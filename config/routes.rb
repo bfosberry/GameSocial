@@ -1,4 +1,6 @@
 GameSocial::Application.routes.draw do
+  resources :users
+
   resources :games
 
   get '/auth/:provider/callback', to: 'sessions#create'
