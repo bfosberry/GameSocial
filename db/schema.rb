@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130906184429) do
+ActiveRecord::Schema.define(version: 20130906184847) do
 
   create_table "chat_servers", force: true do |t|
-    t.string   "type"
+    t.string   "server_type"
     t.integer  "user_id"
     t.string   "ip"
     t.integer  "port"
