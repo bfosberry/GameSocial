@@ -28,7 +28,9 @@ gem 'jbuilder', '~> 1.2'
 gem 'therubyracer'
 
 #oauth
-gem "oauth-plugin", "~> 0.4.0"
+gem 'oauth'
+
+gem 'sqlite3'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
