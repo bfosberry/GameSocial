@@ -15,5 +15,15 @@
   <%= @user.name %>
 </p>
 
+<p> 
+  <strong>Games:</strong>
+  <table>
+  	<% @user.games.each do |g|%>
+  	<tr>
+      <%= g.name %>
+    </tr>
+    <% end %>
+  </table>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

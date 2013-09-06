@@ -23,6 +23,11 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+
+  <div class="field">
+    <%= f.label :game_ids %><br>
+    <%= f.collection_select :game_ids, Game.all, :id, :name,{:include_blank => false},{:multiple => true, :size => 5} %>
+</p>
   <div class="actions">
     <%= f.submit %>
   </div>
