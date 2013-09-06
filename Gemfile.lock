@@ -75,8 +75,6 @@ GEM
       rack (~> 1.2)
     pg (0.16.0)]
     polyglot (0.3.3)
-    postgres (0.8.1)
-      pg (~> 0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -138,11 +136,9 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
-<<<<<<< HEAD
   oauth-plugin (~> 0.4.0)
-=======
   postgres
->>>>>>> 6106f399c8165ab49420d15c07aa7ce40fd5bd50
+  pg
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)
   sdoc
