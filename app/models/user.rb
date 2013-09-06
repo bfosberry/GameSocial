@@ -1,7 +1,3 @@
 class User < ActiveRecord::Base
-	create! do |user|
-    user.provider = auth["provider"]
-    user.uid = auth["uid"]
-    user.name = auth["info"]["name"]
-  end
+	has_and_belongs_to_many :games
 end
