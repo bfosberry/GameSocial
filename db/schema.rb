@@ -38,6 +38,22 @@ ActiveRecord::Schema.define(version: 20130906192709) do
     t.datetime "updated_at"
   end
 
+  create_table "game_servers", force: true do |t|
+    t.string   "name"
+    t.string   "ip"
+    t.integer  "port"
+    t.integer  "game_id"
+    t.integer  "max_players"
+    t.integer  "current_players"
+    t.integer  "latency"
+    t.string   "current_map"
+    t.string   "match_type"
+    t.string   "region"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
   create_table "games", force: true do |t|
     t.string   "name"
     t.text     "store_url"

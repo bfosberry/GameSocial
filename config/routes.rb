@@ -1,5 +1,6 @@
 GameSocial::Application.routes.draw do
   resources :friendships
+  resources :game_servers
 
   resources :chat_servers
 

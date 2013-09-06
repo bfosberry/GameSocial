@@ -1,0 +1,61 @@
+<%= form_for(@game_server) do |f| %>
+  <% if @game_server.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@game_server.errors.count, "error") %> prohibited this game_server from being saved:</h2>
+
+      <ul>
+      <% @game_server.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :ip %><br>
+    <%= f.text_field :ip %>
+  </div>
+  <div class="field">
+    <%= f.label :port %><br>
+    <%= f.number_field :port %>
+  </div>
+  <div class="field">
+    <%= f.label :game_id %><br>
+    <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_server.game} %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @game_server.user} %>
+  </div>
+  <div class="field">
+    <%= f.label :max_players %><br>
+    <%= f.number_field :max_players %>
+  </div>
+  <div class="field">
+    <%= f.label :current_players %><br>
+    <%= f.number_field :current_players %>
+  </div>
+  <div class="field">
+    <%= f.label :latency %><br>
+    <%= f.number_field :latency %>
+  </div>
+  <div class="field">
+    <%= f.label :current_map %><br>
+    <%= f.text_field :current_map %>
+  </div>
+  <div class="field">
+    <%= f.label :match_type %><br>
+    <%= f.text_field :match_type %>
+  </div>
+  <div class="field">
+    <%= f.label :region %><br>
+    <%= f.text_field :region %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  ip: MyString
+  port: 1
+  game_id: 1
+  max_players: 1
+  current_players: 1
+  latency: 1
+  current_map: MyString
+  match_type: MyString
+  region: MyString
+
+two:
+  name: MyString
+  ip: MyString
+  port: 1
+  game_id: 1
+  max_players: 1
+  current_players: 1
+  latency: 1
+  current_map: MyString
+  match_type: MyString
+  region: MyString

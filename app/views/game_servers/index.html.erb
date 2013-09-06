@@ -1,0 +1,47 @@
+<h1>Listing game_servers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Ip</th>
+      <th>Port</th>
+      <th>Game</th>
+      <th>User</th>
+      <th>Max players</th>
+      <th>Current players</th>
+      <th>Latency</th>
+      <th>Current map</th>
+      <th>Match type</th>
+      <th>Region</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @game_servers.each do |game_server| %>
+      <tr>
+        <td><%= game_server.name %></td>
+        <td><%= game_server.ip %></td>
+        <td><%= game_server.port %></td>
+        <td><%= game_server.game.name %></td>
+        <td><%= game_server.user.name %></td>
+        <td><%= game_server.max_players %></td>
+        <td><%= game_server.current_players %></td>
+        <td><%= game_server.latency %></td>
+        <td><%= game_server.current_map %></td>
+        <td><%= game_server.match_type %></td>
+        <td><%= game_server.region %></td>
+        <td><%= link_to 'Show', game_server %></td>
+        <td><%= link_to 'Edit', edit_game_server_path(game_server) %></td>
+        <td><%= link_to 'Destroy', game_server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Game server', new_game_server_path %>
