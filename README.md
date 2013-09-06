@@ -1,13 +1,13 @@
 GameSocial
 ==
 
-> Written with [StackEdit](http://benweet.github.io/stackedit/).
+**Socialize your gaming experience.**
 
-> Authored By: Dale Bracey - [@IRTermite](https://twitter.com/IRTermite)
-
+> Written with [StackEdit](http://benweet.github.io/stackedit/).  
+> Authored By: Dale Bracey - [@IRTermite](https://twitter.com/IRTermite)  
 > Initial Development By: Brendan Fosberry | Gus Ireland
 
-Socialize your gaming experience.
+Spoon Programming Applied: http://www.youtube.com/watch?v=dYBjVTMUQY0
 
 ----
 
@@ -38,4 +38,44 @@ GameSocial will be your one-stop shop for managing and socializing your gaming e
 
 ----
 
+## Features/Functions
+
+ - Profile attrs
+	- GameSocial User Name
+	- User Name for Network 'X'
+	- Server info for chat/speak services
+	- Server info for game server(s)
+	- Social Media profiles
+	- Email address(es)
+	- 
+ - User
+	- Track your games
+	- Track your game network profile(s)
+	- Track your stats
+	- Track your game playing
+	- Track your games played
+ - Friends
+	- Track friends
+	- Track friends' games
+	- Track friends' stats
+	- Track what games friends are playing
+	- Track what games friends have played
+ - Chat
+ - 
+
+----
+
 ## Project Tasks
+
+Issues and Features are tracked on GitHub repo.
+
+
+
+
+
+
+
+
+
+
+
