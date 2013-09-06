@@ -11,10 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130906190514) do
+ActiveRecord::Schema.define(version: 20130906192709) do
+
+  create_table "chat_servers", force: true do |t|
+    t.string   "server_type"
+    t.integer  "user_id"
+    t.string   "ip"
+    t.integer  "port"
+    t.boolean  "public"
+    t.string   "name"
+    t.string   "password"
+    t.string   "room"
+    t.string   "room_password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "friends", force: true do |t|
     t.integer "user_id"
+  end
+
+  create_table "friendships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "games", force: true do |t|

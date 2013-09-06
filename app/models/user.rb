@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+
+  has_many :chat_servers
 def self.from_omniauth(auth)
     where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
   end
@@ -16,5 +18,8 @@ def self.from_omniauth(auth)
   end
 
 	has_and_belongs_to_many :games
-  has_and_belongs_to_many :users, through: :friends
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 end

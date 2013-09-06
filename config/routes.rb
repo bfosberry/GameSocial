@@ -1,8 +1,12 @@
 GameSocial::Application.routes.draw do
+  resources :friendships
+
+  resources :chat_servers
+
   resources :users
 
   resources :games
-  root to: 'games#show'
+  root to: 'games#index'
   match 'auth/steam/callback', to: 'sessions#create', via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
 
@@ -10,7 +14,6 @@ GameSocial::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
