@@ -1,0 +1,2 @@
+module AlertSchedulesHelper
+end
