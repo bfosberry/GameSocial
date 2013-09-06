@@ -1,4 +1,6 @@
 GameSocial::Application.routes.draw do
+  resources :chat_servers
+
   resources :users
 
   resources :games
