@@ -13,11 +13,12 @@
 
   <div class="field">
     <%= f.label :type %><br>
-    <%= f.text_field :server_type %>
+    <%= f.select :server_type, ChatServer.server_types %>
   </div>
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
+    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @chat_server.user} %>
+
   </div>
   <div class="field">
     <%= f.label :ip %><br>
