@@ -69,6 +69,6 @@ class ChatServersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chat_server_params
-      params.require(:chat_server).permit(:type, :user_id, :ip, :port, :public, :name, :password, :room, :room_password)
+      params.require(:chat_server).permit(:server_type, :user_id, :ip, :port, :public, :name, :password, :room, :room_password)
     end
 end

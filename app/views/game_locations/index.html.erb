@@ -1,0 +1,33 @@
+<h1>Listing game_locations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Game</th>
+      <th>Game server</th>
+      <th>Chat server</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @game_locations.each do |game_location| %>
+      <tr>
+        <td><%= game_location.user.name %></td>
+        <td><%= game_location.game.name %></td>
+        <td><%= game_location.game_server.name %></td>
+        <td><%= game_location.chat_server.name %></td>
+        <td><%= link_to 'Show', game_location %></td>
+        <td><%= link_to 'Edit', edit_game_location_path(game_location) %></td>
+        <td><%= link_to 'Destroy', game_location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Game location', new_game_location_path %>

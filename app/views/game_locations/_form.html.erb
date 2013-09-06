@@ -1,0 +1,33 @@
+<%= form_for(@game_location) do |f| %>
+  <% if @game_location.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@game_location.errors.count, "error") %> prohibited this game_location from being saved:</h2>
+
+      <ul>
+      <% @game_location.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @game_location.user} %>
+  </div>
+  <div class="field">
+    <%= f.label :game_id %><br>
+    <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_location.game} %>
+  </div>
+  <div class="field">
+    <%= f.label :game_server_id %><br>
+    <%= f.collection_select :game_server_id, GameServer.all, :id, :name,  {:selected => @game_location.game_server} %>
+  </div>
+  <div class="field">
+    <%= f.label :chat_server_id %><br>
+    <%= f.collection_select :chat_server_id, ChatServer.all, :id, :name,  {:selected => @game_location.chat_server} %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130906192709) do
+ActiveRecord::Schema.define(version: 20130906203118) do
 
   create_table "chat_servers", force: true do |t|
     t.string   "server_type"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 20130906192709) do
   create_table "friendships", force: true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "game_locations", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "game_id"
+    t.integer  "game_server_id"
+    t.integer  "chat_server_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -66,14 +75,6 @@ ActiveRecord::Schema.define(version: 20130906192709) do
   create_table "games_users", force: true do |t|
     t.integer "game_id"
     t.integer "user_id"
-  end
-
-  create_table "identities", force: true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

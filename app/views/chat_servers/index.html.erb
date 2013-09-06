@@ -22,7 +22,7 @@
     <% @chat_servers.each do |chat_server| %>
       <tr>
         <td><%= chat_server.server_type %></td>
-        <td><%= chat_server.user_id %></td>
+        <td><%= chat_server.user.name %></td>
         <td><%= chat_server.ip %></td>
         <td><%= chat_server.port %></td>
         <td><%= chat_server.public %></td>
