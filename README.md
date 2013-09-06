@@ -96,6 +96,11 @@ GameSocial will be your one-stop shop for managing and socializing your gaming e
 
 Issues and Features are tracked on GitHub repo.
 
+----
+
+## Walkthrough
+
+Coming...
 
 
 

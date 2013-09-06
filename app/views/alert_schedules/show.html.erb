@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @alert_schedule.user.name %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @alert_schedule.name %>
+</p>
+
+<%= link_to 'Edit', edit_alert_schedule_path(@alert_schedule) %> |
+<%= link_to 'Back', alert_schedules_path %>
