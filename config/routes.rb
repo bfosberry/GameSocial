@@ -1,7 +1,8 @@
 GameSocial::Application.routes.draw do
   resources :games
+  root to: 'games#show'
+  match 'auth/steam/callback', to: 'sessions#create', via: [:get, :post]
 
-  get '/auth/:provider/callback', to: 'sessions#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

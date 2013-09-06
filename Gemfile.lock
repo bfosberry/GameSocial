@@ -134,7 +134,6 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
-  omniauth
   omniauth-steam
   pg
   rails (= 4.0.0)

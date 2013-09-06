@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
-
+ before_action :set_game, only: [:show, :edit, :update, :destroy]
+ skip_before_filter :verify_authenticity_token  
   # GET /games
   # GET /games.json
   def index
