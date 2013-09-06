@@ -42,8 +42,8 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       up = user_params
-      up[:games] = up[:game_ids].reject {|g|  g.blank? }.map {|id| Game.find(id) }
-      up[:friends] = up[:friend_ids].reject {|f|  f.blank? }.map {|id| User.find(id) }
+      up[:games] = up[:game_ids].reject {|g|  g.blank? }.map {|id| Game.find(id) } if up[:game_ids]
+      up[:friends] = up[:friend_ids].reject {|f|  f.blank? }.map {|id| User.find(id) } if up[:friend_ids]
       
       if @user.update(up)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
