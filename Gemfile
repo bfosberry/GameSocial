@@ -29,10 +29,11 @@ gem 'jbuilder', '~> 1.2'
 gem 'therubyracer'
 
 #auth
-gem 'omniauth'
 gem 'omniauth-steam'
 
-gem 'sqlite3'
+group :dev do
+  gem 'sqlite3'
+end
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

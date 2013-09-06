@@ -3,10 +3,10 @@
 <table>
   <thead>
     <tr>
+      <th>Logo</th>
       <th>Name</th>
-      <th>Store url</th>
       <th>Description</th>
-      <th>Logo url</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -16,12 +16,12 @@
   <tbody>
     <% @games.each do |game| %>
       <tr>
+        <td><%= image_tag(game.logo_url) %></td>
         <td><%= game.name %></td>
-        <td><%= game.store_url %></td>
         <td><%= game.description %></td>
-        <td><%= game.logo_url %></td>
         <td><%= link_to 'Show', game %></td>
         <td><%= link_to 'Edit', edit_game_path(game) %></td>
+        <td><%= link_to 'Store', game.store_url %></td>
         <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
