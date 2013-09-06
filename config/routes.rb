@@ -1,4 +1,6 @@
 GameSocial::Application.routes.draw do
+  resources :users
+
   resources :games
   root to: 'games#show'
   match 'auth/steam/callback', to: 'sessions#create', via: [:get, :post]

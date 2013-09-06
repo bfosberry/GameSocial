@@ -10,4 +10,5 @@ def self.from_omniauth(auth)
       user.name = auth["info"]["nickname"]
     end
   end
+	has_and_belongs_to_many :games
 end
