@@ -31,20 +31,18 @@
 <ul>
   <% for friendship in @user.friendships %>
     <li>
-      <%=h friendship.friend.username %>
-      (<%= link_to "remove", friendship, :method => :delete %>)
+      <%= link_to friendship.friend.name, friendship, :method => :get %>
     </li>
   <% end %>
 </ul>
 
-<p><%= link_to "Find Friends", users_path %></p>
 
-<h2>Friended by Users</h2>
 <ul>
   <% for user in @user.inverse_friends %>
-    <li><%=h user.username %></li>
+    <li><%= link_to user.name, user, :method => :get %></li>
   <% end %>
 </ul>
+<p><%= link_to "Find Friends", users_path %></p>
 
 
 

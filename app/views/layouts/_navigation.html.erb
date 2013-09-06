@@ -1,5 +1,14 @@
+<div id="user_nav">
+    <% if current_user %>
+    Signed in as <%= current_user.name %>
+    <%= link_to "Sign out", signout_path %>
+  <% else %>
+  <%= link_to "Sign in with Steam", "/auth/steam"%>
+  <% end %>
+</div>
+
 <%= link_to "Games", games_path %>
 
-<%= link_to "Users", games_path %>
+<%= link_to "Users", users_path %>
 <%= link_to "Chat Servers", chat_servers_path %>
 

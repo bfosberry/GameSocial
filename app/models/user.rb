@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
-
+include HTTParty
   has_many :chat_servers
 def self.from_omniauth(auth)
     where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
   end
 
-  def self.create_from_omniauth(auth)
+def self.create_from_omniauth(auth)
     create! do |user|
       user.provider = "steam"
       user.uid = auth["uid"]
@@ -15,6 +15,13 @@ def self.from_omniauth(auth)
 
   def add_as_friend(user)
     user.friends.add(user)
+  end
+
+def self.getGames(uid)
+  return get('/services/rest/', :query => {
+      :method => 'flickr.people.getPublicPhotos',
+      :api_key => 'api key goes here',
+      :user_id => uid})
   end
 
 	has_and_belongs_to_many :games
