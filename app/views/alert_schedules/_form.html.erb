@@ -1,0 +1,25 @@
+<%= form_for(@alert_schedule) do |f| %>
+  <% if @alert_schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@alert_schedule.errors.count, "error") %> prohibited this alert_schedule from being saved:</h2>
+
+      <ul>
+      <% @alert_schedule.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @alert_schedule.user} %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
