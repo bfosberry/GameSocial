@@ -1,0 +1,43 @@
+<h1>Listing chat_servers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>User</th>
+      <th>Ip</th>
+      <th>Port</th>
+      <th>Public</th>
+      <th>Name</th>
+      <th>Password</th>
+      <th>Room</th>
+      <th>Room password</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @chat_servers.each do |chat_server| %>
+      <tr>
+        <td><%= chat_server.server_type %></td>
+        <td><%= chat_server.user_id %></td>
+        <td><%= chat_server.ip %></td>
+        <td><%= chat_server.port %></td>
+        <td><%= chat_server.public %></td>
+        <td><%= chat_server.name %></td>
+        <td><%= chat_server.password %></td>
+        <td><%= chat_server.room %></td>
+        <td><%= chat_server.room_password %></td>
+        <td><%= link_to 'Show', chat_server %></td>
+        <td><%= link_to 'Edit', edit_chat_server_path(chat_server) %></td>
+        <td><%= link_to 'Destroy', chat_server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Chat server', new_chat_server_path %>

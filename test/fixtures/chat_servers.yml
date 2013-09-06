@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: 
+  user_id: 1
+  ip: MyString
+  port: 1
+  public: false
+  name: MyString
+  password: MyString
+  room: MyString
+  room_password: MyString
+
+two:
+  type: 
+  user_id: 1
+  ip: MyString
+  port: 1
+  public: false
+  name: MyString
+  password: MyString
+  room: MyString
+  room_password: MyString
