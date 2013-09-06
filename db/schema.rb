@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20130906163916) do
     t.integer "user_id"
   end
 
+  create_table "identities", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "provider"
     t.string   "uid"
