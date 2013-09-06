@@ -47,7 +47,6 @@ GameSocial will be your one-stop shop for managing and socializing your gaming e
 	- Server info for game server(s)
 	- Social Media profiles
 	- Email address(es)
-	- 
  - User
 	- Track your games
 	- Track your game network profile(s)
@@ -59,9 +58,8 @@ GameSocial will be your one-stop shop for managing and socializing your gaming e
 	- Track friends' games
 	- Track friends' stats
 	- Track what games friends are playing
-	- Track what games friends have played
+	- Track what games friends have played	
  - Chat
- - 
 
 ----
 
