@@ -31,10 +31,6 @@ gem 'therubyracer'
 #auth
 gem 'omniauth-steam'
 
-group :dev do
-  gem 'sqlite3'
-end
-
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
