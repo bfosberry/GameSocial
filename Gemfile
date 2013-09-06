@@ -28,8 +28,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'therubyracer'
 
-#oauth
-gem 'oauth'
+#auth
+gem 'omniauth'
+gem 'omniauth-steam'
 
 gem 'sqlite3'
 

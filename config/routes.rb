@@ -53,4 +53,5 @@ GameSocial::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  get '/auth/:provider/callback', to: 'sessions#create'
 end
