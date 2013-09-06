@@ -1,4 +1,7 @@
 GameSocial::Application.routes.draw do
+  resources :games
+
+  get '/auth/:provider/callback', to: 'sessions#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -53,5 +56,4 @@ GameSocial::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  get '/auth/:provider/callback', to: 'sessions#create'
 end

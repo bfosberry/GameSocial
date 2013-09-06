@@ -1,3 +1,4 @@
+
 # encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
@@ -17,6 +18,13 @@ ActiveRecord::Schema.define(version: 20130906155156) do
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
+  end
+
+  create_table "games", force: true do |t|
+    t.string   "name"
+    t.text     "store_url"
+    t.text     "description"
+    t.text     "logo_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
