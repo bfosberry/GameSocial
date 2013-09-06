@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @game_location.user.name %>
+</p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @game_location.game.name %>
+</p>
+
+<p>
+  <strong>Game server:</strong>
+  <%= @game_location.game_server.name %>
+</p>
+
+<p>
+  <strong>Chat server:</strong>
+  <%= @game_location.chat_server.name %>
+</p>
+
+<%= link_to 'Edit', edit_game_location_path(@game_location) %> |
+<%= link_to 'Back', game_locations_path %>

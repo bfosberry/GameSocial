@@ -44,7 +44,15 @@
 </ul>
 <p><%= link_to "Find Friends", users_path %></p>
 
+<h2>This user was last playing</h2>
+<ul>
+  <li>Game: <%= @user.latest_location.game.name %></li>
+  <li>Game Server: <%= @user.latest_location.game_server.name %></li>
+  <li>Chat Server: <%= @user.latest_location.chat_server.name %></li>
+  <li>Last seen: <%= @user.latest_location.game.updated_at %></li>
 
+
+</ul>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

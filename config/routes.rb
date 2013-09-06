@@ -1,4 +1,6 @@
 GameSocial::Application.routes.draw do
+  resources :game_locations
+
   resources :friendships
   resources :game_servers
 
