@@ -1,4 +1,4 @@
-<%= form_for(@game) do |f| %>
+<%= form_for(@game, :html => {:class => "form-horizontal"}) do |f| %>
   <% if @game.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
@@ -11,23 +11,36 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+<br>
+
+  <div class="input">
+    <%= f.label :name, :class => "help-inline" %><br>
+    <%= f.text_field :name, :class => "span5" %>
   </div>
-  <div class="field">
-    <%= f.label :store_url %><br>
-    <%= f.text_area :store_url %>
+
+<br>
+
+  <div class="input">
+    <%= f.label :store_url, :class => "help-inline" %><br>
+    <%= f.text_area :store_url, :class => "span5" %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+
+<br>
+
+  <div class="input-prepend">
+    <%= f.label :description, :class => "help-inline" %><br>
+    <%= f.text_area :description, :class => "span5", :rows => "5" %>
   </div>
-  <div class="field">
-    <%= f.label :logo_url %><br>
-    <%= f.text_area :logo_url %>
+
+<br>
+
+  <div class="input">
+    <%= f.label :logo_url, :class => "help-inline" %><br>
+    <%= f.text_area :logo_url, :class => "span5" %>
   </div>
+
+<br><br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Add Game", :class => "btn btn-success" %>
   </div>
 <% end %>

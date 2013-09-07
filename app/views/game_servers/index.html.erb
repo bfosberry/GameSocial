@@ -1,6 +1,6 @@
-<h1>Listing game_servers</h1>
+<h1 class="text-center">GAME SERVERS</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -34,9 +34,9 @@
         <td><%= game_server.current_map %></td>
         <td><%= game_server.match_type %></td>
         <td><%= game_server.region %></td>
-        <td><%= link_to 'Show', game_server %></td>
-        <td><%= link_to 'Edit', edit_game_server_path(game_server) %></td>
-        <td><%= link_to 'Destroy', game_server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', game_server, :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_game_server_path(game_server), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', game_server, :class => "btn btn danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -44,4 +44,4 @@
 
 <br>
 
-<%= link_to 'New Game server', new_game_server_path %>
+<%= link_to 'New Game server', new_game_server_path, :class => "btn btn-success" %>

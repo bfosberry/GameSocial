@@ -1,24 +1,26 @@
+<div class="pagination-centered">
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @game.name %>
-</p>
+<table class="table table-condensed">
+  <tr>
+	<td><h5 class="text-center">Name</h5></td>
+	<td><p class="text-center"><%= @game.name %></p></td>
+  </tr>
+  <tr>
+	<td><h5 class="text-center">Store url</h5></td>
+	<td><p class="text-center"><a href="<%= @game.store_url %>">Visit Steam Store</a></p></td>
+  </tr>
+  <tr>
+	<td><h5 class="text-center">Description</h5></td>
+	<td><p class="text-center"><%= @game.description %></p></td>
+  </tr>
+  <tr>
+	<td><h5 class="text-center">Logo</h5></td>
+	<td><p class="text-center"><%= image_tag(@game.logo_url) %></p></td>
+  </tr>
+</table>
 
-<p>
-  <strong>Store url:</strong>
-  <a href="<%= @game.store_url %>">Visit Steam Store</a>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @game.description %>
-</p>
-
-<p>
-  <strong>Logo:</strong>
-  <%= image_tag(@game.logo_url) %>
-</p>
-
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+<%= link_to 'Edit', edit_game_path(@game), :class => "btn btn-primary" %> 
+<%= link_to 'Back', games_path, :class => "btn btn-warning" %>
+</div>

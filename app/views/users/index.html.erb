@@ -1,6 +1,6 @@
-<h1>Listing users</h1>
+<h1 class="text-center">USERS</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Provider</th>
@@ -20,10 +20,10 @@
         <td><%= user.provider %></td>
         <td><%= user.uid %></td>
         <td><%= user.name %></td>
-        <td><%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "Add Friend", friendships_path(:friend_id => user), :class => "btn", :method => :post %></td>
+        <td><%= link_to 'Show', user, :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_user_path(user), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', user, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'New User', new_user_path, :class => "btn btn-success" %>

@@ -1,6 +1,8 @@
-<h1>Listing games</h1>
+<h1 class="text-center">GAMES</h1>
 
-<table>
+<br>
+
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Logo</th>
@@ -16,13 +18,13 @@
   <tbody>
     <% @games.each do |game| %>
       <tr>
-        <td><%= image_tag(game.logo_url) %></td>
+        <td><%= image_tag(game.logo_url, :size => "32x32") %></td>
         <td><%= game.name %></td>
         <td><%= game.description %></td>
-        <td><%= link_to 'Show', game %></td>
-        <td><%= link_to 'Edit', edit_game_path(game) %></td>
-        <td><%= link_to 'Store', game.store_url %></td>
-        <td><%= link_to 'Destroy', game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', game, :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_game_path(game), :class => "btn" %></td>
+        <td><%= link_to 'Store', game.store_url, :class => "btn" %></td>
+        <td><%= link_to 'Destroy', game, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Game', new_game_path %>
+<%= link_to 'New Game', new_game_path, :class => "btn btn-success" %>
