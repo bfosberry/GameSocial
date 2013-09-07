@@ -1,6 +1,6 @@
-<h1>Listing chat_servers</h1>
+<h1 class="text-center">CHAT SERVERS</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Type</th>
@@ -30,9 +30,9 @@
         <td><%= chat_server.password %></td>
         <td><%= chat_server.room %></td>
         <td><%= chat_server.room_password %></td>
-        <td><%= link_to 'Show', chat_server %></td>
-        <td><%= link_to 'Edit', edit_chat_server_path(chat_server) %></td>
-        <td><%= link_to 'Destroy', chat_server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', chat_server, :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_chat_server_path(chat_server), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', chat_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -40,4 +40,4 @@
 
 <br>
 
-<%= link_to 'New Chat server', new_chat_server_path %>
+<%= link_to 'New Chat server', new_chat_server_path, :class => "btn btn-success" %>

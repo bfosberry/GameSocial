@@ -1,6 +1,6 @@
-<h1>Listing game_locations</h1>
+<h1 class="text-center">GAME LOCATIONS</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>User</th>
@@ -20,9 +20,9 @@
         <td><%= game_location.game.name %></td>
         <td><%= game_location.game_server.name %></td>
         <td><%= game_location.chat_server.name %></td>
-        <td><%= link_to 'Show', game_location %></td>
-        <td><%= link_to 'Edit', edit_game_location_path(game_location) %></td>
-        <td><%= link_to 'Destroy', game_location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', game_location, :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_game_location_path(game_location), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', game_location, :class => "btn btn danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Game location', new_game_location_path %>
+<%= link_to 'New Game location', new_game_location_path, :class => "btn btn-success" %>
