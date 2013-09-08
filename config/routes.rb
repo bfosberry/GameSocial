@@ -1,4 +1,6 @@
 GameSocial::Application.routes.draw do
+  resources :alert_conditions
+
   resources :alert_schedules
 
   resources :game_locations
