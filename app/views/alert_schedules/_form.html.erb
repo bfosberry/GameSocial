@@ -19,6 +19,10 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+
+  <%= f.fields_for :alert_conditions do |builder| %>
+    <%= render "alert_condition_fields", :f => builder %>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

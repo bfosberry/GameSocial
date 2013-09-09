@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130907235621) do
+ActiveRecord::Schema.define(version: 20130909014305) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
     t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "alert_schedule_id"
   end
 
   create_table "alert_schedules", force: true do |t|

@@ -69,6 +69,8 @@ class AlertSchedulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def alert_schedule_params
-      params.require(:alert_schedule).permit(:user_id, :name)
+      params.require(:alert_schedule).permit!
+      #TODO fix this so we can pass in both cases for value
+      #(:user_id, :name,:alert_conditions_attributes => [:id, :value => [:start_time,  :end_time], :value => []])
     end
 end
