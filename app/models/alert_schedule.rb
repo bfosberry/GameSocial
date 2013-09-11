@@ -6,6 +6,7 @@ class AlertSchedule < ActiveRecord::Base
 
   accepts_nested_attributes_for :alert_conditions, :allow_destroy => true
 
+  delegate :name, :to => :user, :prefix => true, :allow_nil => true
 
   def generate_conditions
   	AlertCondition.condition_types.each {|t| generate_condition(t) }

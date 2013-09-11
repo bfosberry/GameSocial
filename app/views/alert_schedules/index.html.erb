@@ -14,7 +14,7 @@
   <tbody>
     <% @alert_schedules.each do |alert_schedule| %>
       <tr>
-        <td><%= alert_schedule.user.name %></td>
+        <td><%= alert_schedule.user_name %></td>
         <td><%= alert_schedule.name %></td>
         <td><%= link_to 'Show', alert_schedule, :class => "btn" %></td>
         <td><%= link_to 'Edit', edit_alert_schedule_path(alert_schedule), :class => "btn" %></td>
