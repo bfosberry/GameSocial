@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  condition_type: MyString
+  value: MyText
+
+two:
+  condition_type: MyString
+  value: MyText

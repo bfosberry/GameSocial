@@ -1,0 +1,25 @@
+<%= form_for(@alert_condition) do |f| %>
+  <% if @alert_condition.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@alert_condition.errors.count, "error") %> prohibited this alert_condition from being saved:</h2>
+
+      <ul>
+      <% @alert_condition.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :condition_type %><br>
+    <%= f.text_field :condition_type %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br>
+    <%= f.text_area :value %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

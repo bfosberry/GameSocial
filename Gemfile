@@ -5,6 +5,7 @@ gem 'rails', '4.0.0'
 
 gem 'pg'
 
+gem 'unicorn'
 group :development, :test do
  gem 'sqlite3'
  gem 'binding_of_caller'

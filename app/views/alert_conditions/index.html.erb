@@ -1,0 +1,29 @@
+<h1>Listing alert_conditions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Condition type</th>
+      <th>Value</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @alert_conditions.each do |alert_condition| %>
+      <tr>
+        <td><%= alert_condition.condition_type %></td>
+        <td><%= alert_condition.value %></td>
+        <td><%= link_to 'Show', alert_condition %></td>
+        <td><%= link_to 'Edit', edit_alert_condition_path(alert_condition) %></td>
+        <td><%= link_to 'Destroy', alert_condition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Alert condition', new_alert_condition_path %>
