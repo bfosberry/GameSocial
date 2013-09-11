@@ -1,14 +1,8 @@
   <div class="field">
     <%= f.label f.object.condition_type %><br>
-    <% if f.object.condition_type.to_sym == :games %>
-      <%= f.collection_select :value, Game.all, :id, :name,{:include_blank => false, :selected => f.object.value},{:multiple => true, :size => 5} %>
-    <% elsif f.object.condition_type.to_sym == :users %>
-      <%= f.collection_select :value, current_user.friends, :id, :name, {:include_blank => false, :selected => f.object.value},{:multiple => true, :size => 5} %>
-    <% elsif f.object.condition_type.to_sym == :days %>
-      <%= f.select :value, AlertCondition.days_of_the_week, {:include_blank => false, :selected => f.object.value},{:multiple => true, :size => 5} %>
-    <% elsif f.object.condition_type.to_sym == :times %>
-      <%= f.fields_for :value do |builder| %>
-        <%= render "alert_condition_times_fields", :f => builder, :v => f.object.value.to_hash%>
-      <% end %>
+    <% v = f.object.value %>
+    <% v = v ? v.to_hash : {} %>
+    <%= f.fields_for :value do |builder| %>
+      <%= render "alert_condition_#{f.object.condition_type}_fields", :f => builder, :v => v %>
     <% end %>
-  </div>
+ </div>
