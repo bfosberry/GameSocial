@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
     where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
   end
 
-def self.create_from_omniauth(auth)
+  def self.create_from_omniauth(auth)
     create! do |user|
       user.provider = "steam"
       user.uid = auth["uid"]
@@ -22,14 +22,20 @@ def self.create_from_omniauth(auth)
     user.friends.add(user)
   end
 
-def self.getGames(uid)
-  return get('/services/rest/', :query => {
-      :method => 'flickr.people.getPublicPhotos',
-      :api_key => 'api key goes here',
-      :user_id => uid})
+  def self.getGames(uid)
+    return get('/services/rest/', 
+               :query => {
+                 :method => 'flickr.people.getPublicPhotos',
+                 :api_key => 'api key goes here',
+                :user_id => uid}
+              )
   end
 
   def latest_location
     game_locations.last
+  end
+
+  def is_admin?
+    true
   end
 end

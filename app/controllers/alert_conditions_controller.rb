@@ -1,5 +1,6 @@
 class AlertConditionsController < ApplicationController
   before_action :set_alert_condition, only: [:show, :edit, :update, :destroy]
+  before_filter :enforce_login
 
   # GET /alert_conditions
   # GET /alert_conditions.json

@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
- skip_before_filter :verify_authenticity_token  
+  skip_before_filter :verify_authenticity_token  
+  before_filter :enforce_login, :except => [:new, :create, :home]
+
   # GET /users
   # GET /users.json
   def index
@@ -19,6 +21,10 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+  end
+
+  # GET /users/home
+  def home
   end
 
   # POST /users
