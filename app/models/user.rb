@@ -23,12 +23,11 @@ class User < ActiveRecord::Base
   end
 
   def self.getGames(uid)
-    return get('/services/rest/', 
-               :query => {
+    return get('/services/rest/', :query => {
                  :method => 'flickr.people.getPublicPhotos',
                  :api_key => 'api key goes here',
-                :user_id => uid}
-              )
+                 :user_id => uid
+               })
   end
 
   def latest_location
