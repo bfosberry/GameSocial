@@ -1,5 +1,6 @@
 class GameServersController < ApplicationController
   before_action :set_game_server, only: [:show, :edit, :update, :destroy]
+  before_filter :enforce_login
 
   # GET /game_servers
   # GET /game_servers.json

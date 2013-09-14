@@ -1,5 +1,6 @@
 class AlertSchedulesController < ApplicationController
   before_action :set_alert_schedule, only: [:show, :edit, :update, :destroy]
+  before_filter :enforce_login
 
   # GET /alert_schedules
   # GET /alert_schedules.json

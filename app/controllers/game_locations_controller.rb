@@ -1,5 +1,6 @@
 class GameLocationsController < ApplicationController
   before_action :set_game_location, only: [:show, :edit, :update, :destroy]
+  before_filter :enforce_login
 
   # GET /game_locations
   # GET /game_locations.json

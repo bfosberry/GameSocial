@@ -1,5 +1,6 @@
 class ChatServersController < ApplicationController
   before_action :set_chat_server, only: [:show, :edit, :update, :destroy]
+  before_filter :enforce_login
 
   # GET /chat_servers
   # GET /chat_servers.json

@@ -13,7 +13,7 @@ GameSocial::Application.routes.draw do
   resources :users
 
   resources :games
-  root to: 'games#index'
+  root to: 'users#home'
   match 'auth/steam/callback', to: 'sessions#create', via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
 

@@ -1,5 +1,6 @@
 class FriendshipsController < ApplicationController
   before_action :set_friendship, only: [:show, :edit, :update, :destroy]
+  before_filter :enforce_login
 
   # GET /friendships
   # GET /friendships.json
