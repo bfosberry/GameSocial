@@ -9,10 +9,13 @@ GameSocial
 
 Spoon Programming Applied: http://www.youtube.com/watch?v=dYBjVTMUQY0
 
-Play around in our development environment [here](http://hackgamesocial.herokuapp.com/) 
+Play around in our development environment [here](http://hackgamesocial.herokuapp.com/)   
 If you are interested in what we're doing please feel free to [contribute](https://github.com/bfosberry/GameSocial/wiki/Contributing).
 
+To stay up to date on what we are doing join our [Google Group](https://groups.google.com/forum/#!forum/hackgamesocial)  
+
 ----
+
 
 ## Overview
 
