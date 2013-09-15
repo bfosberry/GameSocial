@@ -1,3 +1,4 @@
+require 'workers/sync_worker'
 class User < ActiveRecord::Base
   has_many :chat_servers
   has_and_belongs_to_many :games
@@ -36,5 +37,10 @@ class User < ActiveRecord::Base
 
   def is_admin?
     true
+  end
+
+  def refresh_data
+    w = Workers::SyncWorker.new
+    w.perform(self.id)
   end
 end

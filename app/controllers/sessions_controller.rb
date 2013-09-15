@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   def create
     user = User.from_omniauth(env['omniauth.auth'])
     session[:user_id] = user.id
+    user.refresh_data
     redirect_to games_path, notice: "Signed in."
   end
 

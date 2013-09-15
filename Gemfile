@@ -41,7 +41,8 @@ gem 'omniauth-steam'
 gem 'httparty'
 
 gem 'steam-condenser'
-
+gem 'sidekiq'
+gem 'sinatra'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

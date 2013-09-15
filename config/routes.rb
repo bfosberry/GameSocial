@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 GameSocial::Application.routes.draw do
   resources :alert_conditions
 
@@ -6,7 +8,7 @@ GameSocial::Application.routes.draw do
   resources :game_locations
 
   resources :friendships
-  resources :game_servers
+  resources :game_social_servers
 
   resources :chat_servers
 
@@ -16,6 +18,8 @@ GameSocial::Application.routes.draw do
   root to: 'users#home'
   match 'auth/steam/callback', to: 'sessions#create', via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
+
+  mount Sidekiq::Web => '/sidekiq'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
