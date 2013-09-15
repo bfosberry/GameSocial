@@ -122,6 +122,9 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.8)
+    steam-condenser (1.3.7)
+      multi_json (~> 1.7.2)
+      multi_xml (~> 0.5.2)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
@@ -160,6 +163,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sdoc
   sqlite3
+  steam-condenser
   therubyracer
   turbolinks
   uglifier (>= 1.3.0)
