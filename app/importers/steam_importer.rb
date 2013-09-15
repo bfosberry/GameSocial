@@ -24,7 +24,7 @@ module Importers
     def import_friends
       steam_provider.friends.each do |f|
         u = User.find_by({
-          :uid => f.id,
+          :uid => f.id.to_s,
         })
         if u
 	      user = steam_provider.user
