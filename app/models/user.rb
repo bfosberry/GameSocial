@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
   end
 
   def refresh_data
-    Workers::SyncWorker.perform_async(self.id)
+    w = Workers::SyncWorker.new
+    w.perform(self.id)
   end
 end
