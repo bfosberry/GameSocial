@@ -23,20 +23,20 @@ class User < ActiveRecord::Base
     user.friends.add(user)
   end
 
-  def self.getGames(uid)
-    return get('/services/rest/', :query => {
-                 :method => 'flickr.people.getPublicPhotos',
-                 :api_key => 'api key goes here',
-                 :user_id => uid
-               })
-  end
-
   def latest_location
     game_locations.last
   end
 
   def is_admin?
     true
+  end
+
+  def has_friend?(user)
+    friends.include?(user)
+  end
+ 
+  def get_friendship(user)
+    Friendship.find_by_user_id_and_friend_id(user.id, self.id) || Friendship.find_by_user_id_and_friend_id(self.id, user.id)
   end
 
   def refresh_data

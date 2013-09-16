@@ -28,8 +28,7 @@ module Importers
         })
         if u
 	      user = steam_provider.user
-	      user.friends << u unless user.friends.include?(u)
-	      user.save
+              user.friendships.build(:friend_id => u.id)
 	    end 
       end
     end
