@@ -1,6 +1,6 @@
 <div class="btn-group">
 <%= link_to "Games", games_path, :class => "btn" %>
-<%= link_to "Users", users_path, :class => "btn" %>
+<%= link_to "Friends", users_path, :class => "btn" %>
 <%= link_to "Chat Servers", chat_servers_path, :class => "btn" %>
 <%= link_to "Game Servers", game_social_servers_path, :class => "btn" %>
 <%= link_to "Locations", game_locations_path, :class => "btn" %>
@@ -16,5 +16,5 @@
 </div>
 
 <div class="btn-group">
-	<% if current_user %><b><p class="text-info"> <i class="icon-user icon-white"></i> <%= current_user.name %></p></b><% else %><% end %>
+	<% if current_user %><b><p class="text-info"> <i class="icon-user icon-white"></i><%= link_to current_user.name, user_path(current_user) %></p></b<% end %>
 </div>
