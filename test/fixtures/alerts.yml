@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  alert_schedule_id: 1
+  payload: MyText
+  title: MyString
+  description: MyString
+
+two:
+  alert_schedule_id: 1
+  payload: MyText
+  title: MyString
+  description: MyString

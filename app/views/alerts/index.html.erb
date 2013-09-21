@@ -1,0 +1,33 @@
+<h1>Listing alerts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Alert schedule</th>
+      <th>Payload</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @alerts.each do |alert| %>
+      <tr>
+        <td><%= alert.alert_schedule_id %></td>
+        <td><%= alert.payload %></td>
+        <td><%= alert.title %></td>
+        <td><%= alert.description %></td>
+        <td><%= link_to 'Show', alert %></td>
+        <td><%= link_to 'Edit', edit_alert_path(alert) %></td>
+        <td><%= link_to 'Destroy', alert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Alert', new_alert_path %>
