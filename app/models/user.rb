@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   has_many :game_locations
+
+  has_many :alerting_users, dependent: :destroy
+  has_many :alert_schedules, through: :alerting_users
+
   def self.from_omniauth(auth)
     where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
   end
@@ -17,6 +21,10 @@ class User < ActiveRecord::Base
       user.uid = auth["uid"]
       user.name = auth["info"]["nickname"]
     end
+  end
+
+  def alerting_schedules
+    alert_schedules
   end
 
   def add_as_friend(user)
@@ -42,5 +50,9 @@ class User < ActiveRecord::Base
   def refresh_data
     w = Workers::SyncWorker.new
     w.perform(self.id)
+  end
+
+  def alert(game_location)
+    alerting_schedules.each {|as| as.alert(game_location)}
   end
 end
