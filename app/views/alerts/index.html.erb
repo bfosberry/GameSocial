@@ -4,7 +4,6 @@
   <thead>
     <tr>
       <th>Alert schedule</th>
-      <th>Payload</th>
       <th>Title</th>
       <th>Description</th>
       <th></th>
@@ -17,7 +16,6 @@
     <% @alerts.each do |alert| %>
       <tr>
         <td><%= alert.alert_schedule_id %></td>
-        <td><%= alert.payload %></td>
         <td><%= alert.title %></td>
         <td><%= alert.description %></td>
         <td><%= link_to 'Show', alert %></td>

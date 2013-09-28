@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :game_server_id %><br>
-    <%= f.collection_select :game_server_id, GameServer.all, :id, :name,  {:selected => @game_location.game_server} %>
+    <%= f.collection_select :game_social_server_id, GameSocialServer.all, :id, :name,  {:selected => @game_location.game_social_server} %>
   </div>
   <div class="field">
     <%= f.label :chat_server_id %><br>

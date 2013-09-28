@@ -70,6 +70,6 @@ class GameLocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_location_params
-      params.require(:game_location).permit(:user_id, :game_id, :game_server_id, :chat_server_id)
+      params.require(:game_location).permit(:user_id, :game_id, :game_social_server_id, :chat_server_id)
     end
 end

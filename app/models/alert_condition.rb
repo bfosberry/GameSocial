@@ -34,7 +34,7 @@ class AlertCondition < ActiveRecord::Base
         "end_time" => parse_time(value, "end_time")
       }
     else
-      value[condition_type].delete_if{ |x| x.empty? }
+      value[condition_type].delete_if{ |x| x.empty? } if value
     end
   end
 
