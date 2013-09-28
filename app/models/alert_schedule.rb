@@ -35,11 +35,19 @@ class AlertSchedule < ActiveRecord::Base
   end
 
   def alert(game_location)
-    alerts.select {|a| a.payload == game_location }.first || Alert.create({
-      :alert_schedule => self,
-      :title => game_location.location_title,
-      :payload => game_location,
-      :description => game_location.location_body
-    })
+    if verify_alert_schedule(game_location)
+      existing_alert = alerts.select {|a| a.payload == game_location }.first 
+      Alert.create({
+        :alert_schedule => self,
+        :title => game_location.location_title,
+        :payload => game_location,
+        :description => game_location.location_body
+      }) unless existing_alert
+    end
+  end
+
+  def verify_alert_schedule(game_location)
+    puts "Checking #{name}"
+    alert_conditions.map {|c| c.verify(game_location) }.all?
   end
 end
