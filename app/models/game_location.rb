@@ -6,6 +6,8 @@ class GameLocation < ActiveRecord::Base
 
   after_create :alert_user
 
+  before_destroy :delete_alerts
+
   delegate :name, :id, :to => :game_social_server, :prefix => true, :allow_nil => true
   delegate :name, :id, :to => :chat_server, :prefix => true, :allow_nil => true
   delegate :name, :id, :to => :game, :prefix => true, :allow_nil => true
@@ -32,5 +34,11 @@ Looks like your friend #{user_name} is playing #{game_name}!
 
   def chat_server_body
   	"If you want to chat with them, they're on #{chat_server_name}\n" if chat_server
+  end
+
+  def delete_alerts
+    #messy delete for now
+    alerts = Alert.all.select {|a| a.payload == self }
+    alerts.each {|a| a.destroy }
   end
 end

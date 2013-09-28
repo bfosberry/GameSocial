@@ -54,5 +54,19 @@
 </ul>
 <% end %>
 
+<h2>Activity</h2>
+<table>
+  <tr>
+    <th>Alert</th>
+    <th>Link<th>
+  </tr>
+  <% for alert in @user.alerts %>
+    <tr>
+      <td><%= alert.title %></td>
+      <td><%= link_to 'Show', alert_path(alert) %></td>
+    </tr>
+  <% end %>
+<table>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
