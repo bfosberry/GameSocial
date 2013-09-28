@@ -2,22 +2,22 @@
 
 <p>
   <strong>User:</strong>
-  <%= @game_location.user.name %>
+  <%= @game_location.user_name %>
 </p>
 
 <p>
   <strong>Game:</strong>
-  <%= @game_location.game.name %>
+  <%= @game_location.game_name %>
 </p>
 
 <p>
   <strong>Game server:</strong>
-  <%= @game_location.game_server.name %>
+  <%= @game_location.game_social_server_name %>
 </p>
 
 <p>
   <strong>Chat server:</strong>
-  <%= @game_location.chat_server.name %>
+  <%= @game_location.chat_server_name %>
 </p>
 
 <%= link_to 'Edit', edit_game_location_path(@game_location) %> |
