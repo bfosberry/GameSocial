@@ -6,10 +6,10 @@ class GameLocation < ActiveRecord::Base
 
   after_create :alert_user
 
-  delegate :name, :to => :game_social_server, :prefix => true, :allow_nil => true
-  delegate :name, :to => :chat_server, :prefix => true, :allow_nil => true
-  delegate :name, :to => :game, :prefix => true, :allow_nil => true
-  delegate :name, :to => :user, :prefix => true, :allow_nil => true
+  delegate :name, :id, :to => :game_social_server, :prefix => true, :allow_nil => true
+  delegate :name, :id, :to => :chat_server, :prefix => true, :allow_nil => true
+  delegate :name, :id, :to => :game, :prefix => true, :allow_nil => true
+  delegate :name, :id, :to => :user, :prefix => true, :allow_nil => true
 
   def alert_user
   	user.alert(self)
