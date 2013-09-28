@@ -9,8 +9,9 @@ class User < ActiveRecord::Base
   has_many :game_locations
 
   has_many :alerting_users, dependent: :destroy
-  has_many :alert_schedules, through: :alerting_users
+  has_many :alerting_schedules, through: :alerting_users, :source => :alert_schedule
 
+  has_many :alert_schedules
   def self.from_omniauth(auth)
     where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
   end
@@ -21,10 +22,6 @@ class User < ActiveRecord::Base
       user.uid = auth["uid"]
       user.name = auth["info"]["nickname"]
     end
-  end
-
-  def alerting_schedules
-    alert_schedules
   end
 
   def add_as_friend(user)
@@ -54,5 +51,9 @@ class User < ActiveRecord::Base
 
   def alert(game_location)
     alerting_schedules.each {|as| as.alert(game_location)}
+  end
+
+  def alerts
+    alert_schedules.map {|as| as.alerts }.flatten
   end
 end
