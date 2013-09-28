@@ -29,7 +29,7 @@ class AlertSchedulesController < ApplicationController
 
     respond_to do |format|
       if @alert_schedule.save
-        format.html { redirect_to @alert_schedule, notice: 'Alert schedule was successfully created.' }
+        format.html { redirect_to edit_alert_schedule_path(@alert_schedule), notice: 'Alert schedule was successfully created.' }
         format.json { render action: 'show', status: :created, location: @alert_schedule }
       else
         format.html { render action: 'new' }
