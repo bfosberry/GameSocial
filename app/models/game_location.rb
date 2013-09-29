@@ -29,11 +29,11 @@ Looks like your friend #{user_name} is playing #{game_name}!
   end
 
   def game_server_body
-  	"You can join them on #{game_social_server_name}\n" if game_social_server
+  	"You can join them on this game server: #{game_social_server_name}\n" if game_social_server
   end
 
   def chat_server_body
-  	"If you want to chat with them, they're on #{chat_server_name}\n" if chat_server
+  	"If you want to chat with them, they're on this chat server: #{chat_server_name}\n" if chat_server
   end
 
   def delete_alerts
