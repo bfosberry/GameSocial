@@ -40,7 +40,7 @@ gem 'omniauth-steam'
 
 gem 'httparty'
 
-gem 'steam-condenser', :git => 'git@github.com:bfosberry/steam-condenser-ruby.git', :branch => 'summaries'
+gem 'steam-condenser', :git => 'git@github.com:bfosberry/steam-condenser-ruby.git'
 gem 'sidekiq'
 gem 'sinatra'
 group :doc do
