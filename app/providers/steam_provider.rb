@@ -7,9 +7,6 @@ module Providers
       self.steam_id = SteamCondenser::Community::SteamId.new(id)
       self.user = user
       self.steam_id ? self : nil
-#    rescue SteamCondenserError
-#
-#      nil
     end
 
     def games
@@ -22,6 +19,14 @@ module Providers
 
     def name
       steam_id.nickname
+    end
+
+    def current_game
+      steam_id.game_name
+    end
+
+    def current_game_server
+      steam_id.game_server_id
     end
   end
 end
