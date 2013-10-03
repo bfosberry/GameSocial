@@ -56,4 +56,10 @@ class User < ActiveRecord::Base
   def alerts
     alert_schedules.map {|as| as.alerts }.flatten
   end
+
+  def set_game(game_name)
+    game = Game.where({:name => game_name}).first
+    location = game_locations.last
+    GameLocation.update_location(location, self, game, nil, nil)
+  end
 end

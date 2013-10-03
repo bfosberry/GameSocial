@@ -12,6 +12,7 @@ module Workers
       si = Importers::SteamImporter.new(sp)
       si.import_games
       si.import_friends
+      si.import_location
     end
   end
 end
