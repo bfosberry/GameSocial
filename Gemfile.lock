@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:bfosberry/steam-condenser-ruby.git
+  remote: git://github.com/bfosberry/steam-condenser-ruby.git
   revision: f80cb00195393660cc89a143dfe15f08a855f15c
   specs:
     steam-condenser (1.3.7)
