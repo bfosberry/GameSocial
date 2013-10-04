@@ -13,6 +13,8 @@ module Workers
       si.import_games
       si.import_friends
       si.import_location
+    rescue SteamCondenser::Error => e
+      puts "Failed to sync user"
     end
   end
 end
