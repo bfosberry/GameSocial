@@ -46,7 +46,7 @@ Looks like your friend #{user_name} is playing #{game_name}!
     if location == nil || location.game != game
       location = GameLocation.create({ :user => user, 
                                   :game => game, 
-                                  :game_server => game_server, 
+                                  :game_social_server => game_server, 
                                   :chat_server => chat_server })
     else
       location.game_server = game_server
