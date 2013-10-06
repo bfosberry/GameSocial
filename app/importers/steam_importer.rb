@@ -39,7 +39,7 @@ module Importers
 
     def import_location
       game_name = steam_provider.current_game
-      steam_provider.user.set_game(game_name) if game_name
+      steam_provider.user.set_game(game_name)
     end
   end
 end

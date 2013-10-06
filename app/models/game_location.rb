@@ -14,26 +14,34 @@ class GameLocation < ActiveRecord::Base
   delegate :name, :id, :to => :user, :prefix => true, :allow_nil => true
 
   def alert_user
-  	user.alert(self)
+    user.alert(self) if game
   end
 
   def location_title
-  	"Heads up! #{user_name} is playing #{game_name}"
+    if game
+      "Heads up! #{user_name} is playing #{game_name}"
+    else
+      "#{user_name} is not in-game"
+    end
   end
 
   def location_body
-  	"""
+    if game
+      """
 Looks like your friend #{user_name} is playing #{game_name}!
 
 #{game_server_body}#{chat_server_body}"""
+    else
+      "#{user_name} is currently not playing any games"
+    end
   end
 
   def game_server_body
-  	"You can join them on this game server: #{game_social_server_name}\n" if game_social_server
+    "You can join them on this game server: #{game_social_server_name}\n" if game_social_server
   end
 
   def chat_server_body
-  	"If you want to chat with them, they're on this chat server: #{chat_server_name}\n" if chat_server
+    "If you want to chat with them, they're on this chat server: #{chat_server_name}\n" if chat_server
   end
 
   def delete_alerts
@@ -49,7 +57,7 @@ Looks like your friend #{user_name} is playing #{game_name}!
                                   :game_social_server => game_server, 
                                   :chat_server => chat_server })
     else
-      location.game_server = game_server
+      location.game_social_server = game_server
       location.chat_server = chat_server
       location.save
     end
