@@ -1,6 +1,8 @@
-<h1>Listing alerts</h1>
+<h1 class="text-center">Listing alerts</h1>
 
-<table>
+<br>
+
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Alert schedule</th>
@@ -18,9 +20,9 @@
         <td><%= alert.alert_schedule_id %></td>
         <td><%= alert.title %></td>
         <td><%= alert.description %></td>
-        <td><%= link_to 'Show', alert %></td>
-        <td><%= link_to 'Edit', edit_alert_path(alert) %></td>
-        <td><%= link_to 'Destroy', alert, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', alert, :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_alert_path(alert), :class => "btn" %></td>
+        <td><%= link_to 'Destroy', alert, :class => "btn btn-danger",method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +30,4 @@
 
 <br>
 
-<%= link_to 'New Alert', new_alert_path %>
+<%= link_to 'New Alert', new_alert_path, :class => "btn btn-success" %>

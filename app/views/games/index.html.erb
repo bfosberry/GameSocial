@@ -1,4 +1,4 @@
-<h1 class="text-center">GAMES</h1>
+<h1 class="text-center">Games</h1>
 
 <br>
 
@@ -22,7 +22,7 @@
         <td><%= game.name %></td>
         <td><%= game.description %></td>
         <td><%= link_to 'Show', game, :class => "btn" %></td>
-        <td><%= link_to 'Edit', edit_game_path(game), :class => "btn" %></td>
+        <td><%= link_to 'Edit', edit_game_path(game), :class => "btn"%></td>
         <td><%= link_to 'Store', game.store_url, :class => "btn" %></td>
         <td><%= link_to 'Destroy', game, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
