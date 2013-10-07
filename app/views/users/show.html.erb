@@ -50,13 +50,17 @@
 <p><%= link_to "Find Friends", users_path %></p>
 
 <% if @user.latest_location %>
-<h2>This user was last playing</h2>
-<ul>
-  <li>Game: <%= @user.latest_location.game_name %></li>
-  <li>Game Server: <%= @user.latest_location.game_social_server_name %></li>
-  <li>Chat Server: <%= @user.latest_location.chat_server_name %></li>
-  <li>Last seen: <%= @user.latest_location.updated_at %></li>
-</ul>
+  <% if @user.latest_location.game %>
+    <h2>This user was last playing</h2>
+    <ul>
+      <li>Game: <%= @user.latest_location.game_name %></li>
+      <li>Game Server: <%= @user.latest_location.game_social_server_name %></li>
+      <li>Chat Server: <%= @user.latest_location.chat_server_name %></li>
+      <li>Last seen: <%= @user.latest_location.updated_at %></li>
+    </ul>
+  <% else %>
+    <h2>This user is not in-game</h2>
+  <% end %>
 <% end %>
 
 <h2>Activity</h2>
