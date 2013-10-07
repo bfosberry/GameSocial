@@ -1,0 +1,39 @@
+<div class="pagination-centered">
+
+<p id="notice"><%= notice %></p>
+
+
+<table class="table table-condensed">
+  <tr>
+    <td><h5 class="text-center">Name</h5></td>
+    <td><p class="text-center"><%= @event.name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Description</h5></td>
+    <td><p class="text-center"><%= @event.description %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Start Time</h5></td>
+    <td><p class="text-center"><%= @event.start_time %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">End Time</h5></td>
+    <td><p class="text-center"><%= @event.end_time %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Location</h5></td>
+    <td><p class="text-center"><%= @event.location %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">User</h5></td>
+    <td><p class="text-center"><%= @event.user_name %></p></td>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_event_path(@event), :class => "btn btn-primary" %> |
+<%= link_to 'Back', events_path, :class => "btn btn-warning" %>
+</div>
+
+
+
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130929055655) do
+ActiveRecord::Schema.define(version: 20131007152119) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -57,6 +57,17 @@ ActiveRecord::Schema.define(version: 20130929055655) do
     t.string   "password"
     t.string   "room"
     t.string   "room_password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "user_id"
+    t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

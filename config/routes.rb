@@ -1,6 +1,8 @@
 require 'sidekiq/web'
 
 GameSocial::Application.routes.draw do
+  resources :events
+
   resources :alerts
 
   resources :alert_conditions
