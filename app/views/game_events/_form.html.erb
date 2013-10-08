@@ -1,0 +1,54 @@
+<%= form_for(@game_event, :html => {:class => "form-horizontal"}) do |f| %>
+  <% if @game_event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@game_event.errors.count, "error") %> prohibited this game_event from being saved:</h2>
+
+      <ul>
+      <% @game_event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input">
+    <%= f.label :event_id, :class => "help-inline" %><br>
+    <%= f.collection_select :event_id, Event.all, :id, :name,  {:selected => @game_event.event, :class => "span5"} %>
+  </div>
+  <div class="input">
+    <%= f.label :title, :class => "help-inline" %><br>
+    <%= f.text_field :title, :class => "span5"  %>
+  </div>
+  <div class="input">
+    <%= f.label :description, :class => "help-inline" %><br>
+    <%= f.text_area :description, :class => "span5", :rows => "5" %>
+  </div>
+  <div class="input">
+    <%= f.label :game_id, :class => "help-inline" %><br>
+    <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_event.game, :class => "span5"} %>
+  </div>
+  <div class="input">
+    <%= f.label :game_social_server_id, :class => "help-inline" %><br>
+    <%= f.collection_select :game_social_server_id, GameSocialServer.all, :id, :name,  {:selected => @game_event.game_social_server, :class => "span5"} %>
+  </div>
+  <div class="input">
+    <%= f.label :chat_server_id, :class => "help-inline" %><br>
+    <%= f.number_field :chat_server_id, :class => "span5"  %>
+    <%= f.collection_select :chat_server_id, ChatServer.all, :id, :name,  {:selected => @game_event.chat_server, :class => "span5"} %>
+  </div>
+  <div class="input">
+    <%= f.label :user_id, :class => "help-inline" %><br>
+    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @game_event.user, :class => "span5"} %>
+  </div>
+  <div class="input">
+    <%= f.label :start_time, :class => "help-inline" %><br>
+    <%= f.datetime_select :start_time, :class => "span5"  %>
+  </div>
+  <div class="input">
+    <%= f.label :end_time, :class => "help-inline" %><br>
+    <%= f.datetime_select :end_time, :class => "span5"  %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit", :class => "btn btn-success" %>
+  </div>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130929055655) do
+ActiveRecord::Schema.define(version: 20131008142157) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -61,6 +61,17 @@ ActiveRecord::Schema.define(version: 20130929055655) do
     t.datetime "updated_at"
   end
 
+  create_table "events", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "user_id"
+    t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "friends", force: true do |t|
     t.integer "user_id"
   end
@@ -68,6 +79,20 @@ ActiveRecord::Schema.define(version: 20130929055655) do
   create_table "friendships", force: true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "game_events", force: true do |t|
+    t.integer  "event_id"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "game_id"
+    t.integer  "game_social_server_id"
+    t.integer  "chat_server_id"
+    t.integer  "user_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -109,6 +134,16 @@ ActiveRecord::Schema.define(version: 20130929055655) do
   create_table "games_users", force: true do |t|
     t.integer "game_id"
     t.integer "user_id"
+  end
+
+  create_table "posts", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "postable_id"
+    t.string   "postable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
