@@ -1,0 +1,46 @@
+<div class="pagination-centered">
+
+<p id="notice"><%= notice %></p>
+
+<table class="table table-condensed">
+  <tr>
+    <td><h5 class="text-center">Event</h5></td>
+    <td><p class="text-center"><%= @game_event.event_title %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Game</h5></td>
+    <td><p class="text-center"><%= @game_event.game_name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Game Server</h5></td>
+    <td><p class="text-center"><%= @game_event.game_social_server_name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Chat Server</h5></td>
+    <td><p class="text-center"><%= @game_event.chat_server_name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Owner</h5></td>
+    <td><p class="text-center"><%= @game_event.user_name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Title</h5></td>
+    <td><p class="text-center"><%= @game_event.title %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Description</h5></td>
+    <td><p class="text-center"><%= @game_event.description %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Start Time</h5></td>
+    <td><p class="text-center"><%= @game_event.start_time %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">End Time</h5></td>
+    <td><p class="text-center"><%= @game_event.end_time %></p></td>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_game_event_path(@game_event), :class => "btn btn-primary" %>
+<%= link_to 'Back', game_events_path, :class => "btn btn-warning" %>
+</div>
