@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007152119) do
+ActiveRecord::Schema.define(version: 20131008030221) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -79,6 +79,20 @@ ActiveRecord::Schema.define(version: 20131007152119) do
   create_table "friendships", force: true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "game_events", force: true do |t|
+    t.integer  "event_id"
+    t.string   "title"
+    t.text     "description"
+    t.integer  "game_id"
+    t.integer  "game_social_server_id"
+    t.integer  "chat_server_id"
+    t.integer  "user_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
