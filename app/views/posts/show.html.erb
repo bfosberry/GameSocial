@@ -1,0 +1,22 @@
+<div class="pagination-centered">
+
+<p id="notice"><%= notice %></p>
+
+<table class="table table-condensed">
+  <tr>
+    <td><h5 class="text-center">Title</h5></td>
+    <td><p class="text-center"><%= @post.title %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Body</h5></td>
+    <td><p class="text-center"><%= @post.body %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">User</h5></td>
+    <td><p class="text-center"><%= @post.user_name %></p></td>
+  </tr>
+</table>
+
+<%= link_to 'Edit', edit_post_path(@post), :class => "btn btn-primary" %> |
+<%= link_to 'Back', posts_path, :class => "btn btn-warning" %>
+</div>
