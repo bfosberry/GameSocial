@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_filter :enforce_login
 
   # GET /events
   # GET /events.json
@@ -19,6 +20,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    enforce_ownership(@event)
   end
 
   # POST /events
@@ -40,6 +42,7 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    enforce_ownership(@event)
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -54,6 +57,7 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
+    enforce_ownership(@event)
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url }

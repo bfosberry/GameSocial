@@ -20,6 +20,7 @@ class GameSocialServersController < ApplicationController
 
   # GET /game_social_servers/1/edit
   def edit
+    enforce_ownership(@game_social_server)
   end
 
   # POST /game_social_servers
@@ -41,6 +42,7 @@ class GameSocialServersController < ApplicationController
   # PATCH/PUT /game_social_servers/1
   # PATCH/PUT /game_social_servers/1.json
   def update
+    enforce_ownership(@game_social_server)
     respond_to do |format|
       if @game_social_server.update(game_social_server_params)
         format.html { redirect_to @game_social_server, notice: 'Game server was successfully updated.' }
@@ -55,6 +57,7 @@ class GameSocialServersController < ApplicationController
   # DELETE /game_social_servers/1
   # DELETE /game_social_servers/1.json
   def destroy
+    enforce_ownership(@game_social_server)
     @game_social_server.destroy
     respond_to do |format|
       format.html { redirect_to game_social_servers_url }

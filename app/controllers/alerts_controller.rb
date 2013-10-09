@@ -1,10 +1,11 @@
 class AlertsController < ApplicationController
   before_action :set_alert, only: [:show, :edit, :update, :destroy]
+  before_filter :enforce_login
 
   # GET /alerts
   # GET /alerts.json
   def index
-    @alerts = Alert.all
+    @alerts = all_owned(Alert)
   end
 
   # GET /alerts/1
@@ -65,6 +66,7 @@ class AlertsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_alert
       @alert = Alert.find(params[:id])
+      enforce_ownership(@alert)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

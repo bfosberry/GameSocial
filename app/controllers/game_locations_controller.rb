@@ -1,6 +1,7 @@
 class GameLocationsController < ApplicationController
   before_action :set_game_location, only: [:show, :edit, :update, :destroy]
   before_filter :enforce_login
+  before_filter :enforce_admin, :only: [:index]
 
   # GET /game_locations
   # GET /game_locations.json
@@ -20,6 +21,7 @@ class GameLocationsController < ApplicationController
 
   # GET /game_locations/1/edit
   def edit
+    enforce_ownership(@game_location)
   end
 
   # POST /game_locations
@@ -41,6 +43,7 @@ class GameLocationsController < ApplicationController
   # PATCH/PUT /game_locations/1
   # PATCH/PUT /game_locations/1.json
   def update
+    enforce_ownership(@game_location)
     respond_to do |format|
       if @game_location.update(game_location_params)
         format.html { redirect_to @game_location, notice: 'Game location was successfully updated.' }
@@ -55,6 +58,7 @@ class GameLocationsController < ApplicationController
   # DELETE /game_locations/1
   # DELETE /game_locations/1.json
   def destroy
+    enforce_ownership(@game_location)
     @game_location.destroy
     respond_to do |format|
       format.html { redirect_to game_locations_url }

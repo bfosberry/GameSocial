@@ -1,6 +1,7 @@
 class AlertCondition < ActiveRecord::Base
   belongs_to :alert_schedule
   serialize :value
+  delegate :user, :to => :alert_schedule
 
   def self.condition_types
   	[

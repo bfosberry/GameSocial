@@ -1,6 +1,7 @@
 class FriendshipsController < ApplicationController
   before_action :set_friendship, only: [:show, :edit, :update, :destroy]
   before_filter :enforce_login
+  before_filter :enforce_admin, only: [:index]
 
   # GET /friendships
   # GET /friendships.json
@@ -67,6 +68,7 @@ class FriendshipsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_friendship
       @friendship = Friendship.find(params[:id])
+      enforce_ownership(@friendship)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
