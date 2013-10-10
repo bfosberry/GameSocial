@@ -1,5 +1,6 @@
 class GameEventsController < ApplicationController
   before_action :set_game_event, only: [:show, :edit, :update, :destroy]
+  before_filter :enforce_login
 
   # GET /game_events
   # GET /game_events.json
@@ -19,6 +20,7 @@ class GameEventsController < ApplicationController
 
   # GET /game_events/1/edit
   def edit
+    enforce_ownership(@game_event)
   end
 
   # POST /game_events
@@ -40,6 +42,7 @@ class GameEventsController < ApplicationController
   # PATCH/PUT /game_events/1
   # PATCH/PUT /game_events/1.json
   def update
+    enforce_ownership(@game_event)
     respond_to do |format|
       if @game_event.update(game_event_params)
         format.html { redirect_to @game_event, notice: 'Game event was successfully updated.' }
@@ -54,6 +57,7 @@ class GameEventsController < ApplicationController
   # DELETE /game_events/1
   # DELETE /game_events/1.json
   def destroy
+    enforce_ownership(@game_event)
     @game_event.destroy
     respond_to do |format|
       format.html { redirect_to game_events_url }

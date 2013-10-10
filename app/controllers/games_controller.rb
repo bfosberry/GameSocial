@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   skip_before_filter :verify_authenticity_token  
   before_filter :enforce_login
+  before_filter :enforce_admin, except: [:show]
 
   # GET /games
   # GET /games.json

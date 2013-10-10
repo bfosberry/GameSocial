@@ -5,7 +5,7 @@ class AlertSchedulesController < ApplicationController
   # GET /alert_schedules
   # GET /alert_schedules.json
   def index
-    @alert_schedules = AlertSchedule.all
+    @alert_schedules = all_owned(AlertSchedule)
   end
 
   # GET /alert_schedules/1
@@ -66,6 +66,7 @@ class AlertSchedulesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_alert_schedule
       @alert_schedule = AlertSchedule.find(params[:id])
+      enforce_ownership(@alert_schedule)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -20,6 +20,7 @@ class ChatServersController < ApplicationController
 
   # GET /chat_servers/1/edit
   def edit
+    enforce_ownership(@chat_server)
   end
 
   # POST /chat_servers
@@ -41,6 +42,7 @@ class ChatServersController < ApplicationController
   # PATCH/PUT /chat_servers/1
   # PATCH/PUT /chat_servers/1.json
   def update
+    enforce_ownership(@chat_server)
     respond_to do |format|
       if @chat_server.update(chat_server_params)
         format.html { redirect_to @chat_server, notice: 'Chat server was successfully updated.' }
@@ -55,6 +57,7 @@ class ChatServersController < ApplicationController
   # DELETE /chat_servers/1
   # DELETE /chat_servers/1.json
   def destroy
+    enforce_ownership(@chat_server)
     @chat_server.destroy
     respond_to do |format|
       format.html { redirect_to chat_servers_url }

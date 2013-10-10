@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   end
 
   def is_admin?
-    true
+    admin
   end
 
   def has_friend?(user)
