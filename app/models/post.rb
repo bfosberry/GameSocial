@@ -1,5 +1,6 @@
-class Event < ActiveRecord::Base
+class Post < ActiveRecord::Base
   belongs_to :user
   delegate :name, :to => :user, :prefix => true, :allow_nil => true
-  has_many :posts, as: :postable
+
+  belongs_to :postable, :polymorphic => true
 end
