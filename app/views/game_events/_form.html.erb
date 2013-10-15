@@ -1,3 +1,4 @@
+
 <%= form_for(@game_event, :html => {:class => "form-horizontal"}) do |f| %>
   <% if @game_event.errors.any? %>
     <div id="error_explanation">
@@ -33,7 +34,6 @@
   </div>
   <div class="input">
     <%= f.label :chat_server_id, :class => "help-inline" %><br>
-    <%= f.number_field :chat_server_id, :class => "span5"  %>
     <%= f.collection_select :chat_server_id, ChatServer.all, :id, :name,  {:selected => @game_event.chat_server, :class => "span5"} %>
   </div>
   <div class="input">
