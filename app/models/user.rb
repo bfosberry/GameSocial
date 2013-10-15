@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_secure_password
   validates_confirmation_of :password
 
-  before_save { |user| user.email = email.downcase }
+  before_save { |user| user.email = email.downcase if email }
   before_save :create_remember_token
 
   def self.from_omniauth(auth)
