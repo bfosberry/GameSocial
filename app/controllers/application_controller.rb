@@ -26,11 +26,6 @@ class ApplicationController < ActionController::Base
   end
   
   private
-
-    def current_user
-      @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
-    end
-
     def validate_ownership(object)
       signed_in? && (is_admin? || (object == current_user || object.user == current_user))
     end
@@ -38,5 +33,4 @@ class ApplicationController < ActionController::Base
     def all_owned(model)
       model.all.select {|m| m.user == current_user }
     end
-
 end
