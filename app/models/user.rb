@@ -12,6 +12,13 @@ class User < ActiveRecord::Base
   has_many :alerting_schedules, through: :alerting_users, :source => :alert_schedule
 
   has_many :alert_schedules
+
+  has_secure_password
+  validates_confirmation_of :password
+
+  before_save { |user| user.email = email.downcase }
+  before_save :create_remember_token
+
   def self.from_omniauth(auth)
     where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
   end
@@ -62,4 +69,9 @@ class User < ActiveRecord::Base
     location = game_locations.last
     GameLocation.update_location(location, self, game, nil, nil)
   end
+
+  private
+    def create_remember_token
+      self.remember_token = SecureRandom.urlsafe_base64
+    end
 end

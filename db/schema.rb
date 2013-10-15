@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131008192612) do
+ActiveRecord::Schema.define(version: 20131015220423) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -154,6 +154,8 @@ ActiveRecord::Schema.define(version: 20131008192612) do
     t.datetime "updated_at"
     t.string   "email"
     t.boolean  "admin"
+    t.string   "remember_token"
+    t.string   "password_digest"
   end
 
 end
