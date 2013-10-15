@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   has_many :game_locations
+  has_many :alerts, :through => :alert_schedule
 
   has_many :alerting_users, dependent: :destroy
   has_many :alerting_schedules, through: :alerting_users, :source => :alert_schedule
@@ -51,10 +52,6 @@ class User < ActiveRecord::Base
 
   def alert(game_location)
     alerting_schedules.each {|as| as.alert(game_location)}
-  end
-
-  def alerts
-    alert_schedules.map {|as| as.alerts }.flatten
   end
 
   def set_game(game_name)
