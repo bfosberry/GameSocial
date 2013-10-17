@@ -14,19 +14,25 @@
 
   <div class="input">
     <%= f.label :event_id, :class => "help-inline" %><br>
-    <%= f.collection_select :event_id, Event.all, :id, :name,  {:selected => @game_event.event, :class => "span5"} %>
+    <%= f.collection_select :event_id, Event.all, :id, :name,  {:selected => @game_event.event_id, :class => "span5"} %>
   </div>
   <div class="input">
     <%= f.label :title, :class => "help-inline" %><br>
     <%= f.text_field :title, :class => "span5"  %>
   </div>
+  <% if current_user.is_admin? %>
+  <div class="input">
+    <%= f.label "Game Event Owner", :class => "help-inline" %><br>
+    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @game_event.user_id, :class => "span5"} %>
+  </div>
+  <% end %>
   <div class="input">
     <%= f.label :description, :class => "help-inline" %><br>
     <%= f.text_area :description, :class => "span5", :rows => "5" %>
   </div>
   <div class="input">
     <%= f.label :game_id, :class => "help-inline" %><br>
-    <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_event.game, :class => "span5"} %>
+    <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_event.game_id, :class => "span5"} %>
   </div>
   <div class="input">
     <%= f.label :game_social_server_id, :class => "help-inline" %><br>
@@ -35,10 +41,6 @@
   <div class="input">
     <%= f.label :chat_server_id, :class => "help-inline" %><br>
     <%= f.collection_select :chat_server_id, ChatServer.all, :id, :name,  {:selected => @game_event.chat_server, :class => "span5"} %>
-  </div>
-  <div class="input">
-    <%= f.label :user_id, :class => "help-inline" %><br>
-    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @game_event.user, :class => "span5"} %>
   </div>
   <div class="input">
     <%= f.label :start_time, :class => "help-inline" %><br>

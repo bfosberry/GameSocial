@@ -8,8 +8,6 @@ module SessionsHelper
   end
 
   def signed_in?
-    puts "Checking signed in"
-    puts current_user
     !current_user.nil?
   end
 
@@ -18,12 +16,10 @@ module SessionsHelper
   end
 
   def current_user
-    puts remember_token
     @current_user ||= User.find_by_remember_token(remember_token) if remember_token
   end
 
   def remember_token
-    puts "token is #{cookies.permanent[:remember_token]}"
     cookies.permanent[:remember_token]
   end
 end

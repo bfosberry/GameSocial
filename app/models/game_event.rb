@@ -8,7 +8,7 @@ class GameEvent < ActiveRecord::Base
 
   delegate :name, :to => :user, :prefix => true, :allow_nil => true
   delegate :name, :to => :game, :prefix => true, :allow_nil => true
-  delegate :title, :to => :event, :prefix => true, :allow_nil => true
+  delegate :name, :to => :event, :prefix => true, :allow_nil => true
   delegate :name, :to => :game_social_server, :prefix => true, :allow_nil => true
   delegate :name, :to => :chat_server, :prefix => true, :allow_nil => true
 end

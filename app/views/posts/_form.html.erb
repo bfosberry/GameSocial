@@ -23,7 +23,6 @@
   </div>
   <div class="input">
     <%= f.label :user_id, :class => "help-inline" %><br>
-    <%= f.number_field :user_id %>
     <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @post.user, :class => "span5"} %>
   </div>
   <div class="actions">
