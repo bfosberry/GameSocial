@@ -20,7 +20,7 @@ class PostsController < ApplicationController
 
   def new_for_game_event
     game_event = GameEvent.find(params[:game_event_id])
-    @post = Post.new({ :postable => event })
+    @post = Post.new({ :postable => game_event })
     render 'new'
   end
 
