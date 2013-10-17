@@ -66,7 +66,7 @@
 </tr>
 <% end %>
 </table>  
-<%= link_to 'Post Comment', new_post_path, :class => "btn btn-success" %><br><br>
+<%= link_to 'Post Comment', new_post_for_event_path(@event), :class => "btn btn-success" %><br><br>
 
 <%= link_to 'Edit', edit_event_path(@event), :class => "btn btn-primary" %> |
 <%= link_to 'Back', events_path, :class => "btn btn-warning" %>

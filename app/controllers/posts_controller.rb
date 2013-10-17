@@ -18,6 +18,18 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def new_for_game_event
+    game_event = GameEvent.find(params[:game_event_id])
+    @post = Post.new({ :postable => event })
+    render 'new'
+  end
+
+  def new_for_event
+    event = Event.find(params[:event_id])
+    @post = Post.new({ :postable => event })
+    render 'new'
+  end
+
   # GET /posts/1/edit
   def edit
     enforce_ownership(@post)
@@ -27,6 +39,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.user = current_user unless @post.user
 
     respond_to do |format|
       if @post.save
@@ -73,6 +86,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body, :user_id)
+      params.require(:post).permit(:title, :body, :user_id, :postable_id, :postable_type)
     end
 end
