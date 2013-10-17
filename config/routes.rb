@@ -3,6 +3,7 @@ require 'sidekiq/web'
 GameSocial::Application.routes.draw do
   resources :posts
 
+  match 'game_events/new_for_event/:event_id', to: 'game_events#new_for_event', as: 'new_game_event_for_event', via: [:get] 
   resources :game_events
 
   resources :events
@@ -84,3 +85,17 @@ GameSocial::Application.routes.draw do
   #     resources :products
   #   end
 end
+
+GameSocial::Application.routes.named_routes.module.module_eval do
+  def new_game_event_for_event_path(*args)
+    "#{game_events_path}/new_for_event/#{args.first.id}"
+  end
+end
+
+GameSocial::Application.routes.named_routes.instance_eval do
+  @helpers += [
+    :new_game_event_for_event_path
+  ]
+end
+
+

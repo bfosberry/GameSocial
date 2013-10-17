@@ -18,6 +18,12 @@ class GameEventsController < ApplicationController
     @game_event = GameEvent.new
   end
 
+  # GET /game_events/new_for_event
+  def new_for_event
+    @game_event = GameEvent.new({ :event_id => params[:event_id]})
+    render 'new'
+  end
+
   # GET /game_events/1/edit
   def edit
     enforce_ownership(@game_event)
@@ -27,7 +33,7 @@ class GameEventsController < ApplicationController
   # POST /game_events.json
   def create
     @game_event = GameEvent.new(game_event_params)
-
+    @game_event.user = current_user unless @game_event.user
     respond_to do |format|
       if @game_event.save
         format.html { redirect_to @game_event, notice: 'Game event was successfully created.' }
