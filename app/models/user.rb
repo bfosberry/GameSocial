@@ -7,15 +7,15 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   has_many :game_locations
-  has_many :alerts, :through => :alert_schedule
+  has_many :alerts, :through => :alert_schedules
 
   has_many :alerting_users, dependent: :destroy
   has_many :alerting_schedules, through: :alerting_users, :source => :alert_schedule
 
   has_many :alert_schedules
 
-  has_secure_password
-  validates_confirmation_of :password
+#  has_secure_password
+#  validates_confirmation_of :password
 
   before_save { |user| user.email = email.downcase if email }
   before_save :create_remember_token
