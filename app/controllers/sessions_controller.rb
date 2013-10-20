@@ -4,11 +4,11 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(env['omniauth.auth'])
     user.refresh_data
     sign_in user.reload
-    redirect_to games_path, notice: "Signed in."
+    redirect_to root_url, notice: "Signed in."
   end
 
   def destroy
     sign_out
-    redirect_to games_path, notice: "Signed out."
+    redirect_to root_url, notice: "Signed out."
   end
 end
