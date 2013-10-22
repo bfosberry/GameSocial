@@ -11,5 +11,6 @@
  *= require_self
  *= require_tree .
  *= require jquery.simple-dtpicker
+ *= require jquery.timepicker
  */
 
