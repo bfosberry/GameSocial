@@ -1,6 +1,13 @@
 <div class="field">
-  Start Time: <%= f.time_select('start_time', :default => {:hour => v['start_time(4i)'], :minute => v['start_time(5i)']}) %>
+  Start Time: <%= f.text_field(:start_time, :value => v[:start_time], :class => 'time_field') %>
 </div>
 <div class="field">
-  End Time: <%= f.time_select('end_time', :default => {:hour => v['end_time(4i)'], :minute => v['end_time(5i)']}) %>
+  End Time: <%= f.text_field(:end_time, :value => v[:end_time], :class => 'time_field') %>
  </div>
+
+<script type="text/javascript">
+  $(function(){
+    $('.time_field').timepicker({});
+  });
+</script>
+

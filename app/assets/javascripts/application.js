@@ -15,3 +15,6 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
+//= require jquery.simple-dtpicker
+//= require jquery.timepicker.js
+
