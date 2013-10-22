@@ -3,4 +3,4 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
-  $('.time_field').appendDtpicker({"closeOnSelected": true, "inline": false});
+  $('.date_field').appendDtpicker({"closeOnSelected": true, "inline": false});
