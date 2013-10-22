@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022143030) do
-
+ActiveRecord::Schema.define(version: 20131022211753) do
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
     t.text     "value"
@@ -72,6 +71,11 @@ ActiveRecord::Schema.define(version: 20131022143030) do
     t.datetime "updated_at"
   end
 
+  create_table "events_users", id: false, force: true do |t|
+    t.integer "event_id", null: false
+    t.integer "user_id",  null: false
+  end
+
   create_table "friends", force: true do |t|
     t.integer "user_id"
   end
@@ -91,10 +95,15 @@ ActiveRecord::Schema.define(version: 20131022143030) do
     t.integer  "game_social_server_id"
     t.integer  "chat_server_id"
     t.integer  "user_id"
-    t.datetime "start_time",            default: '2013-10-22 23:29:33'
-    t.datetime "end_time",              default: '2013-10-23 00:29:33'
+    t.datetime "start_time",            default: '2013-10-22 14:32:52'
+    t.datetime "end_time",              default: '2013-10-22 15:32:52'
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "game_events_users", id: false, force: true do |t|
+    t.integer "game_event_id", null: false
+    t.integer "user_id",       null: false
   end
 
   create_table "game_locations", force: true do |t|

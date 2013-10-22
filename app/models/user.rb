@@ -2,6 +2,11 @@ require 'workers/sync_worker'
 class User < ActiveRecord::Base
   has_many :chat_servers
   has_and_belongs_to_many :games
+  has_many :game_events
+  has_many :events
+  has_and_belongs_to_many :attending_events, class_name: "Event"
+  has_and_belongs_to_many :attending_game_events, class_name: "GameEvent"
+
   has_many :friendships
   has_many :friends, :through => :friendships
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
