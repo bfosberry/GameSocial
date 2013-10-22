@@ -40,7 +40,11 @@ class AlertCondition < ActiveRecord::Base
   end
 
   def parse_time(t, name)
-    t[name]
+    t ? t[name] : default_time(name)
+  end
+
+  def default_time(name)
+    name == "start_time" ? "00:00" : "23:59" 
   end
 
   def verify(game_location)
