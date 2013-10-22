@@ -31,7 +31,7 @@ class AlertSchedule < ActiveRecord::Base
   end
 
   def condition_for(type)
-  	AlertCondition.condition_for(type, self)
+    AlertCondition.condition_for(type, self)
   end
 
   def alert(game_location)
