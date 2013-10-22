@@ -73,8 +73,6 @@ class AlertSchedulesController < ApplicationController
     def alert_schedule_params
       params.require(:alert_schedule).permit(:user_id, :name, :alert_conditions_attributes => [
         :id, 
-        :value => ['start_time(1i)', 'start_time(2i)', 'start_time(3i)', 'start_time(4i)', 
-                   'start_time(5i)', 'end_time(1i)', 'end_time(2i)', 'end_time(3i)', 'end_time(4i)', 
-                   'end_time(5i)', :games => [], :users => [], :days => []]])
+        :value => ['start_time', 'end_time', :games => [], :users => [], :days => []]])
     end
 end

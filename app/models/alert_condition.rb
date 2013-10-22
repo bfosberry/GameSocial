@@ -40,9 +40,7 @@ class AlertCondition < ActiveRecord::Base
   end
 
   def parse_time(t, name)
-    hour_name = "#{name}(4i)"
-    min_name = "#{name}(5i)"
-    "#{t[hour_name]}:#{t[min_name]}"
+    t[name]
   end
 
   def verify(game_location)
