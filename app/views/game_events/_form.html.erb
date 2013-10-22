@@ -42,11 +42,11 @@
   </div>
   <div class="input">
     <%= f.label :start_time, :class => "help-inline" %><br>
-    <%= f.datetime_select :start_time, :class => "span5"  %>
+    <%= f.text_field(:start_time, :value => @game_event.start_time, :class => 'time_field') %>
   </div>
   <div class="input">
     <%= f.label :end_time, :class => "help-inline" %><br>
-    <%= f.datetime_select :end_time, :class => "span5"  %>
+    <%= f.text_field(:end_time, :value => @game_event.end_time, :class => 'time_field') %>
   </div>
   <div class="actions">
     <%= f.submit "Submit", :class => "btn btn-success" %>
