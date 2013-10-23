@@ -73,21 +73,27 @@ class User < ActiveRecord::Base
   end
 
   def join_event(event)
-    attending_events << event unless attending_events.include?(event)
+    attending_events << event unless attending_event?(event)
   end
 
   def leave_event(event)
-    ae = attending_events.find_by_id(event.id)
-    attending_events.delete(event) if ae
+    attending_events.delete(event) if attending_event?(event)
+  end
+  
+  def attending_event?(event)
+    attending_events.include?(event)
   end
 
   def join_game_event(game_event)
-    attending_game_events << game_event unless attending_game_events.include?(game_event)
+    attending_game_events << game_event unless attending_game_event?(game_event)
   end
 
   def leave_game_event(game_event)
-    ae = attending_game_events.find_by_id(game_event.id)
-    attending_game_events.delete(game_event) if ae
+    attending_game_events.delete(game_event) if attending_game_event?(game_event)
+  end
+
+  def attending_game_event?(game_event)
+    attending_game_events.include?(game_event)
   end
   
   private

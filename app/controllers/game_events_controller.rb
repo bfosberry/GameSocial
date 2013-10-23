@@ -34,7 +34,7 @@ class GameEventsController < ApplicationController
     user = User.find_by_id(params[:user_id]) || current_user
     validate_ownership(user)
     user.join_game_event(@game_event)
-    redirect_to @game_event, notice: 'Game Event joined.' 
+    redirect_to game_events_path, notice: 'Game Event joined.' 
   end
 
   # GET /game_events/1/leave
@@ -42,7 +42,7 @@ class GameEventsController < ApplicationController
     user = User.find_by_id(params[:user_id]) || current_user
     validate_ownership(user)
     user.leave_game_event(@game_event)
-    redirect_to @game_event, notice: 'Game Event left.' 
+    redirect_to game_events_path, notice: 'Game Event left.' 
   end
 
 

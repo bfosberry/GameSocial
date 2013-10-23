@@ -15,6 +15,7 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -31,6 +32,11 @@
         <td><%= game_event.start_time %></td>
         <td><%= game_event.end_time %></td>
         <td><%= link_to 'Show', game_event, :class => "btn" %></td>
+        <% if current_user.attending_game_event?(game_event) %>
+          <td><%= link_to 'Leave', leave_game_event_path(game_event), :class => "btn" %></td>
+        <% else %>
+          <td><%= link_to 'Join', join_game_event_path(game_event), :class => "btn" %></td>
+        <% end %>
         <td><%= link_to 'Edit', edit_game_event_path(game_event), :class => "btn" %></td>
         <td><%= link_to 'Destroy', game_event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
