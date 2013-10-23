@@ -41,6 +41,18 @@
   </tr>
 </table>
 
+<h2>Attending</h2>
+<table class="table table-condensed">
+<tr>
+  <th>Username</th>
+</tr>
+<% for user in @game_event.users %>
+<tr>
+  <td><p class="text-center"><%= user.name %></p></td>
+</tr>
+<% end %>
+</table> 
+
 <h2>Comments</h2>
 <table class="table table-condensed">
 <tr>
