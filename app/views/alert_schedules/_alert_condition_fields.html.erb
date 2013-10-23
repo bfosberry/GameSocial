@@ -1,7 +1,6 @@
   <div class="field">
     <%= f.label f.object.condition_type %><br>
     <% v = f.object.parsed_value %>
-    <% v = v ? v.to_hash : {} %>
     <%= f.fields_for :value do |builder| %>
       <%= render "alert_condition_#{f.object.condition_type}_fields", :f => builder, :v => v %>
     <% end %>
