@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :join, :leave]
   before_filter :enforce_login
 
   # GET /events
@@ -21,6 +21,22 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     enforce_ownership(@event)
+  end
+
+  # GET /events/1/join
+  def join
+    user = User.find_by_id(params[:user_id]) || current_user
+    validate_ownership(user)
+    user.join_event(@event)
+    redirect_to @event, notice: 'Event joined.' 
+  end
+
+  # GET /events/1/leave
+  def leave
+    user = User.find_by_id(params[:user_id]) || current_user
+    validate_ownership(user)
+    user.leave_event(@event)
+    redirect_to @event, notice: 'Event left.' 
   end
 
   # POST /events

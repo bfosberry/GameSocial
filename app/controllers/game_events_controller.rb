@@ -1,5 +1,5 @@
 class GameEventsController < ApplicationController
-  before_action :set_game_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_game_event, only: [:show, :edit, :update, :destroy, :join, :leave]
   before_filter :enforce_login
 
   # GET /game_events
@@ -28,6 +28,23 @@ class GameEventsController < ApplicationController
   def edit
     enforce_ownership(@game_event)
   end
+
+  # GET /game_events/1/join
+  def join
+    user = User.find_by_id(params[:user_id]) || current_user
+    validate_ownership(user)
+    user.join_game_event(@game_event)
+    redirect_to @game_event, notice: 'Game Event joined.' 
+  end
+
+  # GET /game_events/1/leave
+  def leave
+    user = User.find_by_id(params[:user_id]) || current_user
+    validate_ownership(user)
+    user.leave_game_event(@game_event)
+    redirect_to @game_event, notice: 'Game Event left.' 
+  end
+
 
   # POST /game_events
   # POST /game_events.json
