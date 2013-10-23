@@ -23,9 +23,11 @@
   </div>
   <div class="input">
     <%= f.label :user_id, :class => "help-inline" %><br>
-    <%= f.number_field :user_id %>
     <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @post.user, :class => "span5"} %>
   </div>
+
+  <%= f.hidden_field :postable_id, :value => @post.postable_id %>
+  <%= f.hidden_field :postable_type, :value => @post.postable_type %>
   <div class="actions">
     <%= f.submit "Submit", :class => "btn btn-success"%>
   </div>

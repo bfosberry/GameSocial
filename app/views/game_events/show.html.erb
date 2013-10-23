@@ -5,7 +5,7 @@
 <table class="table table-condensed">
   <tr>
     <td><h5 class="text-center">Event</h5></td>
-    <td><p class="text-center"><%= @game_event.event_title %></p></td>
+    <td><p class="text-center"><%= @game_event.event_name %></p></td>
   </tr>
   <tr>
     <td><h5 class="text-center">Game</h5></td>
@@ -40,6 +40,37 @@
     <td><p class="text-center"><%= @game_event.end_time %></p></td>
   </tr>
 </table>
+
+<h2>Attending</h2>
+<table class="table table-condensed">
+<tr>
+  <th>Username</th>
+</tr>
+<% for user in @game_event.users %>
+<tr>
+  <td><p class="text-center"><%= user.name %></p></td>
+</tr>
+<% end %>
+</table> 
+
+<h2>Comments</h2>
+<table class="table table-condensed">
+<tr>
+  <th>Title</th>
+  <th>Body</th>
+  <th>User</th>
+  <th></th>
+  <th></th>
+</tr>
+<% for post in @game_event.posts %>
+<tr>
+  <td><p class="text-center"><%= post.title %></p></td>
+  <td><p class="text-center"><%= post.body %></p></td>
+  <td><p class="text-center"><%= post.user_name %></p></td>
+</tr>
+<% end %>
+</table>  
+<%= link_to 'Post Comment', new_post_for_game_event_path(@game_event), :class => "btn btn-success" %><br><br>
 
 <%= link_to 'Edit', edit_game_event_path(@game_event), :class => "btn btn-primary" %>
 <%= link_to 'Back', game_events_path, :class => "btn btn-warning" %>

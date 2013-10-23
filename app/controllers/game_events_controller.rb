@@ -1,5 +1,5 @@
 class GameEventsController < ApplicationController
-  before_action :set_game_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_game_event, only: [:show, :edit, :update, :destroy, :join, :leave]
   before_filter :enforce_login
 
   # GET /game_events
@@ -18,16 +18,39 @@ class GameEventsController < ApplicationController
     @game_event = GameEvent.new
   end
 
+  # GET /game_events/new_for_event
+  def new_for_event
+    @game_event = GameEvent.new({ :event_id => params[:event_id]})
+    render 'new'
+  end
+
   # GET /game_events/1/edit
   def edit
     enforce_ownership(@game_event)
   end
 
+  # GET /game_events/1/join
+  def join
+    user = User.find_by_id(params[:user_id]) || current_user
+    validate_ownership(user)
+    user.join_game_event(@game_event)
+    redirect_to game_events_path, notice: 'Game Event joined.' 
+  end
+
+  # GET /game_events/1/leave
+  def leave
+    user = User.find_by_id(params[:user_id]) || current_user
+    validate_ownership(user)
+    user.leave_game_event(@game_event)
+    redirect_to game_events_path, notice: 'Game Event left.' 
+  end
+
+
   # POST /game_events
   # POST /game_events.json
   def create
     @game_event = GameEvent.new(game_event_params)
-
+    @game_event.user = current_user unless @game_event.user
     respond_to do |format|
       if @game_event.save
         format.html { redirect_to @game_event, notice: 'Game event was successfully created.' }

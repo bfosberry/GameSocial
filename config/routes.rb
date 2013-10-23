@@ -3,8 +3,19 @@ require 'sidekiq/web'
 GameSocial::Application.routes.draw do
   resources :posts
 
+  match 'game_events/new_for_event/:event_id', to: 'game_events#new_for_event', as: 'new_game_event_for_event', via: [:get] 
+  match 'posts/new_for_event/:event_id', to: 'posts#new_for_event', as: 'new_post_for_event', via: [:get] 
+  match 'posts/new_for_game_event/:game_event_id', to: 'posts#new_for_game_event', as: 'new_post_for_game_event', via: [:get] 
+  match 'game_events/:id/join', to: 'game_events#join', as: 'join_game_event', via: [:get]
+  match 'game_events/:id/join/:user_id', to: 'game_events#join', as: 'join_user_game_event', via: [:get]
+  match 'game_events/:id/leave', to: 'game_events#leave', as: 'leave_game_event', via: [:get]
+  match 'game_events/:id/leave/:user_id', to: 'game_events#leave', as: 'leave_user_game_event', via: [:get]
   resources :game_events
 
+  match 'events/:id/join', to: 'events#join', as: 'join_event', via: [:get]
+  match 'events/:id/join/:user_id', to: 'events#join', as: 'join_user_event', via: [:get]
+  match 'events/:id/leave', to: 'events#leave', as: 'leave_event', via: [:get]
+  match 'events/:id/leave/:user_id', to: 'events#leave', as: 'leave_user_event', via: [:get]
   resources :events
 
   resources :alerts
@@ -84,3 +95,25 @@ GameSocial::Application.routes.draw do
   #     resources :products
   #   end
 end
+
+GameSocial::Application.routes.named_routes.module.module_eval do
+  def new_game_event_for_event_path(*args)
+    "#{game_events_path}/new_for_event/#{args.first.id}"
+  end
+  def new_post_for_event_path(*args)
+    "#{posts_path}/new_for_event/#{args.first.id}"
+  end
+  def new_post_for_game_event_path(*args)
+    "#{posts_path}/new_for_game_event/#{args.first.id}"
+  end
+end
+
+GameSocial::Application.routes.named_routes.instance_eval do
+  @helpers += [
+    :new_game_event_for_event_path,
+    :new_post_for_event_path,
+    :new_post_for_game_event_path
+  ]
+end
+
+
