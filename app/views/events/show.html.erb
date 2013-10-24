@@ -49,6 +49,18 @@
 </table>  
 <%= link_to 'Create Game Event', new_game_event_for_event_path(@event), :class => "btn btn-success" %><br><br>
 
+<h2>Attending</h2>
+<table class="table table-condensed">
+<tr>
+  <th>Username</th>
+</tr>
+<% for user in @event.users %>
+<tr>
+  <td><p class="text-center"><%= user.name %></p></td>
+</tr>
+<% end %>
+</table>  
+
 <h2>Comments</h2>
 <table class="table table-condensed">
 <tr>

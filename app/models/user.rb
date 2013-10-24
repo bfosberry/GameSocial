@@ -12,15 +12,15 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   has_many :game_locations
-  has_many :alerts, :through => :alert_schedule
+  has_many :alerts, :through => :alert_schedules
 
   has_many :alerting_users, dependent: :destroy
   has_many :alerting_schedules, through: :alerting_users, :source => :alert_schedule
 
   has_many :alert_schedules
 
-  has_secure_password
-  validates_confirmation_of :password
+#  has_secure_password
+#  validates_confirmation_of :password
 
   before_save { |user| user.email = email.downcase if email }
   before_save :create_remember_token
@@ -72,8 +72,34 @@ class User < ActiveRecord::Base
     GameLocation.update_location(location, self, game, nil, nil)
   end
 
+  def join_event(event)
+    attending_events << event unless attending_event?(event)
+  end
+
+  def leave_event(event)
+    attending_events.delete(event) if attending_event?(event)
+  end
+  
+  def attending_event?(event)
+    attending_events.include?(event)
+  end
+
+  def join_game_event(game_event)
+    attending_game_events << game_event unless attending_game_event?(game_event)
+  end
+
+  def leave_game_event(game_event)
+    attending_game_events.delete(game_event) if attending_game_event?(game_event)
+  end
+
+  def attending_game_event?(game_event)
+    attending_game_events.include?(game_event)
+  end
+  
   private
     def create_remember_token
-      self.remember_token = SecureRandom.urlsafe_base64
+      if self.remember_token.blank? or self.password_digest_changed?
+        self.remember_token = SecureRandom.urlsafe_base64
+      end
     end
 end

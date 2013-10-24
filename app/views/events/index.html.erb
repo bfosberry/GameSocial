@@ -14,6 +14,7 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -27,6 +28,11 @@
         <td><%= event.user_id %></td>
         <td><%= event.location %></td>
         <td><%= link_to 'Show', event, :class => "btn" %></td>
+        <% if current_user.attending_event?(event) %>
+          <td><%= link_to 'Leave', leave_event_path(event), :class => "btn" %></td>
+        <% else %>
+          <td><%= link_to 'Join', join_event_path(event), :class => "btn" %></td>
+        <% end %>
         <td><%= link_to 'Edit', edit_event_path(event), :class => "btn"  %></td>
         <td><%= link_to 'Destroy', event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
