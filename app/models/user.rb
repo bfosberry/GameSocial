@@ -26,7 +26,9 @@ class User < ActiveRecord::Base
   before_save :create_remember_token
 
   def self.from_omniauth(auth)
-    where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
+    user = where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
+    user.activate
+    user
   end
 
   def self.create_from_omniauth(auth)
@@ -34,6 +36,7 @@ class User < ActiveRecord::Base
       user.provider = "steam"
       user.uid = auth["uid"]
       user.name = auth["info"]["nickname"]
+      user.status = "Active"
     end
   end
 
@@ -58,8 +61,7 @@ class User < ActiveRecord::Base
   end
 
   def refresh_data
-    w = Workers::SyncWorker.new
-    w.perform(self.id)
+    Workers::SyncWorker.perform_async(self.id)
   end
 
   def alert(game_location)
@@ -94,6 +96,14 @@ class User < ActiveRecord::Base
 
   def attending_game_event?(game_event)
     attending_game_events.include?(game_event)
+  end
+ 
+  def is_active?
+    status == "Active"
+  end
+ 
+  def activate
+    self.update_attribute(:status, "Active") unless is_active?
   end
   
   private

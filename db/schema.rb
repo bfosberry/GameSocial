@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022211753) do
+ActiveRecord::Schema.define(version: 20131024143325) do
+
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
     t.text     "value"
@@ -63,8 +64,8 @@ ActiveRecord::Schema.define(version: 20131022211753) do
   create_table "events", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "start_time",  default: '2013-10-22 23:29:33'
-    t.datetime "end_time",    default: '2013-10-23 05:29:33'
+    t.datetime "start_time",  default: '2013-10-22 14:32:52'
+    t.datetime "end_time",    default: '2013-10-22 20:32:52'
     t.integer  "user_id"
     t.string   "location"
     t.datetime "created_at"
@@ -165,6 +166,7 @@ ActiveRecord::Schema.define(version: 20131022211753) do
     t.boolean  "admin"
     t.string   "remember_token"
     t.string   "password_digest"
+    t.string   "status",          default: "Inactive"
   end
 
 end

@@ -10,9 +10,12 @@ module Workers
       user = User.find(user_id)
       sp = Providers::SteamProvider.new(user)
       si = Importers::SteamImporter.new(sp)
-      si.import_games
-      si.import_friends
-      si.import_location
+      si.import_user
+      if user.is_active?
+        si.import_games
+        si.import_friends
+        si.import_location
+      end
     rescue SteamCondenser::Error => e
       puts "Failed to sync user"
     end

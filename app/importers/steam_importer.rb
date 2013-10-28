@@ -23,13 +23,11 @@ module Importers
 
     def import_friends
       steam_provider.friends.each do |f|
-        u = User.find_by({
-          :uid => f.id.to_s,
-        })
-        if u
-          user = steam_provider.user
-              user.friendships.build(:friend_id => u.id)
-        end 
+        puts "Importing #{f.id}"
+        u = User.find_or_create_by({ :uid => f.id.to_s, :provider => "steam" })
+        user = steam_provider.user
+        u.friendships.build(:friend_id => user.id)
+        user.friendships.build(:friend_id => u.id)
       end
     end
 
