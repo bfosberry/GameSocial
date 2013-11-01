@@ -25,6 +25,7 @@ module Importers
       steam_provider.friends.each do |f|
         puts "Importing #{f.id}"
         u = User.find_or_create_by({ :uid => f.id.to_s, :provider => "steam" })
+        u.refresh_data
         user = steam_provider.user
         u.friendships.build(:friend_id => user.id)
         user.friendships.build(:friend_id => u.id)
