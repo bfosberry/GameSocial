@@ -8,7 +8,7 @@ class Ical
           event.description = o.description
           event.dtstart     = o.start_time
           event.dtend       = o.end_time
-          event.location    = o.location
+          event.location    = o.location if o.location
         end
       end
     end
