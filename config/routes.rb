@@ -100,11 +100,25 @@ GameSocial::Application.routes.named_routes.module.module_eval do
   def new_game_event_for_event_path(*args)
     "#{game_events_path}/new_for_event/#{args.first.id}"
   end
+
   def new_post_for_event_path(*args)
     "#{posts_path}/new_for_event/#{args.first.id}"
   end
+
   def new_post_for_game_event_path(*args)
     "#{posts_path}/new_for_game_event/#{args.first.id}"
+  end
+
+  def event_ics_path(*args)
+    "#{event_path(args.first.id)}.ics?auth_token=#{current_user.remember_token}"
+  end
+
+  def events_ics_path(*args)
+    "#{events_path}.ics?auth_token=#{current_user.remember_token}"
+  end
+
+  def game_events_ics_path(*args)
+    "#{game_events_path}.ics?auth_token=#{current_user.remember_token}"
   end
 end
 
@@ -112,7 +126,10 @@ GameSocial::Application.routes.named_routes.instance_eval do
   @helpers += [
     :new_game_event_for_event_path,
     :new_post_for_event_path,
-    :new_post_for_game_event_path
+    :new_post_for_game_event_path,
+    :event_ics_path,
+    :events_ics_path,
+    :game_events_ics_path
   ]
 end
 

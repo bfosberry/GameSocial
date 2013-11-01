@@ -28,6 +28,10 @@
     <td><h5 class="text-center">User</h5></td>
     <td><p class="text-center"><%= @event.user_name %></p></td>
   </tr>
+  <tr>
+    <td><h5 class="text-center">Calendar</h5></td>
+    <td><p class="text-center"><%= link_to "ICal", event_ics_path(@event), :class => "btn btn-primary" %></p></td>
+  </tr>
 </table>
 
 <h2>Games</h2>
