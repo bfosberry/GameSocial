@@ -1,11 +1,16 @@
 class GameEventsController < ApplicationController
   before_action :set_game_event, only: [:show, :edit, :update, :destroy, :join, :leave]
+  before_filter :spoof_login, only: [:index]
   before_filter :enforce_login
 
   # GET /game_events
-  # GET /game_events.json
+  # GET /game_events.jso
   def index
     @game_events = GameEvent.all
+    respond_to do |format|
+      format.html {}
+      format.ics { render inline: Ical.ical_from_collection(@game_events).to_s}
+    end
   end
 
   # GET /game_events/1

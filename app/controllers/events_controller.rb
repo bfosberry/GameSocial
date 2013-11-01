@@ -1,16 +1,26 @@
+require 'ical'
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :join, :leave]
+  before_filter :spoof_login, only: [:show, :index]
   before_filter :enforce_login
 
   # GET /events
   # GET /events.json
   def index
     @events = Event.all
+    respond_to do |format|
+      format.html {}
+      format.ics { render inline: Ical.ical_from_collection(@events).to_s}
+    end
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    respond_to do |format|
+      format.html {}
+      format.ics { render inline: Ical.ical_from_collection(@event.game_events).to_s}
+    end
   end
 
   # GET /events/new

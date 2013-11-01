@@ -5,12 +5,14 @@ gem 'rails', '4.0.0'
 
 gem 'pg'
 gem 'jquery-timepicker-rails'
+gem 'ri_cal'
 
 gem 'unicorn'
 group :development, :test do
  gem 'sqlite3'
  gem 'binding_of_caller'
  gem 'better_errors'
+ gem 'debugger'
 end
 
 # Use SCSS for stylesheets

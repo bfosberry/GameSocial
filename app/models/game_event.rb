@@ -12,4 +12,12 @@ class GameEvent < ActiveRecord::Base
   delegate :name, :to => :event, :prefix => true, :allow_nil => true
   delegate :name, :to => :game_social_server, :prefix => true, :allow_nil => true
   delegate :name, :to => :chat_server, :prefix => true, :allow_nil => true
+
+  def name
+    title
+  end
+
+  def location
+    game_social_server_name
+  end
 end

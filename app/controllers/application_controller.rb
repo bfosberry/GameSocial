@@ -21,6 +21,11 @@ class ApplicationController < ActionController::Base
     send_unauthorized unless validate_ownership(object)
   end
 
+  def spoof_login
+    user = User.find_by_remember_token(params[:auth_token])
+    sign_in user if user
+  end
+
   def send_unauthorized
     render :text => "You are not allowed to view this resource.", :status => :unauthorized
   end
