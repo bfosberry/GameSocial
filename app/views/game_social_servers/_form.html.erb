@@ -1,10 +1,10 @@
-<%= form_for(@game_server) do |f| %>
-  <% if @game_server.errors.any? %>
+<%= form_for(@game_social_server) do |f| %>
+  <% if @game_social_server.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@game_server.errors.count, "error") %> prohibited this game_server from being saved:</h2>
+      <h2><%= pluralize(@game_social_server.errors.count, "error") %> prohibited this game_server from being saved:</h2>
 
       <ul>
-      <% @game_server.errors.full_messages.each do |msg| %>
+      <% @game_social_server.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -25,12 +25,14 @@
   </div>
   <div class="field">
     <%= f.label :game_id %><br>
-    <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_server.game} %>
+    <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_social_server.game} %>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @game_server.user} %>
-  </div>
+  <% if is_admin? %>
+    <div class="field">
+      <%= f.label :user_id %><br>
+      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @game_social_server.user} %>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.label :max_players %><br>
     <%= f.number_field :max_players %>

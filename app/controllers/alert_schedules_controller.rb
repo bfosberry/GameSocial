@@ -26,6 +26,7 @@ class AlertSchedulesController < ApplicationController
   # POST /alert_schedules.json
   def create
     @alert_schedule = AlertSchedule.new(alert_schedule_params)
+    @alert_schedule.user = current_user unless @alert_schedule.user
 
     respond_to do |format|
       if @alert_schedule.save

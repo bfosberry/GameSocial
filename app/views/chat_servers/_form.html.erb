@@ -15,11 +15,15 @@
     <%= f.label :type %><br>
     <%= f.select :server_type, ChatServer.server_types %>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @chat_server.user} %>
 
-  </div>
+  <% if is_admin? %>
+    <div class="field">
+      <%= f.label :user_id %><br>
+      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @chat_server.user} %>
+
+    </div>
+  <% end %>
+  
   <div class="field">
     <%= f.label :ip %><br>
     <%= f.text_field :ip %>

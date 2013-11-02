@@ -27,10 +27,12 @@
     <%= f.label :end_time, :class => "help-inline" %><br>
     <%= f.text_field(:end_time, :value => @event.end_time, :class => 'date_field') %>
   </div>
-  <div class="input">
-    <%= f.label :user_id, :class => "help-inline" %><br>
-    <%=  f.collection_select :user_id, User.all, :id, :name,  {:selected => @event.user, :class => "span5"} %>
-  </div>
+  <% if is_admin? %>
+    <div class="input">
+      <%= f.label :user_id, :class => "help-inline" %><br>
+      <%=  f.collection_select :user_id, User.all, :id, :name,  {:selected => @event.user, :class => "span5"} %>
+    </div>
+  <% end %>
   <div class="input">
     <%= f.label :location, :class => "help-inline" %><br>
     <%= f.text_field :location, :class => "span5" %>

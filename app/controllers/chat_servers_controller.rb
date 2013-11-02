@@ -27,7 +27,7 @@ class ChatServersController < ApplicationController
   # POST /chat_servers.json
   def create
     @chat_server = ChatServer.new(chat_server_params)
-
+    @chat_server.user = current_user unless @chat_server.user
     respond_to do |format|
       if @chat_server.save
         format.html { redirect_to @chat_server, notice: 'Chat server was successfully created.' }

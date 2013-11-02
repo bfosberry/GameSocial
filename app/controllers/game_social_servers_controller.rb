@@ -27,6 +27,7 @@ class GameSocialServersController < ApplicationController
   # POST /game_social_servers.json
   def create
     @game_social_server = GameSocialServer.new(game_social_server_params)
+    @game_social_server.user = current_user unless @game_social_server.user
 
     respond_to do |format|
       if @game_social_server.save
@@ -68,9 +69,7 @@ class GameSocialServersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game_social_server
-      puts "setting game server"
       @game_social_server = GameSocialServer.find(params[:id])
-      puts @game_social_server
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
