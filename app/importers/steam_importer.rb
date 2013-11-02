@@ -29,6 +29,8 @@ module Importers
         user = steam_provider.user
         u.friendships.build(:friend_id => user.id)
         user.friendships.build(:friend_id => u.id)
+        u.save
+        user.save
       end
     end
 
