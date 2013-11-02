@@ -13,6 +13,7 @@ class GameEvent < ActiveRecord::Base
   delegate :name, :to => :game_social_server, :prefix => true, :allow_nil => true
   delegate :name, :to => :chat_server, :prefix => true, :allow_nil => true
 
+  default_scope order('start_time ASC')
   def name
     title
   end

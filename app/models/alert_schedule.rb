@@ -12,6 +12,8 @@ class AlertSchedule < ActiveRecord::Base
 
   delegate :name, :to => :user, :prefix => true, :allow_nil => true
 
+  default_scope order('name DESC')
+
   def generate_conditions
   	AlertCondition.condition_types.each {|t| generate_condition(t) }
     reload
