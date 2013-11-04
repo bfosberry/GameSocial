@@ -1,5 +1,6 @@
 require 'sidekiq/capistrano'
 require 'capistrano-unicorn'
+require 'bundler/capistrano'
 
 set :application, "GameSocial"
 set :repository,  "https://github.com/bfosberry/GameSocial.git"
