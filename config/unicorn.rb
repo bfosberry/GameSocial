@@ -4,7 +4,8 @@ timeout 60
 preload_app true
 
 working_directory "/var/www/GameSocial/current/"
-listen "/tmp/sockets/gamesocial.sock", :backlog => 64
+pid "/var/www/GameSocial/shared/pids/unicorn.pid"
+listen "/var/www/GameSocial/shared/sockets/gamesocial.sock", :backlog => 64
 listen 8080, :tcp_nopush => true
 
 stderr_path "/var/www/GameSocial/current/log/unicorn.stderr.log"
