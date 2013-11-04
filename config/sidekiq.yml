@@ -1,0 +1,5 @@
+:verbose: false
+:concurrency:  5
+:queues:
+  - [sync, 5]
+  - [default, 5]
