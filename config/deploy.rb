@@ -17,6 +17,7 @@ set :scm, "git"
 set :user, "rails"
 set :use_sudo, false
 set :normalize_asset_timestamps, false
+set :branch, fetch(:branch, "master")
 
 after 'deploy:restart', 'unicorn:duplicate'
 
