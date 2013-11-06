@@ -21,6 +21,18 @@ set :normalize_asset_timestamps, false
 set :branch, fetch(:branch, "master")
 
 after 'deploy:restart', 'unicorn:duplicate'
+after 'deploy:update_code', 'deploy:symlink_db'
+after 'deploy:update_code', 'deploy:symlink_secrets'
+
+namespace :deploy do
+  desc "Symlinks the database.yml"
+  task :symlink_db, :roles => :app do
+    run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
+  end
+  task :symlink_secrets, :roles => :app do
+    run "ln -nfs #{deploy_to}/shared/config/secret.yml #{release_path}/config/secret.yml"
+  end
+end
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
