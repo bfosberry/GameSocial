@@ -4,8 +4,7 @@ namespace :sync do
     puts "Syncing users..."
     User.all.each do |user|
       puts "Syncing #{user.name}"
-      w = Workers::SyncWorker.new
-      w.perform(user.id)
+      Workers::SyncWorker.perform_async(user.id)
     end
   end
 
