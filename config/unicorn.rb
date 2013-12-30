@@ -6,7 +6,7 @@ preload_app true
 working_directory "/var/www/GameSocial/current/"
 pid "/var/www/GameSocial/shared/pids/unicorn.pid"
 listen "/var/www/GameSocial/shared/sockets/gamesocial.sock", :backlog => 64
-listen 8080, :tcp_nopush => true
+listen 8300, :tcp_nopush => true
 
 stderr_path "/var/www/GameSocial/current/log/unicorn.stderr.log"
 stdout_path "/var/www/GameSocial/current/log/unicorn.stdout.log"
