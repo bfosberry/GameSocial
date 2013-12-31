@@ -24,7 +24,6 @@ module Importers
     def import_friends
       steam_provider.friends.each do |f|
         u = User.find_or_create_by({ :uid => f.id.to_s, :provider => "steam" })
-        u.refresh_data
         user = steam_provider.user
         u.friends << user unless u.friends.include? user
         user.friends << u unless user.friends.include? u

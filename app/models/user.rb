@@ -1,4 +1,5 @@
 require 'workers/sync_worker'
+require 'workers/import_worker'
 class User < ActiveRecord::Base
   has_many :chat_servers
   has_and_belongs_to_many :games
@@ -62,6 +63,14 @@ class User < ActiveRecord::Base
 
   def refresh_data
     Workers::SyncWorker.perform_async(self.id)
+  end
+
+  def import
+    Workers::ImportWorker.perform_async(self.id)
+  end
+
+  def refresh_location
+    Workers::LocationSyncWorker.perform_async(self.id)
   end
 
   def alert(game_location)
