@@ -64,6 +64,14 @@ class User < ActiveRecord::Base
     Workers::SyncWorker.perform_async(self.id)
   end
 
+  def import
+    Workers::ImportWorker.perform_async(self.id)
+  end
+
+  def refresh_location
+    Workers::LocationSyncWorker.perform_async(self.id)
+  end
+
   def alert(game_location)
     alerting_schedules.each {|as| as.alert(game_location)}
   end

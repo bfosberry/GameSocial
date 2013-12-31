@@ -2,7 +2,7 @@ require './app/providers/steam_provider.rb'
 require './app/importers/steam_importer.rb'
 
 module Workers
-  class SyncWorker
+  class LocationSyncWorker
     include Sidekiq::Worker
     sidekiq_options :queue => :sync, :retry => false
 
@@ -10,14 +10,9 @@ module Workers
       user = User.find(user_id)
       sp = Providers::SteamProvider.new(user)
       si = Importers::SteamImporter.new(sp)
-      si.import_user
-      si.import_games
       si.import_location
-      if user.is_active?
-        si.import_friends
-      end
     rescue SteamCondenser::Error => e
-      puts "Failed to sync user"
+      puts "Failed to sync users location"
     end
   end
 end
