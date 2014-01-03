@@ -18,7 +18,11 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 5.minutes, :at => '12:00am', :roles => [:app] do
+every 5.minutes do
+  rake "sync:location"
+end
+
+every 30.minutes do
   rake "sync:all"
 end
 

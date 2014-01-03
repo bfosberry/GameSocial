@@ -1,4 +1,5 @@
 require 'workers/sync_worker'
+require 'workers/location_sync_worker'
 require 'workers/import_worker'
 class User < ActiveRecord::Base
   has_many :chat_servers

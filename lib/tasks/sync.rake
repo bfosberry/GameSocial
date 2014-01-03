@@ -6,6 +6,13 @@ namespace :sync do
     end
   end
 
+  task :location => :environment do
+    User.all.each do |user|
+      Workers::LocationSyncWorker.perform_async(user.id)
+    end
+  end
+
   desc "Synchronize all users"
   task :all => [:steam]
 end
+
