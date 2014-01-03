@@ -1,5 +1,5 @@
 class AlertMailer < ActionMailer::Base
-  default from: "alerts@hackgamesocial.herokuapp.com"
+  default from: "alerts@cloud1001.co"
 
   def alert_email(alert)
   	@user = alert.user
