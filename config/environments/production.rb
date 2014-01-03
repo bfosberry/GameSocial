@@ -84,6 +84,8 @@ GameSocial::Application.configure do
     port:                 SECRETS['smtp_port'],
     user_name:            SECRETS['smtp_username'],
     password:             SECRETS['smtp_password'],
-    authentication:       'plain'
+    authentication:       'plain',
+    enable_starttls_auto: true
+
   }
 end
