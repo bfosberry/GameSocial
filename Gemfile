@@ -8,6 +8,7 @@ gem 'jquery-timepicker-rails'
 gem 'ri_cal'
 
 gem 'unicorn'
+gem 'whenever'
 group :development, :test do
  gem 'sqlite3'
  gem 'binding_of_caller'
