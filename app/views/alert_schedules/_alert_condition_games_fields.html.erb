@@ -1,3 +1,3 @@
 <div class="field">
-  <%= f.collection_select :games, Game.all, :id, :name,{:include_blank => false, :selected => v},{:multiple => true, :size => 5} %>
+  <%= f.collection_select :games, @alert_schedule.user.games, :id, :name,{:include_blank => false, :selected => v},{:multiple => true, :size => 5} %>
  </div>
