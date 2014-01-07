@@ -26,6 +26,7 @@ module Importers
         u = User.find_or_create_by({ :uid => f.id.to_s, :provider => "steam" })
         user = steam_provider.user
         u.friends << user unless u.friends.include? user
+        user.reload
         user.friends << u unless user.friends.include? u
       end
     end
