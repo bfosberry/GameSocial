@@ -1,7 +1,7 @@
 class AlertSchedule < ActiveRecord::Base
   belongs_to :user
   has_many :alert_conditions, dependent: :destroy
-  has_many :alerts
+  has_many :alerts, :dependent => :destroy
 
   after_commit :generate_conditions
 
