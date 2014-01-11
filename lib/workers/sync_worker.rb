@@ -16,6 +16,7 @@ module Workers
         si.import_friends
       end
     rescue SteamCondenser::Error => e
+      puts e
       puts "Failed to sync user"
     end
   end
