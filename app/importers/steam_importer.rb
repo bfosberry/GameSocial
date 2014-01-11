@@ -7,6 +7,7 @@ module Importers
     end
 
     def import_games
+      user = steam_provider.user
       steam_provider.games.keys.each do |k|
         g = steam_provider.games[k]
         game = Game.find_or_create_by({
@@ -15,10 +16,9 @@ module Importers
           :logo_url => g.logo_url,
           :description => g.name
         })
-        user = steam_provider.user
         user.games << game unless user.games.include?(game)
-        user.save
       end
+      user.save
     end
 
     def import_friends
@@ -26,9 +26,9 @@ module Importers
         u = User.find_or_create_by({ :uid => f.id.to_s, :provider => "steam" })
         user = steam_provider.user
         u.friends << user unless u.friends.include? user
-        user.reload
         user.friends << u unless user.friends.include? u
       end
+      steam_provider.user.save
     end
 
     def import_user
