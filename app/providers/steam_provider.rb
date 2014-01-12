@@ -22,6 +22,9 @@ module Providers
     end
 
     def current_game
+      puts "Fetching game"
+      puts "SECRETS"
+      puts steam_id.game_name
       steam_id.game_name
     end
 
