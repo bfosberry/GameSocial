@@ -35,6 +35,22 @@ namespace :deploy do
   end
 end
 
+namespace :rails do
+  desc "Open the rails console on each of the remote servers"
+  task :console do
+    rails_env = fetch(:rails_env)
+    execute_interactively "bundle exec rails console #{rails_env}"  
+  end
+ 
+ 
+def execute_interactively(command)
+    user = fetch(:user)
+    port = 22
+    find_servers_for_task(current_task).each do |current_server|
+      exec "ssh -l #{user} #{current_server.host} -p #{port} -t 'cd #{deploy_to}/current && #{command}'"
+    end
+  end
+end
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 
