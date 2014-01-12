@@ -23,12 +23,13 @@ module Importers
 
     def import_friends
       steam_provider.friends.each do |f|
-        u = User.find_or_create_by({ :uid => f.id.to_s, :provider => "steam" })
-        user = steam_provider.user
-        u.friends << user unless u.friends.include? user
-        user.friends << u unless user.friends.include? u
+        if f.id.to_i  0
+          u = User.find_or_create_by({ :uid => f.id.to_s, :provider => "steam" })
+          user = steam_provider.user
+          u.friends << user unless u.friends.include? user
+          user.friends << u unless user.friends.include? u
+        end
       end
-      steam_provider.user.save
     end
 
     def import_user
