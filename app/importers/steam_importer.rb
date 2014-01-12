@@ -37,6 +37,7 @@ module Importers
 
     def import_location
       game_name = steam_provider.current_game
+      puts "#{steam_provider.user.name} is in #{game_name}"
       steam_provider.user.set_game(game_name)
     end
   end
