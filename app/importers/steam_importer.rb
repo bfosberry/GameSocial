@@ -23,7 +23,7 @@ module Importers
 
     def import_friends
       steam_provider.friends.each do |f|
-        if f.id.to_i  0
+        if f.id.to_i > 0
           u = User.find_or_create_by({ :uid => f.id.to_s, :provider => "steam" })
           user = steam_provider.user
           u.friends << user unless u.friends.include? user
