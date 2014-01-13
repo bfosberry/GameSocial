@@ -5,6 +5,7 @@ module Providers
       SteamCondenser::Community::WebApi.api_key = SECRETS['steam_api_key']
       id = SteamCondenser::Community::SteamId.community_id_to_steam_id(user.uid.to_i)
       self.steam_id = SteamCondenser::Community::SteamId.new(id)
+      steam_id.fetch
       self.user = user
       self.steam_id ? self : nil
     end
