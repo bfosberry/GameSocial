@@ -9,6 +9,8 @@ gem 'ri_cal'
 
 gem 'unicorn'
 gem 'whenever'
+gem 'SyslogLogger'
+
 group :development, :test do
  gem 'sqlite3'
  gem 'binding_of_caller'
