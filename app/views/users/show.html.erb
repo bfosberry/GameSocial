@@ -39,7 +39,7 @@
 <ul>
   <% for friendship in @user.friendships %>
     <li>
-      <%= link_to friendship.friend.name, friendship, :method => :get %>
+      <%= link_to friendship.friend_name, friendship, :method => :get %>
     </li>
   <% end %>
 </ul>
