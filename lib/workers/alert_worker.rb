@@ -4,7 +4,7 @@ require './app/importers/steam_importer.rb'
 module Workers
   class AlertWorker
     include Sidekiq::Worker
-    sidekiq_options :queue => :alert, :retry => false
+    sidekiq_options :queue => :alert, :retry => 5
 
     def perform(alert_id)
       alert = Alert.find(alert_id)

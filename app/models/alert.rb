@@ -12,7 +12,6 @@ class Alert < ActiveRecord::Base
   end
 
   def deliver_alert
-  	w = Workers::AlertWorker.new
-  	w.perform(id)
+    Workers::AlertWorker.perform_async(id)
   end
 end
