@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+<% if is_admin? %>
 <p>
   <strong>Provider:</strong>
   <%= @user.provider %>
@@ -9,6 +10,7 @@
   <strong>Uid:</strong>
   <%= @user.uid %>
 </p>
+ <% end %>
 
 <p>
   <strong>Name:</strong>
@@ -23,10 +25,11 @@
 <p> 
   <strong>Games:</strong>
   <table>
+        <th></th>
   	<% @user.games.each do |g|%>
   	<tr>
-      <%= g.name %>
-    </tr>
+          <td><%= g.name %></td>
+        </tr>
     <% end %>
   </table>
 
@@ -44,7 +47,7 @@
 
 <ul>
   <% for user in @user.inverse_friends %>
-    <li><%= link_to user.name, user, :method => :get %></li>
+<!--    <li><%= link_to user.name, user, :method => :get %></li>-->
   <% end %>
 </ul>
 <p><%= link_to "Find Friends", users_path %></p>

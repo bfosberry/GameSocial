@@ -1,13 +1,15 @@
 <div class="btn-group">
-<%= link_to "Games", games_path, :class => "btn" %>
 <%= link_to "Friends", users_path, :class => "btn" %>
 <%= link_to "Events", events_path, :class => "btn" %>
 <%= link_to "Game Events", game_events_path, :class => "btn" %>
 <%= link_to "Chat Servers", chat_servers_path, :class => "btn" %>
 <%= link_to "Game Servers", game_social_servers_path, :class => "btn" %>
-<%= link_to "Locations", game_locations_path, :class => "btn" %>
 <%= link_to "Alert Schedules", alert_schedules_path, :class => "btn" %>
 <%= link_to "Alerts", alerts_path, :class => "btn" %>
+<% if is_admin? %>
+  <%= link_to "Games", games_path, :class => "btn" %>
+  <%= link_to "Locations", game_locations_path, :class => "btn" %>
+<% end %>
 </div>
 
 <div class="btn-group">
