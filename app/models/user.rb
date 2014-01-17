@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
       user.status = "Active"
     end
   end
+ 
+  def sanatized_name
+    name.blank? ? "(Unknown)" : name
+  end
 
   def add_as_friend(user)
     user.friends.add(user)

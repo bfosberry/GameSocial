@@ -15,11 +15,9 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <% if current_user == user %>
-        <% else %>
         <td><%= user.provider %></td>
         <td><%= user.uid %></td>
-        <td><%= user.name %></td>
+        <td><%= user.sanatized_name %></td>
         <% if current_user.has_friend?(user) %>
           <td><%= link_to "Remove Friend", friendship_path(current_user.get_friendship(user)), :class => "btn", :method => :delete %></td>
         <% else %>
@@ -28,7 +26,6 @@
         <td><%= link_to 'Show', user, :class => "btn" %></td>
         <td><%= link_to 'Edit', edit_user_path(user), :class => "btn" %></td>
         <td><%= link_to 'Destroy', user, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
       </tr>
     <% end %>
   </tbody>
