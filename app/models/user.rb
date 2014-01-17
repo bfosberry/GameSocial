@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   has_many :game_locations, :dependent => :destroy
-  has_many :alerts, :through => :alert_schedules
+  has_many :alerts, :through => :alert_schedules, :order => "created_at DESC"
 
   has_many :alerting_users, dependent: :destroy
   has_many :alerting_schedules, through: :alerting_users, :source => :alert_schedule
