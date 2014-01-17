@@ -9,7 +9,7 @@ gem 'ri_cal'
 
 gem 'unicorn'
 gem 'whenever'
-gem 'SyslogLogger'
+gem 'syslog-logger'
 
 group :development, :test do
  gem 'sqlite3'
