@@ -4,6 +4,7 @@
 
 <p>To Contribute to this project please visit <a href="https://github.com/bfosberry/GameSocial">https://github.com/bfosberry/GameSocial</a></p>
 
+<% if signed_in? %>
 <h3> News feed:</h3>
 <table>
   <tr><th>User</th><th>Game</th><th>Time</th></tr>
@@ -15,3 +16,4 @@
     </tr>
   <% end %>
 </table>
+<% end %>
