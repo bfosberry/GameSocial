@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
     game_locations.last
   end
 
+  def latest_locations
+    friends.map {|f| f.latest_location }.select {|l| l && l.game }
+  end
+
   def is_admin?
     admin
   end
