@@ -1,6 +1,6 @@
 :verbose: false
 :concurrency:  5
 :queues:
-  - [sync, 5]
-  - [default, 5]
-  - [alert, 5]
+  - [sync, 2]
+  - [default, 1]
+  - [alert, 2]

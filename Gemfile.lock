@@ -215,6 +215,7 @@ DEPENDENCIES
   capistrano-unicorn
   coffee-rails (~> 4.0.0)
   debugger
+  debugger-ruby_core_source
   httparty
   jbuilder (~> 1.2)
   jquery-rails
