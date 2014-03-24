@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 20131024143325) do
   create_table "events", force: true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "start_time",  default: '2013-10-22 14:32:52'
-    t.datetime "end_time",    default: '2013-10-22 20:32:52'
+    t.datetime "start_time",  default: '2014-03-24 13:06:55'
+    t.datetime "end_time",    default: '2014-03-24 19:06:55'
     t.integer  "user_id"
     t.string   "location"
     t.datetime "created_at"
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(version: 20131024143325) do
     t.integer  "game_social_server_id"
     t.integer  "chat_server_id"
     t.integer  "user_id"
-    t.datetime "start_time",            default: '2013-10-22 14:32:52'
-    t.datetime "end_time",              default: '2013-10-22 15:32:52'
+    t.datetime "start_time",            default: '2014-03-24 13:06:55'
+    t.datetime "end_time",              default: '2014-03-24 14:06:55'
     t.datetime "created_at"
     t.datetime "updated_at"
   end

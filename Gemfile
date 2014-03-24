@@ -10,6 +10,7 @@ gem 'ri_cal'
 gem 'unicorn'
 gem 'whenever'
 gem 'syslog-logger'
+gem 'debugger-ruby_core_source'
 
 group :development, :test do
  gem 'sqlite3'
