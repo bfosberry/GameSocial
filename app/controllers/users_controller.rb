@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_filter :verify_authenticity_token  
   before_filter :enforce_login, :except => [:new, :create, :home]
-  before_filter :enforce_admim, :only => [:index]
+  before_filter :enforce_admin, :only => [:index]
 
   # GET /users
   # GET /users.json
