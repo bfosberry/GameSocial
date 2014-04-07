@@ -6,7 +6,7 @@ class AlertConditionsController < ApplicationController
   # GET /alert_conditions
   # GET /alert_conditions.json
   def index
-    @alert_conditions = AlertCondition.all
+    @alert_conditions = AlertCondition.all.paginate(:page => params[:page])
   end
 
   # GET /alert_conditions/1

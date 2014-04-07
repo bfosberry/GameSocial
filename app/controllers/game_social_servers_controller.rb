@@ -5,7 +5,7 @@ class GameSocialServersController < ApplicationController
   # GET /game_social_servers
   # GET /game_social_servers.json
   def index
-    @game_social_servers = GameSocialServer.all
+    @game_social_servers = GameSocialServer.all.paginate(:page => params[:page])
   end
 
   # GET /game_social_servers/1

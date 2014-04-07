@@ -5,7 +5,7 @@ class AlertSchedulesController < ApplicationController
   # GET /alert_schedules
   # GET /alert_schedules.json
   def index
-    @alert_schedules = all_owned(AlertSchedule)
+    @alert_schedules = all_owned(AlertSchedule).paginate(:page => params[:page])
   end
 
   # GET /alert_schedules/1

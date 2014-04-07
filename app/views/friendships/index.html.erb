@@ -1,5 +1,7 @@
 <h1>Listing friendships</h1>
 
+<%= will_paginate @game_locations %>
+
 <table>
   <thead>
     <tr>
@@ -23,6 +25,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @game_locations %>
 
 <br>
 

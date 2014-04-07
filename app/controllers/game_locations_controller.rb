@@ -6,7 +6,7 @@ class GameLocationsController < ApplicationController
   # GET /game_locations
   # GET /game_locations.json
   def index
-    @game_locations = GameLocation.all
+    @game_locations = GameLocation.paginate(:page => params[:page])
   end
 
   # GET /game_locations/1

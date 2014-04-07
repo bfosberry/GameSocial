@@ -1,5 +1,7 @@
 <h1>Listing alert_conditions</h1>
 
+<%= will_paginate @game_locations %>
+
 <table>
   <thead>
     <tr>
@@ -10,8 +12,10 @@
       <th></th>
     </tr>
   </thead>
+    <%= will_paginate @alert_conditions %>
 
   <tbody>
+   
     <% @alert_conditions.each do |alert_condition| %>
       <tr>
         <td><%= alert_condition.condition_type %></td>
@@ -22,7 +26,11 @@
       </tr>
     <% end %>
   </tbody>
+      <%= will_paginate @alert_conditions %>
+
 </table>
+
+<%= will_paginate @game_locations %>
 
 <br>
 

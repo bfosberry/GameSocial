@@ -6,7 +6,7 @@ class GameEventsController < ApplicationController
   # GET /game_events
   # GET /game_events.jso
   def index
-    @game_events = GameEvent.all
+    @game_events = GameEvent.all.paginate(:page => params[:page])
     respond_to do |format|
       format.html {}
       format.ics { render inline: Ical.ical_from_collection(@game_events).to_s}

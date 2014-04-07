@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.all.paginate(:page => params[:page])
     respond_to do |format|
       format.html {}
       format.ics { render inline: Ical.ical_from_collection(@events).to_s}

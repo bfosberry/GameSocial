@@ -5,7 +5,7 @@ class AlertsController < ApplicationController
   # GET /alerts
   # GET /alerts.json
   def index
-    @alerts = all_owned(Alert)
+    @alerts = all_owned(Alert).paginate(:page => params[:page])
   end
 
   # GET /alerts/1

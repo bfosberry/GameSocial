@@ -12,6 +12,8 @@ gem 'whenever'
 gem 'syslog-logger'
 gem 'debugger-ruby_core_source'
 
+gem 'will_paginate', '~> 3.0'
+
 group :development, :test do
  gem 'sqlite3'
  gem 'binding_of_caller'

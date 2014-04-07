@@ -36,6 +36,6 @@ class ApplicationController < ActionController::Base
     end
 
     def all_owned(model)
-      model.all.select {|m| m.user == current_user }
+      model.where(:user_id => current_user.id)
     end
 end
