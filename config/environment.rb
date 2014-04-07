@@ -1,6 +1,6 @@
 # Load the Rails application.
 require File.expand_path('../application', __FILE__)
-unless SECRETS 
+unless  defined? SECRETS 
   SECRETS = {}
   SECRETS['steam_api_key'] = ENV['STEAM_API_KEY']
   SECRETS['smtp_username'] = ENV['SMTP_USERNAME']
