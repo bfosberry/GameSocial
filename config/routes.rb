@@ -32,6 +32,8 @@ GameSocial::Application.routes.draw do
 
   resources :chat_servers
 
+  match 'users/sync', to: 'users#sync', as: 'sync_users', via:[:get]
+  match 'users/sync_location', to: 'users#sync_location', as: 'sync_users_location', via:[:get]
   resources :users
 
   resources :games

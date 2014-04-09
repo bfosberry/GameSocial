@@ -16,7 +16,7 @@
     <% if current_user %>
     <%= link_to "Sign out", signout_path, :class => "btn btn-danger"%>
   <% else %>
-  <%= link_to "Sign in with Steam", "/auth/steam", :class => "btn btn-primary"%>
+  <%= link_to image_tag("https://steamcommunity.com/public/images/signinthroughsteam/sits_small.png", :border=>0), "/auth/steam" %>
   <% end %>
 </div>
 

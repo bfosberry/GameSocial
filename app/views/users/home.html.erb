@@ -5,7 +5,17 @@
 <p>To Contribute to this project please visit <a href="https://github.com/bfosberry/GameSocial">https://github.com/bfosberry/GameSocial</a></p>
 
 <% if signed_in? %>
-<h3> News feed:</h3>
+
+<p id="notice"><%= notice %></p>
+
+<% if Rails.env != "prodction" %>
+  <div>
+  	<p>Manually sync users</p>
+  	<%= link_to "Sync Users", sync_users_path, :class => "btn" %>
+    <%= link_to "Sync Locations", sync_users_location_path, :class => "btn" %>
+  </div>
+<% end %>
+<h3> Friends In-game:</h3>
 <table>
   <tr><th>User</th><th>Game</th><th>Time</th></tr>
   <% current_user.latest_locations.each do |l| %>
