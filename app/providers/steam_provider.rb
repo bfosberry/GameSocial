@@ -12,10 +12,15 @@ module Providers
 
     def games
       steam_id.games
+    rescue
+      []
     end
+
 
     def friends
       steam_id.friends
+    rescue 
+      []
     end
 
     def name

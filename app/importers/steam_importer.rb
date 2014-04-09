@@ -8,14 +8,17 @@ module Importers
 
     def import_games
       user = steam_provider.user
-      steam_provider.games.keys.each do |k|
-        g = steam_provider.games[k]
-        game = Game.find_or_create_by({
-          :name => g.name,
-          :store_url => g.store_url,
-          :logo_url => g.logo_url,
-          :description => g.name
-        })
+      keys = steam_provider.games.keys
+      if keys
+        keys.each do |k|
+          g = steam_provider.games[k]
+          game = Game.find_or_create_by({
+            :name => g.name,
+            :store_url => g.store_url,
+            :logo_url => g.logo_url,
+            :description => g.name
+          })
+        end
         user.games << game unless user.games.include?(game)
       end
       user.save

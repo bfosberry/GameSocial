@@ -72,6 +72,24 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET /users/sync
+  def sync
+    User.all.each do |user|
+      w = Workers::SyncWorker.new
+      w.perform(user.id)
+    end
+    redirect_to root_path, notice: "Users synced"
+  end
+
+  # GET /users/sync_location
+  def sync_location
+    User.all.each do |user|
+      w = Workers::LocationSyncWorker.new
+      w.perform(user.id)
+    end
+    redirect_to root_path, notice: "Locations synced"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
