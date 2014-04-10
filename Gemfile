@@ -49,6 +49,8 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
 
 #auth
 gem 'omniauth-steam'
