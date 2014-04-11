@@ -18,8 +18,8 @@ module Importers
             :logo_url => g.logo_url,
             :description => g.name
           })
-        end
-        user.games << game unless user.games.include?(game)
+          user.games << game unless user.games.include?(game)
+        end  
       end
       user.save
     end
