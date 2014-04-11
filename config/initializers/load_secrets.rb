@@ -5,6 +5,8 @@ unless defined? SECRETS
   SECRETS['smtp_password'] = ENV['SMTP_PASSWORD']
   SECRETS['smtp_server'] = ENV['SMTP_SERVER']
   SECRETS['smtp_port'] = ENV['SMTP_PORT']
+  SECRETS['redis_server']  = ENV['REDISTOGO_URL']
+
 
   secret_file = "#{Rails.root}/config/secret.yml"
   if File.exists?(secret_file)
