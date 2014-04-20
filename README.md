@@ -25,94 +25,37 @@ GameSocial will be your one-stop shop for managing and socializing your gaming e
 
 ----
 
-## Platforms
+## Getting started
 
- - Android
- - iOS
- - Windows Mobile
- - Linux Desktop
- - Windows Desktop
- - OSX
+### Prerequisites
 
+Before geting started make sure you have the following
+
+* ruby-1.9.3
+* redis
+
+### Setup
+
+* Configure database.yml
+* Get your steam api key [here](http://steamcommunity.com/dev/apikey)
+* Create secret.yml, use secret.yml.example as a template
+* Run rake db:create && rake db:migrate
+
+### Running the app
+
+* Run the server with "rails s"
+* Run sidekiq with "sidekiq -C config/myapp_sidekiq.yml"
+* Configure the cron tasks with "whenever -w"
+
+### Tools
+
+There are a couple of rake tasks which can help with managing application data.
+
+* rake sync:location: Synchronize the location of all users
+* rake sync:all :Syncronize all user data
+ 
 ----
 
-## Services
+## Running instances
 
- - Steam
- - XBoxLive
- - PlayStation Network (PSN)
- - Origin
- - ...what else do Gamers play on?
-
-----
-
-## Features/Functions
-
- - Profile attrs
-	- GameSocial User Name
-	- User Name for Network 'X'
-	- Server info for chat/speak services
-	- Server info for game server(s)
-	- Social Media profiles
-	- Email address(es)
- - User
-	- Track your games
-	- Track your game network profile(s)
-	- Track your stats
-	- Track your game playing
-		- Game Name
-		- Current Map
-		- Current Status
-	- Track your games played
- - Friends
-	- Track friends
-	- Track friends' games
-	- Track friends' stats
-	- Track what games friends are playing
-		- Game Name
-		- Current Map
-		- Current Status
-	- Track what games friends have played	
- - Groups/Clans
-	- Clan Name
-	- Clan Games
-	- Clan Stats
-	- Clan Members
-	- Clan Servers
- - Chat/Messaging
-	- Stream style messaging, think "Facebook walls"
-	- Private messaging (chat), w/ notifications
- - Notifications/Alerts
-	- Live Pop-ups (in online)
-	- Offline notification to messaging (if offline)
- - Events
-	- Scheduling
-	- Live Create/Invite
-	- Public/Private
-	- Tournament Ladders
-	- One-time games
- - Stats
-	- Local to private instance
-	- Optional push to global stats logs
-		- User key auth to carry between private instances of GameSocial and report back to the Global Public Stats server
-
-----
-
-## Project Tasks
-
-Issues and Features are tracked on GitHub repo.
-
-----
-
-## Walkthrough
-
-Coming...
-
-
-
-
-
-
-
-
-
+Staging: [Heroku](http://dev-gamesocial.herokuapp.com/)
