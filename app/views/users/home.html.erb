@@ -11,7 +11,7 @@
 <% if Rails.env != "prodction" %>
   <div>
   	<p>Manually sync users</p>
-  	<%= link_to "Sync Users", sync_users_path, :class => "btn" %>
+  	<%= link_to "Sync Me", sync_users_path, :class => "btn" %>
     <%= link_to "Sync Locations", sync_users_location_path, :class => "btn" %>
   </div>
 <% end %>
