@@ -9,7 +9,7 @@ GameSocial
 
 Spoon Programming Applied: http://www.youtube.com/watch?v=dYBjVTMUQY0
 
-Play around in our development environment [here](http://hackgamesocial.herokuapp.com/)   
+Play around in our development environment [here](http://dev-gamesocial.herokuapp.com/)   
 If you are interested in what we're doing please feel free to [contribute](https://github.com/bfosberry/GameSocial/wiki/Contributing).
 
 To stay up to date on what we are doing join our [Google Group](https://groups.google.com/forum/#!forum/hackgamesocial)  
@@ -53,9 +53,11 @@ There are a couple of rake tasks which can help with managing application data.
 
 * rake sync:location: Synchronize the location of all users
 * rake sync:all :Syncronize all user data
- 
+
 ----
 
 ## Running instances
 
 Staging: [Heroku](http://dev-gamesocial.herokuapp.com/)
+ 
+ Staging has a single worker thread and does not handle the large number of tasks around syncing all locations well, the worker thread may block.
