@@ -25,6 +25,12 @@ GameSocial will be your one-stop shop for managing and socializing your gaming e
 
 ----
 
+## Whats Next?
+
+Take a look at our [alpha release page](https://github.com/bfosberry/GameSocial/wiki/Alpha-release) for info on what features are in the pipeline atm.
+
+----
+
 ## Getting started
 
 ### Prerequisites
