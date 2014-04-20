@@ -74,19 +74,19 @@ class UsersController < ApplicationController
 
   # GET /users/sync
   def sync
-    User.all.each do |user|
-      w = Workers::SyncWorker.new
-      w.perform(user.id)
-    end
+    w = Workers::SyncWorker.new
+    w.perform(current_user.id)
     redirect_to root_path, notice: "Users synced"
   end
 
   # GET /users/sync_location
   def sync_location
-    User.all.each do |user|
+    current_user.friends.each do |u|
       w = Workers::LocationSyncWorker.new
-      w.perform(user.id)
+      w.perform(u.id)
     end
+    w = Workers::LocationSyncWorker.new
+    w.perform(current_user.id)
     redirect_to root_path, notice: "Locations synced"
   end
 
