@@ -36,6 +36,13 @@ class ApplicationController < ActionController::Base
     end
 
     def all_owned(model)
-      model.where(:user_id => current_user.id)
+      if model.column_names.include? "user_id"
+        model.where(:user_id => current_user.id) 
+      #TODO fixme, the pagination does not accept arrays
+      #elsif model.method_defined? "user"
+      # model.all.select{ |m| m.user == current_user }
+      else 
+        model.all
+      end
     end
 end
