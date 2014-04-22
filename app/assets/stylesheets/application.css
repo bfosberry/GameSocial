@@ -14,3 +14,12 @@
  *= require jquery.timepicker
  */
 
+.content 
+{
+	padding-top: 40px;
+}
+
+.navbar
+{
+	white-space: nowrap;
+}
