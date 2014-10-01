@@ -1,5 +1,6 @@
 
 <%= form_for(@game_event, :html => {:class => "form-horizontal"}) do |f| %>
+  <% @game_event.set_defaults %>
   <% if @game_event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@game_event.errors.count, "error") %> prohibited this game_event from being saved:</h2>

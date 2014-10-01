@@ -13,6 +13,7 @@ class GameEvent < ActiveRecord::Base
   delegate :name, :to => :game_social_server, :prefix => true, :allow_nil => true
   delegate :name, :to => :chat_server, :prefix => true, :allow_nil => true
 
+  before_save :set_defaults
   default_scope order('start_time ASC')
   def name
     title
@@ -20,5 +21,10 @@ class GameEvent < ActiveRecord::Base
 
   def location
     game_social_server_name
+  end
+
+  def set_defaults
+    self.start_time ||= DateTime.now
+    self.end_time ||= DateTime.now
   end
 end

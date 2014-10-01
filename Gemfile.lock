@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/bfosberry/steam-condenser-ruby.git
-  revision: 2a611b48a4dbe2805ca78e1ab1abfe40b7315827
+  revision: dd53277e3578ee993404d09a14d36b5d4ef430be
   branch: summaries
   specs:
     steam-condenser (1.3.8.1)
@@ -103,7 +103,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     minitest (4.7.5)
-    multi_json (1.9.2)
+    multi_json (1.10.1)
     multi_xml (0.5.5)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
