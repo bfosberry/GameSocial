@@ -9,7 +9,10 @@ class GameEventsController < ApplicationController
     @game_events = GameEvent.all.paginate(:page => params[:page])
     respond_to do |format|
       format.html {}
-      format.ics { render inline: Ical.ical_from_collection(@game_events).to_s}
+      format.ics do
+        expires_now
+        render inline: Ical.ical_from_collection(@game_events).to_s
+      end 
     end
   end
 

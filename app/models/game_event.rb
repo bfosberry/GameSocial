@@ -8,6 +8,7 @@ class GameEvent < ActiveRecord::Base
   has_and_belongs_to_many :users
 
   delegate :name, :to => :user, :prefix => true, :allow_nil => true
+  delegate :email, :to => :user, :prefix => true, :allow_nil => true
   delegate :name, :to => :game, :prefix => true, :allow_nil => true
   delegate :name, :to => :event, :prefix => true, :allow_nil => true
   delegate :name, :to => :game_social_server, :prefix => true, :allow_nil => true
