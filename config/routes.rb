@@ -112,15 +112,15 @@ GameSocial::Application.routes.named_routes.module.module_eval do
   end
 
   def event_ics_path(*args)
-    "#{event_path(args.first.id)}.ics?auth_token=#{current_user.remember_token}"
+    "#{event_path(args.first.id)}.ics?auth_token=#{current_user.remember_token}&noCache"
   end
 
   def events_ics_path(*args)
-    "#{events_path}.ics?auth_token=#{current_user.remember_token}"
+    "#{events_path}.ics?auth_token=#{current_user.remember_token}&noCache"
   end
 
   def game_events_ics_path(*args)
-    "#{game_events_path}.ics?auth_token=#{current_user.remember_token}"
+    "#{game_events_path}.ics?auth_token=#{current_user.remember_token}&noCache"
   end
 end
 
