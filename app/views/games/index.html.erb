@@ -18,8 +18,8 @@
   <tbody>
     <% @games.each do |game| %>
       <tr>
-        <td><%= image_tag(game.logo_url, :size => "32x32") %></td>
-        <td><%= game.name %></td>
+        <%= render "games/game", :g => game %>
+
         <td><%= link_to 'Show', game, :class => "btn" %></td>
         <td><%= link_to 'Edit', edit_game_path(game), :class => "btn"%></td>
         <td><%= link_to 'Store', game.store_url, :class => "btn" %></td>

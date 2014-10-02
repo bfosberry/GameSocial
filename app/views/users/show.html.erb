@@ -24,16 +24,8 @@
 
 <p> 
   <strong>Games:</strong>
-  <table>
-        <th></th>
-  	<% @user.games.each do |g|%>
-  	<tr>
-          <td><%= g.name %></td>
-        </tr>
-    <% end %>
-  </table>
-
-
+  <%= render "games/games", :games => @user.games %>
+<p>
 
 <h2>Friends</h2>
 <ul>
