@@ -31,21 +31,23 @@ module Importers
     def import_friends
       steam_provider.friends.each do |f|
         if f.id.to_i > 0
-          u = User.find_or_create_by({ :uid => f.id.to_s, :provider => "steam" })
-          user = steam_provider.user
-          u.friends << user unless u.friends.include? user
-          user.friends << u unless user.friends.include? u
+          u = User.where({ :uid => f.id.to_s, :provider => "steam" }).first
+          if u
+            user = steam_provider.user
+            u.friends << user unless u.friends.include? user
+            user.friends << u unless user.friends.include? u
+          end
         end
       end
     end
 
     def import_user
-      steam_provider.user.update_attributes({ :name => steam_provider.name })
+      steam_provider.user.update_attributes({ :name => steam_provider.name,
+                                              :avatar_url => steam_provider.avatar_url })
     end
 
     def import_location
       game_name = steam_provider.current_game
-      puts "#{steam_provider.user.name} is in #{game_name}"
       steam_provider.user.set_game(game_name)
     end
   end

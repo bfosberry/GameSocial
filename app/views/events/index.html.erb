@@ -1,4 +1,4 @@
-<h1 class="text-center">Listing events</h1>
+<h1 class="text-center">Lan Parties</h1>
 
 <br>
 
@@ -8,7 +8,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Description</th>
       <th>Start time</th>
       <th>End time</th>
       <th>User</th>
@@ -24,10 +23,9 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.name %></td>
-        <td><%= event.description %></td>
         <td><%= event.start_time %></td>
         <td><%= event.end_time %></td>
-        <td><%= event.user_id %></td>
+        <td><%= event.user_name %></td>
         <td><%= event.location %></td>
         <td><%= link_to 'Show', event, :class => "btn" %></td>
         <% if current_user.attending_event?(event) %>

@@ -2,10 +2,9 @@ module Providers
   class SteamProvider
     attr_accessor :steam_id, :user
     def initialize(user)
-      SteamCondenser::Community::WebApi.api_key = SECRETS['steam_api_key']
-      id = SteamCondenser::Community::SteamId.community_id_to_steam_id(user.uid.to_i)
-      self.steam_id = SteamCondenser::Community::SteamId.new(id)
-      steam_id.fetch
+      WebApi.api_key = SECRETS['steam_api_key']
+      id = SteamId.community_id_to_steam_id(user.uid.to_i)
+      self.steam_id = SteamId.new(id)
       self.user = user
       self.steam_id ? self : nil
     end
@@ -15,7 +14,6 @@ module Providers
     rescue
       {}
     end
-
 
     def friends
       steam_id.friends
@@ -27,10 +25,11 @@ module Providers
       steam_id.nickname
     end
 
+    def avatar_url
+      steam_id.full_avatar_url
+    end
+
     def current_game
-      puts "Fetching game"
-      puts "SECRETS"
-      puts steam_id.game_name
       steam_id.game_name
     end
 

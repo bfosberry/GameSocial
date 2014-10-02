@@ -28,4 +28,8 @@ class GameEvent < ActiveRecord::Base
     self.start_time ||= DateTime.now
     self.end_time ||= DateTime.now
   end
+
+  def time_until
+    start_time - DateTime.now
+  end
 end

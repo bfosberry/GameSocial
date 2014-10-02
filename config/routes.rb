@@ -28,6 +28,7 @@ GameSocial::Application.routes.draw do
 
   resources :friendships
 
+  match 'game_social_servers/new_source', to: 'game_social_servers#new_source', as: 'new_source_game_server', via: [:get]
   resources :game_social_servers
 
   resources :chat_servers
@@ -122,6 +123,10 @@ GameSocial::Application.routes.named_routes.module.module_eval do
   def game_events_ics_path(*args)
     "#{game_events_path}.ics?auth_token=#{current_user.remember_token}&noCache"
   end
+
+  def new_source_game_social_server_path(*args)
+    "#{game_social_servers_path}/new_source"
+  end
 end
 
 GameSocial::Application.routes.named_routes.instance_eval do
@@ -131,7 +136,8 @@ GameSocial::Application.routes.named_routes.instance_eval do
     :new_post_for_game_event_path,
     :event_ics_path,
     :events_ics_path,
-    :game_events_ics_path
+    :game_events_ics_path,
+    :new_source_game_social_server_path
   ]
 end
 

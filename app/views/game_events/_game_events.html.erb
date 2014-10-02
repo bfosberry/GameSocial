@@ -1,0 +1,12 @@
+<table class="table table-bordered">
+
+  <tbody>
+
+    <tr><th>Name</th><th>Game</th><th>Start Time</th><th>Starts In</th></tr>
+    <% game_events.each do |ge|%>
+  	<tr>
+      <%= render "game_events/game_event", :ge => ge %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

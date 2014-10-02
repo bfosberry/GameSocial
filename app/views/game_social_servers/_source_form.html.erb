@@ -1,0 +1,31 @@
+<%= form_for(@game_social_server) do |f| %>
+  <% if @game_social_server.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@game_social_server.errors.count, "error") %> prohibited this game_server from being saved:</h2>
+
+      <ul>
+      <% @game_social_server.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ip %><br>
+    <%= f.text_field :ip %>
+  </div>
+  <div class="field">
+    <%= f.label :port %><br>
+    <%= f.number_field :port %>
+  </div>
+  <% if is_admin? %>
+    <div class="field">
+      <%= f.label :user_id %><br>
+      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @game_social_server.user} %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

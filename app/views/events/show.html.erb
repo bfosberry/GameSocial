@@ -55,12 +55,9 @@
 
 <h2>Attending</h2>
 <table class="table table-condensed">
-<tr>
-  <th>Username</th>
-</tr>
 <% for user in @event.users %>
 <tr>
-  <td><p class="text-center"><%= user.name %></p></td>
+  <%= render "users/user", :u => user %>
 </tr>
 <% end %>
 </table>  

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141001004901) do
+ActiveRecord::Schema.define(version: 20141002153520) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 20141001004901) do
     t.string   "remember_token"
     t.string   "password_digest"
     t.string   "status",          default: "Inactive"
+    t.string   "avatar_url"
   end
 
 end

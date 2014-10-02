@@ -15,9 +15,6 @@ module Workers
       if user.is_active?
         si.import_friends
       end
-    rescue SteamCondenser::Error => e
-      puts e
-      puts "Failed to sync user"
     end
   end
 end

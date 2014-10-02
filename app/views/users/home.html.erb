@@ -15,15 +15,7 @@
     <%= link_to "Sync Locations", sync_users_location_path, :class => "btn" %>
   </div>
 <% end %>
-<h3> Friends In-game:</h3>
-<table>
-  <tr><th>User</th><th>Game</th><th>Time</th></tr>
-  <% current_user.latest_locations.each do |l| %>
-    <tr>
-      <td><%= l.user_name %></td>
-      <td><%= l.game_name %></td>
-      <td><%= l.created_at %></td>
-    </tr>
-  <% end %>
-</table>
+<h3>Your Upcoming Events:</h3>
+<%= render "game_events/game_events", :game_events => current_user.game_events %>
+
 <% end %>

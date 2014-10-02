@@ -11,10 +11,17 @@ class GameSocialServersController < ApplicationController
   # GET /game_social_servers/1
   # GET /game_social_servers/1.json
   def show
+    @game_social_server.import_server 
+    @game_social_server.reload
   end
 
   # GET /game_social_servers/new
   def new
+    @game_social_server = GameSocialServer.new
+  end
+
+  # GET /game_social_servers/new_source
+  def new_source
     @game_social_server = GameSocialServer.new
   end
 
