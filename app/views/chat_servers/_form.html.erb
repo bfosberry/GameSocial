@@ -19,7 +19,7 @@
   <% if is_admin? %>
     <div class="field">
       <%= f.label :user_id %><br>
-      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @chat_server.user} %>
+      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@chat_server.user || current_user)} %>
 
     </div>
   <% end %>
