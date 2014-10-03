@@ -23,8 +23,8 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.name %></td>
-        <td><%= event.start_time %></td>
-        <td><%= event.end_time %></td>
+        <td><%= event.formatted_start_time %></td>
+        <td><%= event.formatted_end_time %></td>
         <td><%= event.user_name %></td>
         <td><%= event.location %></td>
         <td><%= link_to 'Show', event, :class => "btn" %></td>

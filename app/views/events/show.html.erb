@@ -14,11 +14,11 @@
   </tr>
   <tr>
     <td><h5 class="text-center">Start Time</h5></td>
-    <td><p class="text-center"><%= @event.start_time %></p></td>
+    <td><p class="text-center"><%= @event.formatted_start_time %></p></td>
   </tr>
   <tr>
     <td><h5 class="text-center">End Time</h5></td>
-    <td><p class="text-center"><%= @event.end_time %></p></td>
+    <td><p class="text-center"><%= @event.formatted_end_time %></p></td>
   </tr>
   <tr>
     <td><h5 class="text-center">Location</h5></td>
@@ -43,11 +43,11 @@
   <th></th>
   <th></th>
 </tr>
-<% for game in @event.game_events.order("start_time") %>
+<% for game_event in @event.game_events.order("start_time") %>
 <tr>
-  <td><p class="text-center"><%= game.title %></p></td>
-  <td><p class="text-center"><%= game.game_name %></p></td>
-  <td><p class="text-center"><%= game.start_time %></p></td>
+  <td><p class="text-center"><%= game_event.title %></p></td>
+  <td><p class="text-center"><%= game_event.game_name %></p></td>
+  <td><p class="text-center"><%= game_event.formatted_start_time %></p></td>
 </tr>
 <% end %>
 </table>  

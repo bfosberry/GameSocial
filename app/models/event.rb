@@ -13,4 +13,12 @@ class Event < ActiveRecord::Base
     self.start_time ||= DateTime.now
     self.end_time ||= DateTime.now
   end
+
+  def formatted_start_time
+    start_time.to_formatted_s(:long_ordinal) if start_time
+  end
+
+  def formatted_end_time
+    end_time.to_formatted_s(:long_ordinal) if end_time
+  end
 end

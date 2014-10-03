@@ -30,6 +30,17 @@ class GameEvent < ActiveRecord::Base
   end
 
   def time_until
-    start_time - DateTime.now
+    diff = start_time - DateTime.now
+    hours = (diff/3600).to_i
+    mins = ((diff % 3600)/60).to_i
+    "#{hours}h #{mins}m"
+  end
+
+  def formatted_start_time
+    start_time.to_formatted_s(:long_ordinal) if start_time
+  end
+
+  def formatted_end_time
+    end_time.to_formatted_s(:long_ordinal) if end_time
   end
 end
