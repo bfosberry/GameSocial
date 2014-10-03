@@ -132,6 +132,10 @@ class User < ActiveRecord::Base
   def activate
     self.update_attribute(:status, "Active") unless is_active?
   end
+
+  def upcoming_game_events
+    game_events.where("start_time > ?", DateTime.now)
+  end
   
   private
     def create_remember_token
