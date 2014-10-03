@@ -5,9 +5,8 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Event</th>
+      <th>Lan Party</th>
       <th>Title</th>
-      <th>Description</th>
       <th>Game</th>
       <th>Game Server</th>
       <th>Chat server</th>
@@ -26,7 +25,6 @@
       <tr>
         <td><%= game_event.event_name %></td>
         <td><%= game_event.title %></td>
-        <td><%= game_event.description %></td>
         <td><%= game_event.game_name %></td>
         <td><%= game_event.game_social_server_name %></td>
         <td><%= game_event.chat_server_name %></td>
@@ -55,5 +53,5 @@
 
 <br>
 
-<%= link_to 'New Game event', new_game_event_path, :class => "btn btn-success" %>
+<%= link_to 'Create Event', new_game_event_path, :class => "btn btn-success" %>
 <%= link_to 'ICal', game_events_ics_path, :class => "btn btn-primary"  %>

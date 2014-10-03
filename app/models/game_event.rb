@@ -31,9 +31,12 @@ class GameEvent < ActiveRecord::Base
 
   def time_until
     diff = start_time - DateTime.now
-    hours = (diff/3600).to_i
+    days = (diff/(3600*24)).to_i
+
+    hours = ((diff % (3600*24)) /3600).to_i
     mins = ((diff % 3600)/60).to_i
-    "#{hours}h #{mins}m"
+    sign = diff < 0 ? "-": ""
+    "#{sign}#{days} days, #{hours}h #{mins}m"
   end
 
   def formatted_start_time
