@@ -14,6 +14,9 @@ gem 'debugger-ruby_core_source'
 
 gem 'will_paginate', '~> 3.0'
 
+gem 'google_calendar', :git =>  'git://github.com/bfosberry/google_calendar.git', :branch => "master"
+
+
 group :development, :test do
  gem 'sqlite3'
  gem 'binding_of_caller'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141002153520) do
+ActiveRecord::Schema.define(version: 20141003195026) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 20141002153520) do
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "uid"
   end
 
   create_table "events_users", id: false, force: true do |t|
@@ -100,6 +101,7 @@ ActiveRecord::Schema.define(version: 20141002153520) do
     t.datetime "end_time",              null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "uid"
   end
 
   create_table "game_events_users", id: false, force: true do |t|

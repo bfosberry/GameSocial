@@ -1,3 +1,5 @@
+require 'calendar'
+
 class GameEvent < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
@@ -15,6 +17,9 @@ class GameEvent < ActiveRecord::Base
   delegate :name, :to => :chat_server, :prefix => true, :allow_nil => true
 
   before_save :set_defaults
+  before_destroy :delete_game_event
+  after_commit :export_game_event, :on => [:create, :update]
+
   default_scope order('start_time ASC')
   def name
     title
@@ -22,6 +27,18 @@ class GameEvent < ActiveRecord::Base
 
   def location
     game_social_server_name
+  end
+
+  def export_game_event
+    if calendar.event
+      calendar.update_event
+    else
+      calendar.create_event
+    end
+  end
+
+  def delete_game_event
+    calendar.delete_event
   end
 
   def set_defaults
@@ -45,5 +62,9 @@ class GameEvent < ActiveRecord::Base
 
   def formatted_end_time
     end_time.to_formatted_s(:long_ordinal) if end_time
+  end
+
+  def calendar
+    @calendar ||= Calendar.new(self)
   end
 end

@@ -103,10 +103,12 @@ class User < ActiveRecord::Base
 
   def join_event(event)
     attending_events << event unless attending_event?(event)
+    event.export_event
   end
 
   def leave_event(event)
     attending_events.delete(event) if attending_event?(event)
+    event.export_event
   end
   
   def attending_event?(event)
@@ -115,10 +117,12 @@ class User < ActiveRecord::Base
 
   def join_game_event(game_event)
     attending_game_events << game_event unless attending_game_event?(game_event)
+     game_event.export_game_event
   end
 
   def leave_game_event(game_event)
     attending_game_events.delete(game_event) if attending_game_event?(game_event)
+    game_event.export_game_event
   end
 
   def attending_game_event?(game_event)
