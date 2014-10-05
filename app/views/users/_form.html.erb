@@ -12,6 +12,13 @@
   <% end %>
 
   <div class="field">
+    <p>Warning: It is possible for other users to see your email address when you both join the same event</p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+
+  <% if is_admin? %>
+  <div class="field">
     <%= f.label :provider %><br>
     <%= f.text_field :provider %>
   </div>
@@ -23,15 +30,13 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-
+  
   <div class="field">
     <%= f.label :game_ids %><br>
     <%= f.collection_select :game_ids, Game.all, :id, :name,{:include_blank => false},{:multiple => true, :size => 5} %>
 </p>
+
+ <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

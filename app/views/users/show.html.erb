@@ -22,11 +22,7 @@
   <%= @user.email %>
 </p>
 
-<p> 
-  <strong>Games:</strong>
-  <%= render "games/games", :games => @user.games %>
-<p>
-
+<% if @user.friendships.size > 0 %>
 <h2>Friends</h2>
 <ul>
   <% for friendship in @user.friendships %>
@@ -35,14 +31,7 @@
     </li>
   <% end %>
 </ul>
-
-
-<ul>
-  <% for user in @user.inverse_friends %>
-<!--    <li><%= link_to user.name, user, :method => :get %></li>-->
-  <% end %>
-</ul>
-<p><%= link_to "Find Friends", users_path %></p>
+<% end %>
 
 <% if @user.latest_location %>
   <% if @user.latest_location.game %>
@@ -58,6 +47,7 @@
   <% end %>
 <% end %>
 
+<% if @user.alerts.size > 0 %>
 <h2>Activity</h2>
 <table>
   <tr>
@@ -70,7 +60,7 @@
       <td><%= link_to 'Show', alert_path(alert) %></td>
     </tr>
   <% end %>
-<table>
-
+<table
+<% end %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

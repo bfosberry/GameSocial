@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
 #  has_secure_password
 #  validates_confirmation_of :password
 
+  after_commit :update_events, :on => [:create, :update, :destroy]
+
   before_save { |user| user.email = email.downcase if email }
   before_save :create_remember_token
 
@@ -40,6 +42,11 @@ class User < ActiveRecord::Base
       user.name = auth["info"]["nickname"]
       user.status = "Active"
     end
+  end
+
+  def update_events
+    events.each {|e| e.export_event }
+    game_events.each {|e| e.export_game_event }
   end
  
   def sanatized_name

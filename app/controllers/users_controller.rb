@@ -26,6 +26,11 @@ class UsersController < ApplicationController
 
   # GET /users/home
   def home
+
+    if current_user.email.blank?
+      flash[:notice] = "Your email address is not set, please set it #{view_context.link_to('here',edit_user_path(current_user))}".html_safe
+
+    end
   end
 
   # POST /users
@@ -47,6 +52,8 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+
+    #update all users events and game events to re-export
     respond_to do |format|
       up = user_params
       up[:games] = up[:game_ids].reject {|g|  g.blank? }.map {|id| Game.find(id) } if up[:game_ids]
