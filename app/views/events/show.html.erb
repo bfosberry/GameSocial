@@ -35,22 +35,7 @@
 </table>
 
 <h2>Events</h2>
-<table class="table table-condensed">
-<tr>
-  <th>Title</th>
-  <th>Game</th>
-  <th>Start Time</th>
-  <th></th>
-  <th></th>
-</tr>
-<% for game_event in @event.game_events.order("start_time") %>
-<tr>
-  <td><p class="text-center"><%= game_event.title %></p></td>
-  <td><p class="text-center"><%= game_event.game_name %></p></td>
-  <td><p class="text-center"><%= game_event.formatted_start_time %></p></td>
-</tr>
-<% end %>
-</table>  
+<%= render "game_events/game_events", :game_events => @event.game_events %>
 <%= link_to 'Create Game Event', new_game_event_for_event_path(@event), :class => "btn btn-success" %><br><br>
 
 <h2>Attending</h2>
