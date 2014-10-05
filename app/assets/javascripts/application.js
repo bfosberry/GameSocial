@@ -17,5 +17,6 @@
 //= require turbolinks
 //= require jquery.timepicker
 //= require jquery.simple-dtpicker
+//= require wice_grid
 //= require_tree .
 

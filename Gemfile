@@ -12,7 +12,7 @@ gem 'whenever'
 gem 'syslog-logger'
 gem 'debugger-ruby_core_source'
 
-gem 'will_paginate', '~> 3.0'
+gem "wice_grid", '3.4.2'
 
 gem 'google_calendar', :git =>  'git://github.com/bfosberry/google_calendar.git', :branch => "master"
 
