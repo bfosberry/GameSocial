@@ -1,57 +1,58 @@
 <h1 class="text-center">Events</h1>
+      
+<%= grid(@game_events_grid) do |g|
+  g.column name: 'Lan Party', model: Event, attribute: 'name' do |game_event|
+    game_event.event_name 
+  end
+  
+  g.column name: 'Title', attribute: 'title' do |game_event|
+    game_event.title
+  end
 
-<%= will_paginate @game_events %>
+  g.column name: 'Game', model: Game, attribute: 'name' do |game_event|
+    game_event.game_name
+  end
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Lan Party</th>
-      <th>Title</th>
-      <th>Game</th>
-      <th>Game Server</th>
-      <th>Chat server</th>
-      <th>Owner</th>
-      <th>Start time</th>
-      <th>End time</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  g.column name: 'Owner', model: User, attribute: 'name' do |game_event|
+    game_event.user_name
+  end
+  
+  g.column name: 'Game Server', model: GameSocialServer, attribute: 'name' do |game_event|
+    game_event.game_social_server_name
+  end
 
-  <tbody>
-    <% @game_events.each do |game_event| %>
-      <tr>
-        <td><%= game_event.event_name %></td>
-        <td><%= game_event.title %></td>
-        <td><%= game_event.game_name %></td>
-        <td><%= game_event.game_social_server_name %></td>
-        <td><%= game_event.chat_server_name %></td>
-        <td><%= game_event.user_name %></td>
-        <td><%= game_event.formatted_start_time %></td>
-        <td><%= game_event.formatted_end_time %></td>
-        <td><%= link_to 'Show', game_event, :class => "btn" %></td>
-        <% if current_user.attending_game_event?(game_event) %>
-          <td><%= link_to 'Leave', leave_game_event_path(game_event), :class => "btn" %></td>
-        <% else %>
-          <td><%= link_to 'Join', join_game_event_path(game_event), :class => "btn" %></td>
-        <% end %>
-        <td><%= link_to 'Edit', edit_game_event_path(game_event), :class => "btn" %></td>
-        
-        <td>
-          <% if current_user == game_event.user || current_user.admin? %>
-          <%= link_to 'Destroy', game_event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  g.column name: 'Chat Server', model: ChatServer, attribute: 'name' do |game_event|
+    game_event.chat_server_name
+  end
+  
+  g.column name: 'Start Time', attribute: 'start_time' do |game_event|
+    game_event.formatted_start_time
+  end
 
-<%= will_paginate @game_events %>
+  g.column name: 'End Time', attribute: 'end_time' do |game_event|
+    game_event.formatted_end_time
+  end
+  
+  g.column do |game_event|
+    link_to 'Show', game_event, :class => "btn"
+  end
+  
+  g.column do |game_event|
+    if current_user.attending_game_event?(game_event)
+      link_to 'Leave', leave_game_event_path(game_event), :class => "btn"
+    else
+      link_to 'Join', join_game_event_path(game_event), :class => "btn"
+    end
+  end
 
-<br>
+  g.column do |game_event|
+    link_to 'Edit', edit_game_event_path(game_event), :class => "btn" 
+  end
+
+  g.column do |game_event|
+    link_to 'Destroy', game_event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+  end
+end -%>
 
 <%= link_to 'Create Event', new_game_event_path, :class => "btn btn-success" %>
 <%= link_to 'ICal', game_events_ics_path, :class => "btn btn-primary"  %>

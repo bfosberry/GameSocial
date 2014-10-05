@@ -13,7 +13,7 @@
     event.formatted_end_time
   end
   
-  g.column name: 'Owner', attribute: 'user_id' do |event|
+  g.column name: 'Owner', model: User, attribute: 'name' do |event|
     event.user_name
   end
   
