@@ -7,7 +7,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all.paginate(:page => params[:page])
+    @events_grid = initialize_grid(Event)
+    #Event.all.paginate(:page => params[:page])
     respond_to do |format|
       format.html {}
       format.ics do

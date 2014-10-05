@@ -1,52 +1,46 @@
 <h1 class="text-center">Lan Parties</h1>
 
-<br>
+<%= grid(@events_grid) do |g|
+  g.column name: 'Name', attribute: 'name' do |event|
+    event.name 
+  end
+  
+  g.column name: 'Start Time', attribute: 'start_time' do |event|
+    event.formatted_start_time 
+  end
+  
+  g.column name: 'End Time', attribute: 'end_time' do |event|
+    event.formatted_end_time
+  end
+  
+  g.column name: 'Owner', attribute: 'user_id' do |event|
+    event.user_name
+  end
+  
+  g.column name: 'Location', attribute: 'location' do |event|
+    event.location 
+  end
+  
+  g.column do |event|
+    link_to 'Show', event, :class => "btn"
+  end
+  
+  g.column do |event|
+    if current_user.attending_event?(event)
+      link_to 'Leave', leave_event_path(event), :class => "btn"
+    else
+      link_to 'Join', join_event_path(event), :class => "btn"
+    end
+  end
 
-<%= will_paginate @events %>
+  g.column do |event|
+    link_to 'Edit', edit_event_path(event), :class => "btn" 
+  end
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Start time</th>
-      <th>End time</th>
-      <th>Owner</th>
-      <th>Location</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.name %></td>
-        <td><%= event.formatted_start_time %></td>
-        <td><%= event.formatted_end_time %></td>
-        <td><%= event.user_name %></td>
-        <td><%= event.location %></td>
-        <td><%= link_to 'Show', event, :class => "btn" %></td>
-        <% if current_user.attending_event?(event) %>
-          <td><%= link_to 'Leave', leave_event_path(event), :class => "btn" %></td>
-        <% else %>
-          <td><%= link_to 'Join', join_event_path(event), :class => "btn" %></td>
-        <% end %>
-        <td><%= link_to 'Edit', edit_event_path(event), :class => "btn"  %></td>
-        <td>
-          <% if current_user == event.user || current_user.admin? %>
-          <%= link_to 'Destroy', event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<%= will_paginate @events %>
-
-<br>
+  g.column do |event|
+    link_to 'Destroy', event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+  end
+end -%>
 
 <%= link_to 'Create Lan Party', new_event_path, :class => "btn btn-success"  %>
 <%= link_to 'ICal', events_ics_path, :class => "btn btn-primary"  %>
