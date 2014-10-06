@@ -2,7 +2,6 @@
 
 <p id="notice"><%= notice %></p>
 
-
 <table class="table table-condensed">
   <tr>
     <td><h5 class="text-center">Name</h5></td>
@@ -27,6 +26,16 @@
   <tr>
     <td><h5 class="text-center">User</h5></td>
     <td><p class="text-center"><%= @event.user_name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Join Lan Party</h5></td>
+    <td><p class="text-center">
+    <% if current_user.attending_event?(@event) %>
+      <%= link_to 'Leave', leave_event_path(@event), :class => "btn btn-primary" %>
+    <% else %>
+      <%= link_to 'Join', join_event_path(@event), :class => "btn btn-primary" %>
+    <% end %>
+  </p></td>
   </tr>
   <tr>
     <td><h5 class="text-center">Calendar</h5></td>
