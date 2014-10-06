@@ -37,11 +37,11 @@
   </div>
   <div class="input">
     <%= f.label :game_social_server_id, :class => "help-inline" %><br>
-    <%= f.collection_select :game_social_server_id, GameSocialServer.all, :id, :name,  {:selected => @game_event.game_social_server, :class => "span5"} %>
+    <%= f.collection_select :game_social_server_id, GameSocialServer.all, :id, :name,  {:selected => @game_event.game_social_server, :class => "span5", :include_blank => true} %>
   </div>
   <div class="input">
     <%= f.label :chat_server_id, :class => "help-inline" %><br>
-    <%= f.collection_select :chat_server_id, ChatServer.all, :id, :name,  {:selected => @game_event.chat_server, :class => "span5"} %>
+    <%= f.collection_select :chat_server_id, ChatServer.all, :id, :name,  {:selected => @game_event.chat_server, :class => "span5", :include_blank => true} %>
   </div>
   <div class="input">
     <%= f.label :start_time, :class => "help-inline" %><br>
