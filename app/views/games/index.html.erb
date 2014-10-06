@@ -1,36 +1,30 @@
 <h1 class="text-center">Games</h1>
 
-<br>
-<%= will_paginate @games %>
+<%= grid(@games_grid) do |g|
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Logo</th>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  g.column name: 'Icon', attribute: 'logo_url', filter: false do |game|
+    image_tag(game.logo_url, :size => "128x128")
+  end
 
-  <tbody>
-    <% @games.each do |game| %>
-      <tr>
-        <%= render "games/game", :g => game %>
+  g.column name: 'Name', attribute: 'name' do |game|
+    game.name
+  end
+  
+  g.column do |game|
+    link_to 'Show', game, :class => "btn"
+  end
 
-        <td><%= link_to 'Show', game, :class => "btn" %></td>
-        <td><%= link_to 'Edit', edit_game_path(game), :class => "btn"%></td>
-        <td><%= link_to 'Store', game.store_url, :class => "btn" %></td>
-        <td><%= link_to 'Destroy', game, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  g.column do |game|
+    link_to 'Edit', edit_game_path(game), :class => "btn" 
+  end
 
-<%= will_paginate @games %>
+  g.column do |game|
+    link_to 'Store', game.store_url, :class => "btn" 
+  end
 
-<br>
+  g.column do |game|
+    link_to 'Destroy', game, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+  end
+end -%>
 
 <%= link_to 'New Game', new_game_path, :class => "btn btn-success" %>

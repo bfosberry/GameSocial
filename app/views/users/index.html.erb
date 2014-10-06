@@ -1,40 +1,37 @@
 <h1 class="text-center">Users</h1>
 
-<%= will_paginate @game_locations %>
+<%= grid(@users_grid) do |g|
+  g.column name: 'Provider', attribute: 'provider' do |user|
+    user.provider
+  end
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Provider</th>
-      <th>Uid</th>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  g.column name: 'Uid', attribute: 'uid' do |user|
+    user.uid 
+  end
+  
+  g.column name: 'Name', attribute: 'name' do |user|
+    user.name
+  end
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.provider %></td>
-        <td><%= user.uid %></td>
-        <td><%= user.sanatized_name %></td>
-        <% if current_user.has_friend?(user) %>
-          <td><%= link_to "Remove Friend", friendship_path(current_user.get_friendship(user)), :class => "btn", :method => :delete %></td>
-        <% else %>
-          <td><%= link_to "Add Friend", friendships_path(:friend_id => user), :class => "btn", :method => :post %></td>
-        <% end %>
-        <td><%= link_to 'Show', user, :class => "btn" %></td>
-        <td><%= link_to 'Edit', edit_user_path(user), :class => "btn" %></td>
-        <td><%= link_to 'Destroy', user, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  g.column name: 'Email', attribute: 'email' do |user|
+    user.email
+  end
 
-<%= will_paginate @game_locations %>
+  g.column name: 'Admin', attribute: 'admin' do |user|
+    user.admin
+  end
+  
+  g.column do |user|
+    link_to 'Show', user, :class => "btn"
+  end
 
-<br>
+  g.column do |user|
+    link_to 'Edit', edit_user_path(user), :class => "btn" 
+  end
+
+  g.column do |user|
+    link_to 'Destroy', user, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+  end
+end -%>
 
 <%= link_to 'New User', new_user_path, :class => "btn btn-success" %>

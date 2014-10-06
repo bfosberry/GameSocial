@@ -1,52 +1,66 @@
-<h1 class="text-center">GAME SERVERS</h1>
+<h1 class="text-center">Game Servers</h1>
 
-<%= will_paginate @game_social_servers %>
+<%= grid(@game_social_servers_grid) do |g|
+  g.column name: 'Name', attribute: 'name' do |game_social_server|
+    game_social_server.name
+  end
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Ip</th>
-      <th>Port</th>
-      <th>Game</th>
-      <th>User</th>
-      <th>Max players</th>
-      <th>Current players</th>
-      <th>Latency</th>
-      <th>Current map</th>
-      <th>Match type</th>
-      <th>Region</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  g.column name: 'Game', model: Game, attribute: 'name' do |game_social_server|
+    game_social_server.game_name 
+  end
+  
+  g.column name: 'Ip', attribute: 'ip' do |game_social_server|
+    game_social_server.ip
+  end
 
-  <tbody>
-    <% @game_social_servers.each do |game_social_server| %>
-      <tr>
-        <td><%= game_social_server.name %></td>
-        <td><%= game_social_server.ip %></td>
-        <td><%= game_social_server.port %></td>
-        <td><%= game_social_server.game_name %></td>
-        <td><%= game_social_server.user_name %></td>
-        <td><%= game_social_server.max_players %></td>
-        <td><%= game_social_server.current_players %></td>
-        <td><%= game_social_server.latency %></td>
-        <td><%= game_social_server.current_map %></td>
-        <td><%= game_social_server.match_type %></td>
-        <td><%= game_social_server.region %></td>
-        <td><%= link_to 'Show', game_social_server, :class => "btn" %></td>
-        <td><%= link_to 'Edit', edit_game_social_server_path(game_social_server), :class => "btn" %></td>
-        <td><%= link_to 'Destroy', game_social_server, :class => "btn btn danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  g.column name: 'Port', attribute: 'port' do |game_social_server|
+    game_social_server.port
+  end
 
-<%= will_paginate @game_social_servers %>
+  g.column name: 'Owner', model: User, attribute: 'name' do |game_social_server|
+    game_social_server.user_name
+  end
 
-<br>
+    g.column name: 'Max Players', attribute: 'max_players' do |game_social_server|
+    game_social_server.max_players
+  end
+
+  g.column name: 'Current Players', attribute: 'current_players' do |game_social_server|
+    game_social_server.current_players
+  end
+
+  g.column name: 'Match Type', attribute: 'match_type' do |game_social_server|
+    game_social_server.match_type
+  end
+
+
+  g.column name: 'Region', attribute: 'region' do |game_social_server|
+    game_social_server.region
+  end
+
+
+  g.column name: 'Latency', attribute: 'latency' do |game_social_server|
+    game_social_server.latency
+  end
+
+
+  g.column name: 'Current Map', attribute: 'current_map' do |game_social_server|
+    game_social_server.current_map
+  end
+
+  
+  g.column do |game_social_server|
+    link_to 'Show', game_social_server, :class => "btn"
+  end
+
+  g.column do |game_social_server|
+    link_to 'Edit', edit_game_social_server_path(game_social_server), :class => "btn" 
+  end
+
+  g.column do |game_social_server|
+    link_to 'Destroy', game_social_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+  end
+end -%>
 
 <%= link_to 'Create Source Game Server', new_source_game_social_server_path, :class => "btn btn-warning" %>
 

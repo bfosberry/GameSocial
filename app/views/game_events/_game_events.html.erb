@@ -1,12 +1,17 @@
-<table class="table table-bordered">
+<%= grid(@game_events_grid) do |g|
+  g.column name: 'Title', attribute: 'title' do |game_event|
+    game_event.title
+  end
 
-  <tbody>
+  g.column name: 'Game', model: Game, attribute: 'name' do |game_event|
+    game_event.game_name
+  end
+  
+  g.column name: 'Start Time', attribute: 'start_time' do |game_event|
+    game_event.formatted_start_time
+  end
 
-    <tr><th>Name</th><th>Game</th><th>Start Time</th><th>Starts In</th><th>Link</th></tr>
-    <% game_events.each do |ge|%>
-  	<tr>
-      <%= render "game_events/game_event", :ge => ge %>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+  g.column do |game_event|
+    link_to 'Show', game_event, :class => "btn"
+  end
+end -%>

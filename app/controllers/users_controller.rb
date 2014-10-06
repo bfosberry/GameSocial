@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all.paginate(:page => params[:page])
+    @users_grid = initialize_grid(User)
   end
 
   # GET /users/1

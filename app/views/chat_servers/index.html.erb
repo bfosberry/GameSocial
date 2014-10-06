@@ -1,47 +1,41 @@
-<h1 class="text-center">CHAT SERVERS</h1>
+<h1 class="text-center">Chat Servers</h1>
 
-<%= will_paginate @chat_servers %>
+<%= grid(@chat_servers_grid) do |g|
+  g.column name: 'Name', attribute: 'name' do |chat_server|
+    chat_server.name
+  end
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>User</th>
-      <th>Ip</th>
-      <th>Port</th>
-      <th>Public</th>
-      <th>Name</th>
-      <th>Password</th>
-      <th>Room</th>
-      <th>Room password</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  g.column name: 'Type', attribute: 'server_type' do |chat_server|
+    chat_server.server_type 
+  end
+  
+  g.column name: 'Ip', attribute: 'ip' do |chat_server|
+    chat_server.ip
+  end
 
-  <tbody>
-    <% @chat_servers.each do |chat_server| %>
-      <tr>
-        <td><%= chat_server.server_type %></td>
-        <td><%= chat_server.user.name %></td>
-        <td><%= chat_server.ip %></td>
-        <td><%= chat_server.port %></td>
-        <td><%= chat_server.public %></td>
-        <td><%= chat_server.name %></td>
-        <td><%= chat_server.password %></td>
-        <td><%= chat_server.room %></td>
-        <td><%= chat_server.room_password %></td>
-        <td><%= link_to 'Show', chat_server, :class => "btn" %></td>
-        <td><%= link_to 'Edit', edit_chat_server_path(chat_server), :class => "btn" %></td>
-        <td><%= link_to 'Destroy', chat_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  g.column name: 'Port', attribute: 'port' do |chat_server|
+    chat_server.port
+  end
 
-<%= will_paginate @chat_servers %>
+  g.column name: 'Owner', model: User, attribute: 'name' do |chat_server|
+    chat_server.user_name
+  end
+  
+  g.column name: 'Public', attribute: 'public' do |chat_server|
+    chat_server.public
+  end
+  
+  g.column do |chat_server|
+    link_to 'Show', chat_server, :class => "btn"
+  end
 
-<br>
+  g.column do |chat_server|
+    link_to 'Edit', edit_chat_server_path(chat_server), :class => "btn" 
+  end
+
+  g.column do |chat_server|
+    link_to 'Destroy', chat_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+  end
+end -%>
 
 <%= link_to 'Create Chat Server', new_chat_server_path, :class => "btn btn-success" %>

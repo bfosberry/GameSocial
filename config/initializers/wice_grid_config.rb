@@ -38,7 +38,7 @@ if defined?(Wice::Defaults)
   # * <tt>:when_filtered</tt> - when the table is the result of filtering
   # * <tt>:always</tt>        - show the filter always
   # * <tt>:no</tt>            - never show the filter
-  Wice::Defaults::SHOW_FILTER = :always
+  Wice::Defaults::SHOW_FILTER = :when_filtered
 
   # A boolean value specifying if a change in a filter triggers reloading of the grid.
   Wice::Defaults::AUTO_RELOAD = false
