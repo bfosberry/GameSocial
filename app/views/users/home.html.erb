@@ -18,7 +18,7 @@
 
 <% if current_user.upcoming_game_events.size > 0 %>
 <h3>Your Upcoming Events:</h3>
-<%= render "game_events/game_events", :game_events => current_user.upcoming_game_events %>
+<%= render "game_events/game_events" %>
 
 <% end %>
 <% end %>

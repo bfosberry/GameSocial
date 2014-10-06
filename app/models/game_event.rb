@@ -21,6 +21,15 @@ class GameEvent < ActiveRecord::Base
   after_commit :export_game_event, :on => [:create, :update]
 
   default_scope order('start_time ASC')
+
+  validate :valid_length?
+
+  def valid_length?
+    if start_time >= end_time
+      errors.add(:end_time, 'must occur after start_time')
+    end
+  end
+
   def name
     title
   end

@@ -15,6 +15,15 @@ class Event < ActiveRecord::Base
 
   default_scope order('start_time ASC')
 
+  validate :valid_length?
+
+
+  def valid_length?
+    if start_time >= end_time
+      errors.add(:end_time, 'must occur after start_time')
+    end
+  end
+
   def export_event
     if calendar.event
       calendar.update_event
