@@ -6,6 +6,7 @@ gem 'rails', '4.0.0'
 gem 'pg'
 gem 'jquery-timepicker-rails'
 gem 'ri_cal'
+gem "time_splitter"
 
 gem 'unicorn'
 gem 'whenever'

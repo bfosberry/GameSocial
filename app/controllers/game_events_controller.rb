@@ -108,6 +108,6 @@ class GameEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_event_params
-      params.require(:game_event).permit(:event_id, :title, :description, :game_id, :game_social_server_id, :chat_server_id, :user_id, :start_time, :end_time)
+      params.require(:game_event).permit(:event_id, :title, :description, :game_id, :game_social_server_id, :chat_server_id, :user_id, :start_time_date, :start_time_time, :end_time_date, :end_time_time)
     end
 end

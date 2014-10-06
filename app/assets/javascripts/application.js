@@ -17,7 +17,7 @@
 //= require bootstrap
 //= require turbolinks
 //= require jquery.timepicker
-//= require jquery.simple-dtpicker
+//= require jquery.datepair.js
 //= require wice_grid
 //= require_tree .
 

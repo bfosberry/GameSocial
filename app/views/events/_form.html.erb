@@ -21,14 +21,19 @@
     <%= f.label :description, :class => "help-inline"  %><br>
     <%= f.text_area :description, :class => "span5", :rows => "5" %>
   </div>
+
   <div class="input">
     <%= f.label :start_time, :class => "help-inline" %><br>
-    <%= f.text_field(:start_time, :value => @event.start_time, :class => 'date_field') %>
+    <%= f.date_field(:start_time_date, :class => 'date_field') %>
+    <%= f.time_field :start_time_time, as: :time, :ignore_date => true %>
   </div>
+
   <div class="input">
     <%= f.label :end_time, :class => "help-inline" %><br>
-    <%= f.text_field(:end_time, :value => @event.end_time, :class => 'date_field') %>
+    <%= f.date_field(:end_time_date, :class => 'date_field') %>
+    <%= f.time_field :end_time_time, as: :time, :ignore_date => true %>
   </div>
+
   <% if is_admin? %>
     <div class="input">
       <%= f.label :user_id, :class => "help-inline" %><br>
@@ -43,10 +48,3 @@
     <%= f.submit :class => "btn btn-success" %>
   </div>
 <% end %>
-
-<script type="text/javascript">
-  $(function(){
-    $('.date_field').appendDtpicker({"closeOnSelected": true, "inline": false});
-  });
-</script>
-

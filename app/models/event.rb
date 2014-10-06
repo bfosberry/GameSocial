@@ -1,6 +1,8 @@
 require 'calendar'
 
 class Event < ActiveRecord::Base
+  extend TimeSplitter::Accessors
+
   belongs_to :user
   delegate :name, :to => :user, :prefix => true, :allow_nil => true
   delegate :email, :to => :user, :prefix => true, :allow_nil => true
@@ -17,6 +19,7 @@ class Event < ActiveRecord::Base
 
   validate :valid_length?
 
+  split_accessor :start_time, :end_time
 
   def valid_length?
     if start_time >= end_time

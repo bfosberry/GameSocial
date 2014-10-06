@@ -1,6 +1,8 @@
 require 'calendar'
 
 class GameEvent < ActiveRecord::Base
+  extend TimeSplitter::Accessors
+
   belongs_to :user
   belongs_to :game
   belongs_to :event
@@ -23,6 +25,8 @@ class GameEvent < ActiveRecord::Base
   default_scope order('start_time ASC')
 
   validate :valid_length?
+
+  split_accessor :start_time, :end_time
 
   def valid_length?
     if start_time >= end_time

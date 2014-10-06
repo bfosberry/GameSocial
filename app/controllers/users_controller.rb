@@ -26,10 +26,12 @@ class UsersController < ApplicationController
 
   # GET /users/home
   def home
-    @game_events_grid = initialize_grid(current_user.upcoming_game_events, :include => [:game])
-    if current_user.email.blank?
-      flash[:notice] = "Your email address is not set, please set it #{view_context.link_to('here',edit_user_path(current_user))}".html_safe
+    if current_user
+      @game_events_grid = initialize_grid(current_user.upcoming_game_events, :include => [:game])
+      if current_user.email.blank?
+       flash[:notice] = "Your email address is not set, please set it #{view_context.link_to('here',edit_user_path(current_user))}".html_safe
 
+      end
     end
   end
 
