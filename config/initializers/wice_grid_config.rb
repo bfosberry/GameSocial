@@ -25,7 +25,7 @@ if defined?(Wice::Defaults)
   Wice::Defaults::ALLOW_MULTIPLE_SELECTION = true
 
   # Show the upper pagination panel by default or not
-  Wice::Defaults::SHOW_UPPER_PAGINATION_PANEL = false
+  Wice::Defaults::SHOW_UPPER_PAGINATION_PANEL = true
 
   # Disabling CSV export by default
   Wice::Defaults::ENABLE_EXPORT_TO_CSV = false
