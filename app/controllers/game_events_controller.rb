@@ -1,5 +1,5 @@
 class GameEventsController < ApplicationController
-  before_action :set_game_event, only: [:show, :edit, :update, :destroy, :join, :leave]
+  before_action :set_game_event, only: [:show, :edit, :update, :destroy, :join, :leave, :invite, :send_invite]
   before_filter :spoof_login, only: [:index]
   before_filter :enforce_login
 
@@ -34,6 +34,20 @@ class GameEventsController < ApplicationController
   def new_for_event
     @game_event = GameEvent.new({ :event_id => params[:event_id]})
     render 'new'
+  end
+
+  # GET /game_events/1/invite
+  def invite
+    @invite = Invite.new
+  end
+
+  # POST /game_events/1/invite
+  def send_invite
+    @invite = Invite.new(invite_params)
+    @invite.game_event = @game_event
+    @invite.user =  current_user
+    @invite.deliver
+    redirect_to game_event_path(@game_event), notice: "Invite sent"
   end
 
   # GET /game_events/1/edit
@@ -109,5 +123,9 @@ class GameEventsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_event_params
       params.require(:game_event).permit(:event_id, :title, :description, :game_id, :game_social_server_id, :chat_server_id, :user_id, :start_time_date, :start_time_time, :end_time_date, :end_time_time)
+    end
+
+    def invite_params
+      params.require(:invite).permit(:email)
     end
 end

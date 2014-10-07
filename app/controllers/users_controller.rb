@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   before_filter :enforce_login, :except => [:new, :create, :home]
   before_filter :enforce_admin, :only => [:index]
 
+  autocomplete :user, :name
+
   # GET /users
   # GET /users.json
   def index
@@ -54,7 +56,6 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-
     #update all users events and game events to re-export
     respond_to do |format|
       up = user_params
