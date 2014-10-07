@@ -89,5 +89,5 @@ GameSocial::Application.configure do
 
   }
 
-  config.action_mailer.default_url_options = { :host => "http://social.cloud1001.co" }
+  config.action_mailer.default_url_options = { :host => "http://dev-gamesocial.herokuapp.com/" }
 end

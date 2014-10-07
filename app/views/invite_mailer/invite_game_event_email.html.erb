@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @subject %></h1>
+    <p>
+      <%= @inviter.name %> has invited you to join the following Event:
+    </p>
+    <table>
+      <tr>
+        <td>Event Name</td>
+        <td><%= @game_event.name %></td>
+      </tr>
+      <tr>
+        <td>Game</td>
+        <td><%= @game_event.game_name %></td>
+      </tr>
+      <tr>
+        <td>Start Time</td>
+        <td><%= @game_event.formatted_start_time %></td>
+      </tr>
+    </table>
+
+    <p>To accept this invitation, click <%= link_to 'this link', join_game_event_url(@game_event), :class => "btn btn-primary" %></p>
+  </body>
+</html>

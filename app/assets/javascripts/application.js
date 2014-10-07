@@ -12,12 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui/datepicker
+//= require jquery-ui
 //= require twitter/bootstrap
 //= require bootstrap
 //= require turbolinks
 //= require jquery.timepicker
 //= require jquery.datepair.js
+//= require autocomplete-rails
 //= require wice_grid
 //= require_tree .
 

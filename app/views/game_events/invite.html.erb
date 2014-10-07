@@ -1,0 +1,5 @@
+<h1>Send Invite</h1>
+
+<%= render '/events/invite_form', :type => "Event", :url => invite_game_event_path(@game_event) %>
+
+<%= link_to 'Back', game_event_path(@game_event) %>

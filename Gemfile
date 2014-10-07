@@ -15,6 +15,7 @@ gem 'debugger-ruby_core_source'
 
 gem "wice_grid", '3.4.2'
 gem 'jquery-ui-rails'
+gem 'rails3-jquery-autocomplete'
 
 gem 'google_calendar', :git =>  'git://github.com/bfosberry/google_calendar.git', :branch => "master"
 

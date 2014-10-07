@@ -10,12 +10,16 @@ GameSocial::Application.routes.draw do
   match 'game_events/:id/join/:user_id', to: 'game_events#join', as: 'join_user_game_event', via: [:get]
   match 'game_events/:id/leave', to: 'game_events#leave', as: 'leave_game_event', via: [:get]
   match 'game_events/:id/leave/:user_id', to: 'game_events#leave', as: 'leave_user_game_event', via: [:get]
+  match 'game_events/:id/invite', to: 'game_events#invite', as: 'invite_game_event', via: [:get]
+  match 'game_events/:id/invite', to: 'game_events#send_invite', as: 'send_invite_game_event', via: [:post]
   resources :game_events
 
   match 'events/:id/join', to: 'events#join', as: 'join_event', via: [:get]
   match 'events/:id/join/:user_id', to: 'events#join', as: 'join_user_event', via: [:get]
   match 'events/:id/leave', to: 'events#leave', as: 'leave_event', via: [:get]
   match 'events/:id/leave/:user_id', to: 'events#leave', as: 'leave_user_event', via: [:get]
+  match 'events/:id/invite', to: 'events#invite', as: 'invite_event', via: [:get]
+  match 'events/:id/invite', to: 'events#send_invite', as: 'send_invite_event', via: [:post]
   resources :events
 
   resources :alerts
@@ -35,6 +39,9 @@ GameSocial::Application.routes.draw do
 
   match 'users/sync', to: 'users#sync', as: 'sync_users', via:[:get]
   match 'users/sync_location', to: 'users#sync_location', as: 'sync_users_location', via:[:get]
+  resources :users do
+    get :autocomplete_user_name, :on => :collection
+  end
   resources :users
 
   resources :games
@@ -127,6 +134,14 @@ GameSocial::Application.routes.named_routes.module.module_eval do
   def new_source_game_social_server_path(*args)
     "#{game_social_servers_path}/new_source"
   end
+
+  def invite_game_event_path(*args)
+    "#{game_event_path(args.first.id)}/invite"
+  end
+
+  def invite_event_path(*args)
+    "#{event_path(args.first.id)}/invite"
+  end
 end
 
 GameSocial::Application.routes.named_routes.instance_eval do
@@ -137,7 +152,9 @@ GameSocial::Application.routes.named_routes.instance_eval do
     :event_ics_path,
     :events_ics_path,
     :game_events_ics_path,
-    :new_source_game_social_server_path
+    :new_source_game_social_server_path,
+    :invite_game_event_path,
+    :invite_event_path
   ]
 end
 

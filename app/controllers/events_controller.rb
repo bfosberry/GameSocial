@@ -1,6 +1,5 @@
-require 'ical'
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :join, :leave]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :join, :leave, :invite, :send_invite]
   before_filter :spoof_login, only: [:show, :index]
   before_filter :enforce_login
 
@@ -38,6 +37,20 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     enforce_ownership(@event)
+  end
+
+  # GET /events/1/invite
+  def invite
+    @invite = Invite.new
+  end
+
+  # POST /events/1/invite
+  def send_invite
+    @invite = Invite.new(invite_params)
+    @invite.event = @event
+    @invite.user =  current_user
+    @invite.deliver
+    redirect_to event_path(@event), notice: "Invite sent"
   end
 
   # GET /events/1/join
@@ -107,5 +120,9 @@ class EventsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit(:name, :description, :start_time_date, :start_time_time, :end_time_date, :end_time_time, :user_id, :location)
+    end
+
+    def invite_params
+      params.require(:invite).permit(:email)
     end
 end
