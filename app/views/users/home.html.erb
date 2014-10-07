@@ -1,26 +1,20 @@
 <h1>Welcome to GameSocial</h1>
 
-<% unless signed_in? %><p>Sign in to use the application</p><% end %>
+<p>To get started, take a look at the Lan Parties listed above. By joining a Lan Party or Event you'll see the upcoming games listed below. If you set your email address in your profile, you'll also get emailed calendar invites and updates to events.</p>
 
-<p>To Contribute to this project please visit <a href="https://github.com/bfosberry/GameSocial">https://github.com/bfosberry/GameSocial</a></p>
+<p>You can also create your own Lan Parties and Events, as well as track chat servers and game servers on which to play.</p>
+
+<% unless signed_in? %><p>Sign in to use the application</p><% end %>
 
 <% if signed_in? %>
 
-<p id="notice"><%= notice %></p>
-
-<% if Rails.env != "prodction" %>
-  <div>
-  	<p>Manually sync users</p>
-  	<%= link_to "Sync Me", sync_users_path, :class => "btn" %>
-    <%= link_to "Sync Locations", sync_users_location_path, :class => "btn" %>
-  </div>
-<% end %>
-
-<% if current_user.upcoming_game_events.size > 0 %>
-<h3>Your Upcoming Events:</h3>
-<%= render "game_events/game_events" %>
-
-<% end %>
+	<p id="notice"><%= notice %></p>
+	<% if current_user.upcoming_game_events.size > 0 %>
+		<h3>Your Upcoming Events:</h3>
+		<%= render "game_events/game_events" %>
+	<% end %>
 <% end %>
 
 <p>Find a bug? Want to request a new feature? Click <a href="https://github.com/bfosberry/GameSocial/issues/new">here</a></p>
+
+<p>To Contribute to this project please visit <a href="https://github.com/bfosberry/GameSocial">https://github.com/bfosberry/GameSocial</a></p>
