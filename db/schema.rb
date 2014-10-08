@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003195026) do
+ActiveRecord::Schema.define(version: 20141008152656) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -21,12 +21,16 @@ ActiveRecord::Schema.define(version: 20141003195026) do
     t.integer  "alert_schedule_id"
   end
 
+  add_index "alert_conditions", ["alert_schedule_id"], name: "index_alert_conditions_on_alert_schedule_id"
+
   create_table "alert_schedules", force: true do |t|
     t.integer  "user_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "alert_schedules", ["user_id"], name: "index_alert_schedules_on_user_id"
 
   create_table "alerting_users", force: true do |t|
     t.integer  "user_id"
@@ -47,6 +51,8 @@ ActiveRecord::Schema.define(version: 20141003195026) do
     t.boolean  "active"
   end
 
+  add_index "alerts", ["alert_schedule_id"], name: "index_alerts_on_alert_schedule_id"
+
   create_table "chat_servers", force: true do |t|
     t.string   "server_type"
     t.integer  "user_id"
@@ -61,6 +67,8 @@ ActiveRecord::Schema.define(version: 20141003195026) do
     t.datetime "updated_at"
   end
 
+  add_index "chat_servers", ["user_id"], name: "index_chat_servers_on_user_id"
+
   create_table "events", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -72,6 +80,8 @@ ActiveRecord::Schema.define(version: 20141003195026) do
     t.datetime "updated_at"
     t.string   "uid"
   end
+
+  add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "events_users", id: false, force: true do |t|
     t.integer "event_id", null: false
@@ -104,6 +114,12 @@ ActiveRecord::Schema.define(version: 20141003195026) do
     t.string   "uid"
   end
 
+  add_index "game_events", ["chat_server_id"], name: "index_game_events_on_chat_server_id"
+  add_index "game_events", ["event_id"], name: "index_game_events_on_event_id"
+  add_index "game_events", ["game_id"], name: "index_game_events_on_game_id"
+  add_index "game_events", ["game_social_server_id"], name: "index_game_events_on_game_social_server_id"
+  add_index "game_events", ["user_id"], name: "index_game_events_on_user_id"
+
   create_table "game_events_users", id: false, force: true do |t|
     t.integer "game_event_id", null: false
     t.integer "user_id",       null: false
@@ -134,6 +150,9 @@ ActiveRecord::Schema.define(version: 20141003195026) do
     t.integer  "user_id"
   end
 
+  add_index "game_social_servers", ["game_id"], name: "index_game_social_servers_on_game_id"
+  add_index "game_social_servers", ["user_id"], name: "index_game_social_servers_on_user_id"
+
   create_table "games", force: true do |t|
     t.string   "name"
     t.text     "store_url"
@@ -143,6 +162,9 @@ ActiveRecord::Schema.define(version: 20141003195026) do
     t.datetime "updated_at"
     t.integer  "provider_id"
   end
+
+  add_index "games", ["name"], name: "index_games_on_name"
+  add_index "games", ["provider_id"], name: "index_games_on_provider_id"
 
   create_table "games_users", force: true do |t|
     t.integer "game_id"
@@ -159,6 +181,9 @@ ActiveRecord::Schema.define(version: 20141003195026) do
     t.datetime "updated_at"
   end
 
+  add_index "posts", ["postable_id", "postable_type"], name: "index_posts_on_postable_id_and_postable_type"
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+
   create_table "users", force: true do |t|
     t.string   "provider"
     t.string   "uid"
@@ -172,5 +197,9 @@ ActiveRecord::Schema.define(version: 20141003195026) do
     t.string   "status",          default: "Inactive"
     t.string   "avatar_url"
   end
+
+  add_index "users", ["name"], name: "index_users_on_name"
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider"
 
 end
