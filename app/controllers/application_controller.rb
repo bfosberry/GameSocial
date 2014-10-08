@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
 
   def enforce_login
     unless signed_in?
-      session[:return_to] ||= request.referer
-      redirect_to root_url
+      session[:return_to] = request.fullpath
+      redirect_to "/auth/steam"
     end
   end
 
