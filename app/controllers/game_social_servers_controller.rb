@@ -19,11 +19,13 @@ class GameSocialServersController < ApplicationController
   # GET /game_social_servers/new
   def new
     @game_social_server = GameSocialServer.new
+    @game_social_server.object_permission = ObjectPermission.new
   end
 
   # GET /game_social_servers/new_source
   def new_source
     @game_social_server = GameSocialServer.new
+    @game_social_server.object_permission = ObjectPermission.new
   end
 
   # GET /game_social_servers/1/edit
@@ -82,6 +84,18 @@ class GameSocialServersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_social_server_params
-      params.require(:game_social_server).permit(:name, :ip, :port, :game_id, :max_players, :current_players, :latency, :current_map, :match_type, :region, :user_id)
+      params.require(:game_social_server).permit(:name, 
+                                                 :ip, 
+                                                 :port, 
+                                                 :game_id, 
+                                                 :max_players, 
+                                                 :current_players, 
+                                                 :latency, 
+                                                 :current_map, 
+                                                 :match_type, 
+                                                 :region, 
+                                                 :user_id,
+                                                 object_permission_attributes: [:permission_type])
+
     end
 end

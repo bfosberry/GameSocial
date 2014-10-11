@@ -36,7 +36,7 @@
     <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_event.game_id, :class => "span5"} %>
   </div>
   <div class="input">
-    <%= f.label :game_social_server_id, :class => "help-inline" %><br>
+    <%= f.label :game_social_server_id, "Game Server", :class => "help-inline" %><br>
     <%= f.collection_select :game_social_server_id, GameSocialServer.all, :id, :name,  {:selected => @game_event.game_social_server, :class => "span5", :include_blank => true} %>
   </div>
   <div class="input">
@@ -53,8 +53,11 @@
     <%= f.date_field(:end_time_date, :class => 'date_field') %>
     <%= f.time_field :end_time_time, as: :time, :ignore_date => true %>
   </div>
-
-
+  <div class="field">
+  <%= f.fields_for :object_permission do |builder| %>
+    <% render 'object_permissions/form', :builder => builder %>
+  <% end %>
+  </div>
   <div class="actions">
     <%= f.submit "Submit", :class => "btn btn-success" %>
   </div>

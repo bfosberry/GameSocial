@@ -19,6 +19,11 @@
     <%= f.label :port %><br>
     <%= f.number_field :port %>
   </div>
+  <div class="field">
+  <%= f.fields_for :object_permission do |builder| %>
+    <% render 'object_permissions/form', :builder => builder %>
+  <% end %>
+  </div>
   <% if is_admin? %>
     <div class="field">
       <%= f.label :user_id %><br>

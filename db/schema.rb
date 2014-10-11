@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141008152656) do
+ActiveRecord::Schema.define(version: 20141008161840) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -168,6 +168,19 @@ ActiveRecord::Schema.define(version: 20141008152656) do
 
   create_table "games_users", force: true do |t|
     t.integer "game_id"
+    t.integer "user_id"
+  end
+
+  create_table "object_permissions", force: true do |t|
+    t.string   "permission_type"
+    t.integer  "permissible_object_id"
+    t.string   "permissible_object_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "object_permissions_users", id: false, force: true do |t|
+    t.integer "object_permission_id"
     t.integer "user_id"
   end
 

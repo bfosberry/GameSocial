@@ -10,6 +10,9 @@ class GameEvent < ActiveRecord::Base
   belongs_to :chat_server
   has_many :posts, as: :postable
   has_and_belongs_to_many :users
+  has_one :object_permission, as: :permissible_object
+
+  accepts_nested_attributes_for :object_permission
 
   delegate :name, :to => :user, :prefix => true, :allow_nil => true
   delegate :email, :to => :user, :prefix => true, :allow_nil => true

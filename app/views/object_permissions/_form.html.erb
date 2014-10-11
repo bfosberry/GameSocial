@@ -1,0 +1,2 @@
+<%= builder.label :type, "Visibility", :class => "help-inline" %><br>
+<%= builder.select :permission_type, ObjectPermission.permission_types, {:selected => builder.object.permission_type, :class => "span5"} %>

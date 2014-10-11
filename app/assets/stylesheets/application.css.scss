@@ -1,0 +1,35 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require jquery.timepicker
+ *= require jquery-ui
+ *= require_self
+ *= require_tree .
+*/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.content 
+{
+       padding-top: 50px;
+}
+
+.navbar
+{
+       white-space: nowrap;
+}
+
+.nav-button
+{
+    vertical-align: middle;
+    display: inline-block;
+    margin: 9px 5px 9px 5px;
+}
+
+a#nav-button-container 
+{
+	padding-top: 0px;
+	padding-bottom: 0px;
+}

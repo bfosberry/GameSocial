@@ -32,6 +32,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    @event.object_permission = ObjectPermission.new
   end
 
   # GET /events/1/edit
@@ -119,7 +120,15 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description, :start_time_date, :start_time_time, :end_time_date, :end_time_time, :user_id, :location)
+      params.require(:event).permit(:name, 
+                                    :description, 
+                                    :start_time_date, 
+                                    :start_time_time, 
+                                    :end_time_date, 
+                                    :end_time_time, 
+                                    :user_id, 
+                                    :location, 
+                                    object_permission_attributes: [:permission_type])
     end
 
     def invite_params

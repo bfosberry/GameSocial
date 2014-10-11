@@ -57,6 +57,11 @@
     <%= f.label :region %><br>
     <%= f.text_field :region %>
   </div>
+  <div class="field">
+  <%= f.fields_for :object_permission do |builder| %>
+    <% render 'object_permissions/form', :builder => builder %>
+  <% end %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

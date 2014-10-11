@@ -34,6 +34,10 @@
     <%= f.time_field :end_time_time, as: :time, :ignore_date => true %>
   </div>
 
+  <%= f.fields_for :object_permission do |builder| %>
+    <% render 'object_permissions/form', :builder => builder %>
+  <% end %>
+
   <% if is_admin? %>
     <div class="input">
       <%= f.label :user_id, :class => "help-inline" %><br>

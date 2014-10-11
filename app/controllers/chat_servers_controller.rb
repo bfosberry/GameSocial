@@ -16,6 +16,7 @@ class ChatServersController < ApplicationController
   # GET /chat_servers/new
   def new
     @chat_server = ChatServer.new
+    @chat_server.object_permission = ObjectPermission.new
   end
 
   # GET /chat_servers/1/edit
@@ -73,6 +74,16 @@ class ChatServersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chat_server_params
-      params.require(:chat_server).permit(:server_type, :user_id, :ip, :port, :public, :name, :password, :room, :room_password)
+      params.require(:chat_server).permit(:server_type, 
+                                          :user_id, 
+                                          :ip, 
+                                          :port, 
+                                          :public, 
+                                          :name, 
+                                          :password, 
+                                          :room, 
+                                          :room_password,
+                                          object_permission_attributes: [:permission_type])
+
     end
 end

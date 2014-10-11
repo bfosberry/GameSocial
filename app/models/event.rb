@@ -7,8 +7,11 @@ class Event < ActiveRecord::Base
   delegate :name, :to => :user, :prefix => true, :allow_nil => true
   delegate :email, :to => :user, :prefix => true, :allow_nil => true
   has_many :posts, as: :postable
-  has_many :game_events
+  has_many :game_events, :dependent => :destroy
+  has_one :object_permission, as: :permissible_object
   has_and_belongs_to_many :users
+
+  accepts_nested_attributes_for :object_permission
 
   before_save :set_defaults
   before_destroy :delete_event
@@ -18,6 +21,7 @@ class Event < ActiveRecord::Base
   default_scope order('start_time ASC')
 
   validate :valid_length?
+  validate :name, :presence => true
 
   split_accessor :start_time, :end_time
 

@@ -28,6 +28,7 @@ class GameEventsController < ApplicationController
   # GET /game_events/new
   def new
     @game_event = GameEvent.new
+    @game_event.object_permission = ObjectPermission.new
   end
 
   # GET /game_events/new_for_event
@@ -122,7 +123,18 @@ class GameEventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_event_params
-      params.require(:game_event).permit(:event_id, :title, :description, :game_id, :game_social_server_id, :chat_server_id, :user_id, :start_time_date, :start_time_time, :end_time_date, :end_time_time)
+      params.require(:game_event).permit(:event_id, 
+                                         :title, 
+                                         :description, 
+                                         :game_id, 
+                                         :game_social_server_id, 
+                                         :chat_server_id, 
+                                         :user_id, 
+                                         :start_time_date, 
+                                         :start_time_time, 
+                                         :end_time_date, 
+                                         :end_time_time,
+                                         object_permission_attributes: [:permission_type])
     end
 
     def invite_params
