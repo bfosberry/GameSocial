@@ -43,7 +43,7 @@
     <td><h5 class="text-center">Attend Event</h5></td>
     <td><p class="text-center">
     <% if current_user.attending_game_event?(@game_event) %>
-      <%= link_to 'Leave', leave_game_event_path(@game_event), :class => "btn btn-primary" %>
+      <%= link_to 'Leave', leave_game_event_path(@game_event), :class => "btn btn-warning" %>
     <% else %>
       <%= link_to 'Join', join_game_event_path(@game_event), :class => "btn btn-primary" %>
     <% end %>

@@ -31,7 +31,7 @@
     <td><h5 class="text-center">Join Lan Party</h5></td>
     <td><p class="text-center">
     <% if current_user.attending_event?(@event) %>
-      <%= link_to 'Leave', leave_event_path(@event), :class => "btn btn-primary" %>
+      <%= link_to 'Leave', leave_event_path(@event), :class => "btn btn-warning" %>
     <% else %>
       <%= link_to 'Join', join_event_path(@event), :class => "btn btn-primary" %>
     <% end %>
