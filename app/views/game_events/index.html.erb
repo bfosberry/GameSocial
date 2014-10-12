@@ -34,19 +34,19 @@
   end
   
   g.column do |game_event|
-    link_to 'Show', game_event, :class => "btn"
+    link_to 'Show', game_event, :class => "btn btn-default"
   end
   
   g.column do |game_event|
     if current_user.attending_game_event?(game_event)
-      link_to 'Leave', leave_game_event_path(game_event), :class => "btn"
+      link_to 'Leave', leave_game_event_path(game_event), :class => "btn btn-warning"
     else
-      link_to 'Join', join_game_event_path(game_event), :class => "btn"
+      link_to 'Join', join_game_event_path(game_event), :class => "btn btn-success"
     end
   end
 
   g.column do |game_event|
-    link_to 'Edit', edit_game_event_path(game_event), :class => "btn" 
+    link_to 'Edit', edit_game_event_path(game_event), :class => "btn btn-primary" 
   end
 
   g.column do |game_event|

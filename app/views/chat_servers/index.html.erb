@@ -26,11 +26,11 @@
   end
   
   g.column do |chat_server|
-    link_to 'Show', chat_server, :class => "btn"
+    link_to 'Show', chat_server, :class => "btn btn-default"
   end
 
   g.column do |chat_server|
-    link_to 'Edit', edit_chat_server_path(chat_server), :class => "btn" 
+    link_to 'Edit', edit_chat_server_path(chat_server), :class => "btn btn-primary" 
   end
 
   g.column do |chat_server|
