@@ -56,13 +56,17 @@
 </table>
 
 <h2>Attending</h2>
-<table class="table table-condensed">
-<% for user in @game_event.users %>
-<tr>
-  <%= render "users/user", :u => user %>
-</tr>
-<% end %>
-</table> 
+<div class="row">
+  <% for i in 0..5 %>
+    <div class="col-lg-2 col-md-2">
+      <%  @game_event.users.each_with_index do |u, index| %>
+        <% if index % 6 == i %>
+          <%= render "users/user", :u => u %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <h2>Comments</h2>
 <table class="table table-condensed">

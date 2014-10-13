@@ -42,7 +42,7 @@
     <td><p class="text-center"><%= link_to "ICal", event_ics_path(@event), :class => "btn btn-primary" %></p></td>
   </tr>
   <tr>
-    <td><h5 class="text-center">Invite to LAN Party</h5></td>
+    <td><h5 class="text-center">Invite to LAN h5</Party></td>
     <td><p class="text-center"><%= link_to "Invite", invite_event_path(@event), :class => "btn btn-primary" %></p></td>
   </tr>
 </table>
@@ -52,13 +52,17 @@
 <%= link_to 'Create Game Event', new_game_event_for_event_path(@event), :class => "btn btn-success" %><br><br>
 
 <h2>Attending</h2>
-<table class="table table-condensed">
-<% for user in @event.users %>
-<tr>
-  <%= render "users/user", :u => user %>
-</tr>
-<% end %>
-</table>  
+<div class="row">
+  <% for i in 0..5 %>
+    <div class="col-lg-2 col-md-2">
+      <%  @event.users.each_with_index do |u, index| %>
+        <% if index % 6 == i %>
+          <%= render "users/user", :u => u %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 
 <h2>Comments</h2>
 <table class="table table-condensed">

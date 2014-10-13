@@ -1,2 +1,4 @@
-<td><p class="text-center"><%= image_tag(u.avatar_url, :size => "32x32") %></p></td>
-<td><p class="text-center"><%= u.name %></p></td>
+<div class="user-box">
+    <%= u.name %>
+	<%= image_tag(u.avatar_url, :size => "32x32", :class => "user-image") %>
+</div>
