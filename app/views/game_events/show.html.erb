@@ -51,7 +51,8 @@
   </tr>
   <tr>
     <td><h5 class="text-center">Invite to Event</h5></td>
-    <td><p class="text-center"><%= link_to "Invite", invite_game_event_path(@game_event), :class => "btn btn-primary" %></p></td>
+    <td><p class="text-center"><a data-toggle="modal" href="#inviteModal" class="btn btn-primary">Invite</a></p></td>
+
   </tr>
 </table>
 
@@ -90,3 +91,5 @@
 <%= link_to 'Edit', edit_game_event_path(@game_event), :class => "btn btn-primary" %>
 <%= link_to 'Back', game_events_path, :class => "btn btn-warning" %>
 </div>
+
+<%= render '/events/invite_form', :type => "Event", :url => invite_game_event_path(@game_event) %>

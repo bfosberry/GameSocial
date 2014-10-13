@@ -23,6 +23,7 @@ class GameEventsController < ApplicationController
   # GET /game_events/1
   # GET /game_events/1.json
   def show
+    @invite = Invite.new
   end
 
   # GET /game_events/new

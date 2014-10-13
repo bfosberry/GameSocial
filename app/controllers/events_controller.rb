@@ -19,6 +19,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @invite = Invite.new
     @game_events_grid = initialize_grid(GameEvent, :include => [:game])
     respond_to do |format|
       format.html {}
