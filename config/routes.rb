@@ -1,6 +1,14 @@
 require 'sidekiq/web'
 
 GameSocial::Application.routes.draw do
+  match 'groups/:id/join', to: 'groups#join', as: 'join_group', via: [:get]
+  match 'groups/:id/join/:user_id', to: 'groups#join', as: 'join_user_group', via: [:get]
+  match 'groups/:id/leave', to: 'groups#leave', as: 'leave_group', via: [:get]
+  match 'groups/:id/leave/:user_id', to: 'groups#leave', as: 'leave_user_group', via: [:get]
+  match 'groups/:id/invite', to: 'groups#invite', as: 'invite_group', via: [:get]
+  match 'groups/:id/invite', to: 'groups#send_invite', as: 'send_invite_group', via: [:post]
+  resources :groups
+
   resources :posts
 
   match 'game_events/new_for_event/:event_id', to: 'game_events#new_for_event', as: 'new_game_event_for_event', via: [:get] 

@@ -1,0 +1,37 @@
+<h1>Groups</h1>
+
+<%= grid(@groups_grid) do |g|
+  g.column name: 'Name', attribute: 'name' do |group|
+    group.name
+  end
+
+  g.column name: 'Description', attribute: 'description' do |group|
+    group.description
+  end
+  
+  g.column name: 'Owner', model: User, attribute: 'name' do |group|
+    group.user_name
+  end
+  
+  g.column do |group|
+    link_to 'Show', group, :class => "btn btn-default"
+  end
+
+  g.column do |group|
+    if current_user.in_group?(group)
+      link_to 'Leave', leave_group_path(group), :class => "btn btn-warning"
+    else
+      link_to 'Join', join_group_path(group), :class => "btn btn-success"
+    end
+  end
+
+  g.column do |group|
+    link_to 'Edit', edit_group_path(group), :class => "btn btn-primary" 
+  end
+
+  g.column do |group|
+    link_to 'Destroy', group, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+  end
+end -%>
+
+<%= link_to 'New Group', new_group_path, :class => "btn btn-success" %>

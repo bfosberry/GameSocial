@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @subject %></h1>
+    <p>
+      <%= @inviter.name %> has invited you to join the following Group:
+    </p>
+    <table>
+      <tr>
+        <td>Group Name</td>
+        <td><%= @group.name %></td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td><%= @group.description %></td>
+      </tr>
+    </table>
+
+    <p>To accept this invitation, click <%= link_to 'this link', join_group_url(@group), :class => "btn btn-primary" %></p>
+  </body>
+</html>

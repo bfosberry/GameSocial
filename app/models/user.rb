@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :games
   has_many :game_events
   has_many :events
+  has_many :groups
+  has_and_belongs_to_many :user_groups, :join_table => "groups_users", :class_name => "Group"
+
   has_and_belongs_to_many :attending_events, class_name: "Event"
   has_and_belongs_to_many :attending_game_events, class_name: "GameEvent"
 
@@ -72,6 +75,10 @@ class User < ActiveRecord::Base
     admin
   end
 
+  def in_group?(group)
+    user_groups.include?(group)
+  end
+
   def ordered_alerts
     alerts.order("created_at DESC")
   end
@@ -119,6 +126,14 @@ class User < ActiveRecord::Base
   def leave_event(event)
     attending_events.delete(event) if attending_event?(event)
     event.export_event
+  end
+
+  def join_group(group)
+    user_groups << group unless in_group?(group)
+  end
+
+  def leave_event(group)
+    user_groups.delete(group) if in_group?(group)
   end
   
   def attending_event?(event)

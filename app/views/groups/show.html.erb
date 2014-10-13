@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<table class="table table-condensed">
+  <tr>
+    <td><h5 class="text-center">Name</h5></td>
+    <td><p class="text-center"><%= @group.name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Description</h5></td>
+    <td><p class="text-center"><%= @group.description %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Owner</h5></td>
+    <td><p class="text-center"><%= @group.user_name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Join Group</h5></td>
+    <td><p class="text-center">
+    <% if current_user.in_group?(@group) %>
+      <%= link_to 'Leave', leave_group_path(@group), :class => "btn btn-warning" %>
+    <% else %>
+      <%= link_to 'Join', join_group_path(@group), :class => "btn btn-primary" %>
+    <% end %>
+  </p></td>
+  </tr>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Invite to Group</h5></td>
+    <td><p class="text-center"><a data-toggle="modal" href="#inviteModal" class="btn btn-primary">Invite</a></p></td>
+  </tr>
+</table>
+
+<h2>Members</h2>
+<div class="row">
+  <% for i in 0..5 %>
+    <div class="col-lg-2 col-md-2">
+      <%  @group.users.each_with_index do |u, index| %>
+        <% if index % 6 == i %>
+          <%= render "users/user", :u => u %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<%= render '/events/invite_form', :type => "Group", :url => invite_group_path(@group) %>
+
+<%= link_to 'Edit', edit_group_path(@group), :class => "btn btn-primary"  %> |
+<%= link_to 'Back', groups_path, :class => "btn btn-warning"  %>

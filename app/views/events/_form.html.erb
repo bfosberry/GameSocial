@@ -41,7 +41,7 @@
   <% if is_admin? %>
     <div class="input">
       <%= f.label :user_id, :class => "help-inline" %><br>
-      <%=  f.collection_select :user_id, User.all, :id, :name,  {:selected => (@event.user || current_user), :class => "span5"} %>
+      <%=  f.collection_select :user_id, User.all, :id, :name,  {:selected => (@event.user_id || current_user), :class => "span5"} %>
     </div>
   <% end %>
   <div class="input">

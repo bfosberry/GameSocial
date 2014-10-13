@@ -1,0 +1,35 @@
+<%= form_for(@group) do |f| %>
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+      <ul>
+      <% @group.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+  <%= f.fields_for :object_permission do |builder| %>
+    <% render 'object_permissions/form', :builder => builder %>
+  <% end %>
+  <% if is_admin? %>
+   <div class="field">
+      <%= f.label :user_id %><br>
+      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@group.user_id || current_user)} %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
