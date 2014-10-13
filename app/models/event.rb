@@ -44,8 +44,8 @@ class Event < ActiveRecord::Base
   end
 
   def set_defaults
-    self.start_time ||= DateTime.now
-    self.end_time ||= DateTime.now
+    self.start_time ||= DateTime.now.beginning_of_minute
+    self.end_time ||= DateTime.now.beginning_of_minute
   end
 
   def formatted_start_time
