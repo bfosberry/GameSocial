@@ -30,11 +30,15 @@
   end
 
   g.column do |chat_server|
-    link_to 'Edit', edit_chat_server_path(chat_server), :class => "btn btn-primary" 
+    if current_user.owns(chat_server)
+      link_to 'Edit', edit_chat_server_path(chat_server), :class => "btn btn-primary" 
+    end
   end
 
   g.column do |chat_server|
-    link_to 'Destroy', chat_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    if current_user.owns(chat_server)
+      link_to 'Destroy', chat_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    end
   end
 end -%>
 

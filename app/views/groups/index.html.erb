@@ -26,11 +26,15 @@
   end
 
   g.column do |group|
-    link_to 'Edit', edit_group_path(group), :class => "btn btn-primary" 
+    if current_user.owns(group)
+      link_to 'Edit', edit_group_path(group), :class => "btn btn-primary" 
+    end
   end
 
   g.column do |group|
-    link_to 'Destroy', group, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    if current_user.owns(group)
+      link_to 'Destroy', group, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    end
   end
 end -%>
 

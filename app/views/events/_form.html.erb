@@ -1,4 +1,4 @@
-<%= form_for(@event, :html => {:class => "form-horizontal"}) do |f| %>
+<%= form_for(@event, :html => {:role => "form-horizontal"}) do |f| %>
   <% @event.set_defaults %>
 
   <% if @event.errors.any? %>
@@ -13,40 +13,42 @@
     </div>
   <% end %>
 
-  <div class="input">
+  <div class="form-group">
     <%= f.label :name, :class => "help-inline" %><br>
-    <%= f.text_field :name, :class => "span5" %>
+    <%= f.text_field :name, :class => "form-control" %>
   </div>
-  <div class="input">
+  <div class="form-group">
     <%= f.label :description, :class => "help-inline"  %><br>
-    <%= f.text_area :description, :class => "span5", :rows => "5" %>
+    <%= f.text_area :description, :class => "form-control", :rows => "5" %>
   </div>
 
-  <div class="input">
+  <div class="form-group">
     <%= f.label :start_time, :class => "help-inline" %><br>
     <%= f.date_field(:start_time_date, :class => 'date_field') %>
     <%= f.time_field :start_time_time, as: :time, :ignore_date => true %>
   </div>
 
-  <div class="input">
+  <div class="form-group">
     <%= f.label :end_time, :class => "help-inline" %><br>
     <%= f.date_field(:end_time_date, :class => 'date_field') %>
     <%= f.time_field :end_time_time, as: :time, :ignore_date => true %>
   </div>
 
+  <div class="form-group">
   <%= f.fields_for :object_permission do |builder| %>
     <% render 'object_permissions/form', :builder => builder %>
   <% end %>
+  </div>
 
   <% if is_admin? %>
-    <div class="input">
+    <div class="form-group">
       <%= f.label :user_id, :class => "help-inline" %><br>
-      <%=  f.collection_select :user_id, User.all, :id, :name,  {:selected => (@event.user_id || current_user), :class => "span5"} %>
+      <%=  f.collection_select :user_id, User.all, :id, :name,  {:selected => (@event.user_id || current_user)}, {:class => "form-control"} %>
     </div>
   <% end %>
-  <div class="input">
+  <div class="form-group">
     <%= f.label :location, :class => "help-inline" %><br>
-    <%= f.text_field :location, :class => "span5" %>
+    <%= f.text_field :location, :class => "form-control" %>
   </div>
   <div class="actions">
     <%= f.submit :class => "btn btn-success" %>

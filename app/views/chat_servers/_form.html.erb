@@ -1,4 +1,4 @@
-<%= form_for(@chat_server) do |f| %>
+<%= form_for(@chat_server, :html => { role: "form-horizontal"}) do |f| %>
   <% if @chat_server.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@chat_server.errors.count, "error") %> prohibited this chat_server from being saved:</h2>
@@ -11,53 +11,50 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :type %><br>
-    <%= f.select :server_type, ChatServer.server_types %>
+    <%= f.select :server_type, ChatServer.server_types, {},
+                               {:class => "form-control"} %>
   </div>
 
   <% if is_admin? %>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :user_id %><br>
-      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@chat_server.user || current_user)} %>
+      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@chat_server.user || current_user)},  {:class => "form-control"} %>
     </div>
   <% end %>
   
-  <div class="field">
+  <div class="form-group">
     <%= f.label :ip %><br>
-    <%= f.text_field :ip %>
+    <%= f.text_field :ip, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :port %><br>
-    <%= f.number_field :port %>
+    <%= f.number_field :port, :class => "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :public %><br>
-    <%= f.check_box :public %>
-  </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :password %><br>
-    <%= f.text_field :password %>
+    <%= f.text_field :password, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :room %><br>
-    <%= f.text_field :room %>
+    <%= f.text_field :room, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :room_password %><br>
-    <%= f.text_field :room_password %>
+    <%= f.text_field :room_password, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
   <%= f.fields_for :object_permission do |builder| %>
     <% render 'object_permissions/form', :builder => builder %>
   <% end %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-success" %>
   </div>
 <% end %>

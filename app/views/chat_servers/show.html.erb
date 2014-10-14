@@ -45,5 +45,7 @@
   <%= @chat_server.room_password %>
 </p>
 
-<%= link_to 'Edit', edit_chat_server_path(@chat_server) %> |
+<% if current_user.owns(@chat_server) %>
+  <%= link_to 'Edit', edit_chat_server_path(@chat_server), :class => "btn btn-primary" %> |
+<% end %>
 <%= link_to 'Back', chat_servers_path %>

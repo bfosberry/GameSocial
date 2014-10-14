@@ -88,7 +88,9 @@
 </table>  
 <%= link_to 'Post Comment', new_post_for_game_event_path(@game_event), :class => "btn btn-success" %><br><br>
 
-<%= link_to 'Edit', edit_game_event_path(@game_event), :class => "btn btn-primary" %>
+<% if current_user.owns(@game_event) %>
+  <%= link_to 'Edit', edit_game_event_path(@game_event), :class => "btn btn-primary" %> |
+<% end %>
 <%= link_to 'Back', game_events_path, :class => "btn btn-warning" %>
 </div>
 

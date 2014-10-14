@@ -54,11 +54,15 @@
   end
 
   g.column do |game_social_server|
-    link_to 'Edit', edit_game_social_server_path(game_social_server), :class => "btn btn-primary" 
+    if current_user.owns(game_social_server)
+      link_to 'Edit', edit_game_social_server_path(game_social_server), :class => "btn btn-primary" 
+    end
   end
 
   g.column do |game_social_server|
-    link_to 'Destroy', game_social_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    if current_user.owns(game_social_server)
+      link_to 'Destroy', game_social_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    end
   end
 end -%>
 

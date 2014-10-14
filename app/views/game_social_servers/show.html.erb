@@ -55,5 +55,7 @@
   <%= @game_social_server.region %>
 </p>
 
-<%= link_to 'Edit', edit_game_social_server_path(@game_social_server) %> |
+<% if current_user.owns(@game_social_server) %>
+  <%= link_to 'Edit', edit_event_path(@game_social_server), :class => "btn btn-primary" %> |
+<% end %>
 <%= link_to 'Back', game_social_servers_path %>

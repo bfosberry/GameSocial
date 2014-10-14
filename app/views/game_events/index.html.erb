@@ -46,13 +46,16 @@
   end
 
   g.column do |game_event|
-    link_to 'Edit', edit_game_event_path(game_event), :class => "btn btn-primary" 
+    if current_user.owns(game_event)
+      link_to 'Edit', edit_game_event_path(game_event), :class => "btn btn-primary" 
+    end
   end
 
   g.column do |game_event|
-    link_to 'Destroy', game_event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    if current_user.owns(game_event)
+      link_to 'Destroy', game_event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    end
   end
 end -%>
 
 <%= link_to 'Create Event', new_game_event_path, :class => "btn btn-success" %>
-<%= link_to 'ICal', game_events_ics_path, :class => "btn btn-primary"  %>

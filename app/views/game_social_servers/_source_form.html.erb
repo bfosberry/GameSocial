@@ -1,4 +1,4 @@
-<%= form_for(@game_social_server) do |f| %>
+<%= form_for(@game_social_server, :html => { role: "form-horizontal"}) do |f| %>
   <% if @game_social_server.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@game_social_server.errors.count, "error") %> prohibited this game_server from being saved:</h2>
@@ -11,26 +11,26 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :ip %><br>
-    <%= f.text_field :ip %>
+    <%= f.text_field :ip, :class => "form-control"%>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :port %><br>
-    <%= f.number_field :port %>
+    <%= f.number_field :port, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
   <%= f.fields_for :object_permission do |builder| %>
     <% render 'object_permissions/form', :builder => builder %>
   <% end %>
   </div>
   <% if is_admin? %>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :user_id %><br>
-      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@game_social_server.user || current_user)} %>
+      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@game_social_server.user || current_user)}, {:class => "form-control"} %>
     </div>
   <% end %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-success" %>
   </div>
 <% end %>

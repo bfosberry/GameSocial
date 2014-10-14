@@ -79,6 +79,10 @@ class User < ActiveRecord::Base
     user_groups.include?(group)
   end
 
+  def owns(object)
+    object.user == self
+  end
+
   def ordered_alerts
     alerts.order("created_at DESC")
   end

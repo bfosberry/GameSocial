@@ -58,7 +58,7 @@ class EventsController < ApplicationController
   # GET /events/1/join
   def join
     user = User.find_by_id(params[:user_id]) || current_user
-    validate_ownership(user)
+    enforce_ownership(user)
     user.join_event(@event)
     redirect_to events_path, notice: 'Event joined.' 
   end
@@ -66,7 +66,7 @@ class EventsController < ApplicationController
   # GET /events/1/leave
   def leave
     user = User.find_by_id(params[:user_id]) || current_user
-    validate_ownership(user)
+    ennforce_ownership(user)
     user.leave_event(@event)
     redirect_to events_path, notice: 'Event left.' 
   end

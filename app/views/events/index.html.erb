@@ -34,14 +34,16 @@
   end
 
   g.column do |event|
-    link_to 'Edit', edit_event_path(event), :class => "btn btn-primary" 
+    if current_user.owns(event)
+      link_to 'Edit', edit_event_path(event), :class => "btn btn-primary" 
+    end
   end
 
   g.column do |event|
-    link_to 'Destroy', event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    if current_user.owns(event)
+      link_to 'Destroy', event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    end
   end
 end -%>
 
 <%= link_to 'Create Lan Party', new_event_path, :class => "btn btn-success"  %>
-<%= link_to 'ICal', events_ics_path, :class => "btn btn-primary"  %>
-

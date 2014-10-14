@@ -1,12 +1,22 @@
 <ul class="nav navbar-nav">
   <li class="<%= 'active' if current_page?(events_path) %>"><%= link_to "Lan Parties", events_path, :class => "btn" %></li>
   <li class="<%= 'active' if current_page?(game_events_path) %>"><%= link_to "Events", game_events_path, :class => "btn" %></li>
-  <li class="<%= 'active' if current_page?(chat_servers_path) %>"><%= link_to "Chat Servers", chat_servers_path, :class => "btn" %></li>
-  <li class="<%= 'active' if current_page?(game_social_servers_path) %>"><%= link_to "Game Servers", game_social_servers_path, :class => "btn" %></li>
   <li class="<%= 'active' if current_page?(groups_path) %>"><%= link_to "Groups", groups_path, :class => "btn" %></li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servers <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+      <li class="<%= 'active' if current_page?(chat_servers_path) %>"><%= link_to "Chat Servers", chat_servers_path, :class => "btn" %></li>
+      <li class="<%= 'active' if current_page?(game_social_servers_path) %>"><%= link_to "Game Servers", game_social_servers_path, :class => "btn" %></li>
+    </ul>
+  </li>
   <% if is_admin? %>
-    <li class="<%= 'active' if current_page?(users_path) %>">  <%= link_to "Users", users_path, :class => "btn" %></li>
-    <li class="<%= 'active' if current_page?(games_path) %>"><%= link_to "Games", games_path, :class => "btn" %></li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu">
+      <li class="<%= 'active' if current_page?(users_path) %>">  <%= link_to "Users", users_path, :class => "btn" %></li>
+      <li class="<%= 'active' if current_page?(games_path) %>"><%= link_to "Games", games_path, :class => "btn" %></li>
+    </ul>
+  </li>
   <% end %>
   <li>
   <% if current_user %>

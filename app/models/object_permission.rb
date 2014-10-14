@@ -3,6 +3,10 @@ class ObjectPermission < ActiveRecord::Base
 	belongs_to :permissible_object, :polymorphic => true
 
 	def self.permission_types
-	  ["Public", "Private", "Group"]
+	  group_permission_types << "Group"
 	end
+
+	def self.group_permission_types
+      ["Public", "Private"]
+    end
 end

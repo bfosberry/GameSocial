@@ -1,5 +1,4 @@
-
-<%= form_for(@game_event, :html => {:class => "form-horizontal"}) do |f| %>
+<%= form_for(@game_event, :html => {:role => "form-horizontal"}) do |f| %>
   <% @game_event.set_defaults %>
   <% if @game_event.errors.any? %>
     <div id="error_explanation">
@@ -13,47 +12,47 @@
     </div>
   <% end %>
 
-  <div class="input">
+  <div class="form-group">
     <%= f.label :event_id, :class => "help-inline" %><br>
-    <%= f.collection_select :event_id, Event.all, :id, :name,  {:selected => @game_event.event_id, :class => "span5"} %>
+    <%= f.collection_select :event_id, Event.all, :id, :name,  {:selected => @game_event.event_id}, {:class => "form-control"} %>
   </div>
-  <div class="input">
+  <div class="form-group">
     <%= f.label :title, :class => "help-inline" %><br>
-    <%= f.text_field :title, :class => "span5"  %>
+    <%= f.text_field :title, :class => "form-control"  %>
   </div>
   <% if current_user.is_admin? %>
-  <div class="input">
+  <div class="form-group">
     <%= f.label "Event Owner", :class => "help-inline" %><br>
-    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@game_event.user || current_user), :class => "span5"} %>
+    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@game_event.user || current_user)}, {:class => "form-control"} %>
   </div>
   <% end %>
-  <div class="input">
+  <div class="form-group">
     <%= f.label :description, :class => "help-inline" %><br>
-    <%= f.text_area :description, :class => "span5", :rows => "5" %>
+    <%= f.text_area :description, :class => "form-control", :rows => "5" %>
   </div>
-  <div class="input">
+  <div class="form-group">
     <%= f.label :game_id, :class => "help-inline" %><br>
-    <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_event.game_id, :class => "span5"} %>
+    <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_event.game_id}, {:class => "form-control"} %>
   </div>
-  <div class="input">
+  <div class="form-group">
     <%= f.label :game_social_server_id, "Game Server", :class => "help-inline" %><br>
-    <%= f.collection_select :game_social_server_id, GameSocialServer.all, :id, :name,  {:selected => @game_event.game_social_server, :class => "span5", :include_blank => true} %>
+    <%= f.collection_select :game_social_server_id, GameSocialServer.all, :id, :name,  {:selected => @game_event.game_social_server}, {:class => "form-control", :include_blank => true} %>
   </div>
-  <div class="input">
+  <div class="form-group">
     <%= f.label :chat_server_id, :class => "help-inline" %><br>
-    <%= f.collection_select :chat_server_id, ChatServer.all, :id, :name,  {:selected => @game_event.chat_server, :class => "span5", :include_blank => true} %>
+    <%= f.collection_select :chat_server_id, ChatServer.all, :id, :name,  {:selected => @game_event.chat_server, :include_blank => true}, {:class => "form-control"} %>
   </div>
-  <div class="input">
+  <div class="form-group">
     <%= f.label :start_time, :class => "help-inline" %><br>
     <%= f.date_field(:start_time_date, :class => 'date_field') %>
     <%= f.time_field :start_time_time, as: :time, :ignore_date => true %>
   </div>
-  <div class="input">
+  <div class="form-group">
     <%= f.label :end_time, :class => "help-inline" %><br>
     <%= f.date_field(:end_time_date, :class => 'date_field') %>
     <%= f.time_field :end_time_time, as: :time, :ignore_date => true %>
   </div>
-  <div class="field">
+  <div class="form-group">
   <%= f.fields_for :object_permission do |builder| %>
     <% render 'object_permissions/form', :builder => builder %>
   <% end %>

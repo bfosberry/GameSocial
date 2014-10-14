@@ -1,4 +1,4 @@
-<%= form_for(@game_social_server) do |f| %>
+<%= form_for(@game_social_server, :html => { role: "form-horizontal"}) do |f| %>
   <% if @game_social_server.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@game_social_server.errors.count, "error") %> prohibited this game_server from being saved:</h2>
@@ -11,58 +11,58 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :ip %><br>
-    <%= f.text_field :ip %>
+    <%= f.text_field :ip, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :port %><br>
-    <%= f.number_field :port %>
+    <%= f.number_field :port, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :game_id %><br>
-    <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_social_server.game} %>
+    <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_social_server.game}, {:class => "form-control"}  %>
   </div>
   <% if is_admin? %>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :user_id %><br>
-      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@game_social_server.user || current_user)} %>
+      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@game_social_server.user || current_user)}, {:class => "form-control"} %>
     </div>
   <% end %>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :max_players %><br>
-    <%= f.number_field :max_players %>
+    <%= f.number_field :max_players, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :current_players %><br>
-    <%= f.number_field :current_players %>
+    <%= f.number_field :current_players, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :latency %><br>
-    <%= f.number_field :latency %>
+    <%= f.number_field :latency, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :current_map %><br>
-    <%= f.text_field :current_map %>
+    <%= f.text_field :current_map, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :match_type %><br>
-    <%= f.text_field :match_type %>
+    <%= f.text_field :match_type, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :region %><br>
-    <%= f.text_field :region %>
+    <%= f.text_field :region, :class => "form-control" %>
   </div>
-  <div class="field">
+  <div class="form-group">
   <%= f.fields_for :object_permission do |builder| %>
     <% render 'object_permissions/form', :builder => builder %>
   <% end %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-success" %>
   </div>
 <% end %>

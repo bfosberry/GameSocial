@@ -45,5 +45,7 @@
 
 <%= render '/events/invite_form', :type => "Group", :url => invite_group_path(@group) %>
 
-<%= link_to 'Edit', edit_group_path(@group), :class => "btn btn-primary"  %> |
+<% if current_user.owns(@group) %>
+  <%= link_to 'Edit', edit_group_path(@group), :class => "btn btn-primary" %> |
+<% end %>
 <%= link_to 'Back', groups_path, :class => "btn btn-warning"  %>
