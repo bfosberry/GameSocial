@@ -1,37 +1,41 @@
-<ul class="nav navbar-nav">
-  <li class="<%= 'active' if current_page?(events_path) %>"><%= link_to "Lan Parties", events_path, :class => "btn" %></li>
-  <li class="<%= 'active' if current_page?(game_events_path) %>"><%= link_to "Events", game_events_path, :class => "btn" %></li>
-  <li class="<%= 'active' if current_page?(groups_path) %>"><%= link_to "Groups", groups_path, :class => "btn" %></li>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servers <span class="caret"></span></a>
-    <ul class="dropdown-menu" role="menu">
-      <li class="<%= 'active' if current_page?(chat_servers_path) %>"><%= link_to "Chat Servers", chat_servers_path, :class => "btn" %></li>
-      <li class="<%= 'active' if current_page?(game_social_servers_path) %>"><%= link_to "Game Servers", game_social_servers_path, :class => "btn" %></li>
-    </ul>
-  </li>
-  <% if is_admin? %>
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
-    <ul class="dropdown-menu" role="menu">
-      <li class="<%= 'active' if current_page?(users_path) %>">  <%= link_to "Users", users_path, :class => "btn" %></li>
-      <li class="<%= 'active' if current_page?(games_path) %>"><%= link_to "Games", games_path, :class => "btn" %></li>
-    </ul>
-  </li>
-  <% end %>
-  <li>
-  <% if current_user %>
-    <p class="nav-button"><%= link_to "Sign out", signout_path, :class => "btn btn-danger"%></p>
-  <% else %>
-    <%= link_to image_tag("https://steamcommunity.com/public/images/signinthroughsteam/sits_small.png", :border=>0), "/auth/steam" %>
-  <% end %>
-  </li>
-  <% if current_user %>
-    <li>
-      <%= link_to(user_path(current_user), :id => "nav-button-container") do %>
-        <button type="button" class="btn btn-info nav-button">
-          <span class="glyphicon glyphicon-user"></span><%= current_user.name %>
-        </button> 
-      <% end %>
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <ul class="nav navbar-nav">
+    <li class="<%= 'active' if current_page?(events_path) %>"><%= link_to "Lan Parties", events_path, :class => "btn" %></li>
+    <li class="<%= 'active' if current_page?(game_events_path) %>"><%= link_to "Events", game_events_path, :class => "btn" %></li>
+    <li class="<%= 'active' if current_page?(groups_path) %>"><%= link_to "Groups", groups_path, :class => "btn" %></li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servers <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li class="<%= 'active' if current_page?(chat_servers_path) %>"><%= link_to "Chat Servers", chat_servers_path, :class => "btn" %></li>
+        <li class="<%= 'active' if current_page?(game_social_servers_path) %>"><%= link_to "Game Servers", game_social_servers_path, :class => "btn" %></li>
+      </ul>
     </li>
-  <% end %>
-</ul>
+    <% if is_admin? %>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li class="<%= 'active' if current_page?(users_path) %>">  <%= link_to "Users", users_path, :class => "btn" %></li>
+        <li class="<%= 'active' if current_page?(games_path) %>"><%= link_to "Games", games_path, :class => "btn" %></li>
+      </ul>
+    </li>
+    <% end %>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li>
+    <% if current_user %>
+      <p class="nav-button"><%= link_to "Sign out", signout_path, :class => "btn btn-danger"%></p>
+    <% else %>
+      <%= link_to image_tag("https://steamcommunity.com/public/images/signinthroughsteam/sits_small.png", :border=>0), "/auth/steam" %>
+    <% end %>
+    </li>
+    <% if current_user %>
+      <li>
+        <%= link_to(user_path(current_user), :id => "nav-button-container") do %>
+          <button type="button" class="btn btn-info nav-button">
+            <span class="glyphicon glyphicon-user"></span><%= current_user.name %>
+          </button> 
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
