@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
     user_groups << group unless in_group?(group)
   end
 
-  def leave_event(group)
+  def leave_group(group)
     user_groups.delete(group) if in_group?(group)
   end
   
