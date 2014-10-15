@@ -5,9 +5,9 @@
       <h2><%= pluralize(@game_event.errors.count, "error") %> prohibited this game_event from being saved:</h2>
 
       <ul>
-      <% @game_event.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @game_event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -21,10 +21,10 @@
     <%= f.text_field :title, :class => "form-control"  %>
   </div>
   <% if current_user.is_admin? %>
-  <div class="form-group">
-    <%= f.label "Event Owner", :class => "help-inline" %><br>
-    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@game_event.user_id || current_user.id)}, {:class => "form-control"} %>
-  </div>
+    <div class="form-group">
+      <%= f.label "Event Owner", :class => "help-inline" %><br>
+      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@game_event.user_id || current_user.id)}, {:class => "form-control"} %>
+    </div>
   <% end %>
   <div class="form-group">
     <%= f.label :description, :class => "help-inline" %><br>
