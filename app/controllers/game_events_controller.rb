@@ -6,7 +6,7 @@ class GameEventsController < ApplicationController
   # GET /game_events
   # GET /game_events.jso
   def index
-    @game_events_grid = initialize_grid(GameEvent, :include => [:user, 
+    @game_events_grid = initialize_grid(all_visible(GameEvent), :include => [:user, 
                                                                 :game, 
                                                                 :event, 
                                                                 :chat_server, 

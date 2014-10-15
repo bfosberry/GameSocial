@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups_grid = initialize_grid(Group, :include => [:user])
+    @groups_grid = initialize_grid(all_visible(Group), :include => [:user])
 
   end
 

@@ -11,6 +11,8 @@ class GameEvent < ActiveRecord::Base
   has_many :posts, as: :postable
   has_and_belongs_to_many :users
   has_one :object_permission, as: :permissible_object
+  delegate :is_visible_to?, :to => :object_permission
+
 
   accepts_nested_attributes_for :object_permission
 

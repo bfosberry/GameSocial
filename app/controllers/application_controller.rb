@@ -45,4 +45,9 @@ class ApplicationController < ActionController::Base
         model.all
       end
     end
+
+    def all_visible(model)
+      ids = model.all.select{|ge| ge.is_visible_to?(current_user)}.map{|ge| ge.id}  
+      model.where(id: ids)
+    end
 end

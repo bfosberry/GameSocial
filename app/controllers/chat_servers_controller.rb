@@ -5,7 +5,7 @@ class ChatServersController < ApplicationController
   # GET /chat_servers
   # GET /chat_servers.json
   def index
-    @chat_servers_grid = initialize_grid(ChatServer, :include => [:user])
+    @chat_servers_grid = initialize_grid(all_visible(ChatServer), :include => [:user])
   end
 
   # GET /chat_servers/1

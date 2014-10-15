@@ -3,6 +3,7 @@ class GameSocialServer < ActiveRecord::Base
   belongs_to :game
   has_one :object_permission, as: :permissible_object
   accepts_nested_attributes_for :object_permission
+  delegate :is_visible_to?, :to => :object_permission
 
   delegate :name, :to => :user, :prefix => true, :allow_nil => true
   delegate :name, :to => :game, :prefix => true, :allow_nil => true

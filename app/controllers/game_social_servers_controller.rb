@@ -5,7 +5,7 @@ class GameSocialServersController < ApplicationController
   # GET /game_social_servers
   # GET /game_social_servers.json
   def index
-    @game_social_servers_grid = initialize_grid(GameSocialServer, :include => [:user, 
+    @game_social_servers_grid = initialize_grid(all_visible(GameSocialServer), :include => [:user, 
                                                                                :game])
   end
 

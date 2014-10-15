@@ -2,7 +2,6 @@
   <ul class="nav navbar-nav">
     <li class="<%= 'active' if current_page?(events_path) %>"><%= link_to "Lan Parties", events_path, :class => "btn" %></li>
     <li class="<%= 'active' if current_page?(game_events_path) %>"><%= link_to "Events", game_events_path, :class => "btn" %></li>
-    <li class="<%= 'active' if current_page?(groups_path) %>"><%= link_to "Groups", groups_path, :class => "btn" %></li>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Servers <span class="caret"></span></a>
       <ul class="dropdown-menu" role="menu">

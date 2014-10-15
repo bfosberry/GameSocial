@@ -21,10 +21,7 @@
   </div>
   <div class="form-group">
   <%= f.fields_for :object_permission do |builder| %>
-    <%= builder.label :type, "Visibility", :class => "help-inline" %><br>
-    <%= builder.select :permission_type, ObjectPermission.group_permission_types, 
-      {:selected => builder.object.permission_type}, 
-      {:class => "form-control"} %>
+    <% render 'object_permissions/form', :builder => builder %>
   <% end %>
   </div>
   <% if is_admin? %>
