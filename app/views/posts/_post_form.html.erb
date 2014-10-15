@@ -21,7 +21,7 @@
           <% if is_admin? %>
             <div class="input">
               <%= f.label :user_id, :class => "help-inline" %><br>
-              <%=  f.collection_select :user_id, User.all, :id, :name,  {:selected => (@post.user_id || current_user)}, {:class => "form-control"} %>
+              <%=  f.collection_select :user_id, User.all, :id, :name,  {:selected => (@post.user_id || current_user.id)}, {:class => "form-control"} %>
             </div>
           <% end %>
           <%= f.hidden_field :postable_id, :value => @post.postable_id %>

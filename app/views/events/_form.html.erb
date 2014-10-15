@@ -46,7 +46,7 @@
   <% if is_admin? %>
     <div class="form-group">
       <%= f.label :user_id, :class => "help-inline" %><br>
-      <%=  f.collection_select :user_id, User.all, :id, :name,  {:selected => (@event.user_id || current_user)}, {:class => "form-control"} %>
+      <%=  f.collection_select :user_id, User.all, :id, :name,  {:selected => (@event.user_id || current_user.id)}, {:class => "form-control"} %>
     </div>
   <% end %>
   <div class="form-group">

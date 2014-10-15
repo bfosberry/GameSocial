@@ -30,7 +30,7 @@
   <% if is_admin? %>
     <div class="form-group">
       <%= f.label :user_id %><br>
-      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@game_social_server.user || current_user)}, {:class => "form-control"} %>
+      <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@game_social_server.user_id || current_user.id)}, {:class => "form-control"} %>
     </div>
   <% end %>
   <div class="form-group">
