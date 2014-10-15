@@ -23,7 +23,7 @@ class EventsController < ApplicationController
     @invite = Invite.new
     @post = Post.new({ :postable => @event })
     @posts_grid  = initialize_grid(@event.posts, :include => [:user])
-    @game_events_grid = initialize_grid(GameEvent, :include => [:game])
+    @game_events_grid = initialize_grid(@event.game_events, :include => [:game])
     respond_to do |format|
       format.html {}
       format.ics do
@@ -131,7 +131,7 @@ class EventsController < ApplicationController
                                     :end_time_date, 
                                     :end_time_time, 
                                     :user_id, 
-                                    :location, 
+                                    :location,
                                     object_permission_attributes: [:permission_type])
     end
 

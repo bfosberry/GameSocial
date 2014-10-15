@@ -53,7 +53,7 @@
     <%= f.time_field :end_time_time, as: :time, :ignore_date => true %>
   </div>
   <div class="form-group">
-   <%= fields_for :object_permission do |builder| %>
+    <%= f.fields_for :object_permission do |builder| %>
     <%= builder.label :type, "Visibility", :class => "help-inline" %><br>
     <%= builder.select :permission_type, ObjectPermission.event_permission_types, 
       {:selected =>f.object.object_permission.permission_type}, 
