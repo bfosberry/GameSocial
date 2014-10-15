@@ -86,7 +86,7 @@
 </tr>
 <% end %>
 </table>  
-<%= link_to 'Post Comment', new_post_for_game_event_path(@game_event), :class => "btn btn-success" %><br><br>
+<p class="text-center"><a data-toggle="modal" href="#postModal" class="btn btn-primary">Post a Comment</a></p>
 
 <% if current_user.owns(@game_event) %>
   <%= link_to 'Edit', edit_game_event_path(@game_event), :class => "btn btn-primary" %> |
@@ -95,3 +95,5 @@
 </div>
 
 <%= render '/events/invite_form', :type => "Event", :url => invite_game_event_path(@game_event) %>
+
+<%= render '/posts/post_form', :type => "Event", :url => posts_path %>

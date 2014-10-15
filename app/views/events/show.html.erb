@@ -79,7 +79,7 @@
 </tr>
 <% end %>
 </table>  
-<%= link_to 'Post Comment', new_post_for_event_path(@event), :class => "btn btn-success" %><br><br>
+<p class="text-center"><a data-toggle="modal" href="#postModal" class="btn btn-primary">Post a Comment</a></p>
 
 <% if current_user.owns(@event) %>
   <%= link_to 'Edit', edit_event_path(@event), :class => "btn btn-primary" %> |
@@ -88,3 +88,5 @@
 </div>
 
 <%= render '/events/invite_form', :type => "LAN Party", :url => invite_event_path(@event) %>
+
+<%= render '/posts/post_form', :type => "LAN Party", :url => posts_path %>

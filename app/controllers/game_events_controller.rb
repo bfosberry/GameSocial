@@ -23,6 +23,7 @@ class GameEventsController < ApplicationController
   # GET /game_events/1
   # GET /game_events/1.json
   def show
+    @post = Post.new({ :postable => @game_event })
     @invite = Invite.new
   end
 

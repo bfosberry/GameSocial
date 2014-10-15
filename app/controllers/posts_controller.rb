@@ -18,6 +18,9 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def post
+  end
+  
   def new_for_game_event
     game_event = GameEvent.find(params[:game_event_id])
     @post = Post.new({ :postable => game_event })
@@ -43,7 +46,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to @post.postable, notice: 'Comment posted' }
         format.json { render action: 'show', status: :created, location: @post }
       else
         format.html { render action: 'new' }
