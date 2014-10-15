@@ -3,14 +3,6 @@ worker_processes Integer(ENV["WEB_CONCURRENCY"] || 3)
 timeout 60
 preload_app true
 
-working_directory "/var/www/GameSocial/current/"
-pid "/var/www/GameSocial/shared/pids/unicorn.pid"
-listen "/var/www/GameSocial/shared/sockets/gamesocial.sock", :backlog => 64
-listen 8300, :tcp_nopush => true
-
-stderr_path "/var/www/GameSocial/current/log/unicorn.stderr.log"
-stdout_path "/var/www/GameSocial/current/log/unicorn.stdout.log"
-
 before_fork do |server, worker|
   Signal.trap 'TERM' do
     puts 'Unicorn master intercepting TERM and sending myself QUIT instead'
