@@ -16,8 +16,15 @@
 //= require bootstrap
 //= require jquery-ui
 //= require turbolinks
-//= require jquery.timepicker
-//= require jquery.datepair.js
+//= require jquery.datetimepicker
 //= require autocomplete-rails
 //= require wice_grid
 //= require_tree .
+
+var ready;
+ready = function() {
+  $('.datetimepicker').datetimepicker({ minDate:0, format: 'F jS, Y G:m', inline: true})
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

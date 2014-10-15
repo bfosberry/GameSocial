@@ -87,11 +87,10 @@ GEM
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
+    jquery-datetimepicker-rails (2.3.0.0)
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-timepicker-rails (1.3.5)
-      railties (>= 3.1.0)
     jquery-ui-rails (5.0.0)
       railties (>= 3.2.16)
     json (1.8.1)
@@ -205,7 +204,6 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.3)
     tilt (1.4.1)
-    time_splitter (1.0.0)
     timers (1.1.0)
     treetop (1.4.15)
       polyglot
@@ -243,8 +241,8 @@ DEPENDENCIES
   google_calendar!
   httparty
   jbuilder (~> 1.2)
+  jquery-datetimepicker-rails
   jquery-rails
-  jquery-timepicker-rails
   jquery-ui-rails
   omniauth-steam
   pg
@@ -260,7 +258,6 @@ DEPENDENCIES
   steam-condenser
   syslog-logger
   therubyracer
-  time_splitter
   turbolinks
   uglifier (>= 1.3.0)
   unicorn

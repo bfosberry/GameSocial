@@ -133,10 +133,8 @@ class GameEventsController < ApplicationController
                                          :game_social_server_id, 
                                          :chat_server_id, 
                                          :user_id, 
-                                         :start_time_date, 
-                                         :start_time_time, 
-                                         :end_time_date, 
-                                         :end_time_time,
+                                         :start_time, 
+                                         :end_time,
                                          object_permission_attributes: [:permission_type])
     end
 

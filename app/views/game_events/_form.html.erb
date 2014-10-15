@@ -31,6 +31,14 @@
     <%= f.text_area :description, :class => "form-control", :rows => "5" %>
   </div>
   <div class="form-group">
+    <%= f.label :start_time, :class => "help-inline" %><br>
+    <%= f.text_field(:start_time, :class => "datetimepicker form-control") %>
+  </div>
+  <div class="form-group">
+    <%= f.label :end_time, :class => "help-inline" %><br>
+    <%= f.text_field(:end_time, :class => "datetimepicker form-control") %>
+  </div>
+  <div class="form-group">
     <%= f.label :game_id, :class => "help-inline" %><br>
     <%= f.collection_select :game_id, Game.all, :id, :name,  {:selected => @game_event.game_id}, {:class => "form-control"} %>
   </div>
@@ -41,16 +49,6 @@
   <div class="form-group">
     <%= f.label :chat_server_id, :class => "help-inline" %><br>
     <%= f.collection_select :chat_server_id, ChatServer.all, :id, :name,  {:selected => @game_event.chat_server, :include_blank => true}, {:class => "form-control"} %>
-  </div>
-  <div class="form-group">
-    <%= f.label :start_time, :class => "help-inline" %><br>
-    <%= f.date_field(:start_time_date, :class => 'date_field') %>
-    <%= f.time_field :start_time_time, as: :time, :ignore_date => true %>
-  </div>
-  <div class="form-group">
-    <%= f.label :end_time, :class => "help-inline" %><br>
-    <%= f.date_field(:end_time_date, :class => 'date_field') %>
-    <%= f.time_field :end_time_time, as: :time, :ignore_date => true %>
   </div>
   <div class="form-group">
     <%= f.fields_for :object_permission do |builder| %>
