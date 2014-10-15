@@ -22,6 +22,7 @@ class EventsController < ApplicationController
   def show
     @invite = Invite.new
     @post = Post.new({ :postable => @event })
+    @posts_grid  = initialize_grid(@event.posts, :include => [:user])
     @game_events_grid = initialize_grid(GameEvent, :include => [:game])
     respond_to do |format|
       format.html {}

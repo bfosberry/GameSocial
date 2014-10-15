@@ -1,6 +1,11 @@
 <h1 class="text-center">Lan Parties</h1>
 
 <%= grid(@events_grid) do |g|
+
+  g.blank_slate  do
+    content_tag :div, "No LAN Parties found", class: 'well'
+  end
+
   g.column name: 'Name', attribute: 'name' do |event|
     event.name 
   end

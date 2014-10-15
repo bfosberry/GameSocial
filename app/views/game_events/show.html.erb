@@ -70,23 +70,8 @@
 </div>
 
 <h2>Comments</h2>
-<table class="table table-condensed">
-<tr>
-  <th>Title</th>
-  <th>Body</th>
-  <th>User</th>
-  <th></th>
-  <th></th>
-</tr>
-<% for post in @game_event.posts %>
-<tr>
-  <td><p class="text-center"><%= post.title %></p></td>
-  <td><p class="text-center"><%= post.body %></p></td>
-  <td><p class="text-center"><%= post.user_name %></p></td>
-</tr>
-<% end %>
-</table>  
-<p class="text-center"><a data-toggle="modal" href="#postModal" class="btn btn-primary">Post a Comment</a></p>
+<%= render "posts/posts", :object => @game_event %>
+<a data-toggle="modal" href="#postModal" class="btn btn-primary">Post a Comment</a><br><br>
 
 <% if current_user.owns(@game_event) %>
   <%= link_to 'Edit', edit_game_event_path(@game_event), :class => "btn btn-primary" %> |

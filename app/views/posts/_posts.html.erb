@@ -1,0 +1,18 @@
+<%= grid(@posts_grid) do |g|
+
+  g.blank_slate  do
+    content_tag :div, "No comments found", class: 'well'
+  end
+  
+  g.column name: 'Title', attribute: 'title' do |post|
+    post.title
+  end
+
+  g.column name: 'Body', attribute: 'body' do |post|
+    post.body
+  end
+  
+  g.column name: 'User', model: User, attribute: 'name' do |post|
+    post.user_name
+  end
+end -%>

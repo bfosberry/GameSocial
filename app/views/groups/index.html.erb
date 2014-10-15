@@ -1,6 +1,11 @@
 <h1>Groups</h1>
 
 <%= grid(@groups_grid) do |g|
+
+  g.blank_slate  do
+    content_tag :div, "No Groups found", class: 'well'
+  end
+
   g.column name: 'Name', attribute: 'name' do |group|
     group.name
   end

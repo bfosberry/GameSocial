@@ -63,29 +63,8 @@
 </div>
 
 <h2>Comments</h2>
-<table class="table table-condensed">
-<tr>
-  <th>Title</th>
-  <th>Body</th>
-  <th>User</th>
-  <th></th>
-  <th></th>
-</tr>
-<% for post in @event.posts %>
-<tr>
-  <td><p class="text-center"><%= post.title %></p></td>
-  <td><p class="text-center"><%= post.body %></p></td>
-  <td><p class="text-center"><%= post.user_name %></p></td>
-</tr>
-<% end %>
-</table>  
-<p class="text-center"><a data-toggle="modal" href="#postModal" class="btn btn-primary">Post a Comment</a></p>
-
-<% if current_user.owns(@event) %>
-  <%= link_to 'Edit', edit_event_path(@event), :class => "btn btn-primary" %> |
-<% end %>
-<%= link_to 'Back', events_path, :class => "btn btn-warning" %>
-</div>
+<%= render "posts/posts", :object => @event %>
+<a data-toggle="modal" href="#postModal" class="btn btn-primary">Post a Comment</a><br><br>
 
 <%= render '/events/invite_form', :type => "LAN Party", :url => invite_event_path(@event) %>
 

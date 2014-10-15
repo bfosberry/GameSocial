@@ -1,6 +1,11 @@
 <h1 class="text-center">Chat Servers</h1>
 
 <%= grid(@chat_servers_grid) do |g|
+
+  g.blank_slate  do
+    content_tag :div, "No Chat Servers found", class: 'well'
+  end
+
   g.column name: 'Name', attribute: 'name' do |chat_server|
     chat_server.name
   end

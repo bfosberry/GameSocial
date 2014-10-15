@@ -1,4 +1,8 @@
 <%= grid(@game_events_grid) do |g|
+  g.blank_slate  do
+    content_tag :div, "No Events found", class: 'well'
+  end
+
   g.column name: 'Title', attribute: 'title' do |game_event|
     game_event.title
   end

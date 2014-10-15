@@ -24,6 +24,7 @@ class GameEventsController < ApplicationController
   # GET /game_events/1.json
   def show
     @post = Post.new({ :postable => @game_event })
+    @posts_grid  = initialize_grid(@game_event.posts, :include => [:user])
     @invite = Invite.new
   end
 

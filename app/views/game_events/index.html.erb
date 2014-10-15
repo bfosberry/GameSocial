@@ -1,6 +1,11 @@
 <h1 class="text-center">Events</h1>
       
 <%= grid(@game_events_grid) do |g|
+
+  g.blank_slate  do
+    content_tag :div, "No events found", class: 'well'
+  end
+  
   g.column name: 'Lan Party', model: Event, attribute: 'name' do |game_event|
     game_event.event_name 
   end
