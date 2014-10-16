@@ -60,10 +60,12 @@ class EventsController < ApplicationController
 
   # GET /events/1/join
   def join
+    puts request.referer
     user = User.find_by_id(params[:user_id]) || current_user
     enforce_ownership(user)
     user.join_event(@event)
-    redirect_to events_path, notice: 'Event joined.' 
+    return_url = request.referrer || events_path
+    redirect_to return_url, notice: 'Event joined.' 
   end
 
   # GET /events/1/leave
@@ -71,7 +73,8 @@ class EventsController < ApplicationController
     user = User.find_by_id(params[:user_id]) || current_user
     enforce_ownership(user)
     user.leave_event(@event)
-    redirect_to events_path, notice: 'Event left.' 
+    return_url = request.referrer || events_path
+    redirect_to return_url, notice: 'Event left.' 
   end
 
   # POST /events
