@@ -15,4 +15,10 @@
   g.column name: 'User', model: User, attribute: 'name' do |post|
     post.user_name
   end
+
+  g.column do |post|
+    if current_user.owns(post)
+      link_to 'Delete', post, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    end
+  end
 end -%>

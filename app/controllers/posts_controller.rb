@@ -75,8 +75,9 @@ class PostsController < ApplicationController
   def destroy
     enforce_ownership(@post)
     @post.destroy
+    return_url = request.referrer || posts_path
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to return_url }
       format.json { head :no_content }
     end
   end
