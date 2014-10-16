@@ -23,7 +23,7 @@
 
 var ready;
 ready = function() {
-  $('.datetimepicker').datetimepicker({ minDate:0, format: 'F jS, Y G:m', inline: true})
+  $('.datetimepicker').datetimepicker({ minDate:0, format: 'Y-m-d H:m', inline: true})
 };
 
 $(document).ready(ready);

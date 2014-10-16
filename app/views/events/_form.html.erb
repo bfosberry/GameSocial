@@ -24,12 +24,12 @@
 
   <div class="form-group">
     <%= f.label :start_time, :class => "help-inline" %><br>
-    <%= f.text_field(:start_time, :class => "datetimepicker form-control") %>
+    <%= f.text_field(:start_time, :value=> @event.start_time.strftime('%Y-%m-%d %H:%m'), :class => "datetimepicker form-control") %>
   </div>
 
   <div class="form-group">
     <%= f.label :end_time, :class => "help-inline" %><br>
-    <%= f.text_field(:end_time, :class => "datetimepicker form-control") %>
+    <%= f.text_field(:end_time, :value=> @event.end_time.strftime('%Y-%m-%d %H:%m'), :class => "datetimepicker form-control") %>
   </div>
 
   <div class="form-group">
