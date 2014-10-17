@@ -17,7 +17,7 @@
   end
 
   g.column do |post|
-    if current_user.owns(post)
+    if current_user && current_user.owns(post)
       link_to 'Delete', post, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
     end
   end

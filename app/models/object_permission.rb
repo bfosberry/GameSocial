@@ -11,7 +11,7 @@ class ObjectPermission < ActiveRecord::Base
   end
   
   def is_visible_to?(user)
-    return true if user.is_admin?
+    return true if user && user.is_admin?
     case permission_type
     when "Public"
     	true
@@ -25,7 +25,8 @@ class ObjectPermission < ActiveRecord::Base
     end
   end
 
-  def has_friend_in?
+  def has_friend_in?(user, object)
+    return false unless user && owner
     !(user.friends & get_user_list(object)).empty?
   end
 
@@ -38,6 +39,7 @@ class ObjectPermission < ActiveRecord::Base
   end
 
   def are_friends?(user, owner)
+    return false unless user && owner
   	user.has_friend?(owner)
   end
 end

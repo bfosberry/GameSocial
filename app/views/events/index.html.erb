@@ -31,21 +31,23 @@
   end
   
   g.column do |event|
-    if current_user.attending_event?(event)
-      link_to 'Leave', leave_event_path(event), :class => "btn btn-warning"
-    else
-      link_to 'Join', join_event_path(event), :class => "btn btn-success"
+    if current_user
+      if current_user.attending_event?(event)
+        link_to 'Leave', leave_event_path(event), :class => "btn btn-warning"
+      else
+        link_to 'Join', join_event_path(event), :class => "btn btn-success"
+      end
     end
   end
 
   g.column do |event|
-    if current_user.owns(event)
+    if current_user && current_user.owns(event)
       link_to 'Edit', edit_event_path(event), :class => "btn btn-primary" 
     end
   end
 
   g.column do |event|
-    if current_user.owns(event)
+    if current_user && current_user.owns(event)
       link_to 'Destroy', event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
     end
   end

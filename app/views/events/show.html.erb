@@ -28,10 +28,12 @@
   <tr>
     <td><h5 class="text-center">Join Lan Party</h5></td>
     <td><p class="text-center">
-    <% if current_user.attending_event?(@event) %>
-      <%= link_to 'Leave', leave_event_path(@event), :class => "btn btn-warning" %>
-    <% else %>
-      <%= link_to 'Join', join_event_path(@event), :class => "btn btn-success" %>
+    <% if current_user %>
+      <% if current_user.attending_event?(@event) %>
+        <%= link_to 'Leave', leave_event_path(@event), :class => "btn btn-warning" %>
+      <% else %>
+        <%= link_to 'Join', join_event_path(@event), :class => "btn btn-success" %>
+      <% end %>
     <% end %>
   </p></td>
   </tr>
@@ -39,15 +41,19 @@
     <td><h5 class="text-center">Calendar</h5></td>
     <td><p class="text-center"><%= link_to "ICal", event_ics_path(@event), :class => "btn btn-primary" %></p></td>
   </tr>
+  <% if current_user %>
   <tr>
     <td><h5 class="text-center">Invite to LAN Party</h5></td>
     <td><p class="text-center"><a data-toggle="modal" href="#inviteModal" class="btn btn-primary">Invite</a></p></td>
   </tr>
+  <% end %>
 </table>
 
 <h2>Events</h2>
 <%= render "game_events/game_events", :game_events => @event.game_events %>
+<% if current_user %>
 <%= link_to 'Create Game Event', new_game_event_for_event_path(@event), :class => "btn btn-success" %><br><br>
+<% end %>
 
 <h2>Attending</h2>
 <div class="row">
@@ -63,10 +69,11 @@
 </div>
 
 <h2>Comments</h2>
+<% if current_user %>
 <%= render "posts/posts", :object => @event %>
 <a data-toggle="modal" href="#postModal" class="btn btn-primary">Post a Comment</a><br><br>
-
-<% if current_user.owns(@event) %>
+<% end %>
+<% if current_user && current_user.owns(@event) %>
   <%= link_to 'Edit', edit_event_path(@event), :class => "btn btn-primary" %> |
 <% end %>
 <%= link_to 'Back', events_path, :class => "btn btn-warning" %>

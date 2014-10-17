@@ -39,6 +39,7 @@
     <td><h5 class="text-center">End Time</h5></td>
     <td><p class="text-center"><%= @game_event.formatted_end_time %></p></td>
   </tr>
+  <% if current_user %>
   <tr>
     <td><h5 class="text-center">Attend Event</h5></td>
     <td><p class="text-center">
@@ -49,11 +50,13 @@
     <% end %>
   </p></td>
   </tr>
+
   <tr>
     <td><h5 class="text-center">Invite to Event</h5></td>
     <td><p class="text-center"><a data-toggle="modal" href="#inviteModal" class="btn btn-primary">Invite</a></p></td>
 
   </tr>
+  <% end %>
 </table>
 
 <h2>Attending</h2>
@@ -71,9 +74,11 @@
 
 <h2>Comments</h2>
 <%= render "posts/posts", :object => @game_event %>
+<% if current_user %>
 <a data-toggle="modal" href="#postModal" class="btn btn-primary">Post a Comment</a><br><br>
+<% end %>
 
-<% if current_user.owns(@game_event) %>
+<% if current_user && current_user.owns(@game_event) %>
   <%= link_to 'Edit', edit_game_event_path(@game_event), :class => "btn btn-primary" %> |
 <% end %>
 <%= link_to 'Back', game_events_path, :class => "btn btn-warning" %>

@@ -1,66 +1,63 @@
 <p id="notice"><%= notice %></p>
 
-<% if is_admin? %>
-<p>
-  <strong>Provider:</strong>
-  <%= @user.provider %>
-</p>
 
-<p>
-  <strong>Uid:</strong>
-  <%= @user.uid %>
-</p>
- <% end %>
+<table class="table table-condensed">
+  <tr>
+    <td><h5 class="text-center">Name</h5></td>
+    <td><p class="text-center"><%= @user.name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Email</h5></td>
+    <td><p class="text-center"><%= @user.email %></p></td>
+  </tr>
+  <% if is_admin? %>
+  <tr>
+    <td><h5 class="text-center">Provider</h5></td>
+    <td><p class="text-center"><%= @user.provider %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Uid</h5></td>
+    <td><p class="text-center"><%= @user.uid %></p></td>
+  </tr>
+  <% end %>
+</table>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<h1 class="text-center">Your Games</h1>
+<a data-toggle="modal" href="#gameModal" class="btn btn-primary">Add a Non-Steam Game</a><br>
+<%= grid(@games_grid) do |g|
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  g.blank_slate  do
+    content_tag :div, "No Games found", class: 'well'
+  end
+
+  g.column name: 'Icon', attribute: 'logo_url', filter: false do |game|
+    image_tag(game.logo_url, :crop => :fill)
+  end
+
+  g.column name: 'Name', attribute: 'name' do |game|
+    game.name
+  end
+end -%>
 
 <% if @user.friendships.size > 0 %>
 <h2>Friends</h2>
-<ul>
-  <% for friendship in @user.friendships %>
-    <li>
-      <%= link_to friendship.friend_name, friendship, :method => :get %>
-    </li>
+<div class="row">
+  <% for i in 0..5 %>
+    <div class="col-lg-2 col-md-2">
+      <%  @user.friendships.each_with_index do |u, index| %>
+        <% if index % 6 == i %>
+          <%= render "users/user", :u => u %>
+        <% end %>
+      <% end %>
+    </div>
   <% end %>
-</ul>
+</div>
 <% end %>
 
-<% if @user.latest_location %>
-  <% if @user.latest_location.game %>
-    <h2>This user was last playing</h2>
-    <ul>
-      <li>Game: <%= @user.latest_location.game_name %></li>
-      <li>Game Server: <%= @user.latest_location.game_social_server_name %></li>
-      <li>Chat Server: <%= @user.latest_location.chat_server_name %></li>
-      <li>Last seen: <%= @user.latest_location.updated_at %></li>
-    </ul>
-  <% else %>
-    <h2>This user is not in-game</h2>
-  <% end %>
+<% if current_user == @user %>
+  <%= link_to 'Edit', edit_user_path(@user), :class => "btn btn-primary" %> |
 <% end %>
+<%= link_to 'Back', root_path, :class => "btn btn-warning" %>
+</div>
 
-<% if @user.alerts.size > 0 %>
-<h2>Activity</h2>
-<table>
-  <tr>
-    <th>Alert</th>
-    <th>Link<th>
-  </tr>
-  <% for alert in @user.alerts %>
-    <tr>
-      <td><%= alert.title %></td>
-      <td><%= link_to 'Show', alert_path(alert) %></td>
-    </tr>
-  <% end %>
-<table
-<% end %>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= render '/games/game_form' %>

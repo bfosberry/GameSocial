@@ -54,6 +54,14 @@ class User < ActiveRecord::Base
     events.each {|e| e.export_event }
     game_events.each {|e| e.export_game_event }
   end
+
+  def games_not_owned
+    if games.size > 0
+      Game.where("id NOT IN (?)", games.map{|g| g.id})
+    else 
+      Game.all
+    end
+  end
  
   def sanatized_name
     name.blank? ? "(Unknown)" : name

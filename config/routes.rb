@@ -47,6 +47,7 @@ GameSocial::Application.routes.draw do
 
   match 'users/sync', to: 'users#sync', as: 'sync_users', via:[:get]
   match 'users/sync_location', to: 'users#sync_location', as: 'sync_users_location', via:[:get]
+  match 'users/:id/games', to: 'users#add_game', as: 'user_game_path', via: [:post]
   resources :users do
     get :autocomplete_user_name, :on => :collection
   end
@@ -128,15 +129,15 @@ GameSocial::Application.routes.named_routes.module.module_eval do
   end
 
   def event_ics_path(*args)
-    "#{event_path(args.first.id)}.ics?auth_token=#{current_user.remember_token}&noCache"
+    "#{event_path(args.first.id)}.ics?auth_token=#{current_user.remember_token}&noCache" if current_user
   end
 
   def events_ics_path(*args)
-    "#{events_path}.ics?auth_token=#{current_user.remember_token}&noCache"
+    "#{events_path}.ics?auth_token=#{current_user.remember_token}&noCache"if current_user  
   end
 
   def game_events_ics_path(*args)
-    "#{game_events_path}.ics?auth_token=#{current_user.remember_token}&noCache"
+    "#{game_events_path}.ics?auth_token=#{current_user.remember_token}&noCache" if current_user
   end
 
   def new_source_game_social_server_path(*args)
@@ -149,6 +150,10 @@ GameSocial::Application.routes.named_routes.module.module_eval do
 
   def invite_event_path(*args)
     "#{event_path(args.first.id)}/invite"
+  end
+
+  def user_game_path(*args)
+    "#{user_path(args.first.id)}/games"
   end
 end
 
