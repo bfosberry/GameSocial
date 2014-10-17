@@ -23,7 +23,7 @@ class EventsController < ApplicationController
     @invite = Invite.new
     @post = Post.new({ :postable => @event })
     @posts_grid  = initialize_grid(@event.posts, :include => [:user])
-    @game_events_grid = initialize_grid(@event.game_events, :include => [:game])
+    @game_events_grid = initialize_grid(all_visible(GameEvent).where("event_id = ?", @event.id), :include => [:game])
     respond_to do |format|
       format.html {}
       format.ics do
