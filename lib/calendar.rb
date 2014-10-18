@@ -73,8 +73,8 @@ class Calendar
   end
 
   def initialize_calendar
-  	Google::Calendar.new(:username => ENV["CALENDAR_USERNAME"], 
-  		                 :password => ENV["CALENDAR_PASSWORD"], 
+  	Google::Calendar.new(:username => SECRETS["calendar_username"], 
+  		                 :password => SECRETS["calendar_password"], 
   		                 :app_name => APP_NAME, 
   		                 :calendar => CALENDAR_NAME)
   end
