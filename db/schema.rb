@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141018025519) do
+ActiveRecord::Schema.define(version: 20141018145146) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(version: 20141018025519) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "provider_id"
+    t.string   "provider"
   end
 
   add_index "games", ["name"], name: "index_games_on_name"

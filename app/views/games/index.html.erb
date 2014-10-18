@@ -6,6 +6,10 @@
     image_tag(game.logo_url, :crop => :fill)
   end
 
+  g.column name: 'Type', attribute: 'provider' do |game|
+    game.provider
+  end
+
   g.column name: 'Name', attribute: 'name' do |game|
     game.name
   end

@@ -16,6 +16,7 @@ module Importers
             g = steam_provider.games[k]
             game = Game.create({
               :provider_id => k,
+              :provider => "steam",
               :name => g.name,
               :store_url => g.store_url,
               :logo_url => g.logo_url,
