@@ -2,7 +2,7 @@ require 'google_calendar'
 
 class Calendar
   CALENDAR_NAME = "gamesocialcalendar_#{Rails.env}"
-  APP_NAME= "GameSocial"
+  APP_NAME = "GameSocial"
 
   attr_accessor :object
 
