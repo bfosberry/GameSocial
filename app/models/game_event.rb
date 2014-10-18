@@ -28,10 +28,13 @@ class GameEvent < ActiveRecord::Base
   before_destroy :delete_game_event
   after_commit :export_game_event, :on => [:create, :update]
 
-  default_scope order('start_time ASC')
+  default_scope order('game_start_time ASC')
 
   validate :valid_length?
-  
+
+  alias_attribute :start_time, :game_start_time
+  alias_attribute :end_time, :game_end_time
+
   def valid_length?
     if start_time >= end_time
       errors.add(:end_time, 'must occur after start_time')

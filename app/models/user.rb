@@ -175,7 +175,7 @@ class User < ActiveRecord::Base
   end
 
   def upcoming_game_events
-    game_events.where("end_time > ?", DateTime.now)
+    game_events.where("game_end_time > ?", DateTime.now)
   end
   
   private

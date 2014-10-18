@@ -30,11 +30,11 @@
     game_event.chat_server_name
   end
   
-  g.column name: 'Start Time', attribute: 'start_time' do |game_event|
+  g.column name: 'Start Time', attribute: 'game_start_time' do |game_event|
     game_event.formatted_start_time
   end
 
-  g.column name: 'End Time', attribute: 'end_time' do |game_event|
+  g.column name: 'End Time', attribute: 'game_end_time' do |game_event|
     game_event.formatted_end_time
   end
   

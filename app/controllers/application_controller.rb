@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
       #elsif model.method_defined? "user"
       # model.all.select{ |m| m.user == current_user }
       else 
-        model.all
+        model
       end
     end
 
