@@ -1,3 +1,5 @@
+require 'ical'
+
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy, :join, :leave, :invite, :send_invite]
   before_filter :spoof_login, only: [:show, :index]
