@@ -17,6 +17,7 @@ gem "wice_grid", '3.4.2'
 gem 'jquery-ui-rails'
 gem 'rails3-jquery-autocomplete'
 gem 'rails_12factor'
+gem 'runtimeerror_notifier'
 
 gem 'google_calendar', :git =>  'git://github.com/bfosberry/google_calendar.git', :branch => "master"
 
