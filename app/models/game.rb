@@ -7,7 +7,7 @@ class Game < ActiveRecord::Base
   scope :steam, -> { where(provider: "steam")}
 
   def self.type_fetchers(query = Game.all)
-  	query.select("provider").order("provider").distinct.map {|g| GameTypeFetcher.new(query, g.provider)}
+  	query.unscoped.select("provider").order("provider").distinct.map {|g| GameTypeFetcher.new(query, g.provider)}
   end
 
   def self.types
