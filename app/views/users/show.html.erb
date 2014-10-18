@@ -23,7 +23,7 @@
 </table>
 
 <h1 class="text-center">Your Games</h1>
-<a data-toggle="modal" href="#gameModal" class="btn btn-primary">Add a Non-Steam Game</a><br>
+<a data-toggle="modal" href="#steamGameModal" class="btn btn-primary">Manually add a Steam or Board Game</a>
 <%= grid(@games_grid) do |g|
 
   g.blank_slate  do
@@ -31,7 +31,7 @@
   end
 
   g.column name: 'Icon', attribute: 'logo_url', filter: false do |game|
-    image_tag(game.logo_url, :crop => :fill)
+    image_tag(game.logo_url, :crop => :fill, :class => "game_image")
   end
 
   g.column name: 'Type', attribute: 'provider' do |game|

@@ -17,19 +17,22 @@
     <%= f.label :name, :class => "help-inline" %><br>
     <%= f.text_field :name, :class => "span5" %>
   </div>
-
 <br>
 
   <div class="input">
     <%= f.label :store_url, :class => "help-inline" %><br>
     <%= f.text_area :store_url, :class => "span5" %>
   </div>
-
 <br>
 
   <div class="input-prepend">
     <%= f.label :description, :class => "help-inline" %><br>
     <%= f.text_area :description, :class => "span5", :rows => "5" %>
+  </div>
+
+  <div class="input-prepend">
+    <%= f.label :type, :class => "help-inline" %><br>
+    <%= f.select :provider, Game.types, :class => "span5" %>
   </div>
 
 <br>
