@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   skip_before_filter :verify_authenticity_token  
   before_filter :enforce_login
-  before_filter :enforce_admin, except: [:show]
+  before_filter :enforce_admin, except: [:show, :new]
 
   # GET /games
   # GET /games.json
@@ -32,7 +32,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.html { redirect_to current_user, notice: 'Game was successfully created.' }
         format.json { render action: 'show', status: :created, location: @game }
       else
         format.html { render action: 'new' }
@@ -73,6 +73,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:name, :store_url, :description, :logo_url, :provider_id)
+      params.require(:game).permit(:name, :store_url, :description, :logo_url, :provider_id, :provider)
     end
 end

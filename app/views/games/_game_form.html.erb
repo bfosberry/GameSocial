@@ -1,4 +1,4 @@
-<div class="modal" id="<%= name %>">
+<div class="modal" id="gameModal">
   <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -8,13 +8,15 @@
         <%= form_for(@game, :url => user_game_path(@user), :html => {:class => "form-horizontal"}) do |f| %>
 
         <div class="modal-body">
-          <p>Your Steam account is synced every time you log in, but you want to add a game external to steam, you can do so here.</p>
+          <p>Your Steam account is synced every time you log in, but you want to add a game your own outside steam, or a board game, you can do so here.</p>
 
           <p>Select a game to add</p>
           <div>
             <%= f.label "Game", :class => "help-inline" %><br>
-            <%= f.collection_select :id, @user.games_not_owned, :id, :name, {}, {:class => "form-control"} %>
+            <%= f.grouped_collection_select :id, Game.type_fetchers(@user.games_not_owned), :fetch, :type, :id, :name,  {}, {:class => "form-control"} %>
           </div>
+
+           <p>Don't see the game you wanted to add? Click <%= link_to "here", new_game_path %></p>
         </div>
         <div class="modal-footer">
           <a href="#" data-dismiss="modal" class="btn">Close</a>

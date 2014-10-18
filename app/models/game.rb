@@ -6,25 +6,33 @@ class Game < ActiveRecord::Base
   scope :board, -> { where(provider: "board")}
   scope :steam, -> { where(provider: "steam")}
 
-  def self.type_fetchers
-  	Game.select("provider").order("provider").distinct.map {|g| GameTypeFetcher.new(g.provider)}
+  def self.type_fetchers(query = Game.all)
+  	query.select("provider").order("provider").distinct.map {|g| GameTypeFetcher.new(query, g.provider)}
   end
 
   def self.types
-  	["steam", "board"]
+    type_dict.keys
+  end
+
+  def self.type_dict
+    { 
+      "steam"  => "Steam Games",
+      "board" => "Board Games"
+    }
   end
 
   class GameTypeFetcher
-    def initialize(type)
+    def initialize(query, type)
+      @query = query
       @type = type
     end
 
     def fetch
-      Game.where("provider = ?", @type)
+      @query.where("provider = ?", @type)
     end
 
     def type
-      @type
+      Game.type_dict[@type]
     end
   end
 end
