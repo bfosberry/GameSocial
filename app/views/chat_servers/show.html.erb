@@ -1,49 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Type:</strong>
-  <%= @chat_server.server_type %>
-</p>
+<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @chat_server.user.name %>
-</p>
-
-<p>
-  <strong>Ip:</strong>
-  <%= @chat_server.ip %>
-</p>
-
-<p>
-  <strong>Port:</strong>
-  <%= @chat_server.port %>
-</p>
-
-<p>
-  <strong>Public:</strong>
-  <%= @chat_server.public %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @chat_server.name %>
-</p>
-
-<p>
-  <strong>Password:</strong>
-  <%= @chat_server.password %>
-</p>
-
-<p>
-  <strong>Room:</strong>
-  <%= @chat_server.room %>
-</p>
-
-<p>
-  <strong>Room password:</strong>
-  <%= @chat_server.room_password %>
-</p>
+<table class="table table-condensed">
+  <tr>
+    <td><h5 class="text-center">Name</h5></td>
+    <td><p class="text-center"><%= @chat_server.name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Host</h5></td>
+    <td><p class="text-center"><%= @chat_server.ip %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Port</h5></td>
+    <td><p class="text-center"><%= @chat_server.port %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Type</h5></td>
+    <td><p class="text-center"><%= @chat_server.server_type %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Password</h5></td>
+    <td><p class="text-center"><%= @chat_server.password %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Room</h5></td>
+    <td><p class="text-center"><%= @chat_server.room %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Room Password</h5></td>
+    <td><p class="text-center"><%= @chat_server.room_password %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Launch Chat Server</h5></td>
+    <td><p class="text-center"><%= link_to 'Join Chat Server', @chat_server.launch_url(current_user), :class => "btn btn-success" %>
+   </p></td>
+  </tr>
+</table>
 
 <% if current_user.owns(@chat_server) %>
   <%= link_to 'Edit', edit_chat_server_path(@chat_server), :class => "btn btn-primary" %> |

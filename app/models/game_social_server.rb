@@ -24,4 +24,8 @@ class GameSocialServer < ActiveRecord::Base
     self.latency = server.ping
   rescue;
   end
+
+  def launch_url
+    "steam://connect/#{ip}:#{port}"
+  end
 end

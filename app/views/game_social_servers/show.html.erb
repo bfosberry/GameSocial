@@ -1,59 +1,56 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @game_social_server.name %>
-</p>
-
-<p>
-  <strong>Ip:</strong>
-  <%= @game_social_server.ip %>
-</p>
-
-<p>
-  <strong>Port:</strong>
-  <%= @game_social_server.port %>
-</p>
-
-<p>
-  <strong>Game:</strong>
-  <%= @game_social_server.game_name %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @game_social_server.user_name %>
-</p>
-
-<p>
-  <strong>Max players:</strong>
-  <%= @game_social_server.max_players %>
-</p>
-
-<p>
-  <strong>Current players:</strong>
-  <%= @game_social_server.current_players %>
-</p>
-
-<p>
-  <strong>Latency:</strong>
-  <%= @game_social_server.latency %>
-</p>
-
-<p>
-  <strong>Current map:</strong>
-  <%= @game_social_server.current_map %>
-</p>
-
-<p>
-  <strong>Match type:</strong>
-  <%= @game_social_server.match_type %>
-</p>
-
-<p>
-  <strong>Region:</strong>
-  <%= @game_social_server.region %>
-</p>
+<table class="table table-condensed">
+  <tr>
+    <td><h5 class="text-center">Name</h5></td>
+    <td><p class="text-center"><%= @game_social_server.name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Host</h5></td>
+    <td><p class="text-center"><%= @game_social_server.ip %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Port</h5></td>
+    <td><p class="text-center"><%= @game_social_server.port %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Game</h5></td>
+    <td><p class="text-center"><%= @game_social_server.game_name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Maximum Players</h5></td>
+    <td><p class="text-center"><%= @game_social_server.max_players %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Current Players</h5></td>
+    <td><p class="text-center"><%= @game_social_server.current_players %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Latency</h5></td>
+    <td><p class="text-center"><%= @game_social_server.latency %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Current Map</h5></td>
+    <td><p class="text-center"><%= @game_social_server.current_map %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Match Type</h5></td>
+    <td><p class="text-center"><%= @game_social_server.match_type %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Region</h5></td>
+    <td><p class="text-center"><%= @game_social_server.region %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Owner</h5></td>
+    <td><p class="text-center"><%= @game_social_server.user_name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Launch Game Server</h5></td>
+    <td><p class="text-center"><%= link_to 'Join Game Server', @game_social_server.launch_url, :class => "btn btn-success" %>
+   </p></td>
+  </tr>
+</table>
 
 <% if current_user.owns(@game_social_server) %>
   <%= link_to 'Edit', edit_event_path(@game_social_server), :class => "btn btn-primary" %> |

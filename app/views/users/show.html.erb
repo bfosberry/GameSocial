@@ -44,7 +44,7 @@ end -%>
 <div class="row">
   <% for i in 0..5 %>
     <div class="col-lg-2 col-md-2">
-      <%  @user.friendships.each_with_index do |u, index| %>
+      <%  @user.friends.each_with_index do |u, index| %>
         <% if index % 6 == i %>
           <%= render "users/user", :u => u %>
         <% end %>

@@ -1,3 +1,4 @@
+require "addressable/uri"
 class ChatServer < ActiveRecord::Base
   attr_accessor :username
   belongs_to :user
@@ -11,5 +12,19 @@ class ChatServer < ActiveRecord::Base
   
   def self.server_types
   	["Teamspeak", "Mumble", "Ventrillo"]
+  end
+
+  def launch_url(user)
+    if server_type == "Teamspeak"
+      uri = Addressable::URI.new
+      options = {}
+      options[:port] = port
+      options[:nickname] = user.name
+      options[:password] = password unless password.blank?
+      options[:channel] = room unless room.blank?
+      options[:channelpassword] = room_password unless room_password.blank?
+      uri.query_values = options
+      "ts3server://#{ip}?#{uri.query}"
+    end
   end
 end
