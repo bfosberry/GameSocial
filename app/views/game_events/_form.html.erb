@@ -14,7 +14,7 @@
 
   <div class="form-group">
     <%= f.label :event_id, :class => "help-inline" %><br>
-    <%= f.collection_select :event_id, Event.all, :id, :name,  {:selected => @game_event.event_id}, {:class => "form-control"} %>
+    <%= f.collection_select :event_id, Event.all, :id, :name,  {:selected => @game_event.event_id, :include_blank => true}, {:class => "form-control"} %>
   </div>
   <div class="form-group">
     <%= f.label :title, :class => "help-inline" %><br>
@@ -41,10 +41,11 @@
   <div class="form-group">
     <%= f.label :game_id, :class => "help-inline" %><br>
     <%= f.grouped_collection_select :game_id, Game.type_fetchers, :fetch, :type, :id, :name,  {:selected => @game_event.game_id}, {:class => "form-control"} %>
+      <p>Don't see the game you wanted to add? Click <%= link_to "here", new_game_path, :class => "btn btn-primary btn-sm" %></p>
   </div>
   <div class="form-group">
     <%= f.label :game_social_server_id, "Game Server", :class => "help-inline" %><br>
-    <%= f.collection_select :game_social_server_id, GameSocialServer.all, :id, :name,  {:selected => @game_event.game_social_server_id}, {:class => "form-control", :include_blank => true} %>
+    <%= f.collection_select :game_social_server_id, GameSocialServer.all, :id, :name,  {:selected => @game_event.game_social_server_id, :include_blank => true}, {:class => "form-control"} %>
   </div>
   <div class="form-group">
     <%= f.label :chat_server_id, :class => "help-inline" %><br>

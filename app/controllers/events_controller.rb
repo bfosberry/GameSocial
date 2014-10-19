@@ -23,6 +23,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    enforce_visibility(@event)
     @invite = Invite.new
     @post = Post.new({ :postable => @event })
     @posts_grid  = initialize_grid(@event.posts, :include => [:user])

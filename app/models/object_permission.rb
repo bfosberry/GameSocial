@@ -3,7 +3,7 @@ class ObjectPermission < ActiveRecord::Base
 	belongs_to :permissible_object, :polymorphic => true
 
 	def self.permission_types
-	  ["Public", "Friends"]
+	  ["Private", "Public", "Friends"]
 	end
 
 	def self.event_permission_types
@@ -15,6 +15,8 @@ class ObjectPermission < ActiveRecord::Base
     case permission_type
     when "Public"
     	true
+    when "Private"
+      user == permissible_object.user
     when "Friends"
     	are_friends?(user, permissible_object.user)
     when "Friends + Invites"

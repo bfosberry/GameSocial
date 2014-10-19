@@ -2,7 +2,7 @@ class GameEventsController < ApplicationController
   before_action :set_game_event, only: [:show, :edit, :update, :destroy, :join, :leave, :invite, :send_invite]
   before_filter :spoof_login, only: [:index]
   before_filter :enforce_login, only:  [:edit, :update, :destroy, :join, :leave, :invite, :send_invite]
-
+  
   # GET /game_events
   # GET /game_events.jso
   def index
@@ -24,6 +24,7 @@ class GameEventsController < ApplicationController
   # GET /game_events/1
   # GET /game_events/1.json
   def show
+    enforce_visibility(@game_event)
     @post = Post.new({ :postable => @game_event })
     @posts_grid  = initialize_grid(@game_event.posts, :include => [:user])
     @invite = Invite.new

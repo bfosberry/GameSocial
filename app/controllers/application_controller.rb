@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
     send_unauthorized unless validate_ownership(object)
   end
 
+  def enforce_visibility(object)
+    send_unauthorized unless is_visible?(object)
+  end
+
   def spoof_login
     user = User.find_by_remember_token(params[:auth_token])
     sign_in user if user
@@ -49,5 +53,13 @@ class ApplicationController < ActionController::Base
     def all_visible(model)
       ids = model.select{|ge| ge.is_visible_to?(current_user)}.map{|ge| ge.id}  
       model.where(id: ids)
+    end
+
+    def is_visible?(object)
+       if object.respond_to?(:is_visible_to?)
+         object.is_visible_to?(current_user)
+       else
+        false
+      end
     end
 end
