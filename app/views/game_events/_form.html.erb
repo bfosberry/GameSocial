@@ -44,11 +44,11 @@
   </div>
   <div class="form-group">
     <%= f.label :game_social_server_id, "Game Server", :class => "help-inline" %><br>
-    <%= f.collection_select :game_social_server_id, GameSocialServer.all, :id, :name,  {:selected => @game_event.game_social_server}, {:class => "form-control", :include_blank => true} %>
+    <%= f.collection_select :game_social_server_id, GameSocialServer.all, :id, :name,  {:selected => @game_event.game_social_server_id}, {:class => "form-control", :include_blank => true} %>
   </div>
   <div class="form-group">
     <%= f.label :chat_server_id, :class => "help-inline" %><br>
-    <%= f.collection_select :chat_server_id, ChatServer.all, :id, :name,  {:selected => @game_event.chat_server, :include_blank => true}, {:class => "form-control"} %>
+    <%= f.collection_select :chat_server_id, ChatServer.all, :id, :name,  {:selected => @game_event.chat_server_id, :include_blank => true}, {:class => "form-control"} %>
   </div>
   <div class="form-group">
     <%= f.fields_for :object_permission do |builder| %>
