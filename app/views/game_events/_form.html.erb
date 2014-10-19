@@ -20,7 +20,7 @@
     <%= f.label :title, :class => "help-inline" %><br>
     <%= f.text_field :title, :class => "form-control"  %>
   </div>
-  <% if current_user.is_admin? %>
+  <% if current_user && current_user.is_admin? %>
     <div class="form-group">
       <%= f.label "Event Owner", :class => "help-inline" %><br>
       <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => (@game_event.user_id || current_user.id)}, {:class => "form-control"} %>
