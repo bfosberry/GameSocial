@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    @events = all_visible(Event)
     @events_grid = initialize_grid(all_visible(Event), 
                                    :include => [:user])
     respond_to do |format|
@@ -25,12 +26,13 @@ class EventsController < ApplicationController
     @invite = Invite.new
     @post = Post.new({ :postable => @event })
     @posts_grid  = initialize_grid(@event.posts, :include => [:user])
-    @game_events_grid = initialize_grid(all_visible(GameEvent).where("event_id = ?", @event.id), :include => [:game])
+    @game_events = all_visible(GameEvent).where("event_id = ?", @event.id)
+    @game_events_grid = initialize_grid(@game_events, :include => [:game])
     respond_to do |format|
       format.html {}
       format.ics do
         expires_now
-        render inline: Ical.ical_from_collection(@event.game_events).to_s
+        render inline: Ical.ical_from_collection(@game_events).to_s
       end 
     end
   end
