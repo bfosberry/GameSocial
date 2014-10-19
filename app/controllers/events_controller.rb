@@ -65,7 +65,6 @@ class EventsController < ApplicationController
 
   # GET /events/1/join
   def join
-    puts request.referer
     user = User.find_by_id(params[:user_id]) || current_user
     enforce_ownership(user)
     user.join_event(@event)

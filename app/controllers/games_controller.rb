@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   skip_before_filter :verify_authenticity_token  
   before_filter :enforce_login
-  before_filter :enforce_admin, except: [:show, :new]
+  before_filter :enforce_admin, except: [:show, :new, :create]
 
   # GET /games
   # GET /games.json
@@ -17,6 +17,7 @@ class GamesController < ApplicationController
 
   # GET /games/new
   def new
+    session[:return_to] = request.referrer
     @game = Game.new
   end
 
@@ -31,7 +32,8 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to current_user, notice: 'Game was successfully created.' }
+        return_url = session.delete(:return_to) || games_path
+        format.html { redirect_to return_url, notice: 'Game was successfully created.' }
         format.json { render action: 'show', status: :created, location: @game }
       else
         format.html { render action: 'new' }
