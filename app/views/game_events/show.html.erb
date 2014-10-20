@@ -11,11 +11,11 @@
   </tr>
   <tr>
     <td><h5 class="text-center">Game Server</h5></td>
-    <td><p class="text-center"><%= link_to @game_event.game_social_server_name, @game_event.game_social_server %></p></td>
+    <td><p class="text-center"><%= link_to @game_event.game_social_server_name, @game_event.game_social_server if @game_event.game_social_server %></p></td>
   </tr>
   <tr>
     <td><h5 class="text-center">Chat Server</h5></td>
-    <td><p class="text-center"><%= link_to @game_event.chat_server_name, @game_event.chat_server %></p></td>
+    <td><p class="text-center"><%= link_to @game_event.chat_server_name, @game_event.chat_server if @game_event.chat_server %> </p></td>
   </tr>
   <tr>
     <td><h5 class="text-center">Owner</h5></td>
