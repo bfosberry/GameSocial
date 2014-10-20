@@ -13,7 +13,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :event_id, :class => "help-inline" %><br>
+    <%= f.label "LAN Party, :class => "help-inline" %><br>
     <%= f.collection_select :event_id, Event.all, :id, :name,  {:selected => @game_event.event_id, :include_blank => true}, {:class => "form-control"} %>
   </div>
   <div class="form-group">
