@@ -7,6 +7,10 @@
     game_event.title
   end
 
+  g.column name: 'Icon', filter: false do |game_event|
+    image_tag(game_event.game_logo_url, :crop => :fill, :class => "small_game_image")
+  end
+
   g.column name: 'Game', model: Game, attribute: 'name' do |game_event|
     game_event.game_name
   end

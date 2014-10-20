@@ -20,6 +20,7 @@ class GameEvent < ActiveRecord::Base
   delegate :name, :to => :event, :prefix => true, :allow_nil => true
   delegate :name, :to => :game_social_server, :prefix => true, :allow_nil => true
   delegate :name, :to => :chat_server, :prefix => true, :allow_nil => true
+  delegate :logo_url, :to => :game, :prefix => true, :allow_nil => true
 
   delegate :launch_url, :to => :game_social_server, :prefix => true, :allow_nil => true
   delegate :launch_url, :to => :chat_server, :prefix => true, :allow_nil => true

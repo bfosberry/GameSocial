@@ -28,7 +28,7 @@ class ObjectPermission < ActiveRecord::Base
   end
 
   def has_friend_in?(user, object)
-    return false unless user && owner
+    return false unless user && object
     !(user.friends & get_user_list(object)).empty?
   end
 
