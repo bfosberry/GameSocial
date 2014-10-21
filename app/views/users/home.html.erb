@@ -6,6 +6,8 @@
 
 <% unless signed_in? %><p>Sign in to use the application</p><% end %>
 
+<% unless Rails.env == "production" %><p><b>Warning: This is a non-production environment, data may be lost at any time. Please use this environment for testing only.</b></p><% end %>
+
 <% if signed_in? %>
 
 	<p id="notice"><%= notice %></p>
