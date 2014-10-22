@@ -2,6 +2,14 @@
 
 <table class="table table-condensed">
   <tr>
+    <td><h5 class="text-center">Title</h5></td>
+    <td><p class="text-center"><%= @game_event.title %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Description</h5></td>
+    <td><p class="text-center"><%= @game_event.description %></p></td>
+  </tr>
+  <tr>
     <td><h5 class="text-center">Event</h5></td>
     <td><p class="text-center"><%= @game_event.event_name %></p></td>
   </tr>
@@ -22,20 +30,16 @@
     <td><p class="text-center"><%= @game_event.user_name %></p></td>
   </tr>
   <tr>
-    <td><h5 class="text-center">Title</h5></td>
-    <td><p class="text-center"><%= @game_event.title %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Description</h5></td>
-    <td><p class="text-center"><%= @game_event.description %></p></td>
-  </tr>
-  <tr>
     <td><h5 class="text-center">Start Time</h5></td>
     <td><p class="text-center"><%= @game_event.formatted_start_time %></p></td>
   </tr>
   <tr>
     <td><h5 class="text-center">End Time</h5></td>
     <td><p class="text-center"><%= @game_event.formatted_end_time %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Visibility</h5></td>
+    <td><p class="text-center"><%= @game_event.object_permission.permission_type %></p></td>
   </tr>
   <% if current_user %>
   <tr>

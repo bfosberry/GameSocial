@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
   end
 
   def owns(object)
-    object.user == self
+    object.user == self || is_admin?
   end
 
   def ordered_alerts

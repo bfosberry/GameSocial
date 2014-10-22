@@ -25,6 +25,10 @@
     <td><h5 class="text-center">Owner</h5></td>
     <td><p class="text-center"><%= @event.user_name %></p></td>
   </tr>
+  <tr>
+    <td><h5 class="text-center">Visibility</h5></td>
+    <td><p class="text-center"><%= @event.object_permission.permission_type %></p></td>
+  </tr>
   <% if current_user %>
   <tr>
     <td><h5 class="text-center">Join Lan Party</h5></td>
@@ -50,7 +54,7 @@
 <h2>Events</h2>
 <%= render "game_events/game_events", :game_events => @event.game_events %>
 <% if current_user %>
-<%= link_to 'Create Game Event', new_game_event_for_event_path(@event), :class => "btn btn-success" %><br><br>
+<%= link_to 'Create Event', new_game_event_for_event_path(@event), :class => "btn btn-success" %><br><br>
 <% end %>
 
 <h2>Attending</h2>

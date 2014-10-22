@@ -32,6 +32,10 @@
     <td><p class="text-center"><%= @chat_server.room_password %></p></td>
   </tr>
   <tr>
+    <td><h5 class="text-center">Visibility</h5></td>
+    <td><p class="text-center"><%= @chat_server.object_permission.permission_type %></p></td>
+  </tr>
+  <tr>
     <td><h5 class="text-center">Launch Chat Server</h5></td>
     <td><p class="text-center"><%= link_to 'Join Chat Server', @chat_server.launch_url(current_user), :class => "btn btn-success" %>
    </p></td>
