@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  type: 
+  server_type: 
   user_id: 1
   ip: MyString
   port: 1
@@ -12,7 +12,7 @@ one:
   room_password: MyString
 
 two:
-  type: 
+  server_type: 
   user_id: 1
   ip: MyString
   port: 1

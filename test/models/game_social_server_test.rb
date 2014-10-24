@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GameServerTest < ActiveSupport::TestCase
+class GameSocialServerTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -8,8 +8,8 @@ one:
   game_social_server_id: 1
   chat_server_id: 1
   user_id: 1
-  start_time: 2013-10-07 22:02:21
-  end_time: 2013-10-07 22:02:21
+  game_start_time: 2013-10-07 22:02:21
+  game_end_time: 2013-10-07 22:02:21
 
 two:
   event_id: 1
@@ -19,5 +19,5 @@ two:
   game_social_server_id: 1
   chat_server_id: 1
   user_id: 1
-  start_time: 2013-10-07 22:02:21
-  end_time: 2013-10-07 22:02:21
+  game_start_time: 2013-10-07 22:02:21
+  game_end_time: 2013-10-07 22:02:21
