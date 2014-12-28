@@ -56,6 +56,7 @@ GameSocial::Application.routes.draw do
   resources :games
   root to: 'users#home'
   match 'auth/steam/callback', to: 'sessions#create', via: [:get, :post]
+  match 'auth/google_oauth2/callback', to: 'sessions#create', via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
 
   mount Sidekiq::Web => '/sidekiq'
