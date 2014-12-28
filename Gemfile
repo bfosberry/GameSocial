@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.0.0'
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+
 gem 'rails', '4.0.0'
 
 gem 'pg'
@@ -19,7 +19,7 @@ gem 'rails3-jquery-autocomplete'
 gem 'rails_12factor'
 gem 'runtimeerror_notifier'
 
-gem 'google_calendar', :git =>  'git://github.com/bfosberry/google_calendar.git', :branch => "master"
+gem 'google_calendar'
 
 group :development, :test do
  gem 'sqlite3'
