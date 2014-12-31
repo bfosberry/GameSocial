@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141228095021) do
+ActiveRecord::Schema.define(version: 20150101135123) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20141228095021) do
     t.datetime "token_expiry"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "events", force: true do |t|
@@ -221,21 +222,17 @@ ActiveRecord::Schema.define(version: 20141228095021) do
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "users", force: true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email"
     t.boolean  "admin"
     t.string   "remember_token"
     t.string   "password_digest"
     t.string   "status",          default: "Inactive"
+    t.string   "name"
+    t.string   "email"
     t.string   "avatar_url"
   end
 
-  add_index "users", ["name"], name: "index_users_on_name"
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
-  add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider"
 
 end

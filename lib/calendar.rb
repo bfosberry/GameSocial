@@ -73,9 +73,10 @@ class Calendar
   end
 
   def initialize_calendar
-  	Google::Calendar.new(:client_id => ENV['CLIENT_ID'],
-                         :client_secret => ENV['CLIENT_SECRET'],
-                         :calendar => ENV['CALENDAR_ID'],
-                         :redirect_url => "urn:ietf:wg:oauth:2.0:oob")
+    Google::Calendar.new(:client_id => ENV['GOOGLE_CLIENT_ID'],
+                         :client_secret => ENV['GOOGLE_CLIENT_SECRET'],
+                         :calendar => ENV['GOOGLE_CALENDAR_ID'],
+                         :redirect_url => "urn:ietf:wg:oauth:2.0:oob",
+                         :refresh_token  => ENV['GOOGLE_REFRESH_TOKEN'])
   end
 end
