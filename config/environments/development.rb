@@ -29,12 +29,12 @@ GameSocial::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              SECRETS['smtp_server'],
-    port:                 SECRETS['smtp_port'],
-    user_name:            SECRETS['smtp_username'],
-    password:             SECRETS['smtp_password'],
+    address:              ENV['SMTP_SERVER'],
+    port:                 ENV['SMTP_PORT'],
+    user_name:            ENV['SMTP_USERNAME'],
+    password:             ENV['SMTP_PASSWORD'],
     authentication:       'plain',
-    enable_starttls_auto: true  
+    enable_starttls_auto: true
   }
 
   config.action_mailer.default_url_options = { :host => "http://127.0.0.1:3000" }

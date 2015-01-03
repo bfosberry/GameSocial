@@ -7,8 +7,9 @@ class User < ActiveRecord::Base
   has_many :game_events
   has_many :events
   has_many :groups
-  has_and_belongs_to_many :user_groups, :join_table => "groups_users", :class_name => "Group"
+  has_many :credentials, :dependent => :destroy
 
+  has_and_belongs_to_many :user_groups, :join_table => "groups_users", :class_name => "Group"
   has_and_belongs_to_many :attending_events, class_name: "Event"
   has_and_belongs_to_many :attending_game_events, class_name: "GameEvent"
 
@@ -26,7 +27,6 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :object_permissions
 
-
 #  has_secure_password
 #  validates_confirmation_of :password
 
@@ -35,19 +35,15 @@ class User < ActiveRecord::Base
   before_save { |user| user.email = email.downcase if email }
   before_save :create_remember_token
 
-  def self.from_omniauth(auth)
-    user = where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
-    user.activate
-    user
-  end
-
-  def self.create_from_omniauth(auth)
-    create! do |user|
-      user.provider = "steam"
-      user.uid = auth["uid"]
-      user.name = auth["info"]["nickname"]
-      user.status = "Active"
+  def merge_credential(cred)
+    if cred.is_steam?
+      self.name = cred.nickname
+      self.avatar_url = cred.image_url
+    elsif cred.is_google?
+      self.email = cred.email
     end
+    self.credentials << cred unless self.credentials.include? cred
+    save
   end
 
   def update_events
@@ -85,6 +81,18 @@ class User < ActiveRecord::Base
 
   def in_group?(group)
     user_groups.include?(group)
+  end
+
+  def has_credential(provider)
+    !credentials.select {|c| c.provider == provider }.empty?
+  end
+
+  def credential(provider)
+    credentials.select {|c| c.provider == provider }.first
+  end
+
+  def google_refresh_token
+    credential("google_oauth2").refresh_token
   end
 
   def owns(object)

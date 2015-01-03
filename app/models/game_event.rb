@@ -29,7 +29,7 @@ class GameEvent < ActiveRecord::Base
   before_destroy :delete_game_event
   after_commit :export_game_event, :on => [:create, :update]
 
-  default_scope order('game_start_time ASC')
+  default_scope { order(game_start_time: :asc) }
 
   validate :valid_length?
 

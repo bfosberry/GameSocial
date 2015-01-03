@@ -60,6 +60,7 @@ gem 'therubyracer'
 
 #auth
 gem 'omniauth-steam'
+gem "omniauth-google-oauth2"
 
 gem 'httparty'
 

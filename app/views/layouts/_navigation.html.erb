@@ -20,20 +20,28 @@
     <% end %>
   </ul>
   <ul class="nav navbar-nav navbar-right">
-    <li>
-    <% if current_user %>
-      <p class="nav-button"><%= link_to "Sign out", signout_path, :class => "btn btn-danger"%></p>
-    <% else %>
-      <%= link_to image_tag("https://steamcommunity.com/public/images/signinthroughsteam/sits_small.png", :border=>0), "/auth/steam" %>
+    <% unless (current_user && current_user.has_credential("steam")) %>
+      <li>
+        <%= link_to image_tag("https://steamcommunity.com/public/images/signinthroughsteam/sits_small.png", :border=>0), "/auth/steam" %>
+      </li>
     <% end %>
-    </li>
+
+    <% unless (current_user && current_user.has_credential("google_oauth2")) %>
+      <li>
+        <%= link_to image_tag("https://developers.google.com/+/images/branding/sign-in-buttons/White-signin_Long_base_44dp.png", :border => 0, :style => "height:27px"), "/auth/google_oauth2" %>
+      </li>
+    <% end %>
+
     <% if current_user %>
       <li>
         <%= link_to(user_path(current_user), :id => "nav-button-container") do %>
           <button type="button" class="btn btn-info nav-button">
-            <span class="glyphicon glyphicon-user"></span><%= current_user.name %>
+            <span class="glyphicon glyphicon-user"></span><%= current_user.sanatized_name %>
           </button> 
         <% end %>
+      </li>
+      <li>
+        <p class="nav-button"><%= link_to "Sign out", signout_path, :class => "btn btn-danger"%></p>
       </li>
     <% end %>
   </ul>

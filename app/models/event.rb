@@ -17,7 +17,7 @@ class Event < ActiveRecord::Base
 
   after_commit :export_event, :on => [:create, :update]
 
-  default_scope order('start_time ASC')
+  default_scope { order(start_time: :asc) }
 
   validate :valid_length?
   validate :name, :presence => true

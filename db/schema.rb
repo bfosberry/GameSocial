@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141018145146) do
+ActiveRecord::Schema.define(version: 20150101135123) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -68,6 +68,21 @@ ActiveRecord::Schema.define(version: 20141018145146) do
   end
 
   add_index "chat_servers", ["user_id"], name: "index_chat_servers_on_user_id"
+
+  create_table "credentials", force: true do |t|
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "name"
+    t.string   "nickname"
+    t.string   "email"
+    t.string   "profile_url"
+    t.string   "image_url"
+    t.string   "refresh_token"
+    t.datetime "token_expiry"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
 
   create_table "events", force: true do |t|
     t.string   "name"
@@ -172,16 +187,8 @@ ActiveRecord::Schema.define(version: 20141018145146) do
     t.integer "user_id"
   end
 
-  create_table "groups", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "groups", ["name"], name: "index_groups_on_name"
-  add_index "groups", ["user_id"], name: "index_groups_on_user_id"
+# Could not dump table "groups" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "groups_users", force: true do |t|
     t.integer "group_id"
@@ -215,21 +222,17 @@ ActiveRecord::Schema.define(version: 20141018145146) do
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "users", force: true do |t|
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email"
     t.boolean  "admin"
     t.string   "remember_token"
     t.string   "password_digest"
     t.string   "status",          default: "Inactive"
+    t.string   "name"
+    t.string   "email"
     t.string   "avatar_url"
   end
 
-  add_index "users", ["name"], name: "index_users_on_name"
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
-  add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider"
 
 end

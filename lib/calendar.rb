@@ -1,7 +1,7 @@
 require 'google_calendar'
 
 class Calendar
-  CALENDAR_NAME = "gamesocialcalendar_#{Rails.env}"
+  CALENDAR_ID = ENV['CALENDAR_ID']
   APP_NAME = "GameSocial"
 
   attr_accessor :object
@@ -73,9 +73,10 @@ class Calendar
   end
 
   def initialize_calendar
-  	Google::Calendar.new(:username => SECRETS["calendar_username"], 
-  		                 :password => SECRETS["calendar_password"], 
-  		                 :app_name => APP_NAME, 
-  		                 :calendar => CALENDAR_NAME)
+    Google::Calendar.new(:client_id => ENV['GOOGLE_CLIENT_ID'],
+                         :client_secret => ENV['GOOGLE_CLIENT_SECRET'],
+                         :calendar => ENV['GOOGLE_CALENDAR_ID'],
+                         :redirect_url => "urn:ietf:wg:oauth:2.0:oob",
+                         :refresh_token  => ENV['GOOGLE_REFRESH_TOKEN'])
   end
 end
