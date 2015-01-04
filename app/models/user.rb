@@ -162,7 +162,7 @@ class User < ActiveRecord::Base
 
   def join_game_event(game_event)
     attending_game_events << game_event unless attending_game_event?(game_event)
-     game_event.export_game_event
+    game_event.export_game_event
   end
 
   def leave_game_event(game_event)

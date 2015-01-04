@@ -29,9 +29,9 @@ class Calendar
   	event.title = object.name
   	event.start_time = object.start_time
   	event.end_time = object.end_time
-  	event.content = object.description
+    event.description = object.description
   	event.attendees = build_attendees
-  	event.where = object.location
+    event.location = object.location
   	event.save
   	object.update_attribute(:uid, event.id) unless object.uid
     event
