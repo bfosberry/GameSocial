@@ -1,8 +1,16 @@
 require 'google_calendar'
 
 class Calendar
-  CALENDAR_ID = ENV['CALENDAR_ID']
   APP_NAME = "GameSocial"
+  @@refresh_token = ENV['GOOGLE_REFRESH_TOKEN']
+
+  def self.refresh_token=(token)
+    @@refresh_token = token
+  end
+
+  def self.refresh_token
+    @@refresh_token
+  end
 
   attr_accessor :object
 
@@ -11,14 +19,14 @@ class Calendar
   end
 
   def default_reminders
-  	 [{method: 'email', minutes: 10}, 
-  	  {method: 'alert', minutes: 5}]
+    { 'useDefault'  => false,
+      'overrides' => [{'minutes' => 5, 'method' => "popup"},
+                      {'minutes' => 10, 'method' => "email"}]}
   end
 
   def create_event
    	return if event
-   	@event = Google::Event.new({:reminders => default_reminders, 
-   		                          :send_event_notification => true, 
+    @event = Google::Event.new({:send_event_notification => true,
    		                          :calendar => calendar})
   	update_event
   end
@@ -29,10 +37,11 @@ class Calendar
   	event.title = object.name
   	event.start_time = object.start_time
   	event.end_time = object.end_time
-    event.description = object.description
+    event.description = object.description if object.description
   	event.attendees = build_attendees
-    event.location = object.location
-  	event.save
+    event.location = object.location if object.location
+    event.reminders = default_reminders
+    event.save
   	object.update_attribute(:uid, event.id) unless object.uid
     event
   end
@@ -40,14 +49,9 @@ class Calendar
   def build_attendees
   	users_with_email = object.users.select {|u| u.email }
   	users_with_email.map do |u|
-  		relation = 'http://schemas.google.com/g/2005#event.attendee'
-  		#if u == object.user
-  		#  relation = 'http://schemas.google.com/g/2005#event.organizer'
-  		#end
-  		{ :email => u.email, 
-  		  :name => u.name,
-  		  :relation => relation,
-  		  :required => false }
+      { 'email' => u.email,
+        'displayName' => u.name,
+        'responseStatus' => "tentative" }
   	end
   end
 
@@ -77,6 +81,6 @@ class Calendar
                          :client_secret => ENV['GOOGLE_CLIENT_SECRET'],
                          :calendar => ENV['GOOGLE_CALENDAR_ID'],
                          :redirect_url => "urn:ietf:wg:oauth:2.0:oob",
-                         :refresh_token  => ENV['GOOGLE_REFRESH_TOKEN'])
+                         :refresh_token  => @@refresh_token)
   end
 end
