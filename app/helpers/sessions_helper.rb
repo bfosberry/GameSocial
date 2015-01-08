@@ -17,7 +17,7 @@ module SessionsHelper
   end
 
   def current_user
-    @current_user ||= User.find_by_remember_token(remember_token) if remember_token
+    @current_user ||= User.find_by_remember_token(remember_token) unless remember_token.blank?
   end
 
   def remember_token
