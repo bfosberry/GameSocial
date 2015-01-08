@@ -5,11 +5,11 @@ class Calendar
   REFRESH_TOKEN_KEY = "GOOGLE_REFRESH_TOKEN_#{Rails.env}"
 
   def self.set_refresh_token(token)
-    Redis.current.set(REFRESH_TOKEN_KEY, token)
+    REDIS.set(REFRESH_TOKEN_KEY, token)
   end
 
   def self.refresh_token
-    Redis.current.get(REFRESH_TOKEN_KEY)
+    REDIS.get(REFRESH_TOKEN_KEY)
   end
 
   attr_accessor :object
