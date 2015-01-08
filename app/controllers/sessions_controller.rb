@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
   end
 
   def refresh
-    Calendar.refresh_token = env['omniauth.auth']["credentials"]["token"]
+    Calendar.set_refresh_token(env['omniauth.auth']["credentials"]["token"])
     redirect_to root_url, notice: "Refreshed Access Token."
   end
 

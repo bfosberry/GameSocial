@@ -2,14 +2,14 @@ require 'google_calendar'
 
 class Calendar
   APP_NAME = "GameSocial"
-  @@refresh_token = ENV['GOOGLE_REFRESH_TOKEN']
+  REFRESH_TOKEN_KEY = "GOOGLE_REFRESH_TOKEN_#{Rails.env}"
 
-  def self.refresh_token=(token)
-    @@refresh_token = token
+  def self.set_refresh_token(token)
+    Redis.current.set(REFRESH_TOKEN_KEY, token)
   end
 
   def self.refresh_token
-    @@refresh_token
+    Redis.current.get(REFRESH_TOKEN_KEY)
   end
 
   attr_accessor :object
@@ -81,6 +81,6 @@ class Calendar
                          :client_secret => ENV['GOOGLE_CLIENT_SECRET'],
                          :calendar => ENV['GOOGLE_CALENDAR_ID'],
                          :redirect_url => "urn:ietf:wg:oauth:2.0:oob",
-                         :refresh_token  => @@refresh_token)
+                         :refresh_token  => Calendar.refresh_token)
   end
 end
