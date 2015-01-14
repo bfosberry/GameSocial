@@ -36,10 +36,6 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.6)
     arel (4.0.2)
-    autoparse (0.3.3)
-      addressable (>= 2.3.1)
-      extlib (>= 0.9.15)
-      multi_json (>= 1.0.0)
     autoprefixer-rails (4.0.2.2)
       execjs
     bcrypt-ruby (3.0.1)
@@ -85,16 +81,6 @@ GEM
     extlib (0.9.16)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
-    google-api-client (0.8.2)
-      activesupport (>= 3.2)
-      addressable (~> 2.3)
-      autoparse (~> 0.3)
-      extlib (~> 0.9)
-      faraday (~> 0.9)
-      launchy (~> 2.4)
-      multi_json (~> 1.10)
-      retriable (~> 1.4)
-      signet (~> 0.6)
     hashie (3.3.2)
     highline (1.6.21)
     hike (1.2.3)
@@ -118,8 +104,6 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.3)
-    launchy (2.4.3)
-      addressable (~> 2.3)
     libv8 (3.16.14.7)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -197,7 +181,6 @@ GEM
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
     ref (1.0.5)
-    retriable (1.4.1)
     ri_cal (0.8.8)
     ruby-openid (2.6.0)
     runtimeerror_notifier (0.0.24)
@@ -286,7 +269,6 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   debugger
   debugger-ruby_core_source
-  google-api-client
   google_calendar!
   httparty
   jbuilder (~> 1.2)
