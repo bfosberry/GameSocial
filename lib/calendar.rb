@@ -77,10 +77,10 @@ class Calendar
   end
 
   def initialize_calendar
-    Google::Calendar.new(:client_id => ENV['GOOGLE_CLIENT_ID'],
-                         :client_secret => ENV['GOOGLE_CLIENT_SECRET'],
-                         :calendar => ENV['GOOGLE_CALENDAR_ID'],
-                         :redirect_url => "urn:ietf:wg:oauth:2.0:oob",
-                         :refresh_token  => Calendar.refresh_token)
+    conn = Google::Connection.new_with_service_account(
+      :client_id => ENV["GOOGLE_CLIENT_ID"],
+      :signing_key => OpenSSL::PKey::RSA.new(ENV['GOOGLE_KEY'], ENV['GOOGLE_KEY_SECRET'])
+    )
+    Google::Calendar.new({:calendar => ENV['GOOGLE_CALENDAR_ID']}, conn)
   end
 end

@@ -57,7 +57,6 @@ GameSocial::Application.routes.draw do
   root to: 'users#home'
   match 'auth/steam/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/google_oauth2/callback', to: 'sessions#create', via: [:get, :post]
-  match 'auth/google_admin/callback', to: 'sessions#refresh', via: [:get, :post]
   match 'auth/developer/callback', to: 'sessions#create', via: [:get, :post]
  
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
