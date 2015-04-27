@@ -1,14 +1,6 @@
 <h1 class="text-center">Users</h1>
 
 <%= grid(@users_grid) do |g|
-  g.column name: 'Provider', attribute: 'provider' do |user|
-    user.provider
-  end
-
-  g.column name: 'Uid', attribute: 'uid' do |user|
-    user.uid 
-  end
-  
   g.column name: 'Name', attribute: 'name' do |user|
     user.name
   end

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/bfosberry/google_calendar.git
-  revision: edb8b14279e08f6f474d122d972b996cd08ed916
+  revision: 9128555a68891b1efe590d67b692dc09dae751fb
   branch: support-service-accounts
   specs:
     google_calendar (0.4.4)
