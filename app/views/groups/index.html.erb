@@ -23,7 +23,7 @@
   end
 
   g.column do |group|
-    if current_user.in_group?(group)
+    if current_user && current_user.in_group?(group)
       link_to 'Leave', leave_group_path(group), :class => "btn btn-warning"
     else
       link_to 'Join', join_group_path(group), :class => "btn btn-success"
