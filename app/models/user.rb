@@ -95,6 +95,10 @@ class User < ActiveRecord::Base
     credential("google_oauth2").refresh_token
   end
 
+  def steam_uid
+    credential("steam").uid
+  end
+
   def owns(object)
     object.user == self || is_admin?
   end

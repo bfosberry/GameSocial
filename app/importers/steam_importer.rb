@@ -32,7 +32,8 @@ module Importers
     def import_friends
       steam_provider.friends.each do |f|
         if f.id.to_i > 0
-          u = User.where({ :uid => f.id.to_s, :provider => "steam" }).first
+          c = Credential.where({ :uid => f.id.to_s, :provider => "steam" }).first
+          u = c.user if c
           if u
             user = steam_provider.user
             u.friends << user unless u.friends.include? user
