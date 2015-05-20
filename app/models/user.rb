@@ -96,7 +96,7 @@ class User < ActiveRecord::Base
   end
 
   def steam_uid
-    credential("steam").uid
+    credential("steam").uid if credential("steam")
   end
 
   def owns(object)

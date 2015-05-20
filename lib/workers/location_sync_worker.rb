@@ -1,6 +1,6 @@
 require './app/providers/steam_provider.rb'
 require './app/importers/steam_importer.rb'
-
+require 'steam-condenser'
 module Workers
   class LocationSyncWorker
     include Sidekiq::Worker
