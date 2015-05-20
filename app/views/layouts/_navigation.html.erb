@@ -9,6 +9,13 @@
         <li class="<%= 'active' if current_page?(game_social_servers_path) %>"><%= link_to "Game Servers", game_social_servers_path, :class => "btn" %></li>
       </ul>
     </li>
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alerting <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li class="<%= 'active' if current_page?(alerts_path) %>"><%= link_to "Alerts", alerts_path, :class => "btn" %></li>
+        <li class="<%= 'active' if current_page?(alert_schedules_path) %>"><%= link_to "Alert Schedules", alert_schedules_path, :class => "btn" %></li>
+      </ul>
+    </li>
     <% if is_admin? %>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>

@@ -115,11 +115,6 @@ class User < ActiveRecord::Base
     Friendship.find_by_user_id_and_friend_id(user.id, self.id) || Friendship.find_by_user_id_and_friend_id(self.id, user.id)
   end
 
-  def refresh_data_sync
-    w = Workers::SyncWorker.new()
-    w.perform(self.id)
-  end  
-
   def refresh_data
     Workers::SyncWorker.perform_async(self.id)
   end

@@ -1,33 +1,31 @@
-<h1 class="text-center">ALERT SCHEDULER</h1>
+<h1 class="text-center">Alert Schedules</h1>
 
-<%= will_paginate @alert_schedules %>
+<%= grid(@alert_schedules_grid) do |g|
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  g.blank_slate  do
+    content_tag :div, "No Alert Schedules found", class: 'well'
+  end
 
-  <tbody>
-    <% @alert_schedules.each do |alert_schedule| %>
-      <tr>
-        <td><%= alert_schedule.user_name %></td>
-        <td><%= alert_schedule.name %></td>
-        <td><%= link_to 'Show', alert_schedule, :class => "btn" %></td>
-        <td><%= link_to 'Edit', edit_alert_schedule_path(alert_schedule), :class => "btn" %></td>
-        <td><%= link_to 'Destroy', alert_schedule, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  g.column name: 'Name', attribute: 'name' do |alert_schedule|
+    alert_schedule.name
+  end
 
-<%= will_paginate @alert_schedules %>
+  g.column do |alert_schedule|
+    link_to 'Show', alert_schedule, :class => "btn btn-default"
+  end
 
-<br>
+  g.column do |alert_schedule|
+    if current_user.owns(alert_schedule)
+      link_to 'Edit', edit_alert_schedule_path(alert_schedule), :class => "btn btn-primary"
+    end
+  end
 
-<%= link_to 'New Alert schedule', new_alert_schedule_path, :class => "btn btn-success" %>
+  g.column do |alert_schedule|
+    if current_user.owns(alert_schedule)
+      link_to 'Destroy', alert_schedule, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    end
+  end
+end -%>
+
+
+<%= link_to 'Create Alert Schedule', new_alert_schedule_path, :class => "btn btn-success" %>

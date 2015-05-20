@@ -1,2 +1,2 @@
-url = ENV["REDISTOGO_URL"].blank? ? "redis://127.0.0.1:6379" : ENV["REDISTOGO_URL"]
-REDIS = Redis.new(:url => url)
+uri = URI.parse(ENV["REDISTOGO_URL"] || "redis://localhost:6379")
+REDIS = Redis.new(:url => uri, :namespace => "gamekick_#{Rails.env}")

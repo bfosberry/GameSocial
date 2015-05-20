@@ -2,7 +2,7 @@ module SessionsHelper
   def sign_in(user)
     cookies.permanent[:remember_token] = user.remember_token
     user.activate
-    user.refresh_data_sync
+    user.refresh_data
   end
 
   def sign_out
