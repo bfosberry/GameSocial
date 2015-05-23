@@ -62,7 +62,7 @@ module Importers
         u.credentials << c
         return u
       end
-    rescue SteamCondenserError; end
+    rescue SteamCondenser::Error; end
 
     def import_user
       steam_provider.user.update_attributes({ :name => steam_provider.name,
