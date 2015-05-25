@@ -5,8 +5,7 @@ class AlertsController < ApplicationController
   # GET /alerts
   # GET /alerts.json
   def index
-    @alerts_grid = initialize_grid(all_visible(Alert), :include => [:alert_schedule,
-                                                                    :user])
+    @alerts_grid = initialize_grid(all_owned(Alert), :include => [:alert_schedule])
   end
 
   # GET /alerts/1
