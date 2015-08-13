@@ -63,7 +63,8 @@ class User < ActiveRecord::Base
   end
  
   def sanatized_name
-    name.blank? ? "(Unknown)" : name
+    n = name.blank? ? "(Unknown)" : name
+    n.force_encoding('iso-8859-1').encode!('utf-8')
   end
 
   def add_as_friend(user)
@@ -135,7 +136,7 @@ class User < ActiveRecord::Base
   end
 
   def set_game(game_name)
-    game = Game.where({:name => game_name}).first
+    game = Game.find_by_name(game_name)
     location = game_locations.last
     GameLocation.update_location(location, self, game, nil, nil)
   end

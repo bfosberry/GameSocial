@@ -5,6 +5,7 @@ class Game < ActiveRecord::Base
 
   scope :board, -> { where(provider: "board")}
   scope :steam, -> { where(provider: "steam")}
+  before_save :ensure_name_sanitized
 
   def self.type_fetchers(query = Game.all)
   	query.unscoped.select("provider").order("provider").distinct.map {|g| GameTypeFetcher.new(query, g.provider)}
@@ -19,6 +20,18 @@ class Game < ActiveRecord::Base
       "steam"  => "Steam Games",
       "board" => "Board Games"
     }
+  end
+
+  def self.find_by_name(game_name)
+    find_by(:name, sanitized_name(game_name))
+  end
+
+  def self.sanitized_name(game_name)
+    game_name.force_encoding('iso-8859-1').encode!('utf-8') if game_name
+  end
+
+  def ensure_name_sanitized
+    name = Game.sanitized_name(name)
   end
 
   class GameTypeFetcher
