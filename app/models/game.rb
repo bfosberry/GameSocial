@@ -23,7 +23,7 @@ class Game < ActiveRecord::Base
   end
 
   def self.find_by_name(game_name)
-    find_by(:name, sanitized_name(game_name))
+    find_by(name: sanitized_name(game_name))
   end
 
   def self.sanitized_name(game_name)
