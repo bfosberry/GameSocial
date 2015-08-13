@@ -8,14 +8,13 @@ module Workers
 
     def perform(user_id)
       user = User.find(user_id)
-      puts "Syncing location for #{user.name}"
+      logger.debug "Syncing location for #{user.name}"
       sp = Providers::SteamProvider.new(user)
       si = Importers::SteamImporter.new(sp)
       si.import_location
-      puts "Completed sync location for #{user.name}"
+      logger.debug "Completed sync location for #{user.name}"
     rescue SteamCondenser::Error => e
-      puts "Failed to sync users location"
-      puts e
+      logger.error "Failed to sync users location: #{e}"
     end
   end
 end

@@ -19,8 +19,7 @@ module Workers
         f.refresh_data
       end
     rescue SteamCondenser::Error => e
-      puts "Failed to import user"
-      puts e
+      logger.error "Failed to import user: #{e}"
     end
   end
 end
