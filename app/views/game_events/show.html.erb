@@ -99,6 +99,6 @@
 <%= link_to 'Back', game_events_path, :class => "btn btn-warning" %>
 </div>
 
-<%= render '/events/invite_form', :type => "Event", :url => invite_game_event_path(@game_event) %>
+<%= render '/events/invite_form', :type => "Event", :url => invite_game_event_path(@game_event), :game => @game_event.game %>
 
 <%= render '/posts/post_form', :type => "Event", :url => posts_path %>
