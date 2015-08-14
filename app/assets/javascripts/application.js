@@ -20,11 +20,3 @@
 //= require autocomplete-rails
 //= require wice_grid
 //= require_tree .
-
-var ready;
-ready = function() {
-  $('.datetimepicker').datetimepicker({ minDate:0, format: 'Y-m-d H:i', inline: true, step: 30})
-};
-
-$(document).ready(ready);
-$(document).on('page:load', ready);
