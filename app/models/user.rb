@@ -26,9 +26,6 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :object_permissions
 
-#  has_secure_password
-#  validates_confirmation_of :password
-
   after_commit :update_events, :on => [:create, :update, :destroy]
 
   before_save { |user| user.email = email.downcase if email }

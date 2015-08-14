@@ -15,6 +15,20 @@
 		<h3>Your Upcoming Events:</h3>
 		<%= render "game_events/game_events" %>
 	<% end %>
+
+        <h3>Friends in-game:</h3>
+        <% if @game_locations.size > 0 %>
+        <table class="table table-striped table-bordered">
+          <% @game_locations.each do |gl| %>
+            <tr>
+              <%= render "users/user_table", :u => gl.user %>
+              <%= render "games/game", :g => gl.game %>
+            </tr>
+          <% end %>
+          </table>
+        <% else %>
+          <div class="well">No friends are in-game right now</div>
+        <% end %>
 <% end %>
 
 <div class="well">

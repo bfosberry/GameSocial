@@ -62,4 +62,8 @@ Looks like your friend #{user_name} is playing #{game_name}!
       location.save
     end
   end
+
+  def self.in_game
+    where('game_id IS NOT NULL')
+  end
 end
