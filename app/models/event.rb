@@ -53,6 +53,18 @@ class Event < ActiveRecord::Base
     end_time.to_formatted_s(:long_ordinal) if end_time
   end
 
+  def popular_games
+    popularity = {}
+    game_events.each do |ge|
+      popularity[ge.game] = [] unless popularity[ge.game]
+      popularity[ge.game].concat(ge.users.to_a).sort!.uniq!
+    end
+
+    games = []
+    popularity.each {|k,v| games.append({ game: k, users: v}) if v.size > 0}
+    games.sort_by {|g| -g[:users].size }
+  end
+
   def calendar
     @calendar ||= Calendar.new(self)
   end

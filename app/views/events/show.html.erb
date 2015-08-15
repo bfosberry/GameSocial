@@ -57,6 +57,7 @@
 <%= link_to 'Create Event', new_game_event_for_event_path(@event), :class => "btn btn-success" %><br><br>
 <% end %>
 
+<% if @event.users.size > 0 %>
 <h2>Attending</h2>
 <div class="row">
   <% for i in 0..5 %>
@@ -69,6 +70,28 @@
     </div>
   <% end %>
 </div>
+<% end %>
+
+<% if @event.popular_games.size > 0 %>
+<h2>Games being played</h2>
+
+<% @event.popular_games.each do |game_listing| %>
+<div>
+  <p><%= game_listing[:game].name %></p>
+  <div class="row">
+  <% for i in 0..5 %>
+    <div class="col-lg-2 col-md-2">
+      <%  game_listing[:users].each_with_index do |u, index| %>
+        <% if index % 6 == i %>
+          <%= render "users/user", :u => u %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  </div>
+</div>
+<% end %>
+<% end %>
 
 <h2>Comments</h2>
 <% if current_user %>
@@ -80,7 +103,6 @@
 <% end %>
 <%= link_to 'Back', events_path, :class => "btn btn-warning" %>
 </div>
-
 
 <%= render '/events/invite_form', :type => "LAN Party", :url => invite_event_path(@event) %>
 
