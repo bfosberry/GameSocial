@@ -39,6 +39,7 @@ class GameEventsController < ApplicationController
   # GET /game_events/new_for_event
   def new_for_event
     @game_event = GameEvent.new({ :event_id => params[:event_id]})
+    @game_event.object_permission = ObjectPermission.new
     render 'new'
   end
 
