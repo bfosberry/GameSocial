@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
   delegate :name, :to => :user, :prefix => true, :allow_nil => true
   delegate :email, :to => :user, :prefix => true, :allow_nil => true
   has_many :posts, as: :postable
+  has_many :playlists
   has_many :game_events, :dependent => :destroy
   has_one :object_permission, as: :permissible_object
   delegate :is_visible_to?, :to => :object_permission
@@ -57,11 +58,18 @@ class Event < ActiveRecord::Base
     popularity = {}
     game_events.each do |ge|
       popularity[ge.game] = [] unless popularity[ge.game]
-      popularity[ge.game].concat(ge.users.to_a).sort!.uniq!
+      popularity[ge.game].concat(ge.users.to_a)
+    end
+
+    playlists.each do |p|
+      p.games.each do |g|
+        popularity[g] = [] unless popularity[g]
+        popularity[g].append(p.user)
+      end
     end
 
     games = []
-    popularity.each {|k,v| games.append({ game: k, users: v}) if v.size > 0}
+    popularity.each {|k,v| games.append({ game: k, users: v.sort.uniq}) if v.size > 0}
     games.sort_by {|g| -g[:users].size }
   end
 
