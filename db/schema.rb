@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150101135123) do
+ActiveRecord::Schema.define(version: 20150816204828) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -182,6 +182,11 @@ ActiveRecord::Schema.define(version: 20150101135123) do
   add_index "games", ["name"], name: "index_games_on_name"
   add_index "games", ["provider_id"], name: "index_games_on_provider_id"
 
+  create_table "games_playlists", force: true do |t|
+    t.integer "playlist_id"
+    t.integer "game_id"
+  end
+
   create_table "games_users", force: true do |t|
     t.integer "game_id"
     t.integer "user_id"
@@ -206,6 +211,13 @@ ActiveRecord::Schema.define(version: 20150101135123) do
   create_table "object_permissions_users", id: false, force: true do |t|
     t.integer "object_permission_id"
     t.integer "user_id"
+  end
+
+  create_table "playlists", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "posts", force: true do |t|

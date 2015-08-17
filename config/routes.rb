@@ -1,6 +1,10 @@
 require 'sidekiq/web'
 
 GameSocial::Application.routes.draw do
+  match 'playlists/:id', to: 'playlists#add_game', as: 'add_game', via: [:post]
+  match 'playlists/:id/:game_id', to: 'playlists#delete_game', as: 'delete_game', via: [:delete]
+  resources :playlists
+
   match 'groups/:id/join', to: 'groups#join', as: 'join_group', via: [:get]
   match 'groups/:id/join/:user_id', to: 'groups#join', as: 'join_user_group', via: [:get]
   match 'groups/:id/leave', to: 'groups#leave', as: 'leave_group', via: [:get]

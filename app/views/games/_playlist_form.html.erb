@@ -1,0 +1,42 @@
+<div class="modal" id="playlistModal">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Manage your gaming playlist</h4>
+        </div>
+
+        <div class="modal-body">
+          <p>Add and remove games from your LAN playlist</p>
+
+          <div class="input">
+            <%= form_tag("/playlists/#{playlist.id}", method: "post") do %>
+            <%= label_tag :game_id, nil, :class => "help-inline" %><br>
+            <%= select_tag :game_id, grouped_options_for_select(Game.grouped), {:class => "form-control"} %>
+            <%= submit_tag("Add", class: "btn") %>
+          </div>
+
+          <div>
+          <% if playlist.games.size > 0 %>
+          <p>Your current playlist:</p>
+          <table class="table table-striped table-bordered">
+          <% playlist.games.each do |g| %>
+            <tr>
+              <%= render "games/game", :g => g %>
+              <td>
+                <a href="<%= "/playlists/#{playlist.id}/#{g.id}" %>" data-method="delete" rel="nofollow">Remove</a>
+              </td>
+            </tr>
+          <% end %>
+          </table>
+          <% end %>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <a href="#" data-dismiss="modal" class="btn">Close</a>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+</div>

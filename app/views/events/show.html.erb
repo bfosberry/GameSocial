@@ -48,6 +48,13 @@
     <td><h5 class="text-center">Invite to LAN Party</h5></td>
     <td><p class="text-center"><a data-toggle="modal" href="#inviteModal" class="btn btn-primary">Invite</a></p></td>
   </tr>
+  <% if current_user.attending_event?(@event) %>
+  <tr>
+    <td><h5 class="text-center">Manage Play list</h5></td>
+    <td><p class="text-center"><a data-toggle="modal" href="#playlistModal" class="btn btn-primary">Manage</a></p></td>
+  </p></td>
+  </tr>
+  <% end %>
   <% end %>
 </table>
 
@@ -105,5 +112,6 @@
 </div>
 
 <%= render '/events/invite_form', :type => "LAN Party", :url => invite_event_path(@event) %>
+<%= render '/games/playlist_form', :playlist => current_user.playlist_for(@event) %>
 
 <%= render '/posts/post_form', :type => "LAN Party", :url => posts_path %>

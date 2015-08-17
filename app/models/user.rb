@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :events
   has_many :groups
   has_many :credentials, :dependent => :destroy
+  has_many :playlists
 
   has_and_belongs_to_many :user_groups, :join_table => "groups_users", :class_name => "Group"
   has_and_belongs_to_many :attending_events, class_name: "Event"
@@ -176,6 +177,10 @@ class User < ActiveRecord::Base
  
   def is_active?
     status == "Active"
+  end
+  
+  def playlist_for(event)
+    playlists.where(event_id: event.id).first || Playlist.create(user_id: id, event_id: event.id)
   end
  
   def activate

@@ -1,11 +1,16 @@
 class Game < ActiveRecord::Base
   has_and_belongs_to_many :users
+  has_and_belongs_to_many :playlists
 
   default_scope { order(name: :asc) }
 
   scope :board, -> { where(provider: "board")}
   scope :steam, -> { where(provider: "steam")}
   before_save :ensure_name_sanitized
+
+  def self.grouped
+    Game.type_fetchers.map {|f| [f.type, f.fetch.map {|g| [g.name, g.id]}]}
+  end
 
   def self.type_fetchers(query = Game.all)
   	query.unscoped.select("provider").order("provider").distinct.map {|g| GameTypeFetcher.new(query, g.provider)}
