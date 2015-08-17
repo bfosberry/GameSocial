@@ -112,6 +112,8 @@
 </div>
 
 <%= render '/events/invite_form', :type => "LAN Party", :url => invite_event_path(@event) %>
-<%= render '/games/playlist_form', :playlist => current_user.playlist_for(@event) %>
 
+<% if current_user %>
+<%= render '/games/playlist_form', :playlist => current_user.playlist_for(@event) %>
+<% end %>
 <%= render '/posts/post_form', :type => "LAN Party", :url => posts_path %>
