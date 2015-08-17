@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     if current_user
       @game_events_grid = initialize_grid(current_user.upcoming_game_events, :include => [:game])
       friends = current_user.friends
-      @game_locations = friends.map(&:latest_location).reject {|l| l.game.nil?}
+      @game_locations = friends.map(&:latest_location).reject {|l| l.nil? || l.game.nil?}
       if current_user.email.blank?
        flash[:notice] = "Your email address is not set, please set it #{view_context.link_to('here',edit_user_path(current_user))}".html_safe
 
