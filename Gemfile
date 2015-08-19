@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.2.2'
 
 gem 'rails', '4.0.0'
 
@@ -25,7 +25,6 @@ group :development, :test do
  gem 'sqlite3'
  gem 'binding_of_caller'
  gem 'better_errors'
- gem 'debugger'
 end
 
 group :development do
