@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = all_visible(Event)
-    @events_grid = initialize_grid(events)
+    @events_grid = initialize_grid(@events,
                                    :include => [:user])
     respond_to do |format|
       format.html {}
