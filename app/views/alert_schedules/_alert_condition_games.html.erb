@@ -1,0 +1,5 @@
+<% @games = ac.value["games"].reject {|gid| gid.blank? }.map{ |gid| Game.find(gid)} %> 
+<tr>
+    <td><h5 class="text-center"><%= ac.condition_type.capitalize %></h5></td>
+    <td><p class="text-center"><%= @games.map {|g| g.name}.join(", ") %></p></td>
+</tr>

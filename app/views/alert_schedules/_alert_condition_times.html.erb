@@ -1,0 +1,6 @@
+<% @start_time = ac.value["start_time"] %> 
+<% @end_time = ac.value["end_time"] %> 
+<tr>
+    <td><h5 class="text-center"><%= ac.condition_type.capitalize %></h5></td>
+    <td><p class="text-center"><%= @start_time %> - <%= @end_time %></p></td>
+</tr>

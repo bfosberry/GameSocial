@@ -1,14 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @alert_schedule.user_name %>
-</p>
+<table class="table table-condensed">
+  <% if is_admin? %>
+  <tr>
+    <td><h5 class="text-center">User</h5></td>
+    <td><p class="text-center"><%= @alert_schedule.user_name %></p></td>
+  </tr>
+  <% end %>
+  <tr>
+    <td><h5 class="text-center">Alert Name</h5></td>
+    <td><p class="text-center"><%= @alert_schedule.name %></p></td>
+  </tr>
+  <% @alert_schedule.alert_conditions.each do |ac| %>
+    <%= render "alert_condition_#{ac.condition_type}", :ac => ac %>
+  <% end %>
+</table>
 
-<p>
-  <strong>Name:</strong>
-  <%= @alert_schedule.name %>
-</p>
+<%= link_to 'Edit', edit_alert_schedule_path(@alert_schedule), :class => "btn btn-primary" %> |
+<%= link_to 'Back', alert_schedules_path, :class => "btn btn-warning" %>
 
-<%= link_to 'Edit', edit_alert_schedule_path(@alert_schedule) %> |
-<%= link_to 'Back', alert_schedules_path %>
+<br>
