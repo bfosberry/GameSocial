@@ -6,7 +6,7 @@ class GameLocationsController < ApplicationController
   # GET /game_locations
   # GET /game_locations.json
   def index
-    @game_locations = GameLocation.paginate(:page => params[:page])
+    @game_locations_grid = initialize_grid(all_visible(GameLocation))
   end
 
   # GET /game_locations/1

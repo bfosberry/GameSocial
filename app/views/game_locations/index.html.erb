@@ -1,36 +1,36 @@
-<h1 class="text-center">GAME LOCATIONS</h1>
+<h1 class="text-center">Game Locations</h1>
 
-<%= will_paginate @game_locations %>
+<%= grid(@game_locations_grid) do |g|
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Game</th>
-      <th>Game server</th>
-      <th>Chat server</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+  g.blank_slate  do
+    content_tag :div, "No Game Locations", class: 'well'
+  end
 
-  <tbody>
-    <% @game_locations.each do |game_location| %>
-      <tr>
-        <td><%= game_location.user_name %></td>
-        <td><%= game_location.game_name %></td>
-        <td><%= game_location.game_social_server_name %></td>
-        <td><%= game_location.chat_server_name %></td>
-        <td><%= link_to 'Show', game_location, :class => "btn" %></td>
-        <td><%= link_to 'Edit', edit_game_location_path(game_location), :class => "btn" %></td>
-        <td><%= link_to 'Destroy', game_location, :class => "btn btn danger", method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= will_paginate @game_locations %>
+  g.column name: 'User', model: User, attribute: 'name' do |gl|
+    gl.user_name
+  end
 
-<br>
+  g.column name: 'Game', model: Game, attribute: 'name' do |gl|
+    gl.game_name
+  end
+  
+  g.column name: 'Game Server', model: GameSocialServer, attribute: 'name' do |gl|
+    gl.game_social_server_name
+  end
+  
+  g.column name: 'Chat Server', model: ChatServer, attribute: 'name' do |gl|
+    gl.chat_server_name
+  end
 
-<%= link_to 'New Game location', new_game_location_path, :class => "btn btn-success" %>
+  g.column do |gl|
+    link_to 'Show', gl, :class => "btn btn-default"
+  end
+
+  g.column do |gl|
+    link_to 'Edit',  edit_game_location_path(gl), :class => "btn btn-primary"
+  end
+
+  g.column do |gl|
+    link_to 'Destroy', gl, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+  end
+end -%>
