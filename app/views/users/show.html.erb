@@ -33,7 +33,7 @@
   end
 end -%>
 
-<% if @user.friendships.size > 0 %>
+<% unless @user.friends.empty?  %>
 <h2>Friends</h2>
 <div class="row">
   <% for i in 0..5 %>
