@@ -12,7 +12,9 @@
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alerting <span class="caret"></span></a>
       <ul class="dropdown-menu" role="menu">
-        <li class="<%= 'active' if current_page?(alerts_path) %>"><%= link_to "Alerts", alerts_path, :class => "btn" %></li>
+        <% if is_admin? %>
+          <li class="<%= 'active' if current_page?(alerts_path) %>"><%= link_to "Alerts", alerts_path, :class => "btn" %></li>
+        <% end %>
         <li class="<%= 'active' if current_page?(alert_schedules_path) %>"><%= link_to "Alert Schedules", alert_schedules_path, :class => "btn" %></li>
       </ul>
     </li>

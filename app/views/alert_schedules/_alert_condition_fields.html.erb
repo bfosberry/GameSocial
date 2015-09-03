@@ -1,5 +1,5 @@
-  <div class="field">
-    <%= f.label f.object.condition_type %><br>
+  <div class="form-group">
+    <%= f.label f.object.condition_type, :class => "help-inline" %><br>
     <% v = f.object.parsed_value || {} %>
     <%= f.fields_for :value do |builder| %>
       <%= render "alert_condition_#{f.object.condition_type}_fields", :f => builder, :v => v %>

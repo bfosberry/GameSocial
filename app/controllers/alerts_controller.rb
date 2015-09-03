@@ -1,6 +1,7 @@
 class AlertsController < ApplicationController
   before_action :set_alert, only: [:show, :edit, :update, :destroy]
   before_filter :enforce_login
+  before_filter :enforce_admin, except: [:show]
 
   # GET /alerts
   # GET /alerts.json

@@ -1,3 +1,1 @@
-<div class="field">
-  <%= f.collection_select :users, @alert_schedule.user.friends, :id, :name,{:include_blank => false, :selected => v},{:multiple => true, :size => 5} %>
- </div>
+<%= f.collection_select :users, @alert_schedule.user.friends, :id, :name,{:include_blank => false, :selected => v},{:multiple => true, :size => 5, :class => "form-group"} %>

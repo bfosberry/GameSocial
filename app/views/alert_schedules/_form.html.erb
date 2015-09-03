@@ -1,4 +1,4 @@
-<%= form_for(@alert_schedule) do |f| %>
+<%= form_for(@alert_schedule, :html => {:role => "form-horizontal"}) do |f| %>
   <% if @alert_schedule.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@alert_schedule.errors.count, "error") %> prohibited this alert_schedule from being saved:</h2>
@@ -12,21 +12,21 @@
   <% end %>
 
   <% if is_admin? %>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @alert_schedule.user_id} %>
+  <div class="form-group">
+    <%= f.label :user_id, :class => "help-inline" %><br>
+    <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @alert_schedule.user_id}, { :class => "form-control"} %>
   </div>
   <% end %>
   
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <%= f.label :name, :class => "help-inline" %><br>
+    <%= f.text_field :name, :class => "form-control" %>
   </div>
 
   <%= f.fields_for :alert_conditions do |builder| %>
     <%= render "alert_condition_fields", :f => builder %>
   <% end %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-success" %>
   </div>
 <% end %>
