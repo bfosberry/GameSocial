@@ -6,7 +6,7 @@ class GameLocationsController < ApplicationController
   # GET /game_locations
   # GET /game_locations.json
   def index
-    @game_locations_grid = initialize_grid(all_visible(GameLocation))
+    @game_locations_grid = initialize_grid(GameLocation)
   end
 
   # GET /game_locations/1
