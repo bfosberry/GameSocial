@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @game = Game.new
     @games_grid = initialize_grid(@user.games, :per_page => 10)
   end
 
