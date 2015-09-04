@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.2.2'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.1.11'
 
 gem 'pg'
 gem 'jquery-datetimepicker-rails'
