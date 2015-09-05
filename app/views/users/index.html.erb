@@ -24,6 +24,18 @@
   g.column do |user|
     link_to 'Destroy', user, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
   end
+
+  g.column name: 'Synced At', attribute: 'updated_at' do |user|
+    user.updated_at
+  end
+
+  g.column name: 'Location Synced At', model: GameLocation, attribute: 'created_at' do |user|
+    if user.latest_location
+      user.latest_location.created_at
+    else
+      "Unknown"
+    end
+  end
 end -%>
 
 <%= link_to 'New User', new_user_path, :class => "btn btn-success" %>
