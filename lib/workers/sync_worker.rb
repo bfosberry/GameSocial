@@ -17,7 +17,7 @@ module Workers
       if user.is_active?
         si.import_friends
       end
-      u.update_attribute(:updated_at, Datetime.now)
+      user.update_attribute(:updated_at, Datetime.now)
     end
   end
 end
