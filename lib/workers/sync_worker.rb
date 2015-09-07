@@ -9,7 +9,7 @@ module Workers
     def perform(user_id)
       user = User.find(user_id)
       return unless user
-      return if user.steam_uid.nil?
+      return if user.steam_uid.blank?
       sp = Providers::SteamProvider.new(user)
       si = Importers::SteamImporter.new(sp)
       si.import_user

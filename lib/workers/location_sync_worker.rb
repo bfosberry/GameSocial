@@ -8,6 +8,8 @@ module Workers
 
     def perform(user_id)
       user = User.find(user_id)
+      return unless user
+      return if user.steam_uid.blank?
       logger.debug "Syncing location for #{user.name}"
       sp = Providers::SteamProvider.new(user)
       si = Importers::SteamImporter.new(sp)
