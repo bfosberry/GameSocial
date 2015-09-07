@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users_grid = initialize_grid(User)
+    @users_grid = initialize_grid(User, :include => [:game_locations])
   end
 
   # GET /users/1
