@@ -29,11 +29,11 @@ module Providers
     end
 
     def current_game
-      steam_id.game_name
+      steam_id.summary[:game_name] if steam_id.summary
     end
 
     def current_game_server
-      steam_id.game_server_id
+      steam_id.summary[:game_server_ip] if steam_id.summary
     end
   end
 end
