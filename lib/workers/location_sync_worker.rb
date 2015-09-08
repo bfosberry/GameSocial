@@ -16,7 +16,7 @@ module Workers
       si.import_location
       logger.debug "Completed sync location for #{user.name}"
     rescue SteamCondenser::Error => e
-      logger.error "Failed to sync users location: #{e}"
+      logger.error "Failed to sync user #{user_id}'s location: #{e}"
     end
   end
 end

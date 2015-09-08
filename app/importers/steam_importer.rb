@@ -5,7 +5,6 @@ module Importers
     attr_accessor :steam_provider
     def initialize(steam_provider)
       self.steam_provider = steam_provider
-      self
     end
 
     def import_games
