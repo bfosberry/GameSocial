@@ -10,6 +10,7 @@ namespace :sync do
   task :location => :environment do
     User.all.each do |user|
       Workers::LocationSyncWorker.perform_async(user.id)
+      Workers::LocationSyncWorker.perform_in(5.minutes, user.id)
     end
   end
 
