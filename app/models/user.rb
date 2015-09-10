@@ -136,9 +136,11 @@ class User < ActiveRecord::Base
   def set_game(game_name, game_server_ip)
     game = Game.find_by_name(game_name)
     location = game_locations.last
-    ip_parts = game_server_ip.split(":")
-    if ip_parts.size = 2
-      gs = GameSocialServer.where(ip: ip_parts.first, port: ip_parts.last.to_i).first_or_create
+    if game_server_ip 
+      ip_parts = game_server_ip.split(":")
+      if ip_parts.size = 2
+        gs = GameSocialServer.where(ip: ip_parts.first, port: ip_parts.last.to_i).first_or_create
+      end
     end
     GameLocation.update_location(location, self, game, gs, nil)
   end
