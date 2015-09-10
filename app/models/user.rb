@@ -133,10 +133,14 @@ class User < ActiveRecord::Base
     alerting_schedules.each {|as| as.alert(game_location)}
   end
 
-  def set_game(game_name)
+  def set_game(game_name, game_server_ip)
     game = Game.find_by_name(game_name)
     location = game_locations.last
-    GameLocation.update_location(location, self, game, nil, nil)
+    ip_parts = game_server_ip.split(":")
+    if ip_parts.size = 2
+      gs = GameSocialServer.where(ip: ip_parts.first, port: ip_parts.last.to_i).first_or_create
+    end
+    GameLocation.update_location(location, self, game, gs, nil)
   end
 
   def join_event(event)

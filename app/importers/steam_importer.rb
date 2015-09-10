@@ -70,7 +70,8 @@ module Importers
 
     def import_location
       game_name = steam_provider.current_game
-      steam_provider.user.set_game(game_name)
+      game_server_ip = steam_provider.current_game_server
+      steam_provider.user.set_game(game_name, game_server_ip)
     end
   end
 end

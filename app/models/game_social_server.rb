@@ -12,7 +12,7 @@ class GameSocialServer < ActiveRecord::Base
   before_validation :import_server
 
   def import_server
-    server = SourceServer.new(ip, port)
+    server = SteamCondenser::Servers::SourceServer.new(ip, port)
     info = server.server_info
     self.name = info[:server_name]
     self.max_players = info[:max_players]
