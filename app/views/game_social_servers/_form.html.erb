@@ -1,4 +1,6 @@
 <%= form_for(@game_social_server, :html => { role: "form-horizontal"}) do |f| %>
+  <p id="notice"><%= notice %></p>
+
   <% if @game_social_server.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@game_social_server.errors.count, "error") %> prohibited this game_server from being saved:</h2>

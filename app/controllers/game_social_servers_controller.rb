@@ -39,13 +39,17 @@ class GameSocialServersController < ApplicationController
   def create
     @game_social_server = GameSocialServer.new(game_social_server_params)
     @game_social_server.user = current_user unless @game_social_server.user
-
     respond_to do |format|
       if @game_social_server.save
         format.html { redirect_to @game_social_server, notice: 'Game server was successfully created.' }
         format.json { render action: 'show', status: :created, location: @game_social_server }
       else
-        format.html { render action: 'new' }
+        format.html do
+          if request.referrer =~ /new_source/
+            flash.now[:notice] = "Failed to pull server details, please populate manually"
+          end
+          render action: 'new'
+        end
         format.json { render json: @game_social_server.errors, status: :unprocessable_entity }
       end
     end

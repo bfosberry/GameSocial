@@ -7,7 +7,7 @@ class GameSocialServer < ActiveRecord::Base
 
   delegate :name, :to => :user, :prefix => true, :allow_nil => true
   delegate :name, :to => :game, :prefix => true, :allow_nil => true
-  validates :name, :game, :presence => true
+  validates :name, :game, :ip, :port, :presence => true
 
   before_validation :import_server
 
