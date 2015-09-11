@@ -139,7 +139,13 @@ class User < ActiveRecord::Base
     if game_server_ip 
       ip_parts = game_server_ip.split(":")
       if ip_parts.size == 2
-        gs = GameSocialServer.where(ip: ip_parts.first, port: ip_parts.last.to_i).first_or_create
+        default_perms = ObjectPermission.new
+        default_perms.permission_type = "Public"
+        gs = GameSocialServer.where(ip: ip_parts.first,
+                                    port: ip_parts.last.to_i).first_or_create
+        gs.user = self unless gs.user
+        gs.object_permission = default_perms unless gs.object_permission
+        gs.save
       end
     end
     GameLocation.update_location(location, self, game, gs, nil)

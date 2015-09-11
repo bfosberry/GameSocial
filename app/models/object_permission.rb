@@ -1,12 +1,12 @@
 class ObjectPermission < ActiveRecord::Base
-	has_and_belongs_to_many :users
-	belongs_to :permissible_object, :polymorphic => true
+  has_and_belongs_to_many :users
+  belongs_to :permissible_object, :polymorphic => true
 
-	def self.permission_types
-	  ["Private", "Public", "Friends"]
-	end
+  def self.permission_types
+    ["Private", "Public", "Friends"]
+  end
 
-	def self.event_permission_types
+  def self.event_permission_types
     permission_types << [ "Friends + Invites"]
   end
   
