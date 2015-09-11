@@ -1,7 +1,12 @@
 <% if gs %>
-  <td><p class="text-center"><%= gs.name %></p></td>
-  <td><p class="text-center"><%= link_to 'Join', gs.launch_url, :class => "btn btn-primary" %></p></td>
+  <% if current_user.games.include? gs.game %>
+    <td><p class="text-center"><%= gs.name %></p></td>
+    <td><p class="text-center"><%= link_to 'Join', gs.launch_url, :class => "btn btn-primary" %></p></td>
+  <% else %>
+    <td><p class="text-center"><%= gs.name %></p></td>
+    <td><p class="text-center"><%= link_to 'Join (Game Not Owned)', '', :class => "btn btn-warning" %>
+  <% end %>
 <% else %>
-  <td><p class="text-center"></p></td>
+  <td><p class="text-center"></p>Offline</td>
   <td><p class="text-center"><%= link_to 'Join', '', :class => "btn btn-primary disabled" %>
 <% end %>
