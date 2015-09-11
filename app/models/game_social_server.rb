@@ -11,9 +11,13 @@ class GameSocialServer < ActiveRecord::Base
 
   before_validation :import_server
 
+  GAME_SERVER_EXPIRY=5.minutes
+
   def import_server
-    server = SteamCondenser::Servers::SourceServer.new(ip, port)
-    info = server.server_info
+    info = Rails.cache.fetch(game_server_cache_key(ip, port), :expires_in => GAME_SERVER_EXPIRY) do
+      server = SteamCondenser::Servers::SourceServer.new(ip, port)
+      server.server_info
+    end
     self.name = info[:server_name]
     self.max_players = info[:max_players]
     self.current_players = info[:number_of_players]
@@ -27,5 +31,9 @@ class GameSocialServer < ActiveRecord::Base
 
   def launch_url
     "steam://connect/#{ip}:#{port}"
+  end
+
+  def game_server_cache_key(ip, port)
+    "steam_game_server_#{ip}:#{port}"
   end
 end
