@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
   end
 
   def latest_location
-    game_locations.last
+    game_locations.order("created_at desc").first
   end
 
   def latest_locations

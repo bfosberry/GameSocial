@@ -29,7 +29,7 @@
     user.updated_at
   end
 
-  g.column name: 'Location Synced At', model: GameLocation, attribute: 'created_at', ordering: false do |user|
+  g.column name: 'Location Synced At', ordering: false do |user|
     if user.latest_location
       user.latest_location.created_at
     else
