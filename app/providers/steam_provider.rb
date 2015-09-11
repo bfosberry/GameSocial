@@ -14,7 +14,7 @@ module Providers
     end
 
     def games
-      Rails.cache.fetch(game_cache_key, :expires_in => GAMES_EXPIRY) do
+      Rails.cache.fetch(games_cache_key, :expires_in => GAMES_EXPIRY) do
         steam_id.games
       end
     rescue
