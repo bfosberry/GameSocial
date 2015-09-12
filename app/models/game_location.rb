@@ -19,7 +19,7 @@ class GameLocation < ActiveRecord::Base
 
   def location_title
     if game
-      "Heads up! #{user_name} is playing #{game_name}"
+      "Your friend #{user_name} is playing #{game_name}"
     else
       "#{user_name} is not in-game"
     end
@@ -27,21 +27,18 @@ class GameLocation < ActiveRecord::Base
 
   def location_body
     if game
-      """
-Looks like your friend #{user_name} is playing #{game_name}!
-
-#{game_server_body}#{chat_server_body}"""
+      "<p>Looks like your friend #{user_name} is playing #{game_name}!</p>#{game_server_body}#{chat_server_body}"
     else
-      "#{user_name} is currently not playing any games"
+      "<p>#{user_name} is currently not playing any games</p>"
     end
   end
 
   def game_server_body
-    "You can join them on this game server: #{game_social_server_name}\n" if game_social_server
+    "<p>You can join them on this game server: <a href='#{game_social_server.launch_url}'>Join #{game_social_server_name}</a></p>" if game_social_server
   end
 
   def chat_server_body
-    "If you want to chat with them, they're on this chat server: #{chat_server_name}\n" if chat_server
+    "<p>If you want to chat with them, they're on this chat server: #{chat_server_name}</p>" if chat_server
   end
 
   def delete_alerts
