@@ -11,22 +11,20 @@ class GameSocialServer < ActiveRecord::Base
 
   before_validation :import_server
 
-  GAME_SERVER_EXPIRY=5.minutes
+  GAME_SERVER_EXPIRY = 5.minutes
 
   def import_server
-    info = Rails.cache.fetch(game_server_cache_key(ip, port), :expires_in => GAME_SERVER_EXPIRY) do
-      server = SteamCondenser::Servers::SourceServer.new(ip, port)
-      server.server_info
+    info = server_info
+    unless info.empty?
+      self.name = info[:server_name]
+      self.max_players = info[:max_players]
+      self.current_players = info[:number_of_players]
+      gid = info[:game_id]
+      self.game = Game.where(:provider_id => gid).first if gid
+      self.current_map = info[:map_name]
+      self.match_type = info[:game_description]
+      self.latency = server.ping
     end
-    self.name = info[:server_name]
-    self.max_players = info[:max_players]
-    self.current_players = info[:number_of_players]
-    gid = info[:game_id]
-    self.game = Game.where(:provider_id => gid).first
-    self.current_map = info[:map_name]
-    self.match_type = info[:game_description]
-    self.latency = server.ping
-  rescue;
   end
 
   def launch_url
@@ -35,5 +33,16 @@ class GameSocialServer < ActiveRecord::Base
 
   def game_server_cache_key(ip, port)
     "steam_game_server_#{ip}:#{port}"
+  end
+
+  def server_info
+    Rails.cache.fetch(game_server_cache_key(ip, port), :expires_in => GAME_SERVER_EXPIRY) do
+      begin
+        server = SteamCondenser::Servers::SourceServer.new(ip, port)
+        server.server_info
+      rescue;
+        {}
+      end
+    end
   end
 end

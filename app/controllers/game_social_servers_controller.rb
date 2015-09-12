@@ -13,7 +13,8 @@ class GameSocialServersController < ApplicationController
   # GET /game_social_servers/1.json
   def show
     enforce_visibility(@game_social_server)
-    @game_social_server.import_server 
+    @game_social_server.import_server
+    @game_social_server.save
     @game_social_server.reload
   end
 
