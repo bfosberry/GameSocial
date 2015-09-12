@@ -7,11 +7,12 @@ class ChatServer < ActiveRecord::Base
   accepts_nested_attributes_for :object_permission
   delegate :is_visible_to?, :to => :object_permission
 
-  validates :username, :exclusion => { :in => ["Teamspeak", "Mumble", "Ventrillo"] } 
-  validate :name, :presence => true
+  validate :name, :ip, :port, :presence => true
   
-  def self.server_types
-  	["Teamspeak", "Mumble", "Ventrillo"]
+  SERVER_TYPES =  ["Teamspeak", "Mumble", "Ventrilo", "Discord"]
+
+   def self.server_types
+    SERVER_TYPES
   end
 
   def launch_url(user)
@@ -25,6 +26,18 @@ class ChatServer < ActiveRecord::Base
       options[:channelpassword] = room_password unless room_password.blank?
       uri.query_values = options
       "ts3server://#{ip}?#{uri.query}"
+    elsif server_type == "Mumble"
+       pw_string = password.blank? ? "" : ":#{password}"
+      "mumble://#{user.name}:#{pw_string}@#{ip}:#{port}/#{room}"
+    elsif server_type == "Ventrilo"
+      uri = Addressable::URI.new
+      options = {}
+      options[:servername] = name
+      options[:serverpassword] = password unless password.blank?
+      options[:channelname] = room unless room.blank?
+      options[:channelpassword] = room_password unless room_password.blank?
+      uri.query_values = options
+      "ventrilo://#{ip}:#{port}/#{uri.query}"
     end
   end
 end
