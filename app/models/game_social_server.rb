@@ -23,7 +23,6 @@ class GameSocialServer < ActiveRecord::Base
       self.game = Game.where(:provider_id => gid).first if gid
       self.current_map = info[:map_name]
       self.match_type = info[:game_description]
-      self.latency = server.ping
     end
   end
 

@@ -26,7 +26,7 @@
     game_social_server.user_name
   end
 
-    g.column name: 'Max Players', attribute: 'max_players' do |game_social_server|
+  g.column name: 'Max Players', attribute: 'max_players' do |game_social_server|
     game_social_server.max_players
   end
 
@@ -38,21 +38,13 @@
     game_social_server.match_type
   end
 
-
   g.column name: 'Region', attribute: 'region' do |game_social_server|
     game_social_server.region
   end
 
-
-  g.column name: 'Latency', attribute: 'latency' do |game_social_server|
-    game_social_server.latency
-  end
-
-
   g.column name: 'Current Map', attribute: 'current_map' do |game_social_server|
     game_social_server.current_map
   end
-
   
   g.column do |game_social_server|
     link_to 'Show', game_social_server, :class => "btn btn-default"
