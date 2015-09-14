@@ -74,5 +74,13 @@ module Providers
     def summary_cache_key
       "steam_#{user.id}_#{user.steam_uid}_summary"
     end
+
+    def clear_cache
+      Rails.cache.delete(games_cache_key)
+      Rails.cache.delete(friends_cache_key)
+      Rails.cache.delete(name_cache_key)
+      Rails.cache.delete(avatar_url_cache_key)
+      Rails.cache.delete(summary_cache_key)
+    end
   end
 end

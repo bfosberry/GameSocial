@@ -6,11 +6,12 @@ module Workers
     include Sidekiq::Worker
     sidekiq_options :queue => :sync, :retry => 2
 
-    def perform(user_id)
+    def perform(user_id, clear_cache=false)
       user = User.find(user_id)
       return unless user
       return if user.steam_uid.blank?
       sp = Providers::SteamProvider.new(user)
+      sp.clear_cache if clear_cache
       si = Importers::SteamImporter.new(sp)
       si.import_user
       si.import_games

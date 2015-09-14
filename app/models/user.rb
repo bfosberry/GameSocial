@@ -118,7 +118,7 @@ class User < ActiveRecord::Base
   end
 
   def refresh_data
-    Workers::SyncWorker.perform_async(self.id)
+    Workers::SyncWorker.perform_async(self.id, true)
   end
 
   def import
