@@ -265,8 +265,9 @@ GEM
       raindrops (~> 0.7)
     whenever (0.9.4)
       chronic (>= 0.6.3)
-    wice_grid (3.4.2)
-      kaminari (>= 0.13.0)
+    wice_grid (3.5.0)
+      coffee-rails (~> 4.0)
+      kaminari (~> 0.16)
 
 PLATFORMS
   ruby
@@ -308,4 +309,4 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn
   whenever
-  wice_grid (= 3.4.2)
+  wice_grid

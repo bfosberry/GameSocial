@@ -25,7 +25,7 @@ if defined?(Wice::Defaults)
   Wice::Defaults::ALLOW_MULTIPLE_SELECTION = true
 
   # Show the upper pagination panel by default or not
-  Wice::Defaults::SHOW_UPPER_PAGINATION_PANEL = true
+  Wice::Defaults::SHOW_UPPER_PAGINATION_PANEL = false
 
   # Disabling CSV export by default
   Wice::Defaults::ENABLE_EXPORT_TO_CSV = false
@@ -38,7 +38,7 @@ if defined?(Wice::Defaults)
   # * <tt>:when_filtered</tt> - when the table is the result of filtering
   # * <tt>:always</tt>        - show the filter always
   # * <tt>:no</tt>            - never show the filter
-  Wice::Defaults::SHOW_FILTER = :when_filtered
+  Wice::Defaults::SHOW_FILTER = :always
 
   # A boolean value specifying if a change in a filter triggers reloading of the grid.
   Wice::Defaults::AUTO_RELOAD = false
@@ -53,7 +53,7 @@ if defined?(Wice::Defaults)
   # when you connect to two databases one of which is MySQL and the other is Postgresql.
   # If the key for an adapter is missing it will fall back to Wice::Defaults::STRING_MATCHING_OPERATOR
   Wice::Defaults::STRING_MATCHING_OPERATORS = {
-    'ActiveRecord::ConnectionAdapters::MysqlAdapter' => 'LIKE',
+    'ActiveRecord::ConnectionAdapters::MysqlAdapter'      => 'LIKE',
     'ActiveRecord::ConnectionAdapters::PostgreSQLAdapter' => 'ILIKE'
   }
 
@@ -66,15 +66,46 @@ if defined?(Wice::Defaults)
   Wice::Defaults::NEGATION_IN_STRING_FILTERS = false
 
 
+  # Each WiceGrid filter column is defined in two classes, one used for rendering the filter, the other
+  # for generating query conditions. All these columns are in lib/wice/columns/*.rb .
+  # File lib/wice/columns/column_processor_index.rb lists all predefined processors.
+  # In most cases a processor is chosen automatically based on the DB column type,
+  # for example, integer columns
+  # can have two of processors, the default one with one input field, and a processor called "range",
+  # with 2 input fields. In this case it is possible to specify a processor in the column definition:
+  #
+  #     g.column filter_type: :range
+  #
+  # It is also possible to define you own processors:
+  #
+  #     Wice::Defaults::ADDITIONAL_COLUMN_PROCESSORS = {
+  #       some_key_identifying_new_column_type:  ['AViewColumnProcessorClass', 'ConditionsGeneratorClass'],
+  #       another_key_identifying_new_column_type:  ['AnotherViewColumnProcessorClass', 'AnotherConditionsGeneratorClass']
+  #     }
+  #
+  # Column processor keys/names should not coincide with the existing keys/names (see lib/wice/columns/column_processor_index.rb)
+  # the value is a 2-element array with 2 strings, the first should be a name of view processor class inherited from
+  # Wice::Columns::ViewColumn, the second should be a name of conditions generator class inherited from
+  # Wice::Columns::ConditionsGeneratorColumn .
+
 
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-  #                              Showing All Queries                          #
+  #                              Showing All Records                          #
 
-  # Enable or disable showing all queries (non-paginated table)
-  Wice::Defaults::ALLOW_SHOWING_ALL_QUERIES = true
+  # Enable or disable showing all records (non-paginated table)
+  Wice::Defaults::ALLOW_SHOWING_ALL_RECORDS = true
 
   # If number of all queries is more than this value, the user will be given a warning message
   Wice::Defaults::START_SHOWING_WARNING_FROM = 100
+
+  # Hide the "show all" link if the number of all records is more than...
+  # Force-resets back to pagination starting from this value.
+  # Set to nil to always show it
+  Wice::Defaults::SHOW_ALL_ALLOWED_UP_TO = nil
+
+  #
+  # set to nil to skip the check
+  Wice::Defaults::SWITCH_BACK_TO_PAGINATION_FROM = nil
 
 
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -90,7 +121,9 @@ if defined?(Wice::Defaults)
 
   # The default style of the date and datetime helper
   # * <tt>:calendar</tt> - JS calendar
+  # * <tt>:html5</tt> - HTML5 date input field
   # * <tt>:standard</tt> - standard Rails date and datetime helpers
+  # * <tt>:bootstrap</tt> - Bootstrap datepicker helper
   Wice::Defaults::HELPER_STYLE = :calendar
 
   # Format of the datetime displayed.
@@ -104,6 +137,11 @@ if defined?(Wice::Defaults)
   # Format of the date displayed in jQuery's Datepicker
   # If you change the format, make sure to check if +DATE_PARSER+ can still parse this string.
   Wice::Defaults::DATE_FORMAT_JQUERY     =  "yy-mm-dd"
+
+
+  # Format of the date displayed in Bootstrap's Datepicker
+  # If you change the format, make sure to check if +DATE_PARSER+ can still parse this string.
+  Wice::Defaults::DATE_FORMAT_BOOTSTRAP     =  "yyyy-mm-dd"
 
 
   # With Calendar helpers enabled the parameter sent is the string displayed. This lambda will be given a date string in the
@@ -134,7 +172,11 @@ if defined?(Wice::Defaults)
     if date_string.blank?
       nil
     else
-      Date.parse(date_string)
+      begin
+        Date.parse(date_string)
+      rescue ArgumentError
+        nil
+      end
     end
   }
 
@@ -144,4 +186,6 @@ if defined?(Wice::Defaults)
   # popup calendar will be shown relative to the popup trigger element or to the mouse pointer
   Wice::Defaults::POPUP_PLACEMENT_STRATEGY = :trigger # :pointer
 
+  # The name of the page method (should correspond to Kaminari.config.page_method_name)
+  Wice::Defaults::PAGE_METHOD_NAME = :page
 end

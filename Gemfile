@@ -13,7 +13,7 @@ gem 'whenever'
 gem 'syslog-logger'
 gem 'debugger-ruby_core_source'
 
-gem "wice_grid", '3.4.2'
+gem "wice_grid"
 gem 'jquery-ui-rails'
 gem 'rails3-jquery-autocomplete'
 gem 'rails_12factor'
