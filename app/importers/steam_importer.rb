@@ -48,8 +48,6 @@ module Importers
             :provider => "steam"
           ).first_or_initialize
           imported_groups.append(g.group_id64.to_s)
-          g.fetch
-
           group.user = steam_provider.user unless group.user
           perm = ObjectPermission.new
           perm.permission_type = "Public"

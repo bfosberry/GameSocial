@@ -1,9 +1,10 @@
-module Providers
+  module Providers
   class SteamProvider
     attr_accessor :steam_id, :user
     GAMES_EXPIRY=12.hours
     FRIENDS_EXPIRY=12.hours
     GROUPS_EXPIRY=12.hours
+    GROUP_EXPIRY=1.hours
     NAME_EXPIRY=12.hours
     AVATAR_URL_EXPIRY=12.hours
     SUMMARY_EXPIRY=1.minutes
@@ -29,7 +30,20 @@ module Providers
 
     def groups
       Rails.cache.fetch(groups_cache_key, :expires_in => GROUPS_EXPIRY) do
-        steam_id.groups
+        steam_id.groups.map do |g|
+          puts "Fetching group #{g.group_id64}"
+          group(g)
+        end
+      end
+    end
+
+    def group(group)
+      Rails.cache.fetch(group_cache_key(group.group_id64), :expires_in => GROUP_EXPIRY) do
+        begin
+          group.fetch
+        rescue SteamCondenser::Error
+        end
+        group
       end
     end
 
@@ -69,6 +83,10 @@ module Providers
 
     def groups_cache_key
       "steam_#{user.id}_#{user.steam_uid}_groups"
+    end
+
+    def group_cache_key(id)
+      "steam_group_#{id}"
     end
 
     def name_cache_key

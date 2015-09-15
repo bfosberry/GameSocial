@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: git://github.com/bfosberry/steam-condenser-ruby.git
-  revision: 3d2ccce770552f80949789e7a7782950646dd5e3
+  revision: e0a4a4605849a90de892619b59699e9b33fc714e
   branch: summaries
   specs:
     steam-condenser (1.3.11)
