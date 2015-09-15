@@ -5,7 +5,7 @@ class Group < ActiveRecord::Base
   accepts_nested_attributes_for :object_permission
   delegate :is_visible_to?, :to => :object_permission
 
-  validate :name, :presence => true  
+  validates :name, :description, :presence => true  
 
   has_and_belongs_to_many :users
 end

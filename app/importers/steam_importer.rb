@@ -12,18 +12,16 @@ module Importers
       keys = steam_provider.games.keys
       if keys
         keys.each do |k|
-          game = Game.find_by_provider_id(k)
-          unless game
-            g = steam_provider.games[k]
-            game = Game.create({
-              :provider_id => k,
-              :provider => "steam",
-              :name => g.name,
-              :store_url => g.store_url,
-              :logo_url => g.logo_url,
-              :description => g.name
-             })
-          end
+          game = Game.where(
+            :provider_id => k,
+            :provider => "steam"
+          ).first_or_create
+          g = steam_provider.games[k]
+          game.name = g.name
+          game.store_url = g.store_url
+          game.logo_url = g.logo_url
+          game.description = g.name
+          game.save
           user.games << game unless user.games.include?(game)
         end  
       end
@@ -39,6 +37,36 @@ module Importers
           user.friends << u unless user.friends.include? u
         end
       end
+    end
+
+    def import_groups
+      user = steam_provider.user
+      imported_groups = []
+      steam_provider.groups.each do |g|
+          group = Group.where(
+            :provider_id => g.group_id64.to_s,
+            :provider => "steam"
+          ).first_or_initialize
+          imported_groups.append(g.group_id64.to_s)
+          begin
+            g.fetch
+          rescue; end
+
+            group.user = steam_provider.user unless group.user
+            perm = ObjectPermission.new
+            perm.permission_type = "Public"
+            group.object_permission = perm unless group.object_permission
+            group.name = g.name if g.name
+            begin 
+              group.avatar_url = g.avatar_medium_url if g.avatar_medium_url
+            rescue; end
+            group.description = g.headline if g.headline
+            group.save
+          user.groups<< group unless user.groups.include?(group)
+      end
+
+      removed_groups  = user.groups.where(provider: "steam").where('provider_id NOT IN (?)', imported_groups)
+      removed_groups.each {|g| user.groups.delete(g) }
     end
 
     def create_user_from_friend(f)

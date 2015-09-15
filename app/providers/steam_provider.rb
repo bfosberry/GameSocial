@@ -3,6 +3,7 @@ module Providers
     attr_accessor :steam_id, :user
     GAMES_EXPIRY=12.hours
     FRIENDS_EXPIRY=12.hours
+    GROUPS_EXPIRY=12.hours
     NAME_EXPIRY=12.hours
     AVATAR_URL_EXPIRY=12.hours
     SUMMARY_EXPIRY=1.minutes
@@ -17,16 +18,19 @@ module Providers
       Rails.cache.fetch(games_cache_key, :expires_in => GAMES_EXPIRY) do
         steam_id.games
       end
-    rescue
-      {}
     end
 
     def friends
       Rails.cache.fetch(friends_cache_key, :expires_in => FRIENDS_EXPIRY) do
         steam_id.friends
       end
-    rescue 
-      {}
+    end
+
+
+    def groups
+      Rails.cache.fetch(groups_cache_key, :expires_in => GROUPS_EXPIRY) do
+        steam_id.groups
+      end
     end
 
     def name
@@ -63,6 +67,10 @@ module Providers
       "steam_#{user.id}_#{user.steam_uid}_friends"
     end
 
+    def groups_cache_key
+      "steam_#{user.id}_#{user.steam_uid}_groups"
+    end
+
     def name_cache_key
       "steam_#{user.id}_#{user.steam_uid}_name"
     end
@@ -78,6 +86,7 @@ module Providers
     def clear_cache
       Rails.cache.delete(games_cache_key)
       Rails.cache.delete(friends_cache_key)
+      Rails.cache.delete(groups_cache_key)
       Rails.cache.delete(name_cache_key)
       Rails.cache.delete(avatar_url_cache_key)
       Rails.cache.delete(summary_cache_key)
