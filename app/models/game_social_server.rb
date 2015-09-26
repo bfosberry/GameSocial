@@ -1,4 +1,4 @@
-elass GameSocialServer < ActiveRecord::Base
+class GameSocialServer < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
   has_one :object_permission, as: :permissible_object
