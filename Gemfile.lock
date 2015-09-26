@@ -9,8 +9,8 @@ GIT
 
 GIT
   remote: git://github.com/bfosberry/steam-condenser-ruby.git
-  revision: e0a4a4605849a90de892619b59699e9b33fc714e
-  branch: summaries
+  revision: 6f39ef3a0dfb0976e5097353fed4a820ca7898f9
+  branch: add_summary_support
   specs:
     steam-condenser (1.3.11)
       multi_json (~> 1.6)
@@ -310,3 +310,6 @@ DEPENDENCIES
   unicorn
   whenever
   wice_grid
+
+BUNDLED WITH
+   1.10.6
