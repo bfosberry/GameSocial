@@ -1,4 +1,4 @@
-class GameSocialServer < ActiveRecord::Base
+elass GameSocialServer < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
   has_one :object_permission, as: :permissible_object
@@ -36,10 +36,10 @@ class GameSocialServer < ActiveRecord::Base
 
   def server_info
     Rails.cache.fetch(game_server_cache_key(ip, port), :expires_in => GAME_SERVER_EXPIRY) do
+      server = SteamCondenser::Servers::SourceServer.new(ip, port)
       begin
-        server = SteamCondenser::Servers::SourceServer.new(ip, port)
         server.server_info
-      rescue;
+      rescue SteamCondenser::Error::Timeout;
         {}
       end
     end

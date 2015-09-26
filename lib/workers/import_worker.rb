@@ -18,8 +18,6 @@ module Workers
       for f in user.friends
         f.refresh_data
       end
-    rescue SteamCondenser::Error => e
-      logger.error "Failed to import user: #{e}"
     end
   end
 end

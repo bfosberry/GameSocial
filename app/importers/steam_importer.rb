@@ -48,20 +48,16 @@ module Importers
             :provider => "steam"
           ).first_or_initialize
           imported_groups.append(g.group_id64.to_s)
-          begin
-            g.fetch
-          rescue; end
+          g.fetch
 
-            group.user = steam_provider.user unless group.user
-            perm = ObjectPermission.new
-            perm.permission_type = "Public"
-            group.object_permission = perm unless group.object_permission
-            group.name = g.name if g.name
-            begin 
-              group.avatar_url = g.avatar_medium_url if g.avatar_medium_url
-            rescue; end
-            group.description = g.headline if g.headline
-            group.save
+          group.user = steam_provider.user unless group.user
+          perm = ObjectPermission.new
+          perm.permission_type = "Public"
+          group.object_permission = perm unless group.object_permission
+          group.name = g.name if g.name
+          group.avatar_url = g.avatar_medium_url if g.avatar_medium_url
+          group.description = g.headline if g.headline
+          group.save
           user.groups<< group unless user.groups.include?(group)
       end
 
@@ -89,7 +85,7 @@ module Importers
         u.credentials << c
         return u
       end
-    rescue SteamCondenser::Error; end
+    end
 
     def import_user
       steam_provider.user.update_attributes({ :name => steam_provider.name,
