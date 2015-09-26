@@ -192,8 +192,20 @@ ActiveRecord::Schema.define(version: 20150914232502) do
     t.integer "user_id"
   end
 
-# Could not dump table "groups" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "provider_id"
+    t.string   "avatar_url"
+    t.string   "url"
+  end
+
+  add_index "groups", ["name"], name: "index_groups_on_name"
+  add_index "groups", ["user_id"], name: "index_groups_on_user_id"
 
   create_table "groups_users", force: true do |t|
     t.integer "group_id"
