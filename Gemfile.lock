@@ -183,8 +183,24 @@ GEM
     rdoc (4.2.0)
       json (~> 1.4)
     redis (3.2.0)
+    redis-actionpack (4.0.1)
+      actionpack (~> 4)
+      redis-rack (~> 1.5.0)
+      redis-store (~> 1.1.0)
+    redis-activesupport (4.1.1)
+      activesupport (~> 4)
+      redis-store (~> 1.1.0)
     redis-namespace (1.5.1)
       redis (~> 3.0, >= 3.0.4)
+    redis-rack (1.5.0)
+      rack (~> 1.5)
+      redis-store (~> 1.1.0)
+    redis-rails (4.0.0)
+      redis-actionpack (~> 4)
+      redis-activesupport (~> 4)
+      redis-store (~> 1.1.0)
+    redis-store (1.1.6)
+      redis (>= 2.2)
     ref (1.0.5)
     ri_cal (0.8.8)
     rspec-core (3.1.7)
@@ -294,6 +310,7 @@ DEPENDENCIES
   rails (= 4.1.11)
   rails3-jquery-autocomplete
   rails_12factor
+  redis-rails
   ri_cal
   rspec-rails
   runtimeerror_notifier
