@@ -15,6 +15,7 @@ module Workers
       si.import_games
       si.import_location
       si.import_friends
+      si.import_groups
       for f in user.friends
         f.refresh_data
       end
