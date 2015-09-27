@@ -75,10 +75,6 @@
       "steam_#{user.id}_#{user.steam_uid}_friends"
     end
 
-    def groups_cache_key
-      "steam_#{user.id}_#{user.steam_uid}_groups"
-    end
-
     def group_cache_key(id)
       "steam_group_#{id}"
     end
@@ -98,7 +94,6 @@
     def clear_cache
       Rails.cache.delete(games_cache_key)
       Rails.cache.delete(friends_cache_key)
-      Rails.cache.delete(groups_cache_key)
       Rails.cache.delete(name_cache_key)
       Rails.cache.delete(avatar_url_cache_key)
       Rails.cache.delete(summary_cache_key)
