@@ -30,11 +30,15 @@ module Importers
 
     def import_friends
       steam_provider.friends.each do |f|
-        u = create_user_from_friend(f)
-        if u
-          user = steam_provider.user
-          u.friends << user unless u.friends.include? user
-          user.friends << u unless user.friends.include? u
+        begin 
+          u = create_user_from_friend(f)
+          if u
+            user = steam_provider.user
+            u.friends << user unless u.friends.include? user
+            user.friends << u unless user.friends.include? u
+          end
+        rescue SteamCondenser::Error => e
+          raise e unless e.message =~ /This user has not yet set up their Steam Community profile/
         end
       end
     end
