@@ -1,7 +1,7 @@
 :verbose: false
 :concurrency:  5
 :queues:
-  - [alert, 10]
-  - [sync_location, 5]
-  - [sync, 2]
-  - [default, 1]
+  - alert
+  - sync_location
+  - sync
+  - default
