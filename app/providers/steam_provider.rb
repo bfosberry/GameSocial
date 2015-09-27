@@ -36,15 +36,15 @@
 
     def group(group)
       Rails.cache.fetch(group_cache_key(group.group_id64), :expires_in => GROUP_EXPIRY) do
-        group.fetch
+        group.fetch unless group.name
         {
-          :id  => g.group_id64,
-          :name => g.name,
-          :avatar_full_url => g.avatar_full_url,
-          :avatar_icon_url => g.avatar_icon_url,
-          :avatar_medium_url => g.avatar_medium_url,
-          :headline => g.headline,
-          :summary => g.summary
+          :id  => group.group_id64,
+          :name => group.name,
+          :avatar_full_url => group.avatar_full_url,
+          :avatar_icon_url => group.avatar_icon_url,
+          :avatar_medium_url => group.avatar_medium_url,
+          :headline => group.headline,
+          :summary => group.summary
         }
       end
     end
