@@ -29,20 +29,14 @@
 
 
     def groups
-      Rails.cache.fetch(groups_cache_key, :expires_in => GROUPS_EXPIRY) do
-        steam_id.groups.map do |g|
-          puts "Fetching group #{g.group_id64}"
-          group(g)
-        end
+      steam_id.groups.map do |g|
+        group(g)
       end
     end
 
     def group(group)
       Rails.cache.fetch(group_cache_key(group.group_id64), :expires_in => GROUP_EXPIRY) do
-        begin
-          group.fetch
-        rescue SteamCondenser::Error
-        end
+        group.fetch
         group
       end
     end
