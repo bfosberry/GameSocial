@@ -4,7 +4,7 @@ require 'steam-condenser'
 module Workers
   class LocationSyncWorker
     include Sidekiq::Worker
-    sidekiq_options :queue => :sync, :retry => 2
+    sidekiq_options :queue => :sync, :retry => 10
 
     def perform(user_id)
       user = User.find(user_id)
