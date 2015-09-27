@@ -44,17 +44,17 @@ module Importers
       imported_groups = []
       steam_provider.groups.each do |g|
           group = Group.where(
-            :provider_id => g.group_id64.to_s,
+            :provider_id => g[:id].to_s,
             :provider => "steam"
           ).first_or_initialize
-          imported_groups.append(g.group_id64.to_s)
+          imported_groups.append(g[:id].to_s)
           group.user = user unless group.user
           perm = ObjectPermission.new
           perm.permission_type = "Public"
           group.object_permission = perm unless group.object_permission
-          group.name = g.name if g.name
-          group.avatar_url = g.avatar_medium_url if g.avatar_medium_url
-          group.description = g.headline if g.headline
+          group.name = g[:name] if g[:name]
+          group.avatar_url = g[:avatar_medium_url] if g[:avatar_medium_url]
+          group.description = g[:headline] if g[:headline]
           group.save
           user.groups<< group unless user.groups.include?(group)
       end

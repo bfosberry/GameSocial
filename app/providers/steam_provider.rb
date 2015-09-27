@@ -37,7 +37,15 @@
     def group(group)
       Rails.cache.fetch(group_cache_key(group.group_id64), :expires_in => GROUP_EXPIRY) do
         group.fetch
-        group
+        {
+          :id  => g.group_id64,
+          :name => g.name,
+          :avatar_full_url => g.avatar_full_url,
+          :avatar_icon_url => g.avatar_icon_url,
+          :avatar_medium_url => g.avatar_medium_url,
+          :headline => g.headline,
+          :summary => g.summary
+        }
       end
     end
 
