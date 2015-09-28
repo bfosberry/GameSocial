@@ -27,13 +27,14 @@
     end
 
 
-    def groups
+    def groups(clear_cache=false)
       steam_id.groups.map do |g|
-        group(g)
+        group(g, clear_cache)
       end
     end
 
-    def group(group)
+    def group(group, clear_cache=false)
+      Rails.cache.delete(group_cache_key(group.group_id64)) if clear_cache
       Rails.cache.fetch(group_cache_key(group.group_id64), :expires_in => GROUP_EXPIRY) do
         group.fetch unless group.name
         {

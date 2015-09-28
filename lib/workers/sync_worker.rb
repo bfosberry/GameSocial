@@ -15,7 +15,7 @@ module Workers
       si = Importers::SteamImporter.new(sp)
       si.import_user
       si.import_games
-      si.import_groups
+      si.import_groups(clear_cache)
       if user.is_active?
         si.import_friends
       end
