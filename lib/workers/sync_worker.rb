@@ -4,7 +4,7 @@ require './app/importers/steam_importer.rb'
 module Workers
   class SyncWorker
     include Sidekiq::Worker
-    sidekiq_options :queue => :sync, :retry => 10
+    sidekiq_options :queue => :sync
 
     def perform(user_id, clear_cache=false)
       user = User.find(user_id)
