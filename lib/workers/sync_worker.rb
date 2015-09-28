@@ -21,7 +21,7 @@ module Workers
       user.update_attribute(:updated_at, DateTime.now)
     rescue SteamCondenser::Error => e
       if e.message =~ /The specified profile could not be found/
-        puts "Bad profile: user_id"
+        puts "Bad profile: #{user_id}"
       else
         raise e
       end
