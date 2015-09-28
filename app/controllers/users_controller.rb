@@ -16,7 +16,8 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @game = Game.new
-    @games_grid = initialize_grid(@user.games, :per_page => 10)
+    @steam_games_grid = initialize_grid(@user.games.where(provider: "steam"), :per_page => 10, name: "steam")
+    @board_games_grid = initialize_grid(@user.games.where(provider: "board"), :per_page => 10, name: "board")
   end
 
   # GET /users/new

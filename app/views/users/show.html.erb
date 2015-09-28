@@ -12,9 +12,9 @@
   </tr>
 </table>
 
-<h1 class="text-center">Your Games</h1>
+<h1 class="text-center">Your Steam Games</h1>
 <a data-toggle="modal" href="#gameModal" class="btn btn-primary">Add a Game</a>
-<%= grid(@games_grid) do |g|
+<%= grid(@steam_games_grid) do |g|
 
   g.blank_slate  do
     content_tag :div, "No Games found", class: 'well'
@@ -24,8 +24,21 @@
     image_tag(game.logo_url, :crop => :fill, :class => "game_image")
   end
 
-  g.column name: 'Type', attribute: 'provider' do |game|
-    game.provider
+  g.column name: 'Name', attribute: 'name' do |game|
+    game.name
+  end
+end -%>
+
+<h1 class="text-center">Your Board Games</h1>
+<a data-toggle="modal" href="#gameModal" class="btn btn-primary">Add a Game</a>
+<%= grid(@board_games_grid) do |g|
+
+  g.blank_slate  do
+    content_tag :div, "No Games found", class: 'well'
+  end
+
+  g.column name: 'Icon', attribute: 'logo_url', filter: false do |game|
+    image_tag(game.logo_url, :crop => :fill, :class => "game_image")
   end
 
   g.column name: 'Name', attribute: 'name' do |game|
