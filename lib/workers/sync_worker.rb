@@ -15,16 +15,11 @@ module Workers
       si = Importers::SteamImporter.new(sp)
       si.import_user
       si.import_games
+      si.import_groups
       if user.is_active?
         si.import_friends
       end
       user.update_attribute(:updated_at, DateTime.now)
-    rescue SteamCondenser::Error => e
-      if e.message =~ /The specified profile could not be found/
-        puts "Bad profile: #{user_id}"
-      else
-        raise e
-      end
     end
   end
 end
