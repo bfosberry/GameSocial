@@ -60,7 +60,7 @@ module Importers
           group.avatar_url = g[:avatar_medium_url] if g[:avatar_medium_url]
           group.description = g[:headline] if g[:headline]
           group.save
-          user.groups<< group unless user.groups.include?(group)
+          group.users << user unless group.users.include?(user)
       end
 
       removed_groups  = user.groups.where(provider: "steam").where('provider_id NOT IN (?)', imported_groups)

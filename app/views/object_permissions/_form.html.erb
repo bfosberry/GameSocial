@@ -1,4 +1,4 @@
 <%= builder.label :type, "Visibility", :class => "help-inline" %><br>
-<%= builder.select :permission_type, ObjectPermission.permission_types, 
+<%= builder.select :permission_type, ObjectPermission.permission_types(current_user), 
       {:selected => builder.object.permission_type}, 
       {:class => "form-control"} %>
