@@ -3,8 +3,7 @@
     attr_accessor :steam_id, :user
     GAMES_EXPIRY=12.hours
     FRIENDS_EXPIRY=12.hours
-    GROUPS_EXPIRY=12.hours
-    GROUP_EXPIRY=1.hours
+    GROUP_EXPIRY=12.hours
     NAME_EXPIRY=12.hours
     AVATAR_URL_EXPIRY=12.hours
     SUMMARY_EXPIRY=1.minutes
