@@ -43,10 +43,10 @@ module Importers
       end
     end
 
-    def import_groups
+    def import_groups(clear_cache=false)
       user = steam_provider.user
       imported_groups = []
-      steam_provider.groups.each do |g|
+      steam_provider.groups(clear_cache).each do |g|
           group = Group.where(
             :provider_id => g[:id].to_s,
             :provider => "steam"
