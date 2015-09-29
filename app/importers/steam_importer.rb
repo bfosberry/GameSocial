@@ -66,7 +66,7 @@ module Importers
       import_group_object(g)
     end
 
-    def import_group_object(group)
+    def import_group_object(g)
       user = steam_provider.user
       group = Group.where(
         :provider_id => g[:id].to_s,
