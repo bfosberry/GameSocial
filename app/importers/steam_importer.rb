@@ -52,7 +52,7 @@ module Importers
           if g.name
             import_group_object(group)
           else
-            Workers::GroupSyncWorker.perform_async(g.group_id64.to_s)
+            Workers::GroupSyncWorker.perform_async(user.id, g.group_id64.to_s)
           end
           imported_groups.append(g.group_id64.to_s)
       end
