@@ -26,7 +26,6 @@
       end
     end
 
-
     def groups
       steam_id.groups
     end
@@ -36,16 +35,20 @@
       Rails.cache.fetch(group_cache_key(group_id), :expires_in => GROUP_EXPIRY) do
         group = SteamCondenser::Community::SteamGroup.new(group_id.to_i, false)
         group.fetch unless group.name
-        {
-          :id  => group.group_id64,
-          :name => group.name,
-          :avatar_full_url => group.avatar_full_url,
-          :avatar_icon_url => group.avatar_icon_url,
-          :avatar_medium_url => group.avatar_medium_url,
-          :headline => group.headline,
-          :summary => group.summary
-        }
+        group_to_dict(group)
       end
+    end
+
+    def group_to_dict(group)
+      {
+        :id  => group.group_id64,
+        :name => group.name,
+        :avatar_full_url => group.avatar_full_url,
+        :avatar_icon_url => group.avatar_icon_url,
+        :avatar_medium_url => group.avatar_medium_url,
+        :headline => group.headline,
+        :summary => group.summary
+      }
     end
 
     def name

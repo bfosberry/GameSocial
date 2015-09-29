@@ -50,7 +50,7 @@ module Importers
       imported_groups = []
       steam_provider.groups.each do |g|
           if g.name
-            import_group_object(group)
+            import_group_object(steam_provider.group_to_dict(group))
           else
             Workers::GroupSyncWorker.perform_async(user.id, g.group_id64.to_s)
           end
