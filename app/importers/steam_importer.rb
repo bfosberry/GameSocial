@@ -49,7 +49,11 @@ module Importers
       user = steam_provider.user
       imported_groups = []
       steam_provider.groups.each do |g|
-          Workers::GroupSyncWorker.perform_async(g.group_id64.to_s)
+          if g.name
+            import_group_object(group)
+          else
+            Workers::GroupSyncWorker.perform_async(g.group_id64.to_s)
+          end
           imported_groups.append(g.group_id64.to_s)
       end
 
@@ -59,6 +63,10 @@ module Importers
 
     def import_group(group_id, clear_cache=false)
       g = steam_provider.group(group_id, clear_cache)
+      import_group_object(g)
+    end
+
+    def import_group_object(group)
       user = steam_provider.user
       group = Group.where(
         :provider_id => g[:id].to_s,
