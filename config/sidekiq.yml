@@ -4,4 +4,5 @@
   - alert
   - sync_location
   - sync
+  - group_sync
   - default

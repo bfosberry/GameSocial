@@ -27,15 +27,14 @@
     end
 
 
-    def groups(clear_cache=false)
-      steam_id.groups.map do |g|
-        group(g, clear_cache)
-      end
+    def groups
+      steam_id.groups
     end
 
-    def group(group, clear_cache=false)
-      Rails.cache.delete(group_cache_key(group.group_id64)) if clear_cache
-      Rails.cache.fetch(group_cache_key(group.group_id64), :expires_in => GROUP_EXPIRY) do
+    def group(group_id, clear_cache=false)
+      Rails.cache.delete(group_cache_key(group_id)) if clear_cache
+      Rails.cache.fetch(group_cache_key(group_id), :expires_in => GROUP_EXPIRY) do
+        group = SteamCondenser::Community::SteamGroup.new(group_id.to_i, false)
         group.fetch unless group.name
         {
           :id  => group.group_id64,

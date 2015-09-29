@@ -1,4 +1,6 @@
 require './app/providers/steam_provider.rb'
+require './lib/workers/group_sync_worker.rb'
+
 
 module Importers
   class SteamImporter
@@ -46,25 +48,31 @@ module Importers
     def import_groups(clear_cache=false)
       user = steam_provider.user
       imported_groups = []
-      steam_provider.groups(clear_cache).each do |g|
-          group = Group.where(
-            :provider_id => g[:id].to_s,
-            :provider => "steam"
-          ).first_or_initialize
-          imported_groups.append(g[:id].to_s)
-          group.user = user unless group.user
-          perm = ObjectPermission.new
-          perm.permission_type = "Public"
-          group.object_permission = perm unless group.object_permission
-          group.name = g[:name] if g[:name]
-          group.avatar_url = g[:avatar_medium_url] if g[:avatar_medium_url]
-          group.description = g[:headline] if g[:headline]
-          group.save
-          group.users << user unless group.users.include?(user)
+      steam_provider.groups.each do |g|
+          Workers::GroupSyncWorker.perform_async(g.group_id64.to_s)
+          imported_groups.append(g.group_id64.to_s)
       end
 
       removed_groups  = user.groups.where(provider: "steam").where('provider_id NOT IN (?)', imported_groups)
       removed_groups.each {|g| user.groups.delete(g) }
+    end
+
+    def import_group(group_id, clear_cache=false)
+      g = steam_provider.group(group_id, clear_cache)
+      user = steam_provider.user
+      group = Group.where(
+        :provider_id => g[:id].to_s,
+        :provider => "steam"
+      ).first_or_initialize
+      group.user = user unless group.user
+      perm = ObjectPermission.new
+      perm.permission_type = "Public"
+      group.object_permission = perm unless group.object_permission
+      group.name = g[:name] if g[:name]
+      group.avatar_url = g[:avatar_medium_url] if g[:avatar_medium_url]
+      group.description = g[:headline] if g[:headline]
+      group.save
+      group.users << user unless group.users.include?(user)
     end
 
     def create_user_from_friend(f)
