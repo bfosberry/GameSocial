@@ -1,6 +1,8 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy, :join, :leave, :invite, :send_invite]
 
+  before_filter :enforce_admin, :only => [:index]
+
   # GET /groups
   # GET /groups.json
   def index
