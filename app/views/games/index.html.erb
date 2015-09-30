@@ -2,6 +2,10 @@
 
 <%= grid(@games_grid) do |g|
 
+  g.row_attributes do |object|
+    { onclick: "document.location = '#{url_for(object)}';" }
+  end
+
   g.column name: 'Icon', attribute: 'logo_url', filter: false do |game|
     image_tag(game.logo_url, :crop => :fill, :class => "game_image")
   end
@@ -12,10 +16,6 @@
 
   g.column name: 'Name', attribute: 'name' do |game|
     game.name
-  end
-  
-  g.column do |game|
-    link_to 'Show', game, :class => "btn btn-default"
   end
 
   g.column do |game|

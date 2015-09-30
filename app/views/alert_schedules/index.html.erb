@@ -6,12 +6,12 @@
     content_tag :div, "No Alert Schedules found", class: 'well'
   end
 
-  g.column name: 'Name', attribute: 'name' do |alert_schedule|
-    alert_schedule.name
+  g.row_attributes do |object|
+    { onclick: "document.location = '#{url_for(object)}';" }
   end
 
-  g.column do |alert_schedule|
-    link_to 'Show', alert_schedule, :class => "btn btn-default"
+  g.column name: 'Name', attribute: 'name' do |alert_schedule|
+    alert_schedule.name
   end
 
   g.column do |alert_schedule|

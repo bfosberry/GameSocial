@@ -1,6 +1,10 @@
 <h1 class="text-center">Users</h1>
 
 <%= grid(@users_grid) do |g|
+  g.row_attributes do |object|
+    { onclick: "document.location = '#{url_for(object)}';" }
+  end
+
   g.column name: 'Name', attribute: 'name' do |user|
     user.name
   end
@@ -11,10 +15,6 @@
 
   g.column name: 'Admin', attribute: 'admin' do |user|
     user.admin
-  end
-  
-  g.column do |user|
-    link_to 'Show', user, :class => "btn btn-default"
   end
 
   g.column do |user|

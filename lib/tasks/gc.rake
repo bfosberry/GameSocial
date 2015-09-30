@@ -9,8 +9,7 @@ namespace :gc do
 
   desc "Clean up old game locations"
   task :locations => :environment do
-    
-    locations = GameLocation.where("created_at < :month_ago", {:month_ago => 1.month.ago})
+    locations = GameLocation.where("created_at < :days_ago", {:days_ago => 3.days.ago})
     puts "Deleting #{locations.size} locations"
     locations.each(&:destroy)
     puts "Done"

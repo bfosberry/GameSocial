@@ -6,6 +6,10 @@
     content_tag :div, "No Chat Servers found", class: 'well'
   end
 
+  g.row_attributes do |object|
+    { onclick: "document.location = '#{url_for(object)}';" }
+  end
+
   g.column name: 'Name', attribute: 'name' do |chat_server|
     chat_server.name
   end
@@ -24,10 +28,6 @@
 
   g.column name: 'Owner', model: User, attribute: 'name' do |chat_server|
     chat_server.user_name
-  end
-  
-  g.column do |chat_server|
-    link_to 'Show', chat_server, :class => "btn btn-default"
   end
 
   g.column do |chat_server|

@@ -41,3 +41,16 @@ a#nav-button-container
 .small_game_image {
 	max-width: 100px;
 }
+
+.odd:hover {
+  background-color: #eee !important;
+  cursor: pointer;
+  cursor: hand;
+}
+
+
+.even:hover {
+  background-color: #eee;
+  cursor: pointer;
+  cursor: hand;
+}

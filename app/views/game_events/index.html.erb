@@ -6,6 +6,11 @@
     content_tag :div, "No events found", class: 'well'
   end
   
+
+  g.row_attributes do |object|
+    { onclick: "document.location = '#{url_for(object)}';" }
+  end
+
   g.column name: 'Title', attribute: 'title' do |game_event|
     game_event.title
   end
@@ -37,10 +42,6 @@
 
   g.column name: 'End Time', attribute: 'game_end_time' do |game_event|
     game_event.formatted_end_time
-  end
-  
-  g.column do |game_event|
-    link_to 'Show', game_event, :class => "btn btn-default"
   end
   
   g.column do |game_event|

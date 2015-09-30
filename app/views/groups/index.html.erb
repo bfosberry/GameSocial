@@ -6,6 +6,10 @@
     content_tag :div, "No Groups found", class: 'well'
   end
 
+  g.row_attributes do |object|
+    { onclick: "document.location = '#{url_for(object)}';" }
+  end
+
   g.column name: 'Name', attribute: 'name' do |group|
     group.name
   end
@@ -16,10 +20,6 @@
   
   g.column name: 'Owner', model: User, attribute: 'name' do |group|
     group.user_name
-  end
-  
-  g.column do |group|
-    link_to 'Show', group, :class => "btn btn-default"
   end
 
   g.column do |group|

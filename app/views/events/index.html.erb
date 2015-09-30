@@ -6,6 +6,10 @@
     content_tag :div, "No LAN Parties found", class: 'well'
   end
 
+  g.row_attributes do |object|
+    { onclick: "document.location = '#{url_for(object)}';" }
+  end
+
   g.column name: 'Name', attribute: 'name' do |event|
     event.name 
   end
@@ -24,10 +28,6 @@
   
   g.column name: 'Location', attribute: 'location' do |event|
     event.location 
-  end
-  
-  g.column do |event|
-    link_to 'Show', event, :class => "btn btn-default"
   end
   
   g.column do |event|

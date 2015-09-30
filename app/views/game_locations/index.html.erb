@@ -6,6 +6,10 @@
     content_tag :div, "No Game Locations", class: 'well'
   end
 
+  g.row_attributes do |object|
+    { onclick: "document.location = '#{url_for(object)}';" }
+  end
+
   g.column name: 'User', model: User, attribute: 'name' do |gl|
     gl.user_name
   end
@@ -20,10 +24,6 @@
   
   g.column name: 'Chat Server', model: ChatServer, attribute: 'name' do |gl|
     gl.chat_server_name
-  end
-
-  g.column do |gl|
-    link_to 'Show', gl, :class => "btn btn-default"
   end
 
   g.column do |gl|

@@ -6,6 +6,10 @@
     content_tag :div, "No Alerts found", class: 'well'
   end
 
+  g.row_attributes do |object|
+    { onclick: "document.location = '#{url_for(object)}';" }
+  end
+
   g.column name: 'Schedule', model: AlertSchedule, attribute: 'name' do |alert|
     alert.alert_schedule_name
   end
@@ -16,10 +20,6 @@ end
 
   g.column name: 'Description', attribute: 'description' do |alert|
     alert.description
-  end
-
-  g.column do |alert|
-    link_to 'Show', alert, :class => "btn btn-default"
   end
 
   g.column do |alert|
