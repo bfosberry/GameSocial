@@ -40,7 +40,7 @@ module Importers
             user.friends << u unless user.friends.include? u
           end
         rescue SteamCondenser::Error => e
-          raise e unless e.message =~ /This user has not yet set up their Steam Community profile/
+          raise e unless e.message =~ /profile/
         end
       end
     end
