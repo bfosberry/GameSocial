@@ -39,9 +39,7 @@ class GameSocialServer < ActiveRecord::Base
       server = SteamCondenser::Servers::SourceServer.new(ip, port)
       begin
         server.server_info
-      rescue SteamCondenser::Error::Timeout
-        {}
-      rescue Errno::EHOSTUNREACH
+      rescue SteamCondenser::Error::Timeout, Errno::EHOSTUNREACH, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EINVAL, Errno::ENETUNREACH, Errno::ETIMEDOUT
         {}
       end
     end
