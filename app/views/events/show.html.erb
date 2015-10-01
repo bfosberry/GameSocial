@@ -58,6 +58,25 @@
   <% end %>
 </table>
 
+<h2>Calendar</h2>
+<div id="calendar"></div>
+
+<script type='text/javascript'>
+  $(document).ready(function() {
+  events =  [
+    <% @event.game_events.each_with_index do |ge, i| %>
+      {
+        title  : '<%= ge.title %>',
+        start  : '<%= ge.game_start_time %>',
+        end    : '<%= ge.game_end_time %>'
+      }<%= "," unless i == @event.game_events.size - 1 %>
+    <% end %>
+  ];
+  start_time = "<%= @event.next_event.try(:game_start_time) || DateTime.now %>"
+  create_calendar("#calendar", events, "agendaDay", start_time);
+});
+
+</script>
 <h2>Events</h2>
 <%= render "game_events/game_events", :game_events => @event.game_events %>
 <% if current_user %>

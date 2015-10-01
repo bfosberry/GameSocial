@@ -4,12 +4,14 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require jquery.datetimepicker
  *= require jquery-ui
+ *= require fullcalendar
  *= require_self
  *= require_tree .
 */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
 
 .navbar
 {

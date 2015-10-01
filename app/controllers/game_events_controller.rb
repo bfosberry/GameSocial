@@ -34,11 +34,15 @@ class GameEventsController < ApplicationController
   def new
     @game_event = GameEvent.new
     @game_event.object_permission = ObjectPermission.new
+    @game_event.game_start_time = DateTime.now
+    @game_event.game_end_time = DateTime.now
   end
 
   # GET /game_events/new_for_event
   def new_for_event
     @game_event = GameEvent.new({ :event_id => params[:event_id]})
+    @game_event.game_start_time = DateTime.now
+    @game_event.game_end_time = DateTime.now
     @game_event.object_permission = ObjectPermission.new
     render 'new'
   end

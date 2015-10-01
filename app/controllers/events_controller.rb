@@ -42,6 +42,8 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @event.object_permission = ObjectPermission.new
+    @event.start_time = DateTime.now
+    @event.end_time = DateTime.now
   end
 
   # GET /events/1/edit

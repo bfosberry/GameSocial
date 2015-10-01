@@ -19,4 +19,21 @@
 //= require jquery.datetimepicker
 //= require autocomplete-rails
 //= require wice_grid
+//= require moment
+//= require fullcalendar
+//= require fullcalendar/gcal
 //= require_tree .
+
+function create_calendar(id, events, view, start_time) {
+  $(id).fullCalendar({
+    header: {
+      left:   'title',
+      center: 'month agendaWeek agendaDay',
+      right:  'today prev,next'
+    },
+    defaultView: view,
+    timezone: "local",
+    events: events
+  });
+  $(id).fullCalendar('gotoDate', start_time);
+}

@@ -41,6 +41,10 @@ class Event < ActiveRecord::Base
     calendar.delete_event
   end
 
+  def next_event
+    game_events.where("game_start_time > ?", DateTime.now).first
+  end
+
   def set_defaults
     self.start_time ||= DateTime.now.beginning_of_minute
     self.end_time ||= DateTime.now.beginning_of_minute
