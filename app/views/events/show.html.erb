@@ -78,6 +78,11 @@
 
 </script>
 <h2>Events</h2>
+<% if @filter == "owned" %>
+  <p>Showing only events which you can play. <%= link_to 'Show All Events', event_path(@event), :class => "btn btn-success" %><br><br></p>
+<% else %>
+  <p>Showing all events. <%= link_to 'Show Joinable Events', "#{event_path(@event)}/?filter=owned", :class => "btn btn-success" %><br><br></p>
+<% end %>
 <%= render "game_events/game_events", :game_events => @event.game_events %>
 <% if current_user %>
 <%= link_to 'Create Event', new_game_event_for_event_path(@event), :class => "btn btn-success" %><br><br>
