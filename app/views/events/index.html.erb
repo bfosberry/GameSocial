@@ -31,13 +31,7 @@
   end
   
   g.column do |event|
-    if current_user
-      if current_user.attending_event?(event)
-        link_to 'Leave', leave_event_path(event), :class => "btn btn-warning"
-      else
-        link_to 'Join', join_event_path(event), :class => "btn btn-success"
-      end
-    end
+    render "users/attend", :attending => current_user.attending_event?(event), :join => join_event_path(event), :leave =>  leave_event_path(event)
   end
 
   g.column do |event|
