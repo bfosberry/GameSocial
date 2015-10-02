@@ -1,5 +1,11 @@
 <h1 class="text-center">Events</h1>
       
+<% if @filter == "owned" %>
+  <p>Showing only events which you can play. <%= link_to 'Show All Events', game_events_path, :class => "btn btn-success" %><br><br></p>
+<% else %>
+  <p>Showing all events. <%= link_to 'Show Joinable Events', "#{game_events_path}/?filter=owned", :class => "btn btn-success" %><br><br></p>
+<% end %>
+
 <%= grid(@game_events_grid) do |g|
 
   g.blank_slate  do
