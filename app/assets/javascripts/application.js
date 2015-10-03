@@ -37,3 +37,9 @@ function create_calendar(id, events, view, start_time) {
   });
   $(id).fullCalendar('gotoDate', start_time);
 }
+
+function maybeVisit(event, url){
+  if (event.srcElement.tagName == "TD") {
+    document.location = url;
+  }
+}

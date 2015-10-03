@@ -7,7 +7,7 @@
   end
 
   g.row_attributes do |object|
-    { onclick: "document.location = '#{url_for(object)}';" }
+    { onclick: "maybeVisit(event, '#{url_for(object)}');" }
   end
 
   g.column name: 'User', model: User, attribute: 'name' do |gl|

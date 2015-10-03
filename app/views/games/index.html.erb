@@ -3,7 +3,7 @@
 <%= grid(@games_grid) do |g|
 
   g.row_attributes do |object|
-    { onclick: "document.location = '#{url_for(object)}';" }
+    { onclick: "maybeVisit(event, '#{url_for(object)}');" }
   end
 
   g.column name: 'Icon', attribute: 'logo_url', filter: false do |game|

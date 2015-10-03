@@ -74,8 +74,14 @@ class EventsController < ApplicationController
     user = User.find_by_id(params[:user_id]) || current_user
     enforce_ownership(user)
     user.join_event(@event)
-    return_url = request.referrer || events_path
-    redirect_to return_url, notice: 'Event joined.' 
+
+    respond_to do |format|
+      format.html {
+        return_url = request.referrer || events_path
+        redirect_to return_url, notice: 'Event joined.'
+      }
+      format.json { render "", :status => :ok }
+    end
   end
 
   # GET /events/1/leave
@@ -83,8 +89,14 @@ class EventsController < ApplicationController
     user = User.find_by_id(params[:user_id]) || current_user
     enforce_ownership(user)
     user.leave_event(@event)
-    return_url = request.referrer || events_path
-    redirect_to return_url, notice: 'Event left.' 
+
+    respond_to do |format|
+      format.html {
+        return_url = request.referrer || events_path
+        redirect_to return_url, notice: 'Event left.'
+      }
+      format.json { render "", :status => :ok }
+    end
   end
 
   # POST /events

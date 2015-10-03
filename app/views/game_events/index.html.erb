@@ -12,9 +12,8 @@
     content_tag :div, "No events found", class: 'well'
   end
   
-
   g.row_attributes do |object|
-    { onclick: "document.location = '#{url_for(object)}';" }
+    { onclick: "maybeVisit(event, '#{url_for(object)}');" }
   end
 
   g.column name: 'Title', attribute: 'title' do |game_event|
