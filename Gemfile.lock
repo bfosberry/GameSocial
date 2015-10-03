@@ -194,6 +194,8 @@ GEM
       multi_json
       omniauth-openid
     pg (0.18.1)
+    quiet_assets (1.1.0)
+      railties (>= 3.1, < 5.0)
     rack (1.5.5)
     rack-openid (1.3.1)
       rack (>= 1.1.0)
@@ -356,6 +358,7 @@ DEPENDENCIES
   omniauth-google-oauth2
   omniauth-steam
   pg
+  quiet_assets
   rails (= 4.1.11)
   rails3-jquery-autocomplete
   rails_12factor
@@ -376,3 +379,6 @@ DEPENDENCIES
   unicorn
   whenever
   wice_grid
+
+BUNDLED WITH
+   1.10.6
