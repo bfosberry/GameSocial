@@ -1,7 +1,5 @@
-<div id="attending">
-  <% if attending %>
-    <%= link_to 'Leave', leave, :remote => true, "data-type" => :json, :class => "btn btn-warning" %>
-  <% else %>
-    <%= link_to 'Join', join, :remote => true, "data-type" => :json, :class => "btn btn-success" %>
-  <% end %>
-</div>
+<% if attending %>
+  <%= link_to 'Leave', leave, :remote => true, "data-type" => :json, :class => "btn btn-warning" %>
+<% else %>
+  <%= link_to 'Join', join, :remote => true, "data-type" => :json, :class => "btn btn-success" %>
+<% end %>
