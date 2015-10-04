@@ -77,7 +77,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to return_url, notice: 'Event joined.' }
-      format.json { render "", :status => :ok }
+      format.js { render json: {} }
     end
   end
 
@@ -89,7 +89,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to return_url, notice: 'Event left.' }
-      format.json { render "", :status => :ok }
+      format.js { render json: {} }
     end
   end
 

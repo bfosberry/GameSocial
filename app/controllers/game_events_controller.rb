@@ -78,7 +78,7 @@ class GameEventsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to return_url, notice: 'Game Event joined.' }
-      format.json { render "", :status => :ok }
+      format.js { render json: {} }
     end
   end
 
@@ -90,7 +90,7 @@ class GameEventsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to return_url, notice: 'Game Event left.' }
-      format.json { render "", :status => :ok }
+      format.js { render json: {} }
     end
   end
 

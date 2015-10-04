@@ -1,5 +1,36 @@
 <% if attending %>
-  <%= link_to 'Leave', leave, :remote => true, "data-type" => :json, :class => "btn btn-warning" %>
+  <%= link_to 'Leave', leave, :remote => true, "data-type" => "json", :class => "btn btn-warning attend-btn" %>
 <% else %>
-  <%= link_to 'Join', join, :remote => true, "data-type" => :json, :class => "btn btn-success" %>
+  <%= link_to 'Join', join, :remote => true, "data-type" => "json", :class => "btn btn-success attend-btn" %>
 <% end %>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  $('.attend-btn')
+    .bind("ajax:beforeSend", function(evt, xhr, settings){
+      $(this).attr("disabled", "disabled")
+    })
+    .bind("ajax:success", function(evt, data, status, xhr){
+       var elem = $(this)[0];
+       if (elem.innerHTML == "Join"){
+         elem.innerHTML = "Leave";
+         elem.href = "<%= leave %>";
+         $(this).attr('class', "btn btn-warning attend-btn");
+       } else if (elem.innerHTML == "Leave"){
+         elem.innerHTML = "Join";
+         elem.href = "<%= join %>";
+         $(this).attr('class', "btn btn-success attend-btn");
+       }
+    })
+    .bind('ajax:complete', function(evt, xhr, status){
+      $(this).removeAttr("disabled");
+    })
+    .bind("ajax:error", function(evt, xhr, status, error){
+      // TODO report issue
+    });
+
+});
+
+</script>
