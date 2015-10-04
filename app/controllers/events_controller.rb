@@ -76,10 +76,7 @@ class EventsController < ApplicationController
     user.join_event(@event)
 
     respond_to do |format|
-      format.html {
-        return_url = request.referrer || events_path
-        redirect_to return_url, notice: 'Event joined.'
-      }
+      format.html { redirect_to return_url, notice: 'Event joined.' }
       format.json { render "", :status => :ok }
     end
   end
@@ -91,12 +88,13 @@ class EventsController < ApplicationController
     user.leave_event(@event)
 
     respond_to do |format|
-      format.html {
-        return_url = request.referrer || events_path
-        redirect_to return_url, notice: 'Event left.'
-      }
+      format.html { redirect_to return_url, notice: 'Event left.' }
       format.json { render "", :status => :ok }
     end
+  end
+
+  def return_url
+    request.referrer || events_path
   end
 
   # POST /events

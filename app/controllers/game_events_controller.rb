@@ -77,10 +77,7 @@ class GameEventsController < ApplicationController
     user.join_game_event(@game_event)
 
     respond_to do |format|
-      format.html {
-        return_url = request.referrer || game_events_path
-        redirect_to return_url, notice: 'Game Event joined.'
-      }
+      format.html { redirect_to return_url, notice: 'Game Event joined.' }
       format.json { render "", :status => :ok }
     end
   end
@@ -92,12 +89,13 @@ class GameEventsController < ApplicationController
     user.leave_game_event(@game_event)
 
     respond_to do |format|
-      format.html {
-        return_url = request.referrer || game_events_path
-        redirect_to return_url, notice: 'Game Event left.'
-      }
+      format.html { redirect_to return_url, notice: 'Game Event left.' }
       format.json { render "", :status => :ok }
     end
+  end
+
+  def return_url
+    request.referrer || game_events_path
   end
 
   # POST /game_events
