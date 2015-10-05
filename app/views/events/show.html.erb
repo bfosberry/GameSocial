@@ -33,7 +33,9 @@
   <tr>
     <td><h5 class="text-center">Attend Lan Party</h5></td>
     <td><p class="text-center">
+      <% if current_user %>
       <%= render "users/attend", :attending => current_user.attending_event?(@event), :join => join_event_path(@event), :leave =>  leave_event_path(@event) %>
+      <% end %>
     </p></td>
   </tr>
   <tr>
