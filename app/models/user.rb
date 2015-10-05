@@ -202,6 +202,10 @@ class User < ActiveRecord::Base
   def upcoming_game_events
     game_events.where("game_end_time > ?", DateTime.now)
   end
+
+  def notify_websocket(event)
+    WebsocketRails["user_#{id}"].trigger("notifications", event)
+  end
   
   private
     def create_remember_token

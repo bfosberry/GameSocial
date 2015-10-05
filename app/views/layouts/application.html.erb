@@ -35,4 +35,11 @@
     </main>
   </body>
   <%= render 'layouts/footer' %>
+  <% if current_user %>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        registerWebsocket(<%= current_user.id %>);
+      });
+    </script>
+  <% end %>
 </html>

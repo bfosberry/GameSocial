@@ -37,7 +37,6 @@ class UsersController < ApplicationController
       @game_locations = friends.map(&:latest_location).reject {|l| l.nil? }.reject { |l| l.game.nil?}
       if current_user.email.blank?
        flash[:notice] = "Your email address is not set, please set it #{view_context.link_to('here',edit_user_path(current_user))}".html_safe
-
       end
     end
   end

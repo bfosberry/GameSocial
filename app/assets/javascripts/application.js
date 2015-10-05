@@ -45,3 +45,16 @@ function maybeVisit(event, url){
   }
 }
 
+function registerWebsocket(user_id) {
+  var dispatcher = new WebSocketRails(document.location.host + '/websocket');
+  channel = dispatcher.subscribe("user_" + user_id);
+
+  channel.bind('notifications', function(notification) {
+    handleNotification(notification)
+  });
+}
+
+function handleNotification(notification) {
+  console.log('GameId: ' +notification.payload.game_id);
+  console.log('Title: ' +notification.title);
+}

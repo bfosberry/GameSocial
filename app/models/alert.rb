@@ -14,6 +14,7 @@ class Alert < ActiveRecord::Base
   end
 
   def deliver_alert
+    user.notify_websocket(self)
     Workers::AlertWorker.perform_async(id)
   end
 end
