@@ -22,6 +22,7 @@
 //= require moment
 //= require fullcalendar
 //= require fullcalendar/gcal
+//= require websocket_rails/main
 //= require_tree .
 
 function create_calendar(id, events, view, start_time) {
@@ -43,3 +44,4 @@ function maybeVisit(event, url){
     document.location = url;
   }
 }
+
