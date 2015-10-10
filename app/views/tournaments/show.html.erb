@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @tournament.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @tournament.description %>
+</p>
+
+<p>
+  <strong>Num teams:</strong>
+  <%= @tournament.num_teams %>
+</p>
+
+<p>
+  <strong>Team max size:</strong>
+  <%= @tournament.team_max_size %>
+</p>
+
+<p>
+  <strong>Team min size:</strong>
+  <%= @tournament.team_min_size %>
+</p>
+
+<p>
+  <strong>Games per round:</strong>
+  <%= @tournament.games_per_round %>
+</p>
+
+<p>
+  <strong>Teams per round:</strong>
+  <%= @tournament.teams_per_round %>
+</p>
+
+<p>
+  <strong>Brackets:</strong>
+  <%= @tournament.brackets %>
+</p>
+
+<p>
+  <strong>Public teams:</strong>
+  <%= @tournament.public_teams %>
+</p>
+
+<p>
+  <strong>Lead time:</strong>
+  <%= @tournament.lead_time %>
+</p>
+
+<p>
+  <strong>Num parallel events:</strong>
+  <%= @tournament.num_parallel_events %>
+</p>
+
+<p>
+  <strong>Time between rounds:</strong>
+  <%= @tournament.time_between_rounds %>
+</p>
+
+<p>
+  <strong>Time rounding:</strong>
+  <%= @tournament.time_rounding %>
+</p>
+
+<p>
+  <strong>Event earliest time:</strong>
+  <%= @tournament.event_earliest_time %>
+</p>
+
+<p>
+  <strong>Event latest time:</strong>
+  <%= @tournament.event_latest_time %>
+</p>
+
+<%= link_to 'Edit', edit_tournament_path(@tournament) %> |
+<%= link_to 'Back', tournaments_path %>

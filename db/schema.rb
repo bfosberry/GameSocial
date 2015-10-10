@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914232502) do
+ActiveRecord::Schema.define(version: 20151010002625) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -127,12 +127,14 @@ ActiveRecord::Schema.define(version: 20150914232502) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "uid"
+    t.integer  "tournament_id"
   end
 
   add_index "game_events", ["chat_server_id"], name: "index_game_events_on_chat_server_id"
   add_index "game_events", ["event_id"], name: "index_game_events_on_event_id"
   add_index "game_events", ["game_id"], name: "index_game_events_on_game_id"
   add_index "game_events", ["game_social_server_id"], name: "index_game_events_on_game_social_server_id"
+  add_index "game_events", ["tournament_id"], name: "index_game_events_on_tournament_id"
   add_index "game_events", ["user_id"], name: "index_game_events_on_user_id"
 
   create_table "game_events_users", id: false, force: true do |t|
@@ -192,20 +194,8 @@ ActiveRecord::Schema.define(version: 20150914232502) do
     t.integer "user_id"
   end
 
-  create_table "groups", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "provider"
-    t.string   "provider_id"
-    t.string   "avatar_url"
-    t.string   "url"
-  end
-
-  add_index "groups", ["name"], name: "index_groups_on_name"
-  add_index "groups", ["user_id"], name: "index_groups_on_user_id"
+# Could not dump table "groups" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "groups_users", force: true do |t|
     t.integer "group_id"
@@ -244,6 +234,31 @@ ActiveRecord::Schema.define(version: 20150914232502) do
 
   add_index "posts", ["postable_id", "postable_type"], name: "index_posts_on_postable_id_and_postable_type"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+
+  create_table "tournaments", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "num_teams"
+    t.integer  "team_max_size"
+    t.integer  "team_min_size"
+    t.integer  "games_per_round"
+    t.integer  "teams_per_round"
+    t.integer  "brackets"
+    t.boolean  "public_teams"
+    t.integer  "lead_time"
+    t.integer  "num_parallel_events"
+    t.integer  "time_between_rounds"
+    t.string   "time_rounding"
+    t.string   "event_earliest_time"
+    t.string   "event_latest_time"
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tournaments", ["event_id"], name: "index_tournaments_on_event_id"
+  add_index "tournaments", ["user_id"], name: "index_tournaments_on_user_id"
 
   create_table "users", force: true do |t|
     t.datetime "created_at"

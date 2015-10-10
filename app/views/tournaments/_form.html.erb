@@ -1,0 +1,77 @@
+<%= form_for(@tournament) do |f| %>
+  <% if @tournament.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tournament.errors.count, "error") %> prohibited this tournament from being saved:</h2>
+
+      <ul>
+      <% @tournament.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :num_teams %><br>
+    <%= f.number_field :num_teams %>
+  </div>
+  <div class="field">
+    <%= f.label :team_max_size %><br>
+    <%= f.number_field :team_max_size %>
+  </div>
+  <div class="field">
+    <%= f.label :team_min_size %><br>
+    <%= f.number_field :team_min_size %>
+  </div>
+  <div class="field">
+    <%= f.label :games_per_round %><br>
+    <%= f.number_field :games_per_round %>
+  </div>
+  <div class="field">
+    <%= f.label :teams_per_round %><br>
+    <%= f.number_field :teams_per_round %>
+  </div>
+  <div class="field">
+    <%= f.label :brackets %><br>
+    <%= f.number_field :brackets %>
+  </div>
+  <div class="field">
+    <%= f.label :public_teams %><br>
+    <%= f.text_field :public_teams %>
+  </div>
+  <div class="field">
+    <%= f.label :lead_time %><br>
+    <%= f.number_field :lead_time %>
+  </div>
+  <div class="field">
+    <%= f.label :num_parallel_events %><br>
+    <%= f.number_field :num_parallel_events %>
+  </div>
+  <div class="field">
+    <%= f.label :time_between_rounds %><br>
+    <%= f.number_field :time_between_rounds %>
+  </div>
+  <div class="field">
+    <%= f.label :time_rounding %><br>
+    <%= f.text_field :time_rounding %>
+  </div>
+  <div class="field">
+    <%= f.label :event_earliest_time %><br>
+    <%= f.text_field :event_earliest_time %>
+  </div>
+  <div class="field">
+    <%= f.label :event_latest_time %><br>
+    <%= f.text_field :event_latest_time %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

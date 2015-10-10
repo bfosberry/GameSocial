@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :groups
   has_many :credentials, :dependent => :destroy
   has_many :playlists
+  has_many :tournaments, :dependent => :destroy
 
   has_and_belongs_to_many :user_groups, :join_table => "groups_users", :class_name => "Group"
   has_and_belongs_to_many :attending_events, class_name: "Event"

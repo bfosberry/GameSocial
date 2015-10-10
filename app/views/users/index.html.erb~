@@ -1,0 +1,33 @@
+<h1 class="text-center">Users</h1>
+
+<%= grid(@users_grid) do |g|
+  g.column name: 'Name', attribute: 'name' do |user|
+    user.name
+  end
+
+  g.column name: 'Email', attribute: 'email' do |user|
+    user.email
+  end
+
+  g.column name: 'Admin', attribute: 'admin' do |user|
+    user.admin
+  end
+  
+  g.column do |user|
+    link_to 'Show', user, :class => "btn btn-default"
+  end
+
+  g.column do |user|
+    link_to 'Edit', edit_user_path(user), :class => "btn btn-primary" 
+  end
+
+  g.column do |user|
+    link_to 'Destroy', user, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+  end
+
+  g.column do |user|
+    user.latest_location.created_at
+  end
+end -%>
+
+<%= link_to 'New User', new_user_path, :class => "btn btn-success" %>

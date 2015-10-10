@@ -4,6 +4,7 @@ class GameEvent < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
   belongs_to :event
+  belongs_to :tournament
   belongs_to :game_social_server
   belongs_to :chat_server
   has_many :posts, as: :postable
