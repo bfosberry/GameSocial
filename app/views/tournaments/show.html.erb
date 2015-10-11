@@ -1,79 +1,74 @@
 <p id="notice"><%= notice %></p>
 
+<table class="table table-condensed">
+  <tr>
+    <td><h5 class="text-center">Name</h5></td>
+    <td><p class="text-center"><%= @tournament.name %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Description</h5></td>
+    <td><p class="text-center"><%= @tournament.name %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Max Teams</h5></td>
+    <td><p class="text-center"><%= @tournament.num_teams %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Max Team Size</h5></td>
+    <td><p class="text-center"><%= @tournament.team_max_size %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Min Team Size</h5></td>
+    <td><p class="text-center"><%= @tournament.team_min_size %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Games per Round</h5></td>
+    <td><p class="text-center"><%= @tournament.games_per_round %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Teams per Round</h5></td>
+    <td><p class="text-center"><%= @tournament.teams_per_round %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Brackets</h5></td>
+    <td><p class="text-center"><%= @tournament.brackets %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Public Teams</h5></td>
+    <td><p class="text-center"><%= @tournament.public_teams %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Num Parallel Events</h5></td>
+    <td><p class="text-center"><%= @tournament.num_parallel_events %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Lead Time</h5></td>
+    <td><p class="text-center"><%= @tournament.lead_time %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Time between Rounds</h5></td>
+    <td><p class="text-center"><%= @tournament.time_between_rounds %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Time Rounding</h5></td>
+    <td><p class="text-center"><%= @tournament.time_rounding %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Earliest Event Time</h5></td>
+    <td><p class="text-center"><%= @tournament.event_earliest_time %></p></td>
+  </tr>
+    <tr>
+    <td><h5 class="text-center">Latest Event time</h5></td>
+    <td><p class="text-center"><%= @tournament.event_latest_time %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Visibility</h5></td>
+    <td><p class="text-center"><%= @tournament.object_permission.permission_type %></p></td>
+  </tr>
 <p>
-  <strong>Name:</strong>
-  <%= @tournament.name %>
-</p>
+</table>
 
-<p>
-  <strong>Description:</strong>
-  <%= @tournament.description %>
-</p>
+<%= render "game_events/game_events", :game_events => @tournament.game_events %>
 
-<p>
-  <strong>Num teams:</strong>
-  <%= @tournament.num_teams %>
-</p>
-
-<p>
-  <strong>Team max size:</strong>
-  <%= @tournament.team_max_size %>
-</p>
-
-<p>
-  <strong>Team min size:</strong>
-  <%= @tournament.team_min_size %>
-</p>
-
-<p>
-  <strong>Games per round:</strong>
-  <%= @tournament.games_per_round %>
-</p>
-
-<p>
-  <strong>Teams per round:</strong>
-  <%= @tournament.teams_per_round %>
-</p>
-
-<p>
-  <strong>Brackets:</strong>
-  <%= @tournament.brackets %>
-</p>
-
-<p>
-  <strong>Public teams:</strong>
-  <%= @tournament.public_teams %>
-</p>
-
-<p>
-  <strong>Lead time:</strong>
-  <%= @tournament.lead_time %>
-</p>
-
-<p>
-  <strong>Num parallel events:</strong>
-  <%= @tournament.num_parallel_events %>
-</p>
-
-<p>
-  <strong>Time between rounds:</strong>
-  <%= @tournament.time_between_rounds %>
-</p>
-
-<p>
-  <strong>Time rounding:</strong>
-  <%= @tournament.time_rounding %>
-</p>
-
-<p>
-  <strong>Event earliest time:</strong>
-  <%= @tournament.event_earliest_time %>
-</p>
-
-<p>
-  <strong>Event latest time:</strong>
-  <%= @tournament.event_latest_time %>
-</p>
-
-<%= link_to 'Edit', edit_tournament_path(@tournament) %> |
-<%= link_to 'Back', tournaments_path %>
+<%= link_to 'Edit', edit_tournament_path(@tournament), :class => "btn btn-primary"  %> |
+<%= link_to 'Back', tournaments_path, :class => "btn btn-warning" %>

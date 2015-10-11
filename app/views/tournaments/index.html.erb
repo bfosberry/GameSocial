@@ -1,53 +1,34 @@
-<h1>Listing tournaments</h1>
+<h1 class="text-center">Tournaments</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Num teams</th>
-      <th>Team max size</th>
-      <th>Team min size</th>
-      <th>Games per round</th>
-      <th>Teams per round</th>
-      <th>Brackets</th>
-      <th>Public teams</th>
-      <th>Lead time</th>
-      <th>Num parallel events</th>
-      <th>Time between rounds</th>
-      <th>Time rounding</th>
-      <th>Event earliest time</th>
-      <th>Event latest time</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= grid(@tournaments_grid) do |g|
 
-  <tbody>
-    <% @tournaments.each do |tournament| %>
-      <tr>
-        <td><%= tournament.name %></td>
-        <td><%= tournament.description %></td>
-        <td><%= tournament.num_teams %></td>
-        <td><%= tournament.team_max_size %></td>
-        <td><%= tournament.team_min_size %></td>
-        <td><%= tournament.games_per_round %></td>
-        <td><%= tournament.teams_per_round %></td>
-        <td><%= tournament.brackets %></td>
-        <td><%= tournament.public_teams %></td>
-        <td><%= tournament.lead_time %></td>
-        <td><%= tournament.num_parallel_events %></td>
-        <td><%= tournament.time_between_rounds %></td>
-        <td><%= tournament.time_rounding %></td>
-        <td><%= tournament.event_earliest_time %></td>
-        <td><%= tournament.event_latest_time %></td>
-        <td><%= link_to 'Show', tournament %></td>
-        <td><%= link_to 'Edit', edit_tournament_path(tournament) %></td>
-        <td><%= link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  g.blank_slate  do
+    content_tag :div, "No Tournaments found", class: 'well'
+  end
 
-<br>
+  g.row_attributes do |object|
+    { onclick: "maybeVisit(event, '#{url_for(object)}');" }
+  end
 
-<%= link_to 'New Tournament', new_tournament_path %>
+  g.column name: 'Name', attribute: 'name' do |tournament|
+    tournament.name 
+  end
+
+  g.column name: 'Game', model: Game, attribute: 'name' do |tournament|
+    tournament.game_name 
+  end
+  
+  g.column do |tournament|
+    if current_user && current_user.owns(tournament)
+      link_to 'Edit', edit_tournament_path(tournament), :class => "btn btn-primary" 
+    end
+  end
+
+  g.column do |tournament|
+    if current_user && current_user.owns(tournament)
+      link_to 'Destroy', tournament, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+    end
+  end
+end -%>
+
+<%= link_to 'Create Tournament', new_tournament_path, :class => "btn btn-success" %>
