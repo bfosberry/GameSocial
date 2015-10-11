@@ -12,7 +12,7 @@ gem 'unicorn'
 gem 'whenever'
 gem 'syslog-logger'
 gem 'debugger-ruby_core_source'
-gem 'websocket-rails'
+gem 'websocket-rails', '0.6.2', platform: :ruby
 
 gem "wice_grid"
 gem 'jquery-ui-rails'
