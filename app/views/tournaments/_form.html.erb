@@ -20,15 +20,24 @@
     <%= f.text_area :description, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :num_teams, :class => "help-inline"  %><br>
+    <%= f.label :game_id, :class => "help-inline" %><br>
+    <%= f.grouped_collection_select :game_id, Game.type_fetchers, :fetch, :type, :id, :name,  {:selected => @tournament.game_id}, {:class => "form-control"} %>
+      <p>Don't see the game you wanted to add? Click <%= link_to "here", new_game_path, :class => "btn btn-primary btn-sm" %></p>
+  </div>
+  <div class="form-group">
+    <%= f.label "LAN Party", :class => "help-inline" %><br>
+    <%= f.collection_select :event_id, Event.all, :id, :name,  {:selected => @tournament.event_id, :include_blank => true}, {:class => "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label "Max number of Teams", :class => "help-inline"  %><br>
     <%= f.number_field :num_teams, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :team_max_size, :class => "help-inline"  %><br>
+    <%= f.label "Max team size", :class => "help-inline"  %><br>
     <%= f.number_field :team_max_size, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :team_min_size, :class => "help-inline"  %><br>
+    <%= f.label "Min team size", :class => "help-inline"  %><br>
     <%= f.number_field :team_min_size, :class => "form-control" %>
   </div>
   <div class="form-group">
@@ -40,36 +49,38 @@
     <%= f.number_field :teams_per_round, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :brackets, :class => "help-inline"  %><br>
+    <%= f.label "Number of Brackets", :class => "help-inline"  %><br>
     <%= f.number_field :brackets, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :public_teams, :class => "help-inline"  %><br>
-    <%= f.text_field :public_teams, :class => "form-control" %>
+    <%= f.label "Public team signup?", :class => "help-inline"  %><br>
+    <%= f.check_box :public_teams, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :lead_time, :class => "help-inline"  %><br>
+    <%= f.label "Lead time (minutes)", :class => "help-inline"  %><br>
     <%= f.number_field :lead_time, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :num_parallel_events, :class => "help-inline"  %><br>
+    <%= f.label "Number of parallel games", :class => "help-inline"  %><br>
     <%= f.number_field :num_parallel_events, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :time_between_rounds, :class => "help-inline"  %><br>
+    <%= f.label "Time between rounds (minutes)", :class => "help-inline"  %><br>
     <%= f.number_field :time_between_rounds, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :time_rounding, :class => "help-inline"  %><br>
-    <%= f.text_field :time_rounding, :class => "form-control" %>
+    <%= f.label "Scheduled time rounding", :class => "help-inline"  %><br>
+    <%= f.select :time_rounding, Tournament.time_rounding_options, 
+      {:selected => @tournament.time_rounding}, 
+      {:class => "form-control"} %>
   </div>
   <div class="form-group">
-    <%= f.label :event_earliest_time, :class => "help-inline"  %><br>
-    <%= f.text_field :event_earliest_time, :class => "form-control" %>
+    <%= f.label "Earliest event time", :class => "help-inline"  %><br>
+    <%= f.text_field :event_earliest_time, :class => "time_field form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label :event_latest_time, :class => "help-inline"  %><br>
-    <%= f.text_field :event_latest_time, :class => "form-control" %>
+    <%= f.label "Latest event time", :class => "help-inline"  %><br>
+    <%= f.text_field :event_latest_time, :class => "time_field form-control" %>
   </div>
   <div class="form-group">
     <%= f.fields_for :object_permission do |builder| %>
@@ -83,3 +94,9 @@
     <%= f.submit :class => "btn btn-success" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $(function(){
+    $('.time_field').datetimepicker({'datepicker': false, 'format': 'H:i'});
+  });
+</script>

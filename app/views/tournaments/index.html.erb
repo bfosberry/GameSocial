@@ -17,6 +17,10 @@
   g.column name: 'Game', model: Game, attribute: 'name' do |tournament|
     tournament.game_name 
   end
+
+  g.column name: 'Lan Party', model: Event, attribute: 'name' do |tournament|
+    tournament.event_name 
+  end
   
   g.column do |tournament|
     if current_user && current_user.owns(tournament)

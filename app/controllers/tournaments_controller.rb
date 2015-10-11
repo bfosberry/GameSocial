@@ -81,6 +81,6 @@ class TournamentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tournament_params
-      params.require(:tournament).permit(:name, :description, :num_teams, :team_max_size, :team_min_size, :games_per_round, :teams_per_round, :brackets, :public_teams, :lead_time, :num_parallel_events, :time_between_rounds, :time_rounding, :event_earliest_time, :event_latest_time, object_permission_attributes: [:permission_type])
+      params.require(:tournament).permit(:name, :game_id, :event_id, :description, :num_teams, :team_max_size, :team_min_size, :games_per_round, :teams_per_round, :brackets, :public_teams, :lead_time, :num_parallel_events, :time_between_rounds, :time_rounding, :event_earliest_time, :event_latest_time, object_permission_attributes: [:permission_type])
     end
 end

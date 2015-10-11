@@ -5,60 +5,68 @@
     <td><h5 class="text-center">Name</h5></td>
     <td><p class="text-center"><%= @tournament.name %></p></td>
   </tr>
-    <tr>
+  <tr>
     <td><h5 class="text-center">Description</h5></td>
     <td><p class="text-center"><%= @tournament.name %></p></td>
   </tr>
-    <tr>
-    <td><h5 class="text-center">Max Teams</h5></td>
+  <tr>
+    <td><h5 class="text-center">Game</h5></td>
+    <td><p class="text-center"><%= @tournament.game_name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">LAN Party</h5></td>
+    <td><p class="text-center"><%= @tournament.event_name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Max number of Teams</h5></td>
     <td><p class="text-center"><%= @tournament.num_teams %></p></td>
   </tr>
-    <tr>
+  <tr>
     <td><h5 class="text-center">Max Team Size</h5></td>
     <td><p class="text-center"><%= @tournament.team_max_size %></p></td>
   </tr>
-    <tr>
+  <tr>
     <td><h5 class="text-center">Min Team Size</h5></td>
     <td><p class="text-center"><%= @tournament.team_min_size %></p></td>
   </tr>
-    <tr>
+  <tr>
     <td><h5 class="text-center">Games per Round</h5></td>
     <td><p class="text-center"><%= @tournament.games_per_round %></p></td>
   </tr>
-    <tr>
+  <tr>
     <td><h5 class="text-center">Teams per Round</h5></td>
     <td><p class="text-center"><%= @tournament.teams_per_round %></p></td>
   </tr>
-    <tr>
-    <td><h5 class="text-center">Brackets</h5></td>
+  <tr>
+    <td><h5 class="text-center">Number of Brackets</h5></td>
     <td><p class="text-center"><%= @tournament.brackets %></p></td>
   </tr>
-    <tr>
-    <td><h5 class="text-center">Public Teams</h5></td>
+  <tr>
+    <td><h5 class="text-center">Public team signup?</h5></td>
     <td><p class="text-center"><%= @tournament.public_teams %></p></td>
   </tr>
-    <tr>
-    <td><h5 class="text-center">Num Parallel Events</h5></td>
-    <td><p class="text-center"><%= @tournament.num_parallel_events %></p></td>
-  </tr>
-    <tr>
-    <td><h5 class="text-center">Lead Time</h5></td>
+  <tr>
+    <td><h5 class="text-center">Lead time (minutes)</h5></td>
     <td><p class="text-center"><%= @tournament.lead_time %></p></td>
   </tr>
-    <tr>
-    <td><h5 class="text-center">Time between Rounds</h5></td>
+  <tr>
+    <td><h5 class="text-center">Num of parallel games</h5></td>
+    <td><p class="text-center"><%= @tournament.num_parallel_events %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Time between rounds (minutes)</h5></td>
     <td><p class="text-center"><%= @tournament.time_between_rounds %></p></td>
   </tr>
-    <tr>
-    <td><h5 class="text-center">Time Rounding</h5></td>
+  <tr>
+    <td><h5 class="text-center">Schedule time rounding</h5></td>
     <td><p class="text-center"><%= @tournament.time_rounding %></p></td>
   </tr>
-    <tr>
-    <td><h5 class="text-center">Earliest Event Time</h5></td>
+  <tr>
+    <td><h5 class="text-center">Earliest event time</h5></td>
     <td><p class="text-center"><%= @tournament.event_earliest_time %></p></td>
   </tr>
-    <tr>
-    <td><h5 class="text-center">Latest Event time</h5></td>
+  <tr>
+    <td><h5 class="text-center">Latest event time</h5></td>
     <td><p class="text-center"><%= @tournament.event_latest_time %></p></td>
   </tr>
   <tr>
