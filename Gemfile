@@ -8,11 +8,11 @@ gem 'pg'
 gem 'jquery-datetimepicker-rails'
 gem 'ri_cal'
 
-gem 'unicorn'
+gem 'thin'
 gem 'whenever'
 gem 'syslog-logger'
 gem 'debugger-ruby_core_source'
-gem 'websocket-rails', '0.6.2', platform: :ruby
+gem 'websocket-rails'
 
 gem "wice_grid"
 gem 'jquery-ui-rails'
@@ -20,6 +20,7 @@ gem 'rails3-jquery-autocomplete'
 gem 'rails_12factor'
 gem 'runtimeerror_notifier'
 gem 'redis-rails'
+
 gem 'momentjs-rails'
 gem 'quiet_assets'
 gem 'fullcalendar-rails'
@@ -29,12 +30,6 @@ group :development, :test do
  gem 'sqlite3'
  gem 'binding_of_caller'
  gem 'better_errors'
-end
-
-group :development do
-  gem 'capistrano-unicorn', :require => false
-  # Use Capistrano for deployment
-  gem 'capistrano', '2.15.3'
 end
 
 group :test do
