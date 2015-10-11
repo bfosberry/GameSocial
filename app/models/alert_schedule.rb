@@ -52,7 +52,6 @@ class AlertSchedule < ActiveRecord::Base
   end
 
   def verify_alert_schedule(game_location)
-    puts "Checking #{name}"
     alert_conditions.map {|c| c.verify(game_location) }.all?
   end
 end
