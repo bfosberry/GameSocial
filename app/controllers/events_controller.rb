@@ -28,11 +28,18 @@ class EventsController < ApplicationController
     @post = Post.new({ :postable => @event })
     @posts_grid  = initialize_grid(@event.posts, :include => [:user])
     @game_events = all_visible(GameEvent).where("event_id = ?", @event.id)
+    @tournaments = all_visible(Tournament).where("event_id = ?", @event.id)
     @filter = params["filter"]
     if @filter == "owned"
       @game_events = @game_events.where("game_id in (?)", current_user.games.map {|g| g.id })
     end
+    @filter_tournaments = params["filter_tournaments"]
+    if @filter_tournaments == "owned"
+      @tournaments = @tournaments.where("game_id in (?)", current_user.games.map {|g| g.id })
+    end
+    
     @game_events_grid = initialize_grid(@game_events, :include => [:game])
+    @tournaments_grid = initialize_grid(@tournaments, :include => [:game])
     respond_to do |format|
       format.html {}
       format.ics do

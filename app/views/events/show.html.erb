@@ -81,9 +81,21 @@
 <% else %>
   <p>Showing all events. <%= link_to 'Show Joinable Events', "#{event_path(@event)}/?filter=owned", :class => "btn btn-success" %><br><br></p>
 <% end %>
-<%= render "game_events/game_events", :game_events => @event.game_events %>
+<%= render "game_events/game_events" %>
 <% if current_user %>
 <%= link_to 'Create Event', new_game_event_for_event_path(@event), :class => "btn btn-success" %><br><br>
+<% end %>
+
+</script>
+<h2>Tournaments</h2>
+<% if @filter_tournaments == "owned" %>
+  <p>Showing only tournaments which you can play. <%= link_to 'Show All Tournaments', event_path(@event), :class => "btn btn-success" %><br><br></p>
+<% else %>
+  <p>Showing all tournaments. <%= link_to 'Show Joinable Tournaments', "#{event_path(@event)}/?filter_tournaments=owned", :class => "btn btn-success" %><br><br></p>
+<% end %>
+<%= render "tournaments/tournaments" %>
+<% if current_user %>
+<%= link_to 'Create Tournament', new_tournament_for_event_path(@event), :class => "btn btn-success" %><br><br>
 <% end %>
 
 <% if @event.users.size > 0 %>

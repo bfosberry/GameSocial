@@ -1,7 +1,9 @@
 require 'sidekiq/web'
 
 GameSocial::Application.routes.draw do
+  match 'tournaments/new_for_event/:event_id', to: 'tournaments#new_for_event', as: 'new_tournament_for_event', via: [:get] 
   resources :tournaments
+
   match 'playlists/:id', to: 'playlists#add_game', as: 'add_game', via: [:post]
   match 'playlists/:id/:game_id', to: 'playlists#delete_game', as: 'delete_game', via: [:delete]
   resources :playlists

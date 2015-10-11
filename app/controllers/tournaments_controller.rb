@@ -25,6 +25,13 @@ class TournamentsController < ApplicationController
     @tournament.object_permission = ObjectPermission.new
   end
 
+  # GET /tournaments/new_for_event
+  def new_for_event
+    @tournament = Tournament.new({ :event_id => params[:event_id]})
+    @tournament.object_permission = ObjectPermission.new
+    render 'new'
+  end
+
   # GET /tournaments/1/edit
   def edit
     enforce_ownership(@tournament)

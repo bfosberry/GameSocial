@@ -15,7 +15,13 @@ class Tournament < ActiveRecord::Base
 
   validates :time_rounding, :inclusion => {:in => TIME_ROUNDING_OPTIONS}
 
+  default_scope { order(created_at: :asc) }
+
   def self.time_rounding_options
     TIME_ROUNDING_OPTIONS
+  end
+
+  def next_event
+    game_events.where("game_start_time > ?", DateTime.now).first
   end
 end

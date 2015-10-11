@@ -1,0 +1,17 @@
+<%= grid(@tournaments_grid) do |g|
+  g.blank_slate  do
+    content_tag :div, "No Tournaments found", class: 'well'
+  end
+  
+  g.row_attributes do |object|
+    { onclick: "maybeVisit(event, '#{url_for(object)}');" }
+  end
+
+  g.column name: 'Name', attribute: 'name' do |tournament|
+    tournament.name 
+  end
+
+  g.column name: 'Game', model: Game, attribute: 'name' do |tournament|
+    tournament.game_name 
+  end
+end -%>
