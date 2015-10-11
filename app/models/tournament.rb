@@ -11,9 +11,9 @@ class Tournament < ActiveRecord::Base
   accepts_nested_attributes_for :object_permission
   delegate :is_visible_to?, :to => :object_permission
 
-  validates :time_rounding, :inclusion => {:in => TIME_ROUNDING_OPTIONS}
+  TIME_ROUNDING_OPTIONS = %w(None, 5 Minute, 10 Minute, 15 Minute, 30 Minute, 60 Minute)
 
-  TIME_ROUNDING_OPTIONS = ["None", "5 Minute", "10 Minute", "15 Minute", "30 Minute", "60 Minute"]
+  validates :time_rounding, :inclusion => {:in => TIME_ROUNDING_OPTIONS}
 
   def self.time_rounding_options
     TIME_ROUNDING_OPTIONS
