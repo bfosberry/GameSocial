@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 //= require bootstrap
 //= require jquery-ui
+//= require notifyjs_rails
 //= require turbolinks
 //= require jquery.datetimepicker
 //= require autocomplete-rails
@@ -55,6 +56,5 @@ function registerWebsocket(user_id) {
 }
 
 function handleNotification(notification) {
-  console.log('GameId: ' +notification.payload.game_id);
-  console.log('Title: ' +notification.title);
+  $.notify(notification.title, {"className": "info", "position": "bottom right"});
 }

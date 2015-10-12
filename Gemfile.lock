@@ -161,6 +161,7 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     nenv (0.2.0)
+    notifyjs_rails (0.0.2)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -357,6 +358,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   momentjs-rails
+  notifyjs_rails
   omniauth-google-oauth2
   omniauth-steam
   pg

@@ -17,6 +17,7 @@ gem 'websocket-rails'
 gem "wice_grid"
 gem 'jquery-ui-rails'
 gem 'rails3-jquery-autocomplete'
+gem 'notifyjs_rails'
 gem 'rails_12factor'
 gem 'runtimeerror_notifier'
 gem 'redis-rails'
