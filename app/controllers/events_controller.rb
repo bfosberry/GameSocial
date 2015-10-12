@@ -30,11 +30,11 @@ class EventsController < ApplicationController
     @game_events = all_visible(GameEvent).where("event_id = ?", @event.id)
     @tournaments = all_visible(Tournament).where("event_id = ?", @event.id)
     @filter = params["filter"]
-    if @filter == "owned"
+    if @filter == "owned" && current_user
       @game_events = @game_events.where("game_id in (?)", current_user.games.map {|g| g.id })
     end
     @filter_tournaments = params["filter_tournaments"]
-    if @filter_tournaments == "owned"
+    if @filter_tournaments == "owned" && current_user
       @tournaments = @tournaments.where("game_id in (?)", current_user.games.map {|g| g.id })
     end
     

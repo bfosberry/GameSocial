@@ -8,7 +8,7 @@ class GameEventsController < ApplicationController
   def index
     @game_events = all_visible(GameEvent)
     @filter = params["filter"]
-    if @filter == "owned"
+    if @filter == "owned" && current_user
       @game_events = @game_events.where("games.id in (?)", current_user.games.map {|g| g.id })
     end
     @game_events_grid = initialize_grid(@game_events, :include => [:user, 
