@@ -11,12 +11,12 @@ class ObjectPermission < ActiveRecord::Base
   end
 
   def self.permission_types(user)
-    gs = user.groups.map{ |g| g.name }
+    gs = user ? user.groups.map{ |g| g.name } : []
     gs.empty? ? base_permission_types : base_permission_types <<  gs
   end
   
   def self.event_permission_types(user)
-    gs = user.groups.map{ |g| g.name }
+    gs = user ? user.groups.map{ |g| g.name } : []
     gs.empty? ? base_event_permission_types : base_event_permission_types <<  gs
   end
 
@@ -35,8 +35,7 @@ class ObjectPermission < ActiveRecord::Base
     	return true if are_friends?(user, permissible_object.user)
       return has_friend_in?(user, permissible_object)
     else
-      puts "handling group perm"
-      puts permission_type
+      return false unless user
       g = permissible_object.user.groups.where(name: permission_type).first
       g && g.users.include?(user)
     end
