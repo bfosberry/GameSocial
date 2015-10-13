@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151010032942) do
+ActiveRecord::Schema.define(version: 20151013020205) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -234,6 +234,19 @@ ActiveRecord::Schema.define(version: 20151010032942) do
 
   add_index "posts", ["postable_id", "postable_type"], name: "index_posts_on_postable_id_and_postable_type"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+
+  create_table "team_members", force: true do |t|
+    t.integer "team_id"
+    t.integer "user_id"
+  end
+
+  create_table "teams", force: true do |t|
+    t.integer  "tournament_id"
+    t.integer  "user_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tournaments", force: true do |t|
     t.string   "name"

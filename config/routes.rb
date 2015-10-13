@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 GameSocial::Application.routes.draw do
+  resources :teams
   match 'tournaments/new_for_event/:event_id', to: 'tournaments#new_for_event', as: 'new_tournament_for_event', via: [:get] 
   resources :tournaments
 
