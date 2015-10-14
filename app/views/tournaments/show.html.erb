@@ -76,6 +76,8 @@
 <p>
 </table>
 
+<%= render "tournaments/teams", :tournament => @tournament, :teams_grid => @teams_grid %>
+
 <h2>Calendar</h2>
 <div id="calendar"></div>
 
@@ -94,7 +96,7 @@
   create_calendar("#calendar", events, "agendaDay", start_time);
 });
 
-<%= render "game_events/game_events", :game_events => @tournament.game_events %>
+<%= render "game_events/game_events" %>
 
 <%= link_to 'Edit', edit_tournament_path(@tournament), :class => "btn btn-primary"  %> |
 <%= link_to 'Back', tournaments_path, :class => "btn btn-warning" %>

@@ -1,19 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Tournament:</strong>
-  <%= @team.tournament_id %>
-</p>
+<table class="table table-condensed">
+  <tr>
+    <td><h5 class="text-center">Tournament</h5></td>
+    <td><p class="text-center"><%= @team.tournament_name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Owner</h5></td>
+    <td><p class="text-center"><%= @team.user_name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Name</h5></td>
+    <td><p class="text-center"><%= @team.name %></p></td>
+  </tr>
+  <tr>
+    <td><h5 class="text-center">Members</h5></td>
+    <td><p class="text-center"><%= @team.users.size %></p></td>
+  </tr>
+</table>
 
-<p>
-  <strong>User:</strong>
-  <%= @team.user_id %>
-</p>
+<% if @team.users.size > 0 %>
+<h2>Members</h2>
+<div class="row">
+  <% for i in 0..5 %>
+    <div class="col-lg-2 col-md-2">
+      <%  @team.users.each_with_index do |u, index| %>
+        <% if index % 6 == i %>
+          <%= render "users/user", :u => u %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
-
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
+<% if current_user == @team.user %>
+<%= link_to 'Edit', edit_team_path(@team), :class => "btn btn-primary"  %><% end %> |
+<%= link_to 'Back', tournament_path(@team.tournament), :class => "btn btn-warning"%>

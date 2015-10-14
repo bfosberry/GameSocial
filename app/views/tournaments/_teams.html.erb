@@ -1,0 +1,44 @@
+<h2>Teams</h2>
+
+<%= grid(@teams_grid) do |g|
+
+  g.blank_slate  do
+    content_tag :div, "No Teams registered", class: 'well'
+  end
+
+  g.row_attributes do |object|
+    { onclick: "maybeVisit(event, '#{url_for(object)}');" }
+  end
+
+  g.column name: 'Name', attribute: 'name' do |team|
+    team.name 
+  end
+
+  g.column name: 'Owner', model: User, attribute: 'name' do |team|
+    team.user_name 
+  end
+
+  g.column name: 'Members' do |team|
+    team.users.size 
+  end
+  
+  g.column do |team|
+    if current_user && team.can_join?(current_user)
+      if team.users.include?(current_user)
+        link_to 'Leave', leave_team_path(team), :class => "btn btn-warning"
+      elsif !@tournament.in_team?(current_user) 
+        link_to 'Join', join_team_path(team), :class => "btn btn-success" 
+      end
+    end 
+  end
+end -%>
+
+<% if @tournament.in_team?(current_user) %>
+  <% team = @tournament.team_for(current_user) %>
+  <h2>Your Team: <%= team.name %></h2>
+  <%= render "team/team", :team => team %>
+<% end %>
+
+<% if @tournament.can_create_team?(current_user) %>
+  <%= link_to 'Create Team', new_team_for_tournament_path(@tournament), :class => "btn btn-success" %>
+<% end %>

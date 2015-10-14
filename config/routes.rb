@@ -1,6 +1,9 @@
 require 'sidekiq/web'
 
 GameSocial::Application.routes.draw do
+  match 'teams/new_for_tournament/:tournament_id', to: 'teams#new_for_tournament', as: 'new_team_for_tournament', via: [:get] 
+  match 'teams/:id/join', to: 'teams#join', as: 'join_team', via: [:get]
+  match 'teams/:id/leave', to: 'teams#leave', as: 'leave_team', via: [:get]
   resources :teams
   match 'tournaments/new_for_event/:event_id', to: 'tournaments#new_for_event', as: 'new_tournament_for_event', via: [:get] 
   resources :tournaments

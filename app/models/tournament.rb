@@ -25,4 +25,16 @@ class Tournament < ActiveRecord::Base
   def next_event
     game_events.where("game_start_time > ?", DateTime.now).first
   end
+
+  def in_team?(user)
+    !teams.map(&:users).select{|u| u == user}.empty?
+  end
+
+  #def team?(user)
+  #  !teams.map(&:users).select{|u| u == user}.empty?
+  #end
+
+  def can_create_team?(user)
+    public_teams
+  end
 end
