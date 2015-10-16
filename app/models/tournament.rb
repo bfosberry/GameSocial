@@ -4,6 +4,7 @@ class Tournament < ActiveRecord::Base
   belongs_to :game
   has_many :game_events, :dependent => :destroy
   has_many :teams, :dependent => :destroy
+  has_many :tournament_rounds, :dependent => :destroy
 
   delegate :name, to: :game, prefix: true, allow_nil: true
   delegate :name, to: :event, prefix: true, allow_nil: true
