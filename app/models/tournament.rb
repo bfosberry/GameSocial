@@ -28,14 +28,17 @@ class Tournament < ActiveRecord::Base
   end
 
   def in_team?(user)
-    !teams.map(&:users).select{|u| u == user}.empty?
+    !team_for(user).nil?
   end
 
-  #def team?(user)
-  #  !teams.map(&:users).select{|u| u == user}.empty?
-  #end
+  def team_for(user)
+    teams.select {|t| t.users.include? user }.first
+  end
 
   def can_create_team?(user)
     public_teams
+  end
+
+  def build_rounds
   end
 end
