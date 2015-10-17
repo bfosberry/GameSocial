@@ -3,6 +3,8 @@ class Team < ActiveRecord::Base
 	belongs_to :tournament
 	has_many :team_members
 	has_many :users, through: :team_members
+    has_and_belongs_to_many :tournament_round
+
 
     delegate :name, to: :tournament, prefix: true, allow_nil: true
     delegate :name, to: :user, prefix: true, allow_nil: true

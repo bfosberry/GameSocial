@@ -22,8 +22,4 @@
   g.column name: 'Start Time', attribute: 'game_start_time' do |game_event|
     game_event.formatted_start_time
   end
-
-  g.column do |game_event|
-    link_to 'Show', game_event, :class => "btn btn-default"
-  end
 end -%>

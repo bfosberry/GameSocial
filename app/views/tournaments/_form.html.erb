@@ -65,6 +65,10 @@
     <%= f.number_field :num_parallel_events, :class => "form-control" %>
   </div>
   <div class="form-group">
+    <%= f.label "Round duration (minutes)", :class => "help-inline"  %><br>
+    <%= f.number_field :round_length, :class => "form-control" %>
+  </div>
+  <div class="form-group">
     <%= f.label "Time between rounds (minutes)", :class => "help-inline"  %><br>
     <%= f.number_field :time_between_rounds, :class => "form-control" %>
   </div>
@@ -88,7 +92,7 @@
       <%= builder.select :permission_type, ObjectPermission.event_permission_types(current_user), 
       {:selected => f.object.object_permission.permission_type}, 
       {:class => "form-control"} %>
-  <% end %>
+    <% end %>
   </div>
   <div class="actions">
     <%= f.submit :class => "btn btn-success" %>

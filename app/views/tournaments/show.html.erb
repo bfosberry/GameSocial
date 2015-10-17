@@ -54,6 +54,10 @@
     <td><p class="text-center"><%= @tournament.num_parallel_events %></p></td>
   </tr>
   <tr>
+    <td><h5 class="text-center">Round duration (minutes)</h5></td>
+    <td><p class="text-center"><%= @tournament.round_length %></p></td>
+  </tr>
+  <tr>
     <td><h5 class="text-center">Time between rounds (minutes)</h5></td>
     <td><p class="text-center"><%= @tournament.time_between_rounds %></p></td>
   </tr>
@@ -95,7 +99,9 @@
   start_time = "<%= @tournament.next_event.try(:game_start_time) || DateTime.now %>"
   create_calendar("#calendar", events, "agendaDay", start_time);
 });
+</script>
 
+<h2>Events</h2>
 <%= render "game_events/game_events" %>
 
 <%= link_to 'Edit', edit_tournament_path(@tournament), :class => "btn btn-primary"  %> |

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016024613) do
+ActiveRecord::Schema.define(version: 20151017174930) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -248,6 +248,11 @@ ActiveRecord::Schema.define(version: 20151016024613) do
     t.datetime "updated_at"
   end
 
+  create_table "teams_tournament_rounds", force: true do |t|
+    t.integer "tournament_round_id"
+    t.integer "team_id"
+  end
+
   create_table "tournament_rounds", force: true do |t|
     t.integer  "tournament_id"
     t.integer  "game_event_id"
@@ -257,40 +262,13 @@ ActiveRecord::Schema.define(version: 20151016024613) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "winner_id"
+    t.integer  "bracket_id"
   end
 
   add_index "tournament_rounds", ["tournament_id"], name: "index_tournament_rounds_on_tournament_id"
 
-  create_table "tournament_rounds_teams", force: true do |t|
-    t.integer "tournament_round_id"
-    t.integer "team_id"
-  end
-
-  create_table "tournaments", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "num_teams"
-    t.integer  "team_max_size"
-    t.integer  "team_min_size"
-    t.integer  "games_per_round"
-    t.integer  "teams_per_round"
-    t.integer  "brackets"
-    t.boolean  "public_teams"
-    t.integer  "lead_time"
-    t.integer  "num_parallel_events"
-    t.integer  "time_between_rounds"
-    t.string   "time_rounding"
-    t.string   "event_earliest_time"
-    t.string   "event_latest_time"
-    t.integer  "user_id"
-    t.integer  "event_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "game_id"
-  end
-
-  add_index "tournaments", ["event_id"], name: "index_tournaments_on_event_id"
-  add_index "tournaments", ["user_id"], name: "index_tournaments_on_user_id"
+# Could not dump table "tournaments" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "users", force: true do |t|
     t.datetime "created_at"
