@@ -15,7 +15,8 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1.json
   def show
     enforce_visibility(@tournament)
-    @game_events_grid = initialize_grid(@tournament.game_events, :include => [:game])
+    @tournament_rounds_grid = initialize_grid(@tournament.tournament_rounds, 
+                                              :include => [:game_event])
     @teams_grid = initialize_grid(@tournament.teams,
                                   :include => [:user])
   end

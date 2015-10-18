@@ -1,0 +1,29 @@
+<%= grid(@tournament_rounds_grid) do |g|
+  g.blank_slate  do
+    content_tag :div, "No Rounds found", class: 'well'
+  end
+  
+  g.column name: 'Bracket', attribute: 'bracket_id' do |tournament_round|
+    tournament_round.bracket_id
+  end
+
+  g.column name: 'Round', attribute: 'round_index' do |tournament_round|
+    tournament_round.round_index
+  end
+
+  g.column name: 'Winner', attribute: 'winner_id' do |tournament_round|
+    tournament_round.winner_name
+  end
+
+  g.column name: 'Status' do |tournament_round|
+    tournament_round.status
+  end
+
+  g.column name: 'Start Time', attribute: 'game_start_time', model: GameEvent do |tournament_round|
+    tournament_round.game_start_time
+  end
+
+  g.column name: 'End Time', attribute: 'game_end_time', model: GameEvent do |tournament_round|
+    tournament_round.game_end_time
+  end
+end -%>
