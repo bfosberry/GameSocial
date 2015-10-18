@@ -105,14 +105,36 @@ class Tournament < ActiveRecord::Base
     end
   end
 
-  def update_rounds
+  def update_rounds(tournament_round=nil)
+    if tournament_round
+      winner = tournament_round.winner
+      if winner
+        next_bracket = tournament_round.bracket_id + 1
+        next_round_index = (tournament_round.round_index.to_f/2).floor
+        next_round = tournament_rounds
+          .where('bracket_id = ?', next_bracket)
+          .where('round_index = ?', next_round_index).first
+        if next_round
+          unless next_round.teams.include? winner
+            next_round.teams.append(winner)
+          end
+        end
+      end
+    end
+
     tournament_rounds.each do |tr|
       if tr.game_event
         tr.game_event.users = tr.teams.flat_map {|t| t.users }
         team_names = tr.teams.map {|t| t.name }
-        tr.game_event.update_attribute(:description, "#{game_name} tournament. #{team_names.join(" vs ")}")
+        unless team_names.empty?
+          tr.game_event.update_attribute(:description, "#{game_name} tournament. #{team_names.join(" vs ")}")
+        end
         tr.game_event.export_game_event
       end
     end                     
+  end
+
+  def winner
+    tournament_rounds.last.try(&:winner)
   end
 end

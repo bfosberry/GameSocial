@@ -1,7 +1,7 @@
 class TournamentsController < ApplicationController
-  before_action :set_tournament, only: [:show, :edit, :update, :destroy]
+  before_action :set_tournament, only: [:show, :edit, :update, :destroy, :lock, :concede, :resolve]
   before_filter :spoof_login, only: [:show, :index]
-  before_filter :enforce_login, only: [:new, :edit, :update, :destroy]
+  before_filter :enforce_login, only: [:new, :edit, :update, :destroy, :resolve, :concede]
 
   # GET /tournaments
   # GET /tournaments.json
@@ -27,6 +27,44 @@ class TournamentsController < ApplicationController
     enforce_ownership(@tournament)
     @tournament.lock
     redirect_to @tournament
+  end
+
+  # GET /tournaments/1/brackets/2/concede
+  # GET /tournaments/1/brackets/2/concede.json
+  def concede
+    team = @tournament.team_for(current_user)
+    enforce_ownership(@team)
+    tournament_rounds = @tournament.tournament_rounds.where('bracket_id = ?', params['bracket_id'])
+    if team 
+      round = tournament_rounds.select { |tr| tr.teams.include? team }.first
+      if round
+        if round.winner.nil?
+          round.concede(team)
+          notice = "Round conceded"
+        else
+          notice = "Round already resolved"
+        end
+      else
+        notice = "No round to concede"
+      end
+    else
+      notice = "Not in team"
+    end
+    redirect_to @tournament, notice: notice
+  end
+
+  # POST /tournaments/1/brackets/2/resolve
+  # POST /tournaments/1/brackets/2/resolve.json
+  def resolve
+    enforce_ownership(@tournament)
+    team = @tournament.team_for(user_id)
+    tournament_rounds = @tournament.tournament_rounds.where('bracket_id = ?', params['bracket_id'])
+    if team 
+      round = tournament_rounds.select { |tr| tr.teams.include? team }.first
+      if round
+      end
+    end
+    redirect_to @tournament, notice: 'Round resolved'
   end
 
   # GET /tournaments/new

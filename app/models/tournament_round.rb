@@ -12,6 +12,10 @@ class TournamentRound < ActiveRecord::Base
 
   belongs_to :winner, foreign_key: "winner_id", class_name: "Team"
 
+  delegate :team_for, to: :tournament
+
+  after_commit :check
+
   def status
   	if winner
   		return "Completed"
@@ -24,6 +28,35 @@ class TournamentRound < ActiveRecord::Base
     else 
     	return "Upcoming"
   	end
+  end
+
+  def concede(team)
+    unless conceded.include? team.id
+      update_attribute(:conceded, conceded << team.id)
+    end
+    check
+  end
+
+  def resolve(team)
+    update_column(:winner_id, team.id)
+    tournament.update_rounds(self)
+  end
+
+  private
+
+  def check
+    if winner.nil?
+      if conceded.size == teams.size - 1
+        team_list = teams
+        unless conceded.empty?
+          team_list = team_list.where('"teams".id not in (?)', conceded)
+        end
+        w = team_list.first
+        return unless w
+        update_column(:winner_id, w.id)
+        tournament.update_rounds(self)
+      end
+    end
   end
 end
 

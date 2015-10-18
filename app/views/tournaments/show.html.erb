@@ -69,6 +69,10 @@
   <% end %>
 </table>
 
+<% if @tournament.winner %>
+<h2>Winner: <%= @tournament.winner.name %></h2>
+<% end %>
+
 <%= render "tournaments/teams", :tournament => @tournament, :teams_grid => @teams_grid %>
 
 <h2>Calendar</h2>

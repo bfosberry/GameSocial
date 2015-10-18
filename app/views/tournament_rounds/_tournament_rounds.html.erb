@@ -11,12 +11,12 @@
     tournament_round.round_index
   end
 
-  g.column name: 'Winner', attribute: 'winner_id' do |tournament_round|
-    tournament_round.winner_name
-  end
-
   g.column name: 'Status' do |tournament_round|
     tournament_round.status
+  end
+
+  g.column name: 'Winner', attribute: 'winner_id' do |tournament_round|
+    tournament_round.winner_name
   end
 
   g.column name: 'Start Time', attribute: 'game_start_time', model: GameEvent do |tournament_round|
@@ -25,5 +25,19 @@
 
   g.column name: 'End Time', attribute: 'game_end_time', model: GameEvent do |tournament_round|
     tournament_round.game_end_time
+  end
+
+  g.column do |tournament_round|
+    team = tournament_round.team_for(current_user)
+    #if is_admin?
+      #link_to 'Resolve', '#resolveModal', :class => "btn btn-primary", 'data-toggle' => 'modal'
+    #els
+    if team && team.user == current_user
+      if tournament_round.teams.include? team 
+        if tournament_round.winner.nil? && !tournament_round.conceded.include?(team.id)
+          link_to 'Concede', concede_tournament_round_path(tournament_round.tournament, bracket_id: tournament_round.bracket_id), :class => "btn btn-danger" 
+        end
+      end
+    end
   end
 end -%>
