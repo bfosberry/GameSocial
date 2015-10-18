@@ -20,7 +20,7 @@ module Workers
     end
 
     sidekiq_retry_in do |count|
-      5 * 60
+      (20 * 60)*rand
     end
   end
 end
