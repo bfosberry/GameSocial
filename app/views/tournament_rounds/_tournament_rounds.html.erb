@@ -29,10 +29,9 @@
 
   g.column do |tournament_round|
     team = tournament_round.team_for(current_user)
-    #if is_admin?
-      #link_to 'Resolve', '#resolveModal', :class => "btn btn-primary", 'data-toggle' => 'modal'
-    #els
-    if team && team.user == current_user
+    if is_admin? || @tournament.user == current_user
+      link_to 'Resolve', "#resolutionModal#{tournament_round.id}", :class => "btn btn-primary", 'data-toggle' => 'modal'
+    elsif team && team.user == current_user
       if tournament_round.teams.include? team 
         if tournament_round.winner.nil? && !tournament_round.conceded.include?(team.id)
           link_to 'Concede', concede_tournament_round_path(tournament_round.tournament, bracket_id: tournament_round.bracket_id), :class => "btn btn-danger" 
@@ -41,3 +40,7 @@
     end
   end
 end -%>
+
+<% @tournament.tournament_rounds.each do |tournament_round| %>
+<%= render '/tournament_rounds/resolution_form', :teams => tournament_round.teams, :id => tournament_round.id, :url => resolve_tournament_round_path(tournament_round.tournament, bracket_id: tournament_round.bracket_id) %>
+<% end %>

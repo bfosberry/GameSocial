@@ -57,14 +57,20 @@ class TournamentsController < ApplicationController
   # POST /tournaments/1/brackets/2/resolve.json
   def resolve
     enforce_ownership(@tournament)
-    team = @tournament.team_for(user_id)
+    team = Team.find(params[:team_id])
     tournament_rounds = @tournament.tournament_rounds.where('bracket_id = ?', params['bracket_id'])
     if team 
       round = tournament_rounds.select { |tr| tr.teams.include? team }.first
       if round
+        round.resolve(team)
+        notice = 'Round resolved'
+      else
+        notice = "No round to resolve"
       end
+    else
+      notice = "No team found"
     end
-    redirect_to @tournament, notice: 'Round resolved'
+    redirect_to @tournament, notice: notice
   end
 
   # GET /tournaments/new
