@@ -15,7 +15,7 @@ class Tournament < ActiveRecord::Base
 
   TIME_ROUNDING_OPTIONS = ["None", "5 Minute", "10 Minute", "15 Minute", "30 Minute", "60 Minute"]
 
-  validates :time_rounding, :inclusion => {:in => TIME_ROUNDING_OPTIONS}
+  #validates :time_rounding, :inclusion => {:in => TIME_ROUNDING_OPTIONS}
 
   default_scope { order(created_at: :asc) }
 
