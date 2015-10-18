@@ -49,10 +49,6 @@
     <%= f.number_field :teams_per_round, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label "Number of Brackets", :class => "help-inline"  %><br>
-    <%= f.number_field :brackets, :class => "form-control" %>
-  </div>
-  <div class="form-group">
     <%= f.label "Public team signup?", :class => "help-inline"  %><br>
     <%= f.check_box :public_teams, :class => "form-control" %>
   </div>
@@ -71,20 +67,6 @@
   <div class="form-group">
     <%= f.label "Time between rounds (minutes)", :class => "help-inline"  %><br>
     <%= f.number_field :time_between_rounds, :class => "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label "Scheduled time rounding", :class => "help-inline"  %><br>
-    <%= f.select :time_rounding, Tournament.time_rounding_options, 
-      {:selected => @tournament.time_rounding}, 
-      {:class => "form-control"} %>
-  </div>
-  <div class="form-group">
-    <%= f.label "Earliest event time", :class => "help-inline"  %><br>
-    <%= f.text_field :event_earliest_time, :class => "time_field form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label "Latest event time", :class => "help-inline"  %><br>
-    <%= f.text_field :event_latest_time, :class => "time_field form-control" %>
   </div>
   <div class="form-group">
     <%= f.fields_for :object_permission do |builder| %>

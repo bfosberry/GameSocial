@@ -38,10 +38,6 @@
     <td><p class="text-center"><%= @tournament.teams_per_round %></p></td>
   </tr>
   <tr>
-    <td><h5 class="text-center">Number of Brackets</h5></td>
-    <td><p class="text-center"><%= @tournament.brackets %></p></td>
-  </tr>
-  <tr>
     <td><h5 class="text-center">Public team signup?</h5></td>
     <td><p class="text-center"><%= @tournament.public_teams %></p></td>
   </tr>
@@ -62,22 +58,15 @@
     <td><p class="text-center"><%= @tournament.time_between_rounds %></p></td>
   </tr>
   <tr>
-    <td><h5 class="text-center">Schedule time rounding</h5></td>
-    <td><p class="text-center"><%= @tournament.time_rounding %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Earliest event time</h5></td>
-    <td><p class="text-center"><%= @tournament.event_earliest_time %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Latest event time</h5></td>
-    <td><p class="text-center"><%= @tournament.event_latest_time %></p></td>
-  </tr>
-  <tr>
     <td><h5 class="text-center">Visibility</h5></td>
     <td><p class="text-center"><%= @tournament.object_permission.permission_type %></p></td>
   </tr>
-<p>
+  <% if (!@tournament.locked?) && current_user && current_user.owns(@tournament) %>
+  <tr>
+    <td><h5 class="text-center">Locking</h5></td>
+    <td><p class="text-center"><%= link_to 'Lock Tournament', lock_tournament_path(@tournament), :class => "btn btn-success", data: { confirm: 'Are you sure?' } %></p></td>
+  </tr>
+  <% end %>
 </table>
 
 <%= render "tournaments/teams", :tournament => @tournament, :teams_grid => @teams_grid %>

@@ -33,12 +33,12 @@
   end
 end -%>
 
+<% if @tournament.can_create_team?(current_user) %>
+  <%= link_to 'Create Team', new_team_for_tournament_path(@tournament), :class => "btn btn-success" %>
+<% end %>
+
 <% if @tournament.in_team?(current_user) %>
   <% team = @tournament.team_for(current_user) %>
   <h2>Your Team: <%= team.name %></h2>
-  <%= render "team/team", :team => team %>
-<% end %>
-
-<% if @tournament.can_create_team?(current_user) %>
-  <%= link_to 'Create Team', new_team_for_tournament_path(@tournament), :class => "btn btn-success" %>
+  <%= render "teams/team", :team => team %>
 <% end %>

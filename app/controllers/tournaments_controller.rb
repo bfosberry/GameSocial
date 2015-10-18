@@ -20,6 +20,14 @@ class TournamentsController < ApplicationController
                                   :include => [:user])
   end
 
+  # GET /tournaments/1/lock
+  # GET /tournaments/1/lock.json
+  def lock
+    enforce_ownership(@tournament)
+    @tournament.lock
+    redirect_to @tournament
+  end
+
   # GET /tournaments/new
   def new
     @tournament = Tournament.new
