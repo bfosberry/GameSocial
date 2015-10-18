@@ -201,7 +201,7 @@ class User < ActiveRecord::Base
   end
 
   def upcoming_game_events
-    game_events.where("game_end_time > ?", DateTime.now)
+    attending_game_events.where("game_end_time > ?", DateTime.now)
   end
 
   def notify_websocket(event)
