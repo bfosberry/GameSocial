@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151018050151) do
+ActiveRecord::Schema.define(version: 20151019014100) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -264,6 +264,7 @@ ActiveRecord::Schema.define(version: 20151018050151) do
     t.integer  "winner_id"
     t.integer  "bracket_id"
     t.string   "conceded"
+    t.integer  "num_teams"
   end
 
   add_index "tournament_rounds", ["tournament_id"], name: "index_tournament_rounds_on_tournament_id"
