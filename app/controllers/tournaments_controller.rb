@@ -33,7 +33,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1/brackets/2/concede.json
   def concede
     team = @tournament.team_for(current_user)
-    enforce_ownership(@team)
+    enforce_ownership(team)
     tournament_rounds = @tournament.tournament_rounds.where('bracket_id = ?', params['bracket_id'])
     if team 
       round = tournament_rounds.select { |tr| tr.teams.include? team }.first
