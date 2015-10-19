@@ -36,7 +36,7 @@ class Tournament < ActiveRecord::Base
   end
 
   def can_create_team?(user)
-    public_teams
+    public_teams && team_for(user).nil?
   end
 
   def lock

@@ -20,6 +20,8 @@
   <div class="form-group">
     <%= f.label :user_id, :class => "help-inline" %><br>
     <%= f.collection_select :user_id, User.all, :id, :name,  {:selected => @team.user_id, :include_blank => true}, {:class => "form-control"} %>  </div>
+  <% else %>
+    <%= f.hidden_field(:tournament_id, :value => @team.tournament_id) %>
   <% end %>
   <div class="form-group">
     <%= f.label :name, :class => "help-inline" %><br>
