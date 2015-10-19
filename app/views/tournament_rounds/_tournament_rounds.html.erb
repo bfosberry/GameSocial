@@ -2,6 +2,12 @@
   g.blank_slate  do
     content_tag :div, "No Rounds found", class: 'well'
   end
+
+  g.row_attributes do |object|
+    if object.game_event
+    { onclick: "maybeVisit(event, '#{url_for(object.game_event)}');" }
+    end
+  end
   
   g.column name: 'Bracket', attribute: 'bracket_id' do |tournament_round|
     tournament_round.bracket_id
