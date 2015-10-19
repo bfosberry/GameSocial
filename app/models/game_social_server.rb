@@ -41,6 +41,9 @@ class GameSocialServer < ActiveRecord::Base
         server.server_info
       rescue SteamCondenser::Error::Timeout, Errno::EHOSTUNREACH, Errno::ECONNREFUSED, Errno::ECONNRESET, Errno::EINVAL, Errno::ENETUNREACH, Errno::ETIMEDOUT
         {}
+       rescue NoMethodError
+         # TODO fix bug with kondenser :(
+        {}
       end
     end
   end
