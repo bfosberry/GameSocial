@@ -111,6 +111,9 @@ class Tournament < ActiveRecord::Base
                                    :permission_type => self.object_permission.permission_type) 
       game_event.object_permission = op
       game_event.save
+
+      tr.reload
+      tr.game_event_id = game_event.id
       tr.save
     end
   end
