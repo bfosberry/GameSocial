@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019014100) do
+ActiveRecord::Schema.define(version: 20151019221549) do
 
   create_table "alert_conditions", force: true do |t|
     t.string   "condition_type"
@@ -97,6 +97,11 @@ ActiveRecord::Schema.define(version: 20151019014100) do
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id"
+
+  create_table "events_game_social_servers", force: true do |t|
+    t.integer "game_social_server_id"
+    t.integer "event_id"
+  end
 
   create_table "events_users", id: false, force: true do |t|
     t.integer "event_id", null: false

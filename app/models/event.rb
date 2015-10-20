@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
   has_many :playlists
   has_many :game_events, :dependent => :destroy
   has_many :tournaments, :dependent => :destroy
+  has_and_belongs_to_many :game_social_servers
   has_one :object_permission, as: :permissible_object
   delegate :is_visible_to?, :to => :object_permission
   has_and_belongs_to_many :users

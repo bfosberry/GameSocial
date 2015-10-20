@@ -36,6 +36,8 @@ GameSocial::Application.routes.draw do
   match 'game_events/:id/invite', to: 'game_events#send_invite', as: 'send_invite_game_event', via: [:post]
   resources :game_events
 
+  match 'events/:id/game_social_servers', to: 'events#game_social_servers', as: 'events_game_social_servers', via: [:post]
+  match 'events/:id/game_social_servers/:game_social_server_id', to: 'events#delete_game_social_server', as: 'delete_events_game_social_server', via: [:delete]
   match 'events/:id/join', to: 'events#join', as: 'join_event', via: [:get]
   match 'events/:id/join/:user_id', to: 'events#join', as: 'join_user_event', via: [:get]
   match 'events/:id/leave', to: 'events#leave', as: 'leave_event', via: [:get]

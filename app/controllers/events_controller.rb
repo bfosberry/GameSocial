@@ -1,9 +1,9 @@
 require 'ical'
 
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :join, :leave, :invite, :send_invite]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :join, :leave, :invite, :send_invite, :game_social_servers, :delete_game_social_server]
   before_filter :spoof_login, only: [:show, :index]
-  before_filter :enforce_login, only: [:edit, :update, :destroy, :new, :join, :leave, :invite, :send_invite]
+  before_filter :enforce_login, only: [:edit, :update, :destroy, :new, :join, :leave, :invite, :send_invite, :game_social_servers, :delete_game_social_server]
 
   # GET /events
   # GET /events.json
@@ -28,6 +28,7 @@ class EventsController < ApplicationController
     @post = Post.new({ :postable => @event })
     @posts_grid  = initialize_grid(@event.posts, :include => [:user])
     @game_events = all_visible(GameEvent).where("event_id = ?", @event.id)
+    @game_servers_grid  = initialize_grid(@event.game_social_servers, :include => [:game])
     @tournaments = all_visible(Tournament).where("event_id = ?", @event.id)
     @filter = params["filter"]
     if @filter == "owned" && current_user
@@ -98,6 +99,22 @@ class EventsController < ApplicationController
       format.html { redirect_to return_url, notice: 'Event left.' }
       format.js { render json: {} }
     end
+  end
+
+  def game_social_servers
+    game_server = GameSocialServer.find(params[:game_social_server_id])
+    enforce_ownership(game_server)
+    enforce_visibility(@event)
+    @event.game_social_servers.append(game_server) unless @event.game_social_servers.include? game_server
+    redirect_to event_path(@event), notice: "Added #{game_server.name} to game servers"
+  end
+
+  def delete_game_social_server
+    game_server = GameSocialServer.find(params[:game_social_server_id])
+    enforce_ownership(game_server)
+    enforce_visibility(@event)
+    @event.game_social_servers.delete(game_server) if @event.game_social_servers.include? game_server
+    redirect_to event_path(@event), notice: "Removed #{game_server.name} to game servers"
   end
 
   def return_url

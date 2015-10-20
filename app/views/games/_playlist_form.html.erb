@@ -24,7 +24,7 @@
             <tr>
               <%= render "games/game", :g => g %>
               <td>
-                <a href="<%= "/playlists/#{playlist.id}/#{g.id}" %>" data-method="delete" rel="nofollow">Remove</a>
+                <a href="<%= "/playlists/#{playlist.id}/#{g.id}" %>" data-method="delete" rel="nofollow" class="btn btn-warning">Remove</a>
               </td>
             </tr>
           <% end %>
