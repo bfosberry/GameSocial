@@ -27,8 +27,9 @@ class ChatServer < ActiveRecord::Base
       uri.query_values = options
       "ts3server://#{ip}?#{uri.query}"
     elsif server_type == "Mumble"
-       pw_string = password.blank? ? "" : ":#{password}"
-      "mumble://#{user.name}:#{pw_string}@#{ip}:#{port}/#{room}"
+      pw_string = password.blank? ? "" : ":#{password}"
+      login_string = pw_string.blank? ? user.name : "#{user.name}:#{pw_string}"
+      "mumble://#{login_string}@#{ip}:#{port}/#{room}"
     elsif server_type == "Ventrilo"
       uri = Addressable::URI.new
       options = {}
