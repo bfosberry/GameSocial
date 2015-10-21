@@ -13,6 +13,7 @@ class Invite
     elsif group
       InviteMailer.invite_group_email(self).deliver
     end
+    Workers::NotificationWorker.perform_async(user.id, subject)
   end
 
   def verify_email

@@ -204,6 +204,11 @@ class User < ActiveRecord::Base
     attending_game_events.where("game_end_time > ?", DateTime.now)
   end
 
+  def notify_login
+    notification_title = "#{name} just signed in"
+    friends.each {|u| Workers::NotificationWorker.perform_async(u.id, notification_title) }
+  end
+
   def notify_websocket(event)
     WebsocketRails["user_#{id}"].trigger("notifications", event)
   end

@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     user = current_user || cred.user || User.new
     user.merge_credential(cred)
     sign_in user
+    user.notify_login
     return_to = session.delete(:return_to) || root_url
     redirect_to return_to, notice: "Signed in."
   end
