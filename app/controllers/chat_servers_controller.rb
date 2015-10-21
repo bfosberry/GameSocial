@@ -85,6 +85,7 @@ class ChatServersController < ApplicationController
                                           :password, 
                                           :room, 
                                           :room_password,
+                                          :url,
                                           object_permission_attributes: [:permission_type])
 
     end

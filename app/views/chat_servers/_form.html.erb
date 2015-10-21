@@ -49,6 +49,11 @@
     <%= f.text_field :room_password, :class => "form-control" %>
   </div>
   <div class="form-group">
+    <%= f.label "Join URL" %><br>
+    <%= f.text_field :url, :class => "form-control" %>
+    <p>Only set the Join URL if you are using discord, or want to overide the auto-generated url</p>
+  </div>
+  <div class="form-group">
   <%= f.fields_for :object_permission do |builder| %>
     <% render 'object_permissions/form', :builder => builder %>
   <% end %>

@@ -16,6 +16,7 @@ class ChatServer < ActiveRecord::Base
   end
 
   def launch_url(user)
+    return url unless url.blank?
     if server_type == "Teamspeak"
       uri = Addressable::URI.new
       options = {}
