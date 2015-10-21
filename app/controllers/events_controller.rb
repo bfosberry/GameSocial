@@ -143,6 +143,7 @@ class EventsController < ApplicationController
     enforce_ownership(@event)
     respond_to do |format|
       if @event.update(event_params)
+        @event.notify
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else

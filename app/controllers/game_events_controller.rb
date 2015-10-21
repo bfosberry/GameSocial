@@ -119,6 +119,8 @@ class GameEventsController < ApplicationController
   def update
     enforce_ownership(@game_event)
     respond_to do |format|
+      @game_event.notify
+
       if @game_event.update(game_event_params)
         format.html { redirect_to @game_event, notice: 'Game event was successfully updated.' }
         format.json { head :no_content }

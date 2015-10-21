@@ -25,6 +25,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1/lock.json
   def lock
     enforce_ownership(@tournament)
+    @tournament.notify
     @tournament.lock
     redirect_to @tournament
   end
@@ -39,6 +40,7 @@ class TournamentsController < ApplicationController
       round = tournament_rounds.select { |tr| tr.teams.include? team }.first
       if round
         if round.winner.nil?
+          @tournament.notify
           round.concede(team)
           notice = "Round conceded"
         else
@@ -62,6 +64,7 @@ class TournamentsController < ApplicationController
     if team 
       round = tournament_rounds.select { |tr| tr.teams.include? team }.first
       if round
+        @tournament.notify
         round.resolve(team)
         notice = 'Round resolved'
       else
@@ -113,6 +116,7 @@ class TournamentsController < ApplicationController
   def update
     enforce_ownership(@tournament)
     respond_to do |format|
+      @tournament.notify
       if @tournament.update(tournament_params)
         format.html { redirect_to @tournament, notice: 'Tournament was successfully updated.' }
         format.json { head :no_content }

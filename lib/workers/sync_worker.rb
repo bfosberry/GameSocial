@@ -20,6 +20,11 @@ module Workers
         si.import_friends
       end
       user.update_attribute(:updated_at, DateTime.now)
+      user.notify_websocket(notification)
+    end
+
+    def notificaion
+      Notification.new("Steam sync complete!")
     end
   end
 end

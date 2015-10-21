@@ -1,4 +1,5 @@
 require 'calendar'
+require 'workers/notification_worker'
 
 class Event < ActiveRecord::Base
   belongs_to :user
@@ -81,5 +82,13 @@ class Event < ActiveRecord::Base
 
   def calendar
     @calendar ||= Calendar.new(self)
+  end
+
+  def notify
+    users.each {|u| Workers::NotificationWorker.perform_async(u.id, notification_title) }
+  end
+
+  def notification_title
+    "Lan Party #{name} was updated."
   end
 end

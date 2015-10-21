@@ -1,3 +1,5 @@
+require 'workers/notification_worker'
+
 class Tournament < ActiveRecord::Base
   belongs_to :user
   belongs_to :event
@@ -149,5 +151,13 @@ class Tournament < ActiveRecord::Base
 
   def winner
     tournament_rounds.last.try(&:winner)
+  end
+
+  def notify
+    teams.flat_map {|t| t.users }.uniq.each{|u| Workers::NotificationWorker.perform_async(u.id, notification_title)}
+  end
+
+  def notification_title
+    "Tournament #{name} was updated."
   end
 end
