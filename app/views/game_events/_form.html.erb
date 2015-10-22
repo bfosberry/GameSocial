@@ -12,10 +12,12 @@
     </div>
   <% end %>
 
+  <% unless @game_event.event_id %>
   <div class="form-group">
     <%= f.label "LAN Party", :class => "help-inline" %><br>
     <%= f.collection_select :event_id, Event.all, :id, :name,  {:selected => @game_event.event_id, :include_blank => true}, {:class => "form-control"} %>
   </div>
+  <% end %>
   <div class="form-group">
     <%= f.label :title, :class => "help-inline" %><br>
     <%= f.text_field :title, :class => "form-control"  %>
