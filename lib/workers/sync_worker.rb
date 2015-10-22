@@ -23,7 +23,7 @@ module Workers
       user.notify_websocket(notification)
     end
 
-    def notificaion
+    def notification
       Notification.new("Steam sync complete!")
     end
   end
