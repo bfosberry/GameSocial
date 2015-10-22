@@ -21,6 +21,8 @@ module Workers
       end
       user.update_attribute(:updated_at, DateTime.now)
       user.notify_websocket(notification)
+    rescue SteamCondenser::Error => e
+      raise Exception.new(e.message)
     end
 
     def notification
