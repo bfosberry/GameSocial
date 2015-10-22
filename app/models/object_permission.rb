@@ -12,12 +12,12 @@ class ObjectPermission < ActiveRecord::Base
 
   def self.permission_types(user)
     gs = user ? user.groups.map{ |g| g.name } : []
-    gs.empty? ? base_permission_types : base_permission_types <<  gs
+    gs.empty? ? base_permission_types : (base_permission_types + gs)
   end
   
   def self.event_permission_types(user)
     gs = user ? user.groups.map{ |g| g.name } : []
-    gs.empty? ? base_event_permission_types : base_event_permission_types <<  gs
+    gs.empty? ? base_event_permission_types : (base_event_permission_types + gs)
   end
 
   def is_visible_to?(user)
