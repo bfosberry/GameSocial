@@ -26,10 +26,10 @@ class AlertSchedule < ActiveRecord::Base
   end
 
   def generate_condition(type)
-  	 AlertCondition.find_or_create_by_condition_type_and_alert_schedule_id({
+  	AlertCondition.where({
       :alert_schedule_id => id,
       :condition_type => type
-  	})
+  	}).first_or_create
   end
 
   def condition_for(type)
