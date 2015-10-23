@@ -72,6 +72,8 @@
   <% end %>
 </table>
 
+<%= social_share_button_tag(@game_event.name, url: game_event_url(@game_event), desc: @game_event.description, popup: "true", via: "gamesocialapp") %>
+
 <h2>Attending</h2>
 <div class="row">
   <% for i in 0..5 %>

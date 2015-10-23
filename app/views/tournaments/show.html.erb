@@ -69,6 +69,8 @@
   <% end %>
 </table>
 
+<%= social_share_button_tag(@tournament.name, url: tournament_url(@tournament), desc: @tournament.description, popup: "true", via: "gamesocialapp") %>
+
 <% if @tournament.winner %>
 <h2>Winner: <%= @tournament.winner.name %></h2>
 <% end %>

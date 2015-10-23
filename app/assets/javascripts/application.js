@@ -24,6 +24,7 @@
 //= require fullcalendar
 //= require fullcalendar/gcal
 //= require websocket_rails/main
+//= require social-share-button
 //= require_tree .
 
 function create_calendar(id, events, view, start_time) {

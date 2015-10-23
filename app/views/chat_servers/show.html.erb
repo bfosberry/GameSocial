@@ -46,6 +46,8 @@
   </tr>
 </table>
 
+<%= social_share_button_tag(@chat_server.name, url: chat_server_url(@chat_server), popup: "true", via: "gamesocialapp") %>
+
 <% if current_user.owns(@chat_server) %>
   <%= link_to 'Edit', edit_chat_server_path(@chat_server), :class => "btn btn-primary" %> |
 <% end %>

@@ -16,6 +16,14 @@ GIT
       multi_json (~> 1.6)
       multi_xml (~> 0.5)
 
+GIT
+  remote: https://github.com/huacnlee/social-share-button
+  revision: e46a6a3e82b86023bc43b72c9379d3c6afe36b6b
+  specs:
+    social-share-button (0.1.9)
+      coffee-rails
+      sass-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -374,6 +382,7 @@ DEPENDENCIES
   sdoc
   sidekiq
   sinatra
+  social-share-button!
   sqlite3
   steam-condenser!
   syslog-logger

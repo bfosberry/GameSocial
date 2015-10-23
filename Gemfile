@@ -8,6 +8,8 @@ gem 'pg'
 gem 'jquery-datetimepicker-rails'
 gem 'ri_cal'
 
+gem 'social-share-button', :git =>  'https://github.com/huacnlee/social-share-button'
+
 gem 'thin'
 gem 'whenever'
 gem 'syslog-logger'
