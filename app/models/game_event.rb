@@ -34,9 +34,9 @@ class GameEvent < ActiveRecord::Base
   default_scope { order(game_start_time: :asc) }
 
   validate :valid_length?
-  validate :start_time, presence: true
-  validate :end_time, presence: true
-  validate :name, presence: true
+  validates :start_time, presence: true
+  validates :end_time, presence: true
+  validates :name, presence: true
 
   alias_attribute :start_time, :game_start_time
   alias_attribute :end_time, :game_end_time

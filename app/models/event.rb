@@ -24,7 +24,7 @@ class Event < ActiveRecord::Base
   default_scope { order(start_time: :asc) }
 
   validate :valid_length?
-  validate :name, :presence => true
+  validates :name, :presence => true
 
   def valid_length?
     if start_time >= end_time

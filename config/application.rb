@@ -21,5 +21,7 @@ module GameSocial
     # config.i18n.default_locale = :de
 
     config.middleware.delete Rack::Lock
+
+     config.active_record.raise_in_transactional_callbacks = true
   end
 end

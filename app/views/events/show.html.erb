@@ -40,7 +40,7 @@
   </tr>
   <tr>
     <td><h5 class="text-center">Calendar</h5></td>
-    <td><p class="text-center"><%= link_to "ICal", event_ics_path(@event), :class => "btn btn-primary" %></p></td>
+    <td><p class="text-center"><%= link_to "ICal", calendar_path(event_path(@event)), :class => "btn btn-primary" %></p></td>
   </tr>
   <tr>
     <td><h5 class="text-center">Invite to LAN Party</h5></td>

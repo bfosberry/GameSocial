@@ -7,7 +7,7 @@ class ChatServer < ActiveRecord::Base
   accepts_nested_attributes_for :object_permission
   delegate :is_visible_to?, :to => :object_permission
 
-  validate :name, :ip, :port, :presence => true
+  validates :name, :ip, :port, :presence => true
   
   SERVER_TYPES =  ["Teamspeak", "Mumble", "Ventrilo", "Discord"]
 
