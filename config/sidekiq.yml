@@ -1,5 +1,5 @@
 :verbose: false
-:concurrency:  5
+:concurrency: 4
 :queues:
   - alert
   - sync_location
