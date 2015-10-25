@@ -59,3 +59,8 @@ function registerWebsocket(user_id) {
 function handleNotification(notification) {
   $.notify(notification.title, {"className": "info", "position": "bottom right"});
 }
+
+$('#pageTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
