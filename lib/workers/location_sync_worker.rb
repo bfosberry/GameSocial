@@ -15,8 +15,6 @@ module Workers
       si = Importers::SteamImporter.new(sp)
       si.import_location
       logger.debug "Completed sync location for #{user.name}"
-    rescue SteamCondenser::Error => e
-      raise Exception.new(e.message)
     end
   end
 end

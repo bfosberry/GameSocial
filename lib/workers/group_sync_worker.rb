@@ -17,8 +17,6 @@ module Workers
       si.import_group(group_steam_id, clear_cache)
       
       user.update_attribute(:updated_at, DateTime.now)
-    rescue SteamCondenser::Error => e
-      raise Exception.new(e.message)
     end
 
     sidekiq_retry_in do |count|
