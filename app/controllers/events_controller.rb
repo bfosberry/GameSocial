@@ -178,6 +178,7 @@ class EventsController < ApplicationController
                                     :end_time, 
                                     :user_id, 
                                     :location,
+                                    :image_url,
                                     object_permission_attributes: [:permission_type])
     end
 

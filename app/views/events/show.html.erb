@@ -1,4 +1,10 @@
+
 <p id="notice"><%= notice %></p>
+
+
+<div class="page-header">
+  <h3 class="text-center"><%= @event.name %></h3>
+</div>
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
@@ -14,13 +20,14 @@
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active" id="info">
     <table class="table table-condensed">
-      <tr>
-        <td><h5 class="text-center">Name</h5></td>
-        <td><p class="text-center"><%= @event.name %></p></td>
-      </tr>
+
       <tr>
         <td><h5 class="text-center">Description</h5></td>
         <td><p class="text-center"><%= @event.description %></p></td>
+      </tr>
+      <tr>
+        <td><h5 class="text-center">Image</h5></td>
+        <td><p class="text-center"><%= image_tag @event.image_url, size: "100" %></p></td>
       </tr>
       <tr>
         <td><h5 class="text-center">Start Time</h5></td>
@@ -165,8 +172,8 @@
   </div>
 </div>
 
-
-<%= social_share_button_tag(@event.name, url: event_url(@event), desc: @event.description, popup: "true", via: "gamesocialapp") %>
+<p>Share this Event:
+<%= social_share_button_tag(@event.name, url: event_url(@event), desc: @event.description, popup: "true", via: "gamesocialapp") %></p>
 
 <h2>Comments</h2>
 <% if current_user %>

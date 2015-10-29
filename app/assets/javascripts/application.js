@@ -42,7 +42,9 @@ function create_calendar(id, events, view, start_time) {
 }
 
 function maybeVisit(event, url){
-  if (event.srcElement.tagName == "TD") {
+  var source = getTarget(event);
+
+  if (source.tagName == "TD") {
     document.location = url;
   }
 }
@@ -64,3 +66,13 @@ $('#pageTabs a').click(function (e) {
   e.preventDefault()
   $(this).tab('show')
 })
+
+function getTarget(obj) {
+  var targ;
+  var e=obj;
+  if (e.target) targ = e.target;
+  else if (e.srcElement) targ = e.srcElement;
+  if (targ.nodeType == 3) // defeat Safari bug
+      targ = targ.parentNode;
+  return targ;
+}
