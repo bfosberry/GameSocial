@@ -1,4 +1,4 @@
-<%= grid(@posts_grid) do |g|
+<%= grid(@posts_grid, show_filters: :no) do |g|
 
   g.blank_slate  do
     content_tag :div, "No comments found", class: 'well'

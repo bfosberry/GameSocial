@@ -38,15 +38,15 @@
 
   g.column do |event|
     if current_user && current_user.owns(event)
-      link_to 'Edit', edit_event_path(event), :class => "btn btn-primary" 
-    end
-  end
-
-  g.column do |event|
-    if current_user && current_user.owns(event)
-      link_to 'Destroy', event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+      link_to event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } do
+        raw '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Destroy'
+      end
     end
   end
 end -%>
 
-<%= link_to 'Create Lan Party', new_event_path, :class => "btn btn-success"  %>
+<div class="btn-alone">
+  <%= link_to new_event_path, :class => "btn btn-success" do %>
+    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create Lan Party
+  <% end %>
+</div>

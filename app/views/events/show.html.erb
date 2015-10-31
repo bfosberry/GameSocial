@@ -3,6 +3,14 @@
 
 
 <div class="page-header">
+  <%= link_to events_path, :class => "btn btn-warning btn-left" do %>
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+  <% end %>
+  <%= render "users/attend", :attending => current_user.attending_event?(@event), :join => join_event_path(@event), :leave =>  leave_event_path(@event) %>
+  <%= link_to calendar_path(event_path(@event)), :class => "btn btn-primary btn-right" do %>
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> ICal
+  <% end %>
+  <a data-toggle="modal" href="#inviteModal" class="btn btn-primary btn-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Invite</a>
   <h3 class="text-center"><%= @event.name %></h3>
 </div>
 
@@ -10,7 +18,7 @@
 <ul class="nav nav-tabs" role="tablist">
   <li role="presentation" class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Info</a></li>
   <li role="presentation"><a href="#events" aria-controls="events" role="tab" data-toggle="tab">Events</a></li>
-  <li role="presentation"><a href="#calendar" aria-controls="calendar" role="tab" data-toggle="tab">Calendar</a></li>
+  <li role="presentation"><a href="#calendar-div" aria-controls="calendar-div" role="tab" data-toggle="tab">Calendar</a></li>
   <li role="presentation"><a href="#tournaments" aria-controls="tournaments" role="tab" data-toggle="tab">Tournaments</a></li>  
   <li role="presentation"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">Attendees</a></li>  
   <li role="presentation"><a href="#game_servers" aria-controls="game_servers" role="tab" data-toggle="tab">Game Servers</a></li>  
@@ -19,69 +27,37 @@
 
 <div class="tab-content">
   <div role="tabpanel" class="tab-pane active" id="info">
-    <table class="table table-condensed">
+    <div class="panel panel-default">
+      <div class="panel-heading">Summary</div>
+      <div class="panel-body">
+        <div class="media">
+          <div class="media-left">
+            <%= image_tag @event.image_url, size: "100", class: "media-object" %>
+          </div>
+          <div class="media-body">
+            <p><%= @event.description %></p>
+          </div>
+        </div>
+      </div>
 
-      <tr>
-        <td><h5 class="text-center">Description</h5></td>
-        <td><p class="text-center"><%= @event.description %></p></td>
-      </tr>
-      <tr>
-        <td><h5 class="text-center">Image</h5></td>
-        <td><p class="text-center"><%= image_tag @event.image_url, size: "100" %></p></td>
-      </tr>
-      <tr>
-        <td><h5 class="text-center">Start Time</h5></td>
-        <td><p class="text-center"><%= @event.formatted_start_time %></p></td>
-      </tr>
-      <tr>
-        <td><h5 class="text-center">End Time</h5></td>
-        <td><p class="text-center"><%= @event.formatted_end_time %></p></td>
-      </tr>
-      <tr>
-        <td><h5 class="text-center">Location</h5></td>
-        <td><p class="text-center"><%= @event.location %></p></td>
-      </tr>
-      <tr>
-        <td><h5 class="text-center">Owner</h5></td>
-        <td><p class="text-center"><%= @event.user_name %></p></td>
-      </tr>
-      <tr>
-        <td><h5 class="text-center">Visibility</h5></td>
-        <td><p class="text-center"><%= @event.object_permission.permission_type %></p></td>
-      </tr>
-      <% if current_user %>
-      <tr>
-        <td><h5 class="text-center">Attend Lan Party</h5></td>
-        <td><p class="text-center">
-          <% if current_user %>
-          <%= render "users/attend", :attending => current_user.attending_event?(@event), :join => join_event_path(@event), :leave =>  leave_event_path(@event) %>
-          <% end %>
-        </p></td>
-      </tr>
-      <tr>
-        <td><h5 class="text-center">Calendar</h5></td>
-        <td><p class="text-center"><%= link_to "ICal", calendar_path(event_path(@event)), :class => "btn btn-primary" %></p></td>
-      </tr>
-      <tr>
-        <td><h5 class="text-center">Invite to LAN Party</h5></td>
-        <td><p class="text-center"><a data-toggle="modal" href="#inviteModal" class="btn btn-primary">Invite</a></p></td>
-      </tr>
-      <% if current_user.attending_event?(@event) %>
-      <tr>
-        <td><h5 class="text-center">Manage Play list</h5></td>
-        <td><p class="text-center"><a data-toggle="modal" href="#playlistModal" class="btn btn-primary">Manage</a></p></td>
-      </p></td>
-      </tr>
-      <% end %>
-      <% end %>
-    </table>
+      <ul class="list-group">
+        <li class="list-group-item">Start time: <%= @event.formatted_start_time %></li>
+        <li class="list-group-item">End time: <%= @event.formatted_end_time %></li>
+        <li class="list-group-item">Location: <%= @event.location %></li>
+        <li class="list-group-item">Owner: <%= @event.user_name %></li>
+        <li class="list-group-item">Visibility: <%= @event.object_permission.permission_type %></li>
+        <% if current_user && current_user.owns(@event) %>
+          <li class="list-group-item"><%= link_to edit_event_path(@event), :class => "btn btn-success" do %>
+            <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
+          <% end %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 
-  <div role="tabpanel" class="tab-pane" id="calendar">
-    <h2>Calendar</h2>
+  <div role="tabpanel" class="tab-pane" id="calendar-div">
     <div id="calendar"></div>
-
-    <script type='text/javascript'>
+  <script type='text/javascript'>
       $(document).ready(function() {
       events =  [
         <% @event.game_events.each_with_index do |ge, i| %>
@@ -99,39 +75,54 @@
   </div>
 
   <div role="tabpanel" class="tab-pane" id="events">
-    <h2>Events</h2>
-    <% if @filter == "owned" %>
-      <p>Showing only events which you can play. <%= link_to 'Show All Events', event_path(@event), :class => "btn btn-success" %><br><br></p>
-    <% else %>
-      <p>Showing all events. <%= link_to 'Show Joinable Events', "#{event_path(@event)}/?filter=owned", :class => "btn btn-success" %><br><br></p>
-    <% end %>
+    <div class="section-header">
+      <% if @filter == "owned" %>
+        <%= link_to event_path(@event), :class => "btn btn-success" do %>
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Show All
+        <% end %>
+      <% else %>
+       <%= link_to "#{event_path(@event)}/?filter=owned", :class => "btn btn-success" do %>
+         <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Show Joinable
+       <% end %>
+      <% end %>
+      <%= link_to new_game_event_for_event_path(@event), :class => "btn btn-success btn-right" do %>
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create Event
+      <% end %>
+      <h2>Events</h2>
+    </div>
     <%= render "game_events/game_events" %>
-    <% if current_user %>
-    <%= link_to 'Create Event', new_game_event_for_event_path(@event), :class => "btn btn-success" %><br><br>
-    <% end %>
   </div>
 
   <div role="tabpanel" class="tab-pane" id="tournaments">
-    <h2>Tournaments</h2>
-    <% if @filter_tournaments == "owned" %>
-      <p>Showing only tournaments which you can play. <%= link_to 'Show All Tournaments', event_path(@event), :class => "btn btn-success" %><br><br></p>
-    <% else %>
-      <p>Showing all tournaments. <%= link_to 'Show Joinable Tournaments', "#{event_path(@event)}/?filter_tournaments=owned", :class => "btn btn-success" %><br><br></p>
-    <% end %>
+    <div class="section-header">
+      <% if @filter_tournaments == "owned" %>
+        <%= link_to event_path(@event), :class => "btn btn-success" do %>
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Show All
+        <% end %>
+      <% else %>
+        <%= link_to "#{event_path(@event)}/?filter_tournaments=owned", :class => "btn btn-success" do %>
+          <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Show Joinable
+        <% end %>
+      <% end %>
+      <%= link_to new_tournament_for_event_path(@event), :class => "btn btn-success btn-right" do %>
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create Tournament
+      <% end %>
+      <h2>Tournaments</h2>
+    </div>
     <%= render "tournaments/tournaments" %>
-    <% if current_user %>
-    <%= link_to 'Create Tournament', new_tournament_for_event_path(@event), :class => "btn btn-success" %><br><br>
-    <% end %>
   </div>
 
   <div role="tabpanel" class="tab-pane" id="users">
-    <% if @event.users.size > 0 %>
+    <div class="section-header section-header-centered">
       <h2>Attending</h2>
+    </div>
+
+    <% if @event.users.size > 0 %>
       <div class="row">
-        <% for i in 0..5 %>
-          <div class="col-lg-2 col-md-2">
+        <% for i in 0..3 %>
+          <div class="col-lg-3 col-md-3">
             <%  @event.users.each_with_index do |u, index| %>
-              <% if index % 6 == i %>
+              <% if index % 4 == i %>
                 <%= render "users/user", :u => u %>
               <% end %>
             <% end %>
@@ -144,17 +135,17 @@
   </div>
 
   <div role="tabpanel" class="tab-pane" id="games">
-    <% if @event.popular_games.size > 0 %>
-    <h2>Games being played</h2>
-
+    <div class="section-header section-header-centered">
+      <h2>Games being played</h2>
+    </div>
     <% @event.popular_games.each do |game_listing| %>
       <div>
         <p><%= game_listing[:game].name %></p>
         <div class="row">
-        <% for i in 0..5 %>
-          <div class="col-lg-2 col-md-2">
+        <% for i in 0..3 %>
+          <div class="col-lg-3 col-md-3">
             <%  game_listing[:users].each_with_index do |u, index| %>
-              <% if index % 6 == i %>
+              <% if index % 4 == i %>
                 <%= render "users/user", :u => u %>
               <% end %>
             <% end %>
@@ -163,27 +154,32 @@
         </div>
       </div>
       <% end %>
+
+      <% if current_user && current_user.attending_event?(@event) %>
+        <p class="text-center"><a data-toggle="modal" href="#playlistModal" class="btn btn-primary">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> 
+        Manage Playlist</a></p>
     <% end %>
   </div>
 
   <div role="tabpanel" class="tab-pane" id="game_servers">
-    <h2>Game Servers</h2>
+    <div class="section-header section-header-centered">
+      <h2>Game Servers</h2>
+    </div>
     <%= render "game_social_servers/game_social_servers" %>
   </div>
 </div>
 
-<p>Share this Event:
-<%= social_share_button_tag(@event.name, url: event_url(@event), desc: @event.description, popup: "true", via: "gamesocialapp") %></p>
+<div class="share-panel">
+<p>Share this Event:</p>
+<%= social_share_button_tag(@event.name, url: event_url(@event), desc: @event.description, popup: "true", via: "gamesocialapp") %>
+</div>
 
 <h2>Comments</h2>
 <% if current_user %>
 <%= render "posts/posts", :object => @event %>
-<a data-toggle="modal" href="#postModal" class="btn btn-primary">Post a Comment</a><br><br>
+<a data-toggle="modal" href="#postModal" class="btn btn-primary"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Post a Comment</a><br><br>
 <% end %>
-<% if current_user && current_user.owns(@event) %>
-  <%= link_to 'Edit', edit_event_path(@event), :class => "btn btn-primary" %> |
-<% end %>
-<%= link_to 'Back', events_path, :class => "btn btn-warning" %>
 </div>
 
 <%= render '/events/invite_form', :type => "LAN Party", :url => invite_event_path(@event) %>

@@ -25,4 +25,17 @@ img.user-image
     border-color: #D0D0D0;
     border-width: 2px;
     text-align: center;
+    vertical-align: middle;
+}
+
+.user-box .user-text {
+    padding-top: 17px;
+    float: left;
+    width: 75%;
+}
+
+.user-box .user-image {
+    float: right;
+    margin-right: 5px;
+    margin-left: 0px;
 }

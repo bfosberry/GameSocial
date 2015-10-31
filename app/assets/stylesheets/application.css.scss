@@ -55,3 +55,68 @@ a#nav-button-container
   cursor: pointer;
   cursor: hand;
 }
+
+.tab-content {
+  padding: 10px 0px 10px 0px;
+}
+
+.page-header {
+  display: inline-block;
+  margin: auto;
+  width:100%;
+  padding: 10px 0px 10px 0px;
+}
+
+.page-header h3 {
+  float: right;
+  margin: 0 auto;
+  width: 57%;
+}
+
+.page-header .btn {
+  margin: 0px 10px 0px 10px;
+  width: 100px;
+}
+
+.btn-right {
+  float: right;
+}
+
+.share-panel div{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.share-panel p{
+  display: inline-block;
+  margin-right:10px;
+  margin-top:8px;
+  vertical-align: middle;
+}
+
+h2 {
+    text-align: center;
+}
+
+.tab-pane h2 {
+  float: right;
+  margin: 0 auto;
+  width: 60%;
+}
+
+.tab-pane .btn {
+  margin: 0px 10px 0px 10px;
+  width: 200px;
+}
+
+.section-header {
+  padding-bottom: 10px;
+}
+
+.tab-pane .section-header-centered h2 {
+  float: none;
+}
+
+.btn-alone {
+  margin-bottom: 10px;
+}

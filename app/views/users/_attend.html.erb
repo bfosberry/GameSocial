@@ -1,25 +1,33 @@
+<% leave_html = '<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Leave' %>
+<% join_html = '<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Join' %>
+
 <% if attending %>
-  <%= link_to 'Leave', leave, :remote => true, "data-type" => "json", :class => "btn btn-warning attend-btn" %>
+  <%= link_to leave, :remote => true, "data-type" => "json", :class => "btn btn-warning attend-btn" do %>
+    <%= raw leave_html %>
+  <% end %>
 <% else %>
-  <%= link_to 'Join', join, :remote => true, "data-type" => "json", :class => "btn btn-success attend-btn" %>
+  <%= link_to join, :remote => true, "data-type" => "json", :class => "btn btn-success attend-btn" do %>
+    <%= raw join_html  %>
+  <% end %>
 <% end %>
 
 
 <script type="text/javascript">
 $(document).ready(function(){
-
+  var join_html_str = '<%= raw join_html %>';
+  var leave_html_str = '<%= raw leave_html %>';
   $('.attend-btn')
     .bind("ajax:beforeSend", function(evt, xhr, settings){
       $(this).attr("disabled", "disabled")
     })
     .bind("ajax:success", function(evt, data, status, xhr){
        var elem = $(this)[0];
-       if (elem.innerHTML == "Join"){
-         elem.innerHTML = "Leave";
+       if (elem.innerHTML.indexOf("Join") > -1){
+         elem.innerHTML = leave_html_str;
          elem.href = "<%= leave %>";
          $(this).attr('class', "btn btn-warning attend-btn");
-       } else if (elem.innerHTML == "Leave"){
-         elem.innerHTML = "Join";
+       } else if (elem.innerHTML.indexOf("Leave") > -1){
+         elem.innerHTML = join_html_str;
          elem.href = "<%= join %>";
          $(this).attr('class', "btn btn-success attend-btn");
        }
