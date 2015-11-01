@@ -35,16 +35,12 @@
   g.column name: 'Lan Party', model: Event, attribute: 'name' do |tournament|
     tournament.event_name 
   end
-  
-  g.column do |tournament|
-    if current_user && current_user.owns(tournament)
-      link_to 'Edit', edit_tournament_path(tournament), :class => "btn btn-primary" 
-    end
-  end
 
   g.column do |tournament|
     if current_user && current_user.owns(tournament)
-      link_to 'Destroy', tournament, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+      link_to tournament, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } do
+        raw '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Destroy'
+      end
     end
   end
 end -%>

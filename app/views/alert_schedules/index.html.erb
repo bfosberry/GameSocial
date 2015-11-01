@@ -1,4 +1,9 @@
-<h1 class="text-center">Alert Schedules</h1>
+<div class="page-header">
+  <h3 class="text-center h3-1-0">Alert Schedules</h3>
+  <%= link_to new_alert_schedule_path, :class => "btn btn-success btn-left" do %>
+    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create
+  <% end %>
+</div>
 
 <%= grid(@alert_schedules_grid) do |g|
 
@@ -16,16 +21,9 @@
 
   g.column do |alert_schedule|
     if current_user.owns(alert_schedule)
-      link_to 'Edit', edit_alert_schedule_path(alert_schedule), :class => "btn btn-primary"
-    end
-  end
-
-  g.column do |alert_schedule|
-    if current_user.owns(alert_schedule)
-      link_to 'Destroy', alert_schedule, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+      link_to 'Destroy', alert_schedule, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } do
+        raw '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Destroy'
+      end
     end
   end
 end -%>
-
-
-<%= link_to 'Create Alert Schedule', new_alert_schedule_path, :class => "btn btn-success" %>

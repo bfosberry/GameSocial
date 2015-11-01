@@ -1,102 +1,108 @@
+
 <p id="notice"><%= notice %></p>
 
-<table class="table table-condensed">
-  <tr>
-    <td><h5 class="text-center">Title</h5></td>
-    <td><p class="text-center"><%= @game_event.title %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Description</h5></td>
-    <td><p class="text-center"><%= @game_event.description %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Event</h5></td>
-    <td><p class="text-center"><%= @game_event.event_name %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Game</h5></td>
-    <td><p class="text-center"><%= @game_event.game_name %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Game Server</h5></td>
-    <td><p class="text-center"><%= link_to @game_event.game_social_server_name, @game_event.game_social_server if @game_event.game_social_server %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Chat Server</h5></td>
-    <td><p class="text-center"><%= link_to @game_event.chat_server_name, @game_event.chat_server if @game_event.chat_server %> </p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Owner</h5></td>
-    <td><p class="text-center"><%= @game_event.user_name %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Start Time</h5></td>
-    <td><p class="text-center"><%= @game_event.formatted_start_time %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">End Time</h5></td>
-    <td><p class="text-center"><%= @game_event.formatted_end_time %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Visibility</h5></td>
-    <td><p class="text-center"><%= @game_event.object_permission.permission_type %></p></td>
-  </tr>
-  <% if current_user %>
-  <tr>
-    <td><h5 class="text-center">Attend Event</h5></td>
-    <td><p class="text-center">
-      <% if current_user %>
-        <%= render "users/attend", :attending => current_user.attending_game_event?(@game_event), :join => join_game_event_path(@game_event), :leave =>  leave_game_event_path(@game_event) %>
-      <% end %>
-  </p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Invite to Event</h5></td>
-    <td><p class="text-center"><a data-toggle="modal" href="#inviteModal" class="btn btn-primary">Invite</a></p></td>
-
-  </tr>
-  <% if @game_event.game_social_server %>
-  <tr>
-    <td><h5 class="text-center">Launch Game</h5></td>
-    <td><p class="text-center"><%= link_to "Join Server", @game_event.game_social_server_launch_url, :class => "btn btn-success" %>
-   </p></td>
-  </tr>
+<div class="page-header">
+  <%= link_to game_events_path, :class => "btn btn-warning btn-left" do %>
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
   <% end %>
-  <% if @game_event.chat_server %>
-  <tr>
-    <td><h5 class="text-center">Launch Chat Server</h5></td>
-    <td><p class="text-center"><%= link_to 'Join Chat Server', @game_event.chat_server_launch_url(current_user), :class => "btn btn-success" %>
-   </p></td>
-  </tr>
-  <% end %>
-  <% end %>
-</table>
-
-<%= social_share_button_tag(@game_event.name, url: game_event_url(@game_event), desc: @game_event.description, popup: "true", via: "gamesocialapp") %>
-
-<h2>Attending</h2>
-<div class="row">
-  <% for i in 0..5 %>
-    <div class="col-lg-2 col-md-2">
-      <%  @game_event.users.each_with_index do |u, index| %>
-        <% if index % 6 == i %>
-          <%= render "users/user", :u => u %>
-        <% end %>
-      <% end %>
-    </div>
-  <% end %>
+  <%= render "users/attend", :attending => current_user.attending_event?(@event), :join => join_game_event_path(@game_event), :leave =>  leave_game_event_path(@game_event) %>
+  <a data-toggle="modal" href="#inviteModal" class="btn btn-primary btn-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Invite</a>
+  <h3 class="text-center h3-2-1"><%= @game_event.name %></h3>
 </div>
 
-<h2>Comments</h2>
-<%= render "posts/posts", :object => @game_event %>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Info</a></li>
+  <li role="presentation"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">Attendees</a></li>  
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="info">
+    <div class="panel panel-default">
+      <div class="panel-heading">Summary</div>
+      <div class="panel-body">
+        <div class="media">
+          <div class="media-left">
+            <%= image_tag @game_event.game_logo_url, size: "100", class: "media-object" %>
+          </div>
+          <div class="media-body">
+            <p><%= @game_event.description %></p>
+          </div>
+        </div>
+      </div>
+
+      <ul class="list-group">
+        <li class="list-group-item">Start time: <%= @game_event.formatted_start_time %></li>
+        <li class="list-group-item">End time: <%= @game_event.formatted_end_time %></li>
+        <li class="list-group-item">Game: <%= @game_event.game_name %></li>
+        <% if @game_event.event %>
+          <li class="list-group-item">Lan Party: <%= @game_event.event_name %></li>
+        <% end %>
+        <% if @game_event.game_social_server %>
+          <li class="list-group-item">Game Server: <%= link_to @game_event.game_social_server_name, @game_event.game_social_server %></li>
+        <% end %>
+        <% if @game_event.chat_server %>
+          <li class="list-group-item">Chat Server: <%= link_to @game_event.chat_server_name, @game_event.chat_server %> </li>
+        <% end %>
+        <li class="list-group-item">Owner: <%= @game_event.user_name %></li>
+        <li class="list-group-item">Visibility: <%= @game_event.object_permission.permission_type %></li>
+        <li class="list-group-item">
+          <% if current_user && current_user.owns(@game_event) %>
+            <%= link_to edit_game_event_path(@game_event), :class => "btn btn-success" do %>
+               <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
+            <% end %>
+          <% end %>
+          <% if @game_event.game_social_server %>
+            <%= link_to @game_event.game_social_server_launch_url, :class => "btn btn-success" do %>
+              <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Join Server
+            <% end %>
+          <% end %>
+          <% if @game_event.chat_server %>
+            <%= link_to @game_event.chat_server_launch_url(current_user), :class => "btn btn-success" do %>
+              <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span> Join Chat Server
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="users">
+    <div class="section-header section-header-centered">
+      <h2>Attending</h2>
+    </div>
+
+    <% if @game_event.users.size > 0 %>
+      <div class="row">
+        <% for i in 0..3 %>
+          <div class="col-lg-3 col-md-3">
+            <%  @game_event.users.each_with_index do |u, index| %>
+              <% if index % 4 == i %>
+                <%= render "users/user", :u => u %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="well">
+        <p>No Users Attending</p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="share-panel">
+<p>Share this Event:</p>
+<%= social_share_button_tag(@game_event.name, url: game_event_url(@game_event), desc: @game_event.description, popup: "true", via: "gamesocialapp") %>
+</div>
+
 <% if current_user %>
-<a data-toggle="modal" href="#postModal" class="btn btn-primary">Post a Comment</a><br><br>
+  <h2>Comments</h2>
+  <%= render "posts/posts", :object => @game_event %>
+  <a data-toggle="modal" href="#postModal" class="btn btn-primary"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Post a Comment</a><br><br>
 <% end %>
 
-<% if current_user && current_user.owns(@game_event) %>
-  <%= link_to 'Edit', edit_game_event_path(@game_event), :class => "btn btn-primary" %> |
-<% end %>
-<%= link_to 'Back', game_events_path, :class => "btn btn-warning" %>
 </div>
 
 <%= render '/events/invite_form', :type => "Event", :url => invite_game_event_path(@game_event), :game => @game_event.game %>

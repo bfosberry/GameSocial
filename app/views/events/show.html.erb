@@ -1,6 +1,4 @@
-
 <p id="notice"><%= notice %></p>
-
 
 <div class="page-header">
   <%= link_to events_path, :class => "btn btn-warning btn-left" do %>
@@ -171,14 +169,14 @@
 </div>
 
 <div class="share-panel">
-<p>Share this Event:</p>
+<p>Share this Lan Party:</p>
 <%= social_share_button_tag(@event.name, url: event_url(@event), desc: @event.description, popup: "true", via: "gamesocialapp") %>
 </div>
 
-<h2>Comments</h2>
 <% if current_user %>
-<%= render "posts/posts", :object => @event %>
-<a data-toggle="modal" href="#postModal" class="btn btn-primary"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Post a Comment</a><br><br>
+  <h2>Comments</h2>
+  <%= render "posts/posts", :object => @event %>
+  <a data-toggle="modal" href="#postModal" class="btn btn-primary"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Post a Comment</a><br><br>
 <% end %>
 </div>
 

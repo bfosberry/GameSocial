@@ -1,4 +1,9 @@
-<h1 class="text-center">Chat Servers</h1>
+<div class="page-header">
+  <h3 class="text-center h3-1-0">Chat Servers</h3>
+  <%= link_to new_chat_server_path, :class => "btn btn-success btn-left" do %>
+    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create
+  <% end %>
+</div>
 
 <%= grid(@chat_servers_grid) do |g|
 
@@ -32,15 +37,9 @@
 
   g.column do |chat_server|
     if current_user.owns(chat_server)
-      link_to 'Edit', edit_chat_server_path(chat_server), :class => "btn btn-primary" 
-    end
-  end
-
-  g.column do |chat_server|
-    if current_user.owns(chat_server)
-      link_to 'Destroy', chat_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+      link_to 'Destroy', chat_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } do
+        raw '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Destroy'
+      end
     end
   end
 end -%>
-
-<%= link_to 'Create Chat Server', new_chat_server_path, :class => "btn btn-success" %>

@@ -65,13 +65,9 @@
 
   g.column do |game_event|
     if current_user && current_user.owns(game_event)
-      link_to 'Edit', edit_game_event_path(game_event), :class => "btn btn-primary" 
-    end
-  end
-
-  g.column do |game_event|
-    if current_user && current_user.owns(game_event)
-      link_to 'Destroy', game_event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
+      link_to game_event, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } do
+        raw '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Destroy'
+      end
     end
   end
 end -%>
