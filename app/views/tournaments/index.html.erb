@@ -1,4 +1,18 @@
-<h1 class="text-center">Tournaments</h1>
+<div class="page-header">
+  <%= link_to new_tournament_path, :class => "btn btn-success btn-left" do %>
+    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create
+  <% end %>
+  <% if @filter == "owned" %>
+    <%= link_to tournaments_path, :class => "btn btn-success btn-right" do %>
+      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Show All
+    <% end %>
+  <% else %>
+    <%= link_to "#{tournaments_path}/?filter=owned", :class => "btn btn-success btn-right" do %>
+       <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Joinable
+    <% end %>
+  <% end %>
+  <h3 class="text-center h3-1-1">Tournaments</h3>
+</div>
 
 <%= grid(@tournaments_grid) do |g|
 
@@ -34,5 +48,3 @@
     end
   end
 end -%>
-
-<%= link_to 'Create Tournament', new_tournament_path, :class => "btn btn-success" %>

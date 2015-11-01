@@ -1,10 +1,18 @@
-<h1 class="text-center">Events</h1>
-      
-<% if @filter == "owned" %>
-  <p>Showing only events which you can play. <%= link_to 'Show All Events', game_events_path, :class => "btn btn-success" %><br><br></p>
-<% else %>
-  <p>Showing all events. <%= link_to 'Show Joinable Events', "#{game_events_path}/?filter=owned", :class => "btn btn-success" %><br><br></p>
-<% end %>
+<div class="page-header">
+  <%= link_to new_game_event_path, :class => "btn btn-success btn-left" do %>
+    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create
+  <% end %>
+  <% if @filter == "owned" %>
+    <%= link_to game_events_path, :class => "btn btn-success btn-right" do %>
+      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Show All
+    <% end %>
+  <% else %>
+    <%= link_to "#{game_events_path}/?filter=owned", :class => "btn btn-success btn-right" do %>
+       <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span> Joinable
+    <% end %>
+  <% end %>
+  <h3 class="text-center h3-1-1">Events</h3>
+</div>
 
 <%= grid(@game_events_grid) do |g|
 
@@ -67,5 +75,3 @@
     end
   end
 end -%>
-
-<%= link_to 'Create Event', new_game_event_path, :class => "btn btn-success" %>

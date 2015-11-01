@@ -1,4 +1,9 @@
-<h1 class="text-center">LAN Parties</h1>
+<div class="page-header">
+  <h3 class="text-center h3-1-0">LAN Parties</h3>
+  <%= link_to new_event_path, :class => "btn btn-success btn-left" do %>
+    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create
+  <% end %>
+</div>
 
 <%= grid(@events_grid) do |g|
 
@@ -44,9 +49,3 @@
     end
   end
 end -%>
-
-<div class="btn-alone">
-  <%= link_to new_event_path, :class => "btn btn-success" do %>
-    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create Lan Party
-  <% end %>
-</div>
