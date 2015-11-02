@@ -2,7 +2,7 @@
   <%= link_to tournaments_path, :class => "btn btn-warning btn-left" do %>
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
   <% end %>
- <h3 class="text-center h3-1-0"><%= @tournament.name %></h3>
+ <h3 class="text-center h3-1-1"><%= @tournament.name %></h3>
 </div>
 
 <p id="notice"><%= notice %></p>
@@ -31,6 +31,9 @@
       </div>
 
       <ul class="list-group">
+        <% if @tournament.winner %>
+          <li class="list-group-item">Winner: <%= @tournament.winner_name %></li>
+        <% end %>
         <li class="list-group-item">Game: <%= @tournament.game_name %></li>
         <% if @tournament.event %>
           <li class="list-group-item">Lan Party: <%= @tournament.event_name %></li>
@@ -50,15 +53,14 @@
         <li class="list-group-item">Round length: <%= @tournament.round_length %> minutes</li>
         <li class="list-group-item">Gap between Rounds: <%= @tournament.time_between_rounds %> minutes</li>
         <li class="list-group-item">Public team signup?: <%= @tournament.public_teams %></li>
-        
         <li class="list-group-item">
           <% if current_user && current_user.owns(@tournament) %>
             <%= link_to edit_tournament_path(@tournament), :class => "btn btn-success" do %>
                <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
-              <% if (!@tournament.locked?) %>
-                <%= link_to lock_tournament_path(@tournament), :class => "btn btn-success", data: { confirm: 'Are you sure?' } do %>
-                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Lock Tournament
-                <% end %>
+            <% end %>
+            <% if (!@tournament.locked?) %>
+              <%= link_to lock_tournament_path(@tournament), :class => "btn btn-success", data: { confirm: 'Are you sure?' } do %>
+                  <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Lock Tournament
               <% end %>
             <% end %>
           <% end %>
@@ -71,7 +73,7 @@
       </ul>
     </div>
   </div>
-  
+
   <div role="tabpanel" class="tab-pane" id="teams">
     <%= render "tournaments/teams", :tournament => @tournament, :teams_grid => @teams_grid %>
   </div>

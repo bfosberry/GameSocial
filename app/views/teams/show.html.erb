@@ -1,31 +1,41 @@
+<div class="page-header">
+  <%= link_to tournament_path(@team.tournament), :class => "btn btn-warning btn-left" do %>
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+  <% end %>
+  <a data-toggle="modal" href="#inviteModal" class="btn btn-primary btn-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Invite</a>
+  <h3 class="text-center h3-1-1"><%= @team.name %></h3>
+</div>
+
 <p id="notice"><%= notice %></p>
 
-<table class="table table-condensed">
-  <tr>
-    <td><h5 class="text-center">Tournament</h5></td>
-    <td><p class="text-center"><%= @team.tournament_name %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Owner</h5></td>
-    <td><p class="text-center"><%= @team.user_name %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Name</h5></td>
-    <td><p class="text-center"><%= @team.name %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Members</h5></td>
-    <td><p class="text-center"><%= @team.users.size %></p></td>
-  </tr>
-</table>
+<div class="panel panel-default">
+  <div class="panel-heading">Summary</div>
+  <ul class="list-group">
+    <li class="list-group-item">Tournament: <%= @team.tournament_name %></li>
+    <li class="list-group-item">Game: <%= @team.game_name %></li>
+    <li class="list-group-item">Captain: <%= @team.user_name %></li>
+    <li class="list-group-item"><a data-toggle="modal" href="#inviteModal" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Invite to Team</a></li>
+    <% if current_user == @team.user %>
+      <li class="list-group-item">
+        <%= link_to edit_team_path(@team), :class => "btn btn-success" do %>
+          <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<%= render '/events/invite_form', :type => "Team", :url => invite_team_path(@team) %>
 
 <% if @team.users.size > 0 %>
-<h2>Members</h2>
+<div class="section-header-centered">
+  <h2>Members</h2>
+</div>
 <div class="row">
-  <% for i in 0..5 %>
-    <div class="col-lg-2 col-md-2">
+  <% for i in 0..4 %>
+    <div class="col-lg-3 col-md-3">
       <%  @team.users.each_with_index do |u, index| %>
-        <% if index % 6 == i %>
+        <% if index % 4 == i %>
           <%= render "users/user", :u => u %>
         <% end %>
       <% end %>
@@ -33,7 +43,3 @@
   <% end %>
 </div>
 <% end %>
-
-<% if current_user == @team.user %>
-<%= link_to 'Edit', edit_team_path(@team), :class => "btn btn-primary"  %><% end %> |
-<%= link_to 'Back', tournament_path(@team.tournament), :class => "btn btn-warning"%>

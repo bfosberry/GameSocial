@@ -1,7 +1,7 @@
 class Invite
   include ActiveModel::Conversion
   extend  ActiveModel::Naming
-  attr_accessor :email, :game_event, :event, :group, :user
+  attr_accessor :email, :game_event, :event, :group, :team, :user
 
   def deliver
     verify_email
@@ -12,6 +12,8 @@ class Invite
       InviteMailer.invite_event_email(self).deliver
     elsif group
       InviteMailer.invite_group_email(self).deliver
+    elsif team
+      InviteMailer.invite_team_email(self).deliver
     end
     Workers::NotificationWorker.perform_async(user.id, subject)
   end
@@ -26,7 +28,7 @@ class Invite
   end
 
   def object
-    event || game_event || group
+    event || game_event || group || team
   end
 
   def initialize(hsh = {})

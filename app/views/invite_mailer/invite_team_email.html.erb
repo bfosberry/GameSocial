@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1><%= @subject %></h1>
+    <p>
+      <%= @inviter.name %> has invited you to join the following Tournament Team:
+    </p>
+    <table>
+      <tr>
+        <td>Team Name</td>
+        <td><%= @team.name %></td>
+      </tr>
+      <tr>
+        <td>Tournament</td>
+        <td><%= @team.tournament_name %></td>
+      </tr>
+      <tr>
+        <td>Game</td>
+        <td><%= @team.game_name %></td>
+      </tr>
+      <tr>
+        <td>Captain</td>
+        <td><%= @team.user_name %></td>
+      </tr>
+    </table>
+
+    <p>To accept this invitation, click <%= link_to 'this link', join_team_url(@team), :class => "btn btn-primary" %></p>
+  </body>
+</html>

@@ -1,8 +1,9 @@
 <div class="panel panel-default">
   <div class="panel-heading">Summary</div>
-  <div class="panel-body">
-    Captain: <%= team.user_name %>
-  </div>
+  <ul class="list-group">
+    <li class="list-group-item">Captain: <%= team.user_name %></li>
+    <li class="list-group-item"><a data-toggle="modal" href="#inviteModal" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Invite to Team</a></li>
+  </ul>
 </div>
 
 <% if team.users.size > 0 %>
@@ -21,3 +22,5 @@
   <% end %>
 </div>
 <% end %>
+
+<%= render '/events/invite_form', :type => "Team", :url => invite_team_path(team) %>

@@ -8,6 +8,8 @@ class Team < ActiveRecord::Base
 
     delegate :name, to: :tournament, prefix: true, allow_nil: true
     delegate :name, to: :user, prefix: true, allow_nil: true
+    delegate :name, to: :game, prefix: true, allow_nil: true
+    delegate :game, to: :tournament, prefix: false, allow_nil: true
 
 	has_one :object_permission, as: :permissible_object
     accepts_nested_attributes_for :object_permission

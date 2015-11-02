@@ -18,6 +18,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1
   # GET /tournaments/1.json
   def show
+    @invite = Invite.new
     enforce_visibility(@tournament)
     @tournament_rounds_grid = initialize_grid(@tournament.tournament_rounds, 
                                               :include => [:game_event])

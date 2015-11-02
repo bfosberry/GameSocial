@@ -21,4 +21,11 @@ class InviteMailer < ActionMailer::Base
     @inviter = invite.user
     mail(to: invite.email, subject: @subject)
   end
+
+  def invite_team_email(invite)
+    @team = invite.team
+    @subject = invite.subject
+    @inviter = invite.user
+    mail(to: invite.email, subject: @subject)
+  end
 end

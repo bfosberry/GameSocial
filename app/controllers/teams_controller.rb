@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :join, :leave]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :join, :leave, :send_invite]
   before_filter :enforce_login
 
   # GET /teams
@@ -12,6 +12,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
+    @invite = Invite.new
     enforce_visibility(@team)
   end
 
@@ -92,6 +93,20 @@ class TeamsController < ApplicationController
     end
   end
 
+  # GET /events/1/invite
+  def invite
+    @invite = Invite.new
+  end
+
+  # POST /events/1/invite
+  def send_invite
+    @invite = Invite.new(invite_params)
+    @invite.team= @team
+    @invite.user = current_user
+    @invite.deliver
+    redirect_to tournament_path(@team.tournament), notice: "Invite sent"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
@@ -101,6 +116,10 @@ class TeamsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
       params.require(:team).permit(:tournament_id, :user_id, :name, object_permission_attributes: [:permission_type])
+    end
+
+    def invite_params
+      params.require(:invite).permit(:email)
     end
 
     def return_url

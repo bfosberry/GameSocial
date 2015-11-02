@@ -9,16 +9,16 @@
     end
   end
   
-  g.column name: 'Bracket', attribute: 'bracket_id' do |tournament_round|
-    tournament_round.bracket_id
-  end
-
-  g.column name: 'Round', attribute: 'round_index' do |tournament_round|
-    tournament_round.round_index
+  g.column name: 'Bracket/Round' do |tournament_round|
+    "#{tournament_round.bracket_id}/#{tournament_round.round_index}"
   end
 
   g.column name: 'Status' do |tournament_round|
     tournament_round.status
+  end
+
+  g.column name: 'Teams' do |tournament_round|
+    tournament_round.teams.map(&:name).join(", ")
   end
 
   g.column name: 'Winner', attribute: 'winner_id' do |tournament_round|
