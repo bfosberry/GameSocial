@@ -9,7 +9,9 @@ class Tournament < ActiveRecord::Base
   has_many :tournament_rounds, :dependent => :destroy
 
   delegate :name, to: :game, prefix: true, allow_nil: true
+  delegate :logo_url, to: :game, prefix: true, allow_nil: true
   delegate :name, to: :event, prefix: true, allow_nil: true
+  delegate :name, to: :user, prefix: true, allow_nil: true
 
   has_one :object_permission, as: :permissible_object
   accepts_nested_attributes_for :object_permission

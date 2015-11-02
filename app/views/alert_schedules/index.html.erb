@@ -21,7 +21,7 @@
 
   g.column do |alert_schedule|
     if current_user.owns(alert_schedule)
-      link_to 'Destroy', alert_schedule, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } do
+      link_to alert_schedule, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } do
         raw '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Destroy'
       end
     end

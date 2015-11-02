@@ -1,12 +1,14 @@
-<table class="table table-condensed">
-  <tr>
-    <td><h5 class="text-center">Captain</h5></td>
-    <td><p class="text-center"><%= team.user_name %></p></td>
-  </tr>
-</table>
+<div class="panel panel-default">
+  <div class="panel-heading">Summary</div>
+  <div class="panel-body">
+    Captain: <%= team.user_name %>
+  </div>
+</div>
 
 <% if team.users.size > 0 %>
-<h2>Members</h2>
+<div class="section-header-centered">
+  <h2>Members</h2>
+</div>
 <div class="row">
   <% for i in 0..3 %>
     <div class="col-lg-3 col-md-3">

@@ -37,7 +37,7 @@
 
   g.column do |chat_server|
     if current_user.owns(chat_server)
-      link_to 'Destroy', chat_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } do
+      link_to chat_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } do
         raw '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Destroy'
       end
     end

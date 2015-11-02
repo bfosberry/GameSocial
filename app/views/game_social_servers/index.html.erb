@@ -41,7 +41,7 @@
 
   g.column do |game_social_server|
     if current_user.owns(game_social_server)
-      link_to 'Destroy', game_social_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } do
+      link_to game_social_server, :class => "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } do
         raw '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Destroy'
       end
     end

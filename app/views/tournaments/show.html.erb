@@ -1,103 +1,115 @@
+<div class="page-header">
+  <%= link_to tournaments_path, :class => "btn btn-warning btn-left" do %>
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+  <% end %>
+ <h3 class="text-center h3-1-0"><%= @tournament.name %></h3>
+</div>
+
 <p id="notice"><%= notice %></p>
 
-<table class="table table-condensed">
-  <tr>
-    <td><h5 class="text-center">Name</h5></td>
-    <td><p class="text-center"><%= @tournament.name %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Description</h5></td>
-    <td><p class="text-center"><%= @tournament.name %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Game</h5></td>
-    <td><p class="text-center"><%= @tournament.game_name %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">LAN Party</h5></td>
-    <td><p class="text-center"><%= @tournament.event_name %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Max number of Teams</h5></td>
-    <td><p class="text-center"><%= @tournament.num_teams %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Max Team Size</h5></td>
-    <td><p class="text-center"><%= @tournament.team_max_size %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Min Team Size</h5></td>
-    <td><p class="text-center"><%= @tournament.team_min_size %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Games per Round</h5></td>
-    <td><p class="text-center"><%= @tournament.games_per_round %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Teams per Round</h5></td>
-    <td><p class="text-center"><%= @tournament.teams_per_round %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Public team signup?</h5></td>
-    <td><p class="text-center"><%= @tournament.public_teams %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Lead time (minutes)</h5></td>
-    <td><p class="text-center"><%= @tournament.lead_time %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Num of parallel games</h5></td>
-    <td><p class="text-center"><%= @tournament.num_parallel_events %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Round duration (minutes)</h5></td>
-    <td><p class="text-center"><%= @tournament.round_length %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Time between rounds (minutes)</h5></td>
-    <td><p class="text-center"><%= @tournament.time_between_rounds %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Visibility</h5></td>
-    <td><p class="text-center"><%= @tournament.object_permission.permission_type %></p></td>
-  </tr>
-  <% if (!@tournament.locked?) && current_user && current_user.owns(@tournament) %>
-  <tr>
-    <td><h5 class="text-center">Locking</h5></td>
-    <td><p class="text-center"><%= link_to 'Lock Tournament', lock_tournament_path(@tournament), :class => "btn btn-success", data: { confirm: 'Are you sure?' } %></p></td>
-  </tr>
-  <% end %>
-</table>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Info</a></li>
+  <li role="presentation"><a href="#teams" aria-controls="events" role="tab" data-toggle="tab">Teams</a></li>
+  <li role="presentation"><a href="#calendar-div" aria-controls="calendar-div" role="tab" data-toggle="tab">Calendar</a></li>
+  <li role="presentation"><a href="#rounds" aria-controls="tournaments" role="tab" data-toggle="tab">Rounds</a></li>  
+</ul>
 
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="info">
+    <div class="panel panel-default">
+      <div class="panel-heading">Summary</div>
+      <div class="panel-body">
+        <div class="media">
+          <div class="media-left">
+            <%= image_tag @tournament.game_logo_url, size: "100", class: "media-object" %>
+          </div>
+          <div class="media-body">
+            <p><%= @tournament.description %></p>
+          </div>
+        </div>
+      </div>
+
+      <ul class="list-group">
+        <li class="list-group-item">Game: <%= @tournament.game_name %></li>
+        <% if @tournament.event %>
+          <li class="list-group-item">Lan Party: <%= @tournament.event_name %></li>
+        <% end %>
+        <li class="list-group-item">Owner: <%= @tournament.user_name %></li>
+        <li class="list-group-item">Visibility: <%= @tournament.object_permission.permission_type %></li>
+        <li class="list-group-item">Max number of Teams: <%= @tournament.num_teams %></li>
+        <% if @tournament.team_max_size == @tournament.team_min_size %>
+          <li class="list-group-item">Team Size: <%= @tournament.team_max_size %></li>
+        <% else %>
+          <li class="list-group-item">Team Size: <%= @tournament.team_min_size %> - <%= @tournament.team_max_size %></li>
+        <% end %>
+        <li class="list-group-item">Games per Round: <%= @tournament.games_per_round %></li>
+        <li class="list-group-item">Teams per Round: <%= @tournament.teams_per_round %></li>
+        <li class="list-group-item">Max Games in Parallel: <%= @tournament.num_parallel_events %></li>
+        <li class="list-group-item">Tournament lead time: <%= @tournament.lead_time %> minutes</li>
+        <li class="list-group-item">Round length: <%= @tournament.round_length %> minutes</li>
+        <li class="list-group-item">Gap between Rounds: <%= @tournament.time_between_rounds %> minutes</li>
+        <li class="list-group-item">Public team signup?: <%= @tournament.public_teams %></li>
+        
+        <li class="list-group-item">
+          <% if current_user && current_user.owns(@tournament) %>
+            <%= link_to edit_tournament_path(@tournament), :class => "btn btn-success" do %>
+               <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
+              <% if (!@tournament.locked?) %>
+                <%= link_to lock_tournament_path(@tournament), :class => "btn btn-success", data: { confirm: 'Are you sure?' } do %>
+                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Lock Tournament
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <% if @tournament.can_create_team?(current_user) %>
+            <%= link_to new_team_for_tournament_path(@tournament), :class => "btn btn-success" do %>
+              <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create Team
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div role="tabpanel" class="tab-pane" id="teams">
+    <%= render "tournaments/teams", :tournament => @tournament, :teams_grid => @teams_grid %>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="calendar-div">
+    <div id="calendar"></div>
+    <script type='text/javascript'>
+      $(document).ready(function() {
+      events =  [
+        <% @tournament.game_events.each_with_index do |ge, i| %>
+          {
+            title  : '<%= ge.title %>',
+            start  : '<%= ge.game_start_time %>',
+            end    : '<%= ge.game_end_time %>'
+          }<%= "," unless i == @tournament.game_events.size - 1 %>
+        <% end %>
+      ];
+      start_time = "<%= @tournament.next_event.try(:game_start_time) || DateTime.now %>"
+      create_calendar("#calendar", events, "agendaDay", start_time);
+    });
+    </script>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="rounds">
+    <%= render "tournament_rounds/tournament_rounds" %>
+  </div>
+</div>
+
+<div class="share-panel">
+<p>Share this Tournament:</p>
 <%= social_share_button_tag(@tournament.name, url: tournament_url(@tournament), desc: @tournament.description, popup: "true", via: "gamesocialapp") %>
-
-<% if @tournament.winner %>
-<h2>Winner: <%= @tournament.winner.name %></h2>
-<% end %>
-
-<%= render "tournaments/teams", :tournament => @tournament, :teams_grid => @teams_grid %>
-
-<h2>Calendar</h2>
-<div id="calendar"></div>
+</div>
 
 <script type='text/javascript'>
-  $(document).ready(function() {
-  events =  [
-    <% @tournament.game_events.each_with_index do |ge, i| %>
-      {
-        title  : '<%= ge.title %>',
-        start  : '<%= ge.game_start_time %>',
-        end    : '<%= ge.game_end_time %>'
-      }<%= "," unless i == @tournament.game_events.size - 1 %>
-    <% end %>
-  ];
-  start_time = "<%= @tournament.next_event.try(:game_start_time) || DateTime.now %>"
-  create_calendar("#calendar", events, "agendaDay", start_time);
+$(document).ready(function () {
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        $('#calendar').fullCalendar('render');
+    });
+    $('#myTab a:first').tab('show');
 });
 </script>
-
-<h2>Rounds</h2>
-<%= render "tournament_rounds/tournament_rounds" %>
-
-<%= link_to 'Edit', edit_tournament_path(@tournament), :class => "btn btn-primary"  %> |
-<%= link_to 'Back', tournaments_path, :class => "btn btn-warning" %>

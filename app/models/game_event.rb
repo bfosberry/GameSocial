@@ -20,6 +20,7 @@ class GameEvent < ActiveRecord::Base
   delegate :email, :to => :user, :prefix => true, :allow_nil => true
   delegate :name, :to => :game, :prefix => true, :allow_nil => true
   delegate :name, :to => :event, :prefix => true, :allow_nil => true
+  delegate :name, :to => :tournament, :prefix => true, :allow_nil => true
   delegate :name, :to => :game_social_server, :prefix => true, :allow_nil => true
   delegate :name, :to => :chat_server, :prefix => true, :allow_nil => true
   delegate :logo_url, :to => :game, :prefix => true, :allow_nil => true

@@ -1,5 +1,3 @@
-<h2>Teams</h2>
-
 <%= grid(@teams_grid) do |g|
 
   g.blank_slate  do
@@ -33,12 +31,10 @@
   end
 end -%>
 
-<% if @tournament.can_create_team?(current_user) %>
-  <%= link_to 'Create Team', new_team_for_tournament_path(@tournament), :class => "btn btn-success" %>
-<% end %>
-
 <% if @tournament.in_team?(current_user) %>
-  <% team = @tournament.team_for(current_user) %>
-  <h2>Your Team: <%= team.name %></h2>
+  <div class="section-header-centered">
+    <% team = @tournament.team_for(current_user) %>
+    <h2>Your Team: <%= team.name %></h2>
+  </div>
   <%= render "teams/team", :team => team %>
 <% end %>
