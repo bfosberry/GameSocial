@@ -9,97 +9,42 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">Summary</div>
-  <div class="panel-body">
-    <div class="media">
-    </div>
-  </div>
-
   <ul class="list-group">
-    <li class="list-group-item">Start time: <%= @game_event.formatted_start_time %></li>
-    <li class="list-group-item">End time: <%= @game_event.formatted_end_time %></li>
-    <li class="list-group-item">Game: <%= @game_event.game_name %></li>
-    <% if @game_event.event %>
-      <li class="list-group-item">Lan Party: <%= link_to @game_event.event_name, @game_event.event %></li>
+    <% if @chat_server.ip.present? %>
+      <li class="list-group-item">Host: <%= @chat_server.ip %></li>
     <% end %>
-    <% if @game_event.tournament %>
-      <li class="list-group-item">Tournament: <%= link_to @game_event.tournament_name, @game_event.tournament %></li>
+    <% if @chat_server.port.present? %>
+      <li class="list-group-item">Port: <%= @chat_server.port %></li>
     <% end %>
-    <% if @game_event.game_social_server %>
-      <li class="list-group-item">Game Server: <%= link_to @game_event.game_social_server_name, @game_event.game_social_server %></li>
+    <li class="list-group-item">Type: <%= @chat_server.server_type %></li>
+    <% if @chat_server.password.present? %>
+      <li class="list-group-item">Password: <%= @chat_server.password %></li>
     <% end %>
-    <% if @game_event.chat_server %>
-      <li class="list-group-item">Chat Server: <%= link_to @game_event.chat_server_name, @game_event.chat_server %> </li>
+    <% if @chat_server.room.present? %>
+      <li class="list-group-item">Room: <%= @chat_server.room %></li>
     <% end %>
-    <li class="list-group-item">Owner: <%= @game_event.user_name %></li>
-    <li class="list-group-item">Visibility: <%= @game_event.object_permission.permission_type %></li>
+    <% if @chat_server.room_password.present? %>
+      <li class="list-group-item">Room Password: <%= @chat_server.room_password %></li>
+    <% end %>
+    <% if @chat_server.url.present? %>
+      <li class="list-group-item">URL: <%= @chat_server.url %></li>
+    <% end %>
+    <li class="list-group-item">Owner: <%= @chat_server.user_name %></li>
+    <li class="list-group-item">Visibility: <%= @chat_server.object_permission.permission_type %></li>
     <li class="list-group-item">
-      <% if current_user && current_user.owns(@game_event) %>
-        <%= link_to edit_game_event_path(@game_event), :class => "btn btn-success" do %>
+      <% if current_user && current_user.owns(@chat_server) %>
+        <%= link_to edit_chat_server_path(@chat_server), :class => "btn btn-success" do %>
            <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
         <% end %>
       <% end %>
-      <% if @game_event.game_social_server %>
-        <%= link_to @game_event.game_social_server_launch_url, :class => "btn btn-success" do %>
-          <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span> Join Server
-        <% end %>
-      <% end %>
-      <% if @game_event.chat_server %>
-        <%= link_to @game_event.chat_server_launch_url(current_user), :class => "btn btn-success" do %>
-          <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span> Join Chat Server
-        <% end %>
+      <%= link_to @chat_server.launch_url(current_user), :class => "btn btn-success" do %>
+        <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span> Join Chat Server
       <% end %>
     </li>
   </ul>
 </div>
 
-
-<table class="table table-condensed">
-  <tr>
-    <td><h5 class="text-center">Name</h5></td>
-    <td><p class="text-center"><%= @chat_server.name %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Host</h5></td>
-    <td><p class="text-center"><%= @chat_server.ip %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Port</h5></td>
-    <td><p class="text-center"><%= @chat_server.port %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Type</h5></td>
-    <td><p class="text-center"><%= @chat_server.server_type %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Password</h5></td>
-    <td><p class="text-center"><%= @chat_server.password %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Room</h5></td>
-    <td><p class="text-center"><%= @chat_server.room %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Room Password</h5></td>
-    <td><p class="text-center"><%= @chat_server.room_password %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Join URL</h5></td>
-    <td><p class="text-center"><%= @chat_server.url %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Visibility</h5></td>
-    <td><p class="text-center"><%= @chat_server.object_permission.permission_type %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Launch Chat Server</h5></td>
-    <td><p class="text-center"><%= link_to 'Join Chat Server', @chat_server.launch_url(current_user), :class => "btn btn-success" %>
-   </p></td>
-  </tr>
-</table>
-
-<%= social_share_button_tag(@chat_server.name, url: chat_server_url(@chat_server), popup: "true", via: "gamesocialapp") %>
-
-<% if current_user.owns(@chat_server) %>
-  <%= link_to 'Edit', edit_chat_server_path(@chat_server), :class => "btn btn-primary" %> |
-<% end %>
-<%= link_to 'Back', chat_servers_path %>
+<div class="share-panel">
+  <p>Share this Event:</p>
+  <%= social_share_button_tag(@chat_server.name, url: chat_server_url(@chat_server), popup: "true", via: "gamesocialapp") %>
+</div>
