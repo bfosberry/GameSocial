@@ -1,22 +1,30 @@
+<div class="page-header">
+  <%= link_to alert_schedules_path, :class => "btn btn-warning btn-left" do %>
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+  <% end %>
+  <h3 class="text-center h3-1-0"><%= @alert_schedule.name %></h3>
+</div>
+
 <p id="notice"><%= notice %></p>
 
-<table class="table table-condensed">
-  <% if is_admin? %>
-  <tr>
-    <td><h5 class="text-center">User</h5></td>
-    <td><p class="text-center"><%= @alert_schedule.user_name %></p></td>
-  </tr>
-  <% end %>
-  <tr>
-    <td><h5 class="text-center">Alert Name</h5></td>
-    <td><p class="text-center"><%= @alert_schedule.name %></p></td>
-  </tr>
-  <% @alert_schedule.alert_conditions.each do |ac| %>
-    <%= render "alert_condition_#{ac.condition_type}", :ac => ac %>
-  <% end %>
-</table>
+<div class="panel panel-default">
+  <div class="panel-heading">Summary</div>
+  <ul class="list-group">
+    <% if is_admin? %>
+      <li class="list-group-item">Owner: <%= @alert_schedule.user_name %></li>
+    <% end %>
 
-<%= link_to 'Edit', edit_alert_schedule_path(@alert_schedule), :class => "btn btn-primary" %> |
-<%= link_to 'Back', alert_schedules_path, :class => "btn btn-warning" %>
-
-<br>
+    <% @alert_schedule.alert_conditions.each do |ac| %>
+      <li class="list-group-item">
+        <%= render "alert_condition_#{ac.condition_type}", :ac => ac %>
+      </li>
+    <% end %>
+    <li class="list-group-item">
+      <% if current_user && current_user.owns(@alert_schedule) %>
+        <%= link_to edit_alert_schedule_path(@alert_schedule), :class => "btn btn-success" do %>
+           <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
+        <% end %>
+      <% end %>
+    </li>
+  </ul>
+</div>

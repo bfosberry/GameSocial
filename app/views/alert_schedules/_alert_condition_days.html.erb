@@ -1,5 +1,2 @@
 <% @days = ac.value["days"].reject {|d| d.blank? } %> 
-<tr>
-    <td><h5 class="text-center"><%= ac.condition_type.capitalize %></h5></td>
-    <td><p class="text-center"><%= @days.map {|d| d.capitalize }.join(", ") %></p></td>
-</tr>
+<%= ac.condition_type.capitalize %>: <%= @days.map {|d| d.capitalize }.join(", ") %>

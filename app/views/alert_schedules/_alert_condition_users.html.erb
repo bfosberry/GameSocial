@@ -1,5 +1,2 @@
 <% @users = ac.value["users"].reject {|uid| uid.blank? }.map{ |uid| User.find(uid)} %> 
-<tr>
-    <td><h5 class="text-center"><%= ac.condition_type.capitalize %></h5></td>
-    <td><p class="text-center"><%= @users.map {|u| u.name}.join(", ") %></p></td>
-</tr>
+<%= ac.condition_type.capitalize %>: <%= @users.map {|u| u.name}.join(", ") %>
