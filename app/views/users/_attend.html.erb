@@ -1,7 +1,10 @@
 <% leave_html = '<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Leave' %>
 <% join_html = '<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Join' %>
-
-<% if attending %>
+<% if current_user.nil? %>
+  <%= link_to "/auth/steam", :class => "btn btn-warning attend-btn" do %>
+    <%= raw join_html %>
+  <% end %>
+<% elsif attending %>
   <%= link_to leave, :remote => true, "data-type" => "json", :class => "btn btn-warning attend-btn" do %>
     <%= raw leave_html %>
   <% end %>

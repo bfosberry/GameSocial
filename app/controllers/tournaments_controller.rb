@@ -1,8 +1,8 @@
 class TournamentsController < ApplicationController
   before_action :set_tournament, only: [:show, :edit, :update, :destroy, :lock, :concede, :resolve]
   before_filter :spoof_login, only: [:show, :index]
-  before_filter :enforce_login, only: [:new, :edit, :update, :destroy, :resolve, :concede]
-
+  before_filter :enforce_login, except: [:show, :index]
+  
   # GET /tournaments
   # GET /tournaments.json
   def index

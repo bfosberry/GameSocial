@@ -2,7 +2,7 @@
   <%= link_to events_path, :class => "btn btn-warning btn-left" do %>
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
   <% end %>
-  <%= render "users/attend", :attending => current_user.attending_event?(@event), :join => join_event_path(@event), :leave =>  leave_event_path(@event) %>
+  <%= render "users/attend", :attending => (current_user && current_user.attending_event?(@event)), :join => join_event_path(@event), :leave =>  leave_event_path(@event) %>
   <%= link_to calendar_path(event_path(@event)), :class => "btn btn-primary btn-right" do %>
     <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> ICal
   <% end %>

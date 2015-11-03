@@ -35,9 +35,14 @@
           <% end %>
         </div>
         <div class="modal-footer">
-          <a href="#" data-dismiss="modal" class="btn">Close</a>
-          <%= f.submit "Invite", :class => "btn btn-success" %>
-          </div>
+        <% if current_user %>
+            <a href="#" data-dismiss="modal" class="btn">Close</a>
+            <%= f.submit "Invite", :class => "btn btn-success" %>
+        <% else %>
+          <p>Sign in to invite</p>
+        <% end %>
+        </div>
+        
         <% end %>
       </div>
     </div>

@@ -1,7 +1,7 @@
 class GameEventsController < ApplicationController
   before_action :set_game_event, only: [:show, :edit, :update, :destroy, :join, :leave, :invite, :send_invite]
   before_filter :spoof_login, only: [:index]
-  before_filter :enforce_login, only:  [:new, :edit, :update, :destroy, :join, :leave, :invite, :send_invite]
+  before_filter :enforce_login, except:  [:index, :show]
   
   # GET /game_events
   # GET /game_events.jso
