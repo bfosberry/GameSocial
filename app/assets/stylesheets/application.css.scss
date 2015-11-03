@@ -115,6 +115,12 @@ h2 {
   padding-bottom: 10px;
 }
 
+.section-header h3 {
+  float: right;
+  margin: 0 auto;
+  width: 57%;
+}
+
 .tab-pane .section-header-centered h2 {
   float: none;
 }
@@ -123,7 +129,7 @@ h2 {
   margin-bottom: 10px;
 }
 
-.page-header .h3-1-0 {
+.h3-1-0 {
   margin: 0 auto;
   width: 80%;
   margin-right: 100px;

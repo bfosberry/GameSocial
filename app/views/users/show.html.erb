@@ -1,70 +1,104 @@
+<h3 class="text-center"><%= @user.name %> (<%= @user.email %>)</h3>
+
 <p id="notice"><%= notice %></p>
 
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Info</a></li>
+  <li role="presentation"><a href="#steam-games" aria-controls="steam-games" role="tab" data-toggle="tab">Steam Games</a></li>
+  <li role="presentation"><a href="#board-games" aria-controls="board-games" role="tab" data-toggle="tab">Board Games</a></li>
+  <li role="presentation"><a href="#friends" aria-controls="friends" role="tab" data-toggle="tab">Friends</a></li>
+</ul>
 
-<table class="table table-condensed">
-  <tr>
-    <td><h5 class="text-center">Name</h5></td>
-    <td><p class="text-center"><%= @user.name %></p></td>
-  </tr>
-  <tr>
-    <td><h5 class="text-center">Email</h5></td>
-    <td><p class="text-center"><%= @user.email %></p></td>
-  </tr>
-</table>
 
-<h1 class="text-center">Your Steam Games</h1>
-<a data-toggle="modal" href="#gameModal" class="btn btn-primary">Add a Game</a>
-<%= grid(@steam_games_grid) do |g|
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="info">
+    <div class="panel panel-default">
+      <div class="panel-heading">Summary</div>
+      <div class="panel-body">
+        <div class="media">
+          <div class="media-left">
+            <%= image_tag @user.avatar_url, size: "100", class: "media-object" %>
+          </div>
+          <div class="media-body">
+            <p><%= @user.email %></p>
+          </div>
+        </div>
+      </div>
 
-  g.blank_slate  do
-    content_tag :div, "No Games found", class: 'well'
-  end
-
-  g.column name: 'Icon', attribute: 'logo_url', filter: false do |game|
-    image_tag(game.logo_url, :crop => :fill, :class => "game_image")
-  end
-
-  g.column name: 'Name', attribute: 'name' do |game|
-    game.name
-  end
-end -%>
-
-<h1 class="text-center">Your Board Games</h1>
-<a data-toggle="modal" href="#gameModal" class="btn btn-primary">Add a Game</a>
-<%= grid(@board_games_grid) do |g|
-
-  g.blank_slate  do
-    content_tag :div, "No Games found", class: 'well'
-  end
-
-  g.column name: 'Icon', attribute: 'logo_url', filter: false do |game|
-    image_tag(game.logo_url, :crop => :fill, :class => "game_image")
-  end
-
-  g.column name: 'Name', attribute: 'name' do |game|
-    game.name
-  end
-end -%>
-
-<% unless @user.friends.empty?  %>
-<h2>Friends</h2>
-<div class="row">
-  <% for i in 0..5 %>
-    <div class="col-lg-2 col-md-2">
-      <%  @user.friends.each_with_index do |u, index| %>
-        <% if index % 6 == i %>
-          <%= render "users/user", :u => u %>
+      <ul class="list-group">
+        <% if current_user && current_user.owns(@user) %>
+          <li class="list-group-item"><%= link_to edit_user_path(@user), :class => "btn btn-success" do %>
+            <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
+          <% end %></li>
         <% end %>
-      <% end %>
+      </ul>
     </div>
-  <% end %>
-</div>
-<% end %>
+  </div>
 
-<% if current_user == @user %>
-  <%= link_to 'Edit', edit_user_path(@user), :class => "btn btn-primary" %> |
-<% end %>
-<%= link_to 'Back', root_path, :class => "btn btn-warning" %>
-</div>
+  <div role="tabpanel" class="tab-pane" id="steam-games">
+    <div class="section-header">
+      <a data-toggle="modal" href="#gameModal" class="btn btn-primary">
+         <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add a Game</a>
+      <h3 class="h3-1-0">Your Steam Games</h3>
+    </div>
+    <%= grid(@steam_games_grid) do |g|
 
-<%= render '/games/game_form' %>
+      g.blank_slate  do
+        content_tag :div, "No Games found", class: 'well'
+      end
+
+      g.column name: 'Icon', attribute: 'logo_url', filter: false do |game|
+        image_tag(game.logo_url, :crop => :fill, :class => "game_image")
+      end
+
+      g.column name: 'Name', attribute: 'name' do |game|
+        game.name
+      end
+    end -%>
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="board-games">
+    <div class="section-header">
+      <a data-toggle="modal" href="#gameModal" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add a Game</a>
+      <h3 class="h3-1-0">Your Board Games</h3>
+    </div>
+    <%= grid(@board_games_grid) do |g|
+
+      g.blank_slate  do
+        content_tag :div, "No Games found", class: 'well'
+      end
+
+      g.column name: 'Icon', attribute: 'logo_url', filter: false do |game|
+        image_tag(game.logo_url, :crop => :fill, :class => "game_image")
+      end
+
+      g.column name: 'Name', attribute: 'name' do |game|
+        game.name
+      end
+    end -%>
+  </div>
+
+  <div role="tabpanel" class="tab-pane  " id="friends">
+    <div class="section-header section-header-centered">
+      <h2>Your Friends</h2>
+    </div>
+
+    <% if @user.friends.size > 0 %>
+      <div class="row">
+        <% for i in 0..3 %>
+          <div class="col-lg-3 col-md-3">
+            <%  @user.friends.each_with_index do |u, index| %>
+              <% if index % 4 == i %>
+                <%= render "users/user", :u => u %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <h2>No Friends :(</h2>
+    <% end %>
+  </div>
+</div>
