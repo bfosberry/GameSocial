@@ -46,7 +46,7 @@ class TournamentRound < ActiveRecord::Base
 
   def check
     if winner.nil?
-      if conceded.size == num_teams - 1
+      if conceded.size == num_teams.to_i - 1
         team_list = teams
         unless conceded.empty?
           team_list = team_list.where('"teams".id not in (?)', conceded)

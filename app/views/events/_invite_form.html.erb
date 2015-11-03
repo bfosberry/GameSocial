@@ -20,15 +20,9 @@
           <div class="modal-body">
             <p>These are your friends who play <%= game.name %></p>
             <div class="row">
-              <% for i in 0..2 %>
-                <div class="col-lg-2 col-md-2">
-                  <%  friend_list.each_with_index do |u, index| %>
-                    <% if index % 3 == i %>
-                      <%= render "users/user", :u => u %>
-                    <% end %>
-                  <% end %>
-                </div>
-              <% end %>
+                <%  friend_list.each do |u| %>
+                  <%= render "users/user", :u => u %>
+                <% end %>
             </div>
           </div>
           <% end %>

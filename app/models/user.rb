@@ -2,10 +2,10 @@ require 'workers/sync_worker'
 require 'workers/location_sync_worker'
 require 'workers/import_worker'
 class User < ActiveRecord::Base
-  has_many :chat_servers
+  has_many :chat_servers, :dependent => :destroy
   has_and_belongs_to_many :games
-  has_many :game_events
-  has_many :events
+  has_many :game_events, :dependent => :destroy
+  has_many :events, :dependent => :destroy
   has_many :groups
   has_many :credentials, :dependent => :destroy
   has_many :playlists

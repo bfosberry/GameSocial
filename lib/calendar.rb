@@ -25,6 +25,7 @@ class Calendar
   end
 
   def create_event
+    return if Rails.env == "development"
    	return if event
     @event = Google::Event.new({:send_event_notification => true,
    		                          :calendar => calendar})
@@ -32,6 +33,7 @@ class Calendar
   end
 
   def update_event
+    return if Rails.env == "development"
   	return unless event
     event.calendar = calendar
   	event.title = object.name
@@ -56,6 +58,7 @@ class Calendar
   end
 
   def event
+    return if Rails.env == "development"
     unless @event
       if object.uid
         evs = calendar.find_event_by_id(object.uid) 
@@ -66,6 +69,7 @@ class Calendar
   end
 
   def delete_event
+    return if Rails.env == "development"
   	ev = event
   	calendar.delete_event(ev) if ev
   	object.update_attribute(:uid, nil)

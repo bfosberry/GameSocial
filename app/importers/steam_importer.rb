@@ -31,17 +31,26 @@ module Importers
     end
 
     def import_friends
+      user = steam_provider.user
+
+      current_friends = user.friends.map(&:id)
       steam_provider.friends.each do |f|
         begin 
           u = create_user_from_friend(f)
           if u
-            user = steam_provider.user
+            user.reload
             u.friends << user unless u.friends.include? user
             user.friends << u unless user.friends.include? u
+            current_friends.delete(u.id)
           end
         rescue SteamCondenser::Error => e
           raise e unless e.message =~ /profile/
         end
+      end
+      current_friends.each do |f|
+        friend = User.find(f)
+        user.friends.delete(friend)
+        friend.friends.delete(user)
       end
     end
 
