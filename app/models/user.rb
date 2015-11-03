@@ -98,6 +98,10 @@ class User < ActiveRecord::Base
     credential("google_oauth2").refresh_token
   end
 
+  def google_email
+    credential("google_oauth2").email
+  end
+
   def steam_uid
     credential("steam").uid if credential("steam")
   end
@@ -132,6 +136,10 @@ class User < ActiveRecord::Base
 
   def alert(game_location)
     alerting_schedules.each {|as| as.alert(game_location)}
+  end
+
+  def select_email
+    email || google_email
   end
 
   def set_game(game_name, game_server_ip)

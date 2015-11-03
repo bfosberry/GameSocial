@@ -5,6 +5,6 @@ class AlertMailer < ActionMailer::Base
     @user = alert.user
     @body = alert.description
     @subject = alert.title
-    mail(to: @user.email, subject: @subject) if @user.email
+    mail(to: @user.select_email, subject: @subject) if @user.email
   end
 end

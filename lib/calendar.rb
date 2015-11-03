@@ -49,7 +49,7 @@ class Calendar
   def build_attendees
   	users_with_email = object.users.select {|u| u.email }
   	users_with_email.map do |u|
-      { 'email' => u.email,
+      { 'email' => u.select_email,
         'displayName' => u.name,
         'responseStatus' => "tentative" }
   	end

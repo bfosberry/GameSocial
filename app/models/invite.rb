@@ -20,7 +20,7 @@ class Invite
 
   def verify_email
     u = User.find_by_name(email)
-    self.email = u.email if u
+    self.email = u.select_email if u
   end
 
   def subject
