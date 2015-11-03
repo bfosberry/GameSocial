@@ -155,6 +155,10 @@ class Tournament < ActiveRecord::Base
     tournament_rounds.last.try(&:winner)
   end
 
+  def winner_name
+    winner.name
+  end
+
   def notify
     teams.flat_map {|t| t.users }.uniq.each{|u| Workers::NotificationWorker.perform_async(u.id, notification_title)}
   end
