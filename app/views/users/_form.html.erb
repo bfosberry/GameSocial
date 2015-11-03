@@ -1,4 +1,4 @@
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, :html => {:role => "form-horizontal"}) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,33 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
+    <p>By setting an email address here, you can override a linked google account email</p>
     <p>Warning: It is possible for other users to see your email address when you both join the same event</p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.label :email, :class => "help-inline" %>
+    <%= f.text_field :email, :class => "form-control"  %>
   </div>
 
-  <% if is_admin? %>
-  <div class="field">
-    <%= f.label :provider %><br>
-    <%= f.text_field :provider %>
-  </div>
-  <div class="field">
-    <%= f.label :uid %><br>
-    <%= f.text_field :uid %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :game_ids %><br>
-    <%= f.collection_select :game_ids, Game.all, :id, :name,{:include_blank => false},{:multiple => true, :size => 5} %>
-</p>
-
- <% end %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-success" %>
   </div>
 <% end %>
