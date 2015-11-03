@@ -14,7 +14,6 @@
     <li class="list-group-item">Tournament: <%= @team.tournament_name %></li>
     <li class="list-group-item">Game: <%= @team.game_name %></li>
     <li class="list-group-item">Captain: <%= @team.user_name %></li>
-    <li class="list-group-item"><a data-toggle="modal" href="#inviteModal" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Invite to Team</a></li>
     <% if current_user == @team.user %>
       <li class="list-group-item">
         <%= link_to edit_team_path(@team), :class => "btn btn-success" do %>
