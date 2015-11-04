@@ -24,7 +24,10 @@
     <%= f.grouped_collection_select :game_id, Game.type_fetchers, :fetch, :type, :id, :name,  {:selected => @tournament.game_id}, {:class => "form-control"} %>
       <p>Don't see the game you wanted to add? Click <%= link_to "here", new_game_path, :class => "btn btn-primary btn-sm" %></p>
   </div>
-  <% unless @tournament.event_id %>
+
+   <% if @tournament.event_id %>
+    <%= hidden_field(:tournament, :event_id) %>
+  <% else %>
   <div class="form-group">
     <%= f.label "LAN Party", :class => "help-inline" %><br>
     <%= f.collection_select :event_id, Event.all, :id, :name,  {:selected => @tournament.event_id, :include_blank => true}, {:class => "form-control"} %>

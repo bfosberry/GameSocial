@@ -12,7 +12,9 @@
     </div>
   <% end %>
 
-  <% unless @game_event.event_id %>
+  <% if @game_event.event_id %>
+    <%= hidden_field(:game_event, :event_id) %>
+  <% else %>
   <div class="form-group">
     <%= f.label "LAN Party", :class => "help-inline" %><br>
     <%= f.collection_select :event_id, Event.all, :id, :name,  {:selected => @game_event.event_id, :include_blank => true}, {:class => "form-control"} %>
