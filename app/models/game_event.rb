@@ -54,8 +54,8 @@ class GameEvent < ActiveRecord::Base
     title
   end
 
-  def location
-    game_social_server_name
+  def select_location
+    location || game_social_server_name
   end
 
   def export_game_event

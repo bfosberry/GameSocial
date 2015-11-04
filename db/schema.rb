@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028012140) do
+ActiveRecord::Schema.define(version: 20151104023617) do
 
   create_table "alert_conditions", force: :cascade do |t|
     t.string   "condition_type",    limit: 255
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 20151028012140) do
     t.datetime "updated_at"
     t.string   "uid",                   limit: 255
     t.integer  "tournament_id"
+    t.string   "location"
   end
 
   add_index "game_events", ["chat_server_id"], name: "index_game_events_on_chat_server_id"

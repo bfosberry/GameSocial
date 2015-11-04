@@ -40,6 +40,9 @@
         <% if @game_event.tournament %>
           <li class="list-group-item">Tournament: <%= link_to @game_event.tournament_name, @game_event.tournament %></li>
         <% end %>
+        <% if @game_event.location %>
+          <li class="list-group-item">Location: <%= @game_event.location %></li>
+        <% end %>
         <% if @game_event.game_social_server %>
           <li class="list-group-item">Game Server: <%= link_to @game_event.game_social_server_name, @game_event.game_social_server %></li>
         <% end %>

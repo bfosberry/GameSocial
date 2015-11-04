@@ -159,6 +159,7 @@ class GameEventsController < ApplicationController
                                          :user_id, 
                                          :start_time, 
                                          :end_time,
+                                         :location,
                                          object_permission_attributes: [:permission_type])
     end
 
