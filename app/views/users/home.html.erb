@@ -1,11 +1,17 @@
 <h1>Welcome to GameSocial</h1>
 
-<p>To get started, take a look at the Lan Parties listed above. By joining a Lan Party or Event you'll see the upcoming games listed below. If you sign in with Google, you'll also get emailed calendar invites and updates to events.</p>
+<% unless current_user %>
+<p>To get started, sign in with Steam and Google using the buttons above</p>
 
-<p>You can also create your own Lan Parties and Events, as well as track chat servers and game servers on which to play.</p>
+<p>You can also browse the public events throughout the site without logging in.</p>
+<% else %>
 
-<% unless signed_in? %><p>Sign in with Google and Steam to use the application</p><% end %>
+<p>Use GameSocial to join and create Events and Lan Parties using the tools provided. You can also set up Alerting schedules to notify you when a friend is playing a specific game.</p>
 
+<p>For questions and assistance check out the <a href="http://bfosberry.github.io/GameSocial/">GameSocial site</a>, and also the <a href="http://rackergamers.org/community/chat/">Rackergamers Slack Server</a>.
+<% end %>
+
+<p>
 <% unless Rails.env == "production" %><p><b>Warning: This is a non-production environment, data may be lost at any time. Please use this environment for testing only.</b></p><% end %>
 
 <% if signed_in? %>
