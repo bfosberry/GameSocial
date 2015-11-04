@@ -114,7 +114,7 @@ class EventsController < ApplicationController
     enforce_ownership(game_server)
     enforce_visibility(@event)
     @event.game_social_servers.delete(game_server) if @event.game_social_servers.include? game_server
-    redirect_to event_path(@event), notice: "Removed #{game_server.name} to game servers"
+    redirect_to event_path(@event), notice: "Removed #{game_server.name} from game servers"
   end
 
   def return_url
