@@ -15,6 +15,7 @@ gem 'whenever'
 gem 'syslog-logger'
 gem 'debugger-ruby_core_source'
 gem 'websocket-rails'
+gem 'newrelic_rpm'
 
 gem "wice_grid"
 gem 'jquery-ui-rails'
