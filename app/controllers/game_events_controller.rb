@@ -44,7 +44,9 @@ class GameEventsController < ApplicationController
 
   # GET /game_events/new_for_event
   def new_for_event
-    @game_event = GameEvent.new({ :event_id => params[:event_id]})
+    event = Event.find(params[:event_id])
+    enforce_visibility(event)
+    @game_event = GameEvent.new(:event_id => event.id)
     @game_event.game_start_time = DateTime.now
     @game_event.game_end_time = DateTime.now
     @game_event.object_permission = ObjectPermission.new
@@ -53,11 +55,13 @@ class GameEventsController < ApplicationController
 
   # GET /game_events/1/invite
   def invite
+    enforce_visibility(@game_event)
     @invite = Invite.new
   end
 
   # POST /game_events/1/invite
   def send_invite
+    enforce_visibility(@game_event)
     @invite = Invite.new(invite_params)
     @invite.game_event = @game_event
     @invite.user =  current_user
@@ -72,6 +76,7 @@ class GameEventsController < ApplicationController
 
   # GET /game_events/1/join
   def join
+    enforce_visibility(@game_event)
     user = User.find_by_id(params[:user_id]) || current_user
     enforce_ownership(user)
     user.join_game_event(@game_event)
@@ -84,6 +89,7 @@ class GameEventsController < ApplicationController
 
   # GET /game_events/1/leave
   def leave
+    enforce_visibility(@game_event)
     user = User.find_by_id(params[:user_id]) || current_user
     enforce_ownership(user)
     user.leave_game_event(@game_event)

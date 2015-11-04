@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    enforce_ownership(@user)
     @game = Game.new
     @steam_games_grid = initialize_grid(@user.games.where(provider: "steam"), :per_page => 10, name: "steam")
     @board_games_grid = initialize_grid(@user.games.where(provider: "board"), :per_page => 10, name: "board")
@@ -27,6 +28,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    enforce_ownership(@user)
   end
 
   # GET /users/home
@@ -43,6 +45,7 @@ class UsersController < ApplicationController
 
   # POST /user/1/games
   def add_game
+    enforce_ownership(@user)
     game = Game.find(game_params[:id])
     @user.games << game unless @user.games.include?(game)
     respond_to do |format|
@@ -75,6 +78,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    enforce_ownership(@user)
     #update all users events and game events to re-export
     respond_to do |format|
       up = user_params
@@ -94,6 +98,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    enforce_ownership(@user)
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url }
@@ -103,6 +108,7 @@ class UsersController < ApplicationController
 
   # GET /users/sync
   def sync
+    enforce_ownership(@user)
     w = Workers::SyncWorker.new
     w.perform(current_user.id)
     redirect_to root_path, notice: "Users synced"
@@ -110,6 +116,7 @@ class UsersController < ApplicationController
 
   # GET /users/sync_location
   def sync_location
+    enforce_ownership(@user)
     current_user.friends.each do |u|
       w = Workers::LocationSyncWorker.new
       w.perform(u.id)

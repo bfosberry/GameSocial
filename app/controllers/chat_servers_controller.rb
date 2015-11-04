@@ -12,7 +12,6 @@ class ChatServersController < ApplicationController
   # GET /chat_servers/1.json
   def show
     enforce_visibility(@chat_server)
-
   end
 
   # GET /chat_servers/new

@@ -11,6 +11,7 @@ class AlertSchedulesController < ApplicationController
   # GET /alert_schedules/1
   # GET /alert_schedules/1.json
   def show
+    enforce_ownership(@alert_schedule)
   end
 
   # GET /alert_schedules/new
@@ -20,6 +21,7 @@ class AlertSchedulesController < ApplicationController
 
   # GET /alert_schedules/1/edit
   def edit
+    enforce_ownership(@alert_schedule)
   end
 
   # POST /alert_schedules
@@ -42,6 +44,7 @@ class AlertSchedulesController < ApplicationController
   # PATCH/PUT /alert_schedules/1
   # PATCH/PUT /alert_schedules/1.json
   def update
+    enforce_ownership(@alert_schedule)
     respond_to do |format|
       if @alert_schedule.update(alert_schedule_params)
         format.html { redirect_to @alert_schedule, notice: 'Alert schedule was successfully updated.' }
@@ -56,6 +59,7 @@ class AlertSchedulesController < ApplicationController
   # DELETE /alert_schedules/1
   # DELETE /alert_schedules/1.json
   def destroy
+    enforce_ownership(@alert_schedule)
     @alert_schedule.destroy
     respond_to do |format|
       format.html { redirect_to alert_schedules_url }

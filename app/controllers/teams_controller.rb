@@ -5,8 +5,7 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @tournaments = all_visible(Team)
-    @teams = Team.all
+    @teams = all_visible(Team)
   end
 
   # GET /teams/1
@@ -95,11 +94,13 @@ class TeamsController < ApplicationController
 
   # GET /events/1/invite
   def invite
+    enforce_visibility(@team)
     @invite = Invite.new
   end
 
   # POST /events/1/invite
   def send_invite
+    enforce_visibility(@team)
     @invite = Invite.new(invite_params)
     @invite.team= @team
     @invite.user = current_user

@@ -7,12 +7,13 @@ class PlaylistsController < ApplicationController
   # GET /playlists
   # GET /playlists.json
   def index
-    @playlists = Playlist.all
+    @playlists = all_owned(Playlist)
   end
 
   # GET /playlists/1
   # GET /playlists/1.json
   def show
+    enforce_ownership(@playlist)
   end
 
   # GET /playlists/new
@@ -23,6 +24,7 @@ class PlaylistsController < ApplicationController
 
   # GET /playlists/1/edit
   def edit
+    enforce_ownership(@playlist)
   end
 
   # POST /playlists/1

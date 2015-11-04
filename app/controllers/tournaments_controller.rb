@@ -89,7 +89,9 @@ class TournamentsController < ApplicationController
 
   # GET /tournaments/new_for_event
   def new_for_event
-    @tournament = Tournament.new({ :event_id => params[:event_id]})
+    event = Event.find(params[:event_id])
+    enforce_visibility(event)
+    @tournament = Tournament.new({ :event_id => event.id})
     @tournament.object_permission = ObjectPermission.new
     render 'new'
   end

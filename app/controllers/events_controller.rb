@@ -65,11 +65,13 @@ class EventsController < ApplicationController
 
   # GET /events/1/invite
   def invite
+    enforce_visibility(@event)
     @invite = Invite.new
   end
 
   # POST /events/1/invite
   def send_invite
+    enforce_visibility(@event)
     @invite = Invite.new(invite_params)
     @invite.event = @event
     @invite.user =  current_user
@@ -79,6 +81,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/join
   def join
+    enforce_visibility(@event)
     user = User.find_by_id(params[:user_id]) || current_user
     enforce_ownership(user)
     user.join_event(@event)
@@ -91,6 +94,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/leave
   def leave
+    enforce_visibility(@event)
     user = User.find_by_id(params[:user_id]) || current_user
     enforce_ownership(user)
     user.leave_event(@event)
