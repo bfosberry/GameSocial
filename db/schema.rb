@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104023617) do
+ActiveRecord::Schema.define(version: 20151105041041) do
 
   create_table "alert_conditions", force: :cascade do |t|
     t.string   "condition_type",    limit: 255
@@ -84,6 +84,8 @@ ActiveRecord::Schema.define(version: 20151104023617) do
     t.datetime "updated_at"
     t.integer  "user_id"
   end
+
+  add_index "credentials", ["user_id"], name: "index_credentials_on_user_id"
 
   create_table "events", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -159,6 +161,8 @@ ActiveRecord::Schema.define(version: 20151104023617) do
     t.datetime "updated_at"
   end
 
+  add_index "game_locations", ["user_id"], name: "index_game_locations_on_user_id"
+
   create_table "game_social_servers", force: :cascade do |t|
     t.string   "name",            limit: 255
     t.string   "ip",              limit: 255
@@ -190,6 +194,7 @@ ActiveRecord::Schema.define(version: 20151104023617) do
   end
 
   add_index "games", ["name"], name: "index_games_on_name"
+  add_index "games", ["provider_id", "provider"], name: "index_games_on_provider_id_and_provider"
   add_index "games", ["provider_id"], name: "index_games_on_provider_id"
 
   create_table "games_playlists", force: :cascade do |t|
@@ -255,6 +260,8 @@ ActiveRecord::Schema.define(version: 20151104023617) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "teams", ["tournament_id"], name: "index_teams_on_tournament_id"
 
   create_table "teams_tournament_rounds", force: :cascade do |t|
     t.integer "tournament_round_id"
