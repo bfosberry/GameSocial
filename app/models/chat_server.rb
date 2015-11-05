@@ -7,7 +7,9 @@ class ChatServer < ActiveRecord::Base
   accepts_nested_attributes_for :object_permission
   delegate :is_visible_to?, :to => :object_permission
 
-  validates :name, :ip, :port, :presence => true
+  validates :name, :presence => true
+  validates :ip, :port, :presence => true, unless: :discord?
+  validates :url, :presence => true, if: :discord?
   
   SERVER_TYPES =  ["Teamspeak", "Mumble", "Ventrilo", "Discord"]
 
@@ -41,5 +43,9 @@ class ChatServer < ActiveRecord::Base
       uri.query_values = options
       "ventrilo://#{ip}:#{port}/#{uri.query}"
     end
+  end
+
+  def discord?
+    server_type == "Discord"
   end
 end
