@@ -14,6 +14,8 @@ class TournamentRound < ActiveRecord::Base
 
   delegate :team_for, to: :tournament
 
+  default_scope { order(bracket_id: :asc, round_index: :asc) }
+
   after_commit :check
 
   def status
