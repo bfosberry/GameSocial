@@ -17,7 +17,8 @@ class AlertSchedule < ActiveRecord::Base
   def generate_conditions
   	AlertCondition.condition_types.each {|t| generate_condition(t) }
     reload
-    condition_for(:users).parsed_value.each do |user_id|
+    val = condition_for(:users).parsed_value || []
+    val.each do |user_id|
       user = User.find(user_id)
       if user
         users << user unless users.include?(user)
