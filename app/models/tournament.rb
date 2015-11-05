@@ -135,6 +135,7 @@ class Tournament < ActiveRecord::Base
           unless next_round.teams.include? winner
             next_round.teams.append(winner)
           end
+          next_round.save
         end
       end
     end
