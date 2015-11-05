@@ -2,7 +2,7 @@
   <%= link_to game_events_path, :class => "btn btn-warning btn-left" do %>
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
   <% end %>
-  <%= render "users/attend", :attending => current_user.attending_event?(@event), :join => join_game_event_path(@game_event), :leave =>  leave_game_event_path(@game_event) %>
+  <%= render "users/attend", :attending => (current_user && current_user.attending_game_event?(@game_event)), :join => join_game_event_path(@game_event), :leave =>  leave_game_event_path(@game_event) %>
   <a data-toggle="modal" href="#inviteModal" class="btn btn-primary btn-right"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Invite</a>
   <h3 class="text-center h3-2-1"><%= @game_event.name %></h3>
 </div>

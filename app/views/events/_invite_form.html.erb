@@ -14,7 +14,7 @@
             <%= f.label :user, :class => "help-inline" %><br>
             <%= f.autocomplete_field :email, autocomplete_user_name_users_path, :append_to => "#inviteModal" %>
           </div>
-          <% if type == "Event" %>
+          <% if type == "Event" && current_user  %>
           <% friend_list =  current_user.friends.select {|f| f.games.include? game } %>
           <% if friend_list.size > 0 %>
           <div class="modal-body">

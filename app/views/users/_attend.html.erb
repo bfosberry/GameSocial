@@ -1,7 +1,7 @@
 <% leave_html = '<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Leave' %>
 <% join_html = '<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Join' %>
 <% if current_user.nil? %>
-  <%= link_to "/auth/steam", :class => "btn btn-warning attend-btn" do %>
+  <%= link_to "/auth/steam", :class => "btn btn-success attend-btn" do %>
     <%= raw join_html %>
   <% end %>
 <% elsif attending %>
