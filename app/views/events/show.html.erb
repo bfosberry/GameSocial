@@ -144,26 +144,32 @@
       <h2>Games being played</h2>
     </div>
     <% @event.popular_games.each do |game_listing| %>
-      <div>
-        <p><%= game_listing[:game].name %></p>
-        <div class="row">
-        <% for i in 0..3 %>
-          <div class="col-lg-3 col-md-3">
-            <%  game_listing[:users].each_with_index do |u, index| %>
-              <% if index % 4 == i %>
-                <%= render "users/user", :u => u %>
-              <% end %>
-            <% end %>
+
+      <div role="tabpanel" class="tab-pane active" id="info">
+        <div class="panel panel-default">
+          <div class="panel-heading"><%= game_listing[:game].name %></div>
+          <div class="panel-body">
+            <div class="media">
+              <div class="media-left">
+                <%= image_tag game_listing[:game].logo_url, size: "200", class: "media-object" %>
+              </div>
+            </div>
           </div>
-        <% end %>
+
+          <ul class="list-group">
+            <%  game_listing[:users].each do |u| %>
+            <li class="list-group-item"><%= render "users/user", :u => u %></li>
+            <% end %>
+          </ul>
         </div>
       </div>
-      <% end %>
+    <% end %>
 
-      <% if current_user && current_user.attending_event?(@event) %>
-        <p class="text-center"><a data-toggle="modal" href="#playlistModal" class="btn btn-primary">
-        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> 
-        Manage Playlist</a></p>
+
+    <% if current_user && current_user.attending_event?(@event) %>
+      <p class="text-center"><a data-toggle="modal" href="#playlistModal" class="btn btn-primary">
+      <span class="glyphicon glyphicon-list" aria-hidden="true"></span> 
+      Manage Playlist</a></p>
     <% end %>
   </div>
 
