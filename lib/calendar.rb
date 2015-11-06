@@ -40,7 +40,7 @@ class Calendar
     event.start_time = object.start_time
     event.end_time = object.end_time
     desc = object.description || ""
-    desc.gsub( /\r\n/m, "" )
+    desc = desc.gsub( /\r\n/m, "" )
     event.description = desc
     event.attendees = build_attendees
     loc = object.try(:location)
