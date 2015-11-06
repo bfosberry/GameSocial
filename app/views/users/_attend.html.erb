@@ -5,11 +5,11 @@
     <%= raw join_html %>
   <% end %>
 <% elsif attending %>
-  <%= link_to leave, :remote => true, "data-type" => "json", :class => "btn btn-warning attend-btn" do %>
+  <%= link_to leave, :remote => true, "data-type" => "json", :class => "btn btn-warning attend-btn", :id => "attend-#{id}" do %>
     <%= raw leave_html %>
   <% end %>
 <% else %>
-  <%= link_to join, :remote => true, "data-type" => "json", :class => "btn btn-success attend-btn" do %>
+  <%= link_to join, :remote => true, "data-type" => "json", :class => "btn btn-success attend-btn", :id => "attend-#{id}" do %>
     <%= raw join_html  %>
   <% end %>
 <% end %>
@@ -19,12 +19,12 @@
 $(document).ready(function(){
   var join_html_str = '<%= raw join_html %>';
   var leave_html_str = '<%= raw leave_html %>';
-  $('.attend-btn')
+  $('#<%= "attend-#{id}" %>')
     .bind("ajax:beforeSend", function(evt, xhr, settings){
       $(this).attr("disabled", "disabled")
     })
     .bind("ajax:success", function(evt, data, status, xhr){
-       var elem = $(this)[0];
+       var elem = getTarget(evt);
        if (elem.innerHTML.indexOf("Join") > -1){
          elem.innerHTML = leave_html_str;
          elem.href = "<%= leave %>";

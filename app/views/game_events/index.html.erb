@@ -59,7 +59,7 @@
   
   g.column do |game_event|
     if current_user
-      render "users/attend", :attending => current_user.attending_game_event?(game_event), :join => join_game_event_path(game_event), :leave =>  leave_game_event_path(game_event)
+      render "users/attend", :attending => current_user.attending_game_event?(game_event), :join => join_game_event_path(game_event), :leave =>  leave_game_event_path(game_event), :id => game_event.id
     end
   end
 

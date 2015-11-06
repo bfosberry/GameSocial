@@ -37,7 +37,7 @@
   
   g.column do |event|
     if current_user
-      render "users/attend", :attending => current_user.attending_event?(event), :join => join_event_path(event), :leave =>  leave_event_path(event)
+      render "users/attend", :attending => current_user.attending_event?(event), :join => join_event_path(event), :leave =>  leave_event_path(event), :id => event.id
     end
   end
 
