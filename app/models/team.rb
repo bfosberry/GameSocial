@@ -16,6 +16,6 @@ class Team < ActiveRecord::Base
     delegate :is_visible_to?, :to => :object_permission
 
     def can_join?(user)
-        is_visible_to?(user)
+        is_visible_to?(user) && (team_members.size <= tournament.team_max_size)
     end
 end
