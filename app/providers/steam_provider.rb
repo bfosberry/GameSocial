@@ -1,3 +1,5 @@
+  require 'steam-condenser'
+
   module Providers
   class SteamProvider
     attr_accessor :steam_id, :user
@@ -73,7 +75,7 @@
 
     def summary
       Rails.cache.fetch(summary_cache_key, :expires_in => SUMMARY_EXPIRY) do
-        steam_id.summary
+        steam_id.game_info
       end
     end
 

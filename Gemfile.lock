@@ -8,9 +8,8 @@ GIT
       signet (~> 0.6)
 
 GIT
-  remote: git://github.com/bfosberry/steam-condenser-ruby.git
-  revision: a993a142a533052d9c43dfee4266127500e34da4
-  branch: add_summary_support
+  remote: git://github.com/koraktor/steam-condenser-ruby.git
+  revision: 6711134b85b6f89a224e71d0f7def5d11148527c
   specs:
     steam-condenser (1.3.11)
       multi_json (~> 1.6)

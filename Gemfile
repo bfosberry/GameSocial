@@ -70,7 +70,7 @@ gem "omniauth-google-oauth2"
 
 gem 'httparty'
 
-gem 'steam-condenser', :git =>  'git://github.com/bfosberry/steam-condenser-ruby.git', :branch => "add_summary_support"
+gem 'steam-condenser', :git =>  'git://github.com/koraktor/steam-condenser-ruby.git'
 gem 'sidekiq'
 gem 'sinatra'
 group :doc do
