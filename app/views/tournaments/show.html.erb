@@ -36,7 +36,7 @@
         <% end %>
         <li class="list-group-item">Game: <%= @tournament.game_name %></li>
         <% if @tournament.event %>
-          <li class="list-group-item">Lan Party: <%= @tournament.event_name %></li>
+          <li class="list-group-item">Lan Party: <%= link_to @tournament.event_name, @tournament.event %></li>
         <% end %>
         <% if @tournament.tournament_start_time %>
           <li class="list-group-item">Start time: <%= @tournament.formatted_start_time %></li>
