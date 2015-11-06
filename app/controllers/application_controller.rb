@@ -42,16 +42,13 @@ class ApplicationController < ActionController::Base
     def all_owned(model)
       if model.column_names.include? "user_id"
         model.where(:user_id => current_user.id) 
-      #TODO fixme, the pagination does not accept arrays
-      #elsif model.method_defined? "user"
-      # model.all.select{ |m| m.user == current_user }
       else 
         model
       end
     end
 
     def all_visible(model)
-      ids = model.select{|ge| ge.is_visible_to?(current_user)}.map{|ge| ge.id}  
+      ids = model.select{|o| o.is_visible_to?(current_user)}.map{|o| o.id}  
       model.where(id: ids)
     end
 
