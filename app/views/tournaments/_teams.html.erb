@@ -1,4 +1,4 @@
-<%= grid(@teams_grid) do |g|
+<%= grid(@teams_grid, show_filters: :no) do |g|
 
   g.blank_slate  do
     content_tag :div, "No Teams registered", class: 'well'

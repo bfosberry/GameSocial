@@ -1,4 +1,4 @@
-<%= grid(@tournaments_grid) do |g|
+<%= grid(@tournaments_grid, show_filters: :no) do |g|
   g.blank_slate  do
     content_tag :div, "No Tournaments found", class: 'well'
   end

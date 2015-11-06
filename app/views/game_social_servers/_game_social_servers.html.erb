@@ -1,4 +1,4 @@
-<%= grid(@game_servers_grid) do |g|
+<%= grid(@game_servers_grid, show_filters: :no) do |g|
   g.blank_slate  do
     content_tag :div, "No Game Servers Found", class: 'well'
   end

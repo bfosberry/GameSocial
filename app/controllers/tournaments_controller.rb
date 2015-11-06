@@ -12,7 +12,7 @@ class TournamentsController < ApplicationController
       @tournaments = @tournaments.where("game_id in (?)", current_user.games.map {|g| g.id })
     end
     @tournaments_grid = initialize_grid(@tournaments,
-                                        :include => [:user, :event])
+                                        :include => [:user, :event, :game])
   end
 
   # GET /tournaments/1
@@ -23,7 +23,7 @@ class TournamentsController < ApplicationController
     @tournament_rounds_grid = initialize_grid(@tournament.tournament_rounds, 
                                               :include => [:game_event])
     @teams_grid = initialize_grid(@tournament.teams,
-                                  :include => [:user])
+                                  :include => [:user, :tournament_round])
   end
 
   # GET /tournaments/1/lock

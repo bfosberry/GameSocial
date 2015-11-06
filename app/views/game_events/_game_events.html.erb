@@ -1,4 +1,4 @@
-<%= grid(@game_events_grid) do |g|
+<%= grid(@game_events_grid, show_filters: :no) do |g|
   g.blank_slate  do
     content_tag :div, "No Events found", class: 'well'
   end
