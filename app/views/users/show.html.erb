@@ -1,4 +1,4 @@
-<h3 class="text-center"><%= @user.name %> (<%= @user.email %>)</h3>
+<h3 class="text-center"><%= @user.name %></h3>
 
 <p id="notice"><%= notice %></p>
 
@@ -18,29 +18,43 @@
       <div class="panel-body">
         <div class="media">
           <div class="media-left">
-            <%= image_tag @user.avatar_url, size: "100", class: "media-object" %>
+            <%= image_tag @user.avatar_url, size: "200", class: "media-object" %>
           </div>
           <div class="media-body">
-            <p>Email: <%= @user.email %></p>
+            <% if current_user && current_user.owns(@user) %>
+              <p>Email: <%= @user.email %></p>
+            <% end %>
           </div>
-        </div>
+        </div>  
       </div>
 
       <ul class="list-group">
+        <% if @user.steam_profile_url %>
+
+          <li class="list-group-item"><%= link_to @user.steam_profile_url, :class => "btn btn-success" do %>
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Steam Profile
+          <% end %></li>
+        <% end %>
         <% if current_user && current_user.owns(@user) %>
           <li class="list-group-item"><%= link_to edit_user_path(@user), :class => "btn btn-success" do %>
             <span class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit
           <% end %></li>
         <% end %>
+
       </ul>
     </div>
   </div>
 
   <div role="tabpanel" class="tab-pane" id="steam-games">
     <div class="section-header">
-      <a data-toggle="modal" href="#gameModal" class="btn btn-primary">
-         <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add a Game</a>
-      <h3 class="h3-1-0">Your Steam Games</h3>
+     
+      <% if current_user && current_user.owns(@user) %>
+        <a data-toggle="modal" href="#gameModal" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add a Game</a>
+        <h3 class="h3-1-0">Your Steam Games</h3>
+      <% else %>
+        <h3 class="h3-0-0">Your Steam Games</h3>
+      <% end %>
     </div>
     <%= grid(@steam_games_grid) do |g|
 
@@ -60,9 +74,13 @@
 
   <div role="tabpanel" class="tab-pane" id="board-games">
     <div class="section-header">
-      <a data-toggle="modal" href="#gameModal" class="btn btn-primary">
+      <% if current_user && current_user.owns(@user) %>
+        <a data-toggle="modal" href="#gameModal" class="btn btn-primary">
         <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add a Game</a>
-      <h3 class="h3-1-0">Your Board Games</h3>
+        <h3 class="h3-1-0">Your Board Games</h3>
+      <% else %>
+        <h3 class="h3-0-0">Your Board Games</h3>
+      <% end %>
     </div>
     <%= grid(@board_games_grid) do |g|
 

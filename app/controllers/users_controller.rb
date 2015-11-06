@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :add_game]
   skip_before_filter :verify_authenticity_token  
-  before_filter :enforce_login, :except => [:new, :create, :home]
+  before_filter :enforce_login, :except => [:new, :create, :home, :show]
   before_filter :enforce_admin, :only => [:index]
 
   autocomplete :user, :name
@@ -15,7 +15,6 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    enforce_ownership(@user)
     @game = Game.new
     @steam_games_grid = initialize_grid(@user.games.where(provider: "steam"), :per_page => 10, name: "steam")
     @board_games_grid = initialize_grid(@user.games.where(provider: "board"), :per_page => 10, name: "board")
@@ -130,7 +129,6 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
-      enforce_ownership(@user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

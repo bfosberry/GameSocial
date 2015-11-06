@@ -1,8 +1,10 @@
 <div class="user-box">
+    <%= link_to u do %>
     <div class="user-text">
       <%= u.name %>
     </div>
     <div class="user-image">
       <%= image_tag(u.avatar_url, :size => "32x32", :class => "user-image") if u.avatar_url.present? %>
     </div>
+    <% end %>
 </div>

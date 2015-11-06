@@ -106,6 +106,10 @@ class User < ActiveRecord::Base
     credential("steam").uid if credential("steam")
   end
 
+  def steam_profile_url
+    credential("steam").profile_url if credential("steam")
+  end
+
   def owns(object)
     object == self || object.user == self || is_admin?
   end
