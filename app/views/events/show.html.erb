@@ -61,9 +61,16 @@
         <% @event.game_events.each_with_index do |ge, i| %>
           {
             title  : '<%= ge.title %>',
-            start  : '<%= ge.game_start_time %>',
-            end    : '<%= ge.game_end_time %>'
-          }<%= "," unless i == @event.game_events.size - 1 %>
+            start  : '<%= ge.start_time %>',
+            end    : '<%= ge.end_time %>'
+          }<%= "," unless @event.tournaments.size == 0 %>
+        <% end %>
+        <% @event.tournaments.each_with_index do |t, i| %>
+          {
+            title  : '<%= t.name %>',
+            start  : '<%= t.start_time %>',
+            end    : '<%= t.end_time %>'
+          }<%= "," unless i == @event.tournaments.size - 1 %>
         <% end %>
       ];
       start_time = "<%= @event.next_event.try(:game_start_time) || DateTime.now %>"
