@@ -41,7 +41,8 @@ class Calendar
   	event.end_time = object.end_time
     event.description = object.description if object.description
   	event.attendees = build_attendees
-    event.location = object.location if object.location
+    loc = object.try(:location)
+    event.location = loc if loc
     event.reminders = default_reminders
     event.save
   	object.update_attribute(:uid, event.id) unless object.uid
