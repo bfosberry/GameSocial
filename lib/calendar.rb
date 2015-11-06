@@ -34,18 +34,20 @@ class Calendar
 
   def update_event
     return if Rails.env == "development"
-  	return unless event
+    return unless event
     event.calendar = calendar
-  	event.title = object.name
-  	event.start_time = object.start_time
-  	event.end_time = object.end_time
-    event.description = object.description if object.description
-  	event.attendees = build_attendees
+    event.title = object.name
+    event.start_time = object.start_time
+    event.end_time = object.end_time
+    desc = object.description || ""
+    desc.gsub( /\r\n/m, "" )
+    event.description = desc
+    event.attendees = build_attendees
     loc = object.try(:location)
     event.location = loc if loc
     event.reminders = default_reminders
     event.save
-  	object.update_attribute(:uid, event.id) unless object.uid
+    object.update_attribute(:uid, event.id) unless object.uid
     event
   end
 
