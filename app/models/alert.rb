@@ -5,12 +5,12 @@ class Alert < ActiveRecord::Base
   delegate :name, :to => :alert_schedule, :prefix => true, :allow_nil => true
   delegate :game_name, :to => :payload, :allow_nil => true
   delegate :user_name, :to => :payload, :allow_nil => true
-  serialize :payload
+  serialize :payload, Hash
 
   after_create :deliver_alert
 
   def delivered?
-    !delivered_at.nil?
+    delivered_at.present?
   end
 
   def deliver_alert
