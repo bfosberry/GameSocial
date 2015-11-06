@@ -5,7 +5,7 @@ class Alert < ActiveRecord::Base
   delegate :name, :to => :alert_schedule, :prefix => true, :allow_nil => true
   delegate :game_name, :to => :payload, :allow_nil => true
   delegate :user_name, :to => :payload, :allow_nil => true
-  serialize :payload, Hash
+  serialize :payload
 
   after_create :deliver_alert
 
