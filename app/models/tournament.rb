@@ -4,7 +4,7 @@ class Tournament < ActiveRecord::Base
   belongs_to :user
   belongs_to :event
   belongs_to :game
-  has_many :game_events, :dependent => :destroy
+  has_many :game_events, ->{ order(:game_start_time) }, :dependent => :destroy
   has_many :teams, :dependent => :destroy
   has_many :tournament_rounds, :dependent => :destroy
 
@@ -16,6 +16,23 @@ class Tournament < ActiveRecord::Base
   has_one :object_permission, as: :permissible_object
   accepts_nested_attributes_for :object_permission
   delegate :is_visible_to?, :to => :object_permission
+
+  alias_attribute :start_time, :tournament_start_time
+
+  before_save :set_defaults
+  before_destroy :delete_tournament
+  after_commit :export_tournament, :on => [:create, :update]
+
+  validates :name, 
+            :num_teams, 
+            :team_max_size, 
+            :team_min_size, 
+            :games_per_round,
+            :teams_per_round,
+            :lead_time,
+            :num_parallel_events,
+            :time_between_rounds,
+            :round_length, :presence => true
 
   TIME_ROUNDING_OPTIONS = ["None", "5 Minute", "10 Minute", "15 Minute", "30 Minute", "60 Minute"]
 
@@ -41,6 +58,22 @@ class Tournament < ActiveRecord::Base
 
   def can_create_team?(user)
     public_teams && team_for(user).nil?
+  end
+
+  def end_time
+    game_events.last.try(:end_time) || start_time + 60.minutes
+  end
+
+  def formatted_start_time
+    start_time.to_formatted_s(:long_ordinal) if start_time
+  end
+
+  def formatted_end_time
+    end_time.to_formatted_s(:long_ordinal) if end_time
+  end
+
+  def set_defaults
+    self.start_time ||= DateTime.now.beginning_of_minute
   end
 
   def lock
@@ -161,10 +194,30 @@ class Tournament < ActiveRecord::Base
   end
 
   def notify
-    teams.flat_map {|t| t.users }.uniq.each{|u| Workers::NotificationWorker.perform_async(u.id, notification_title)}
+    users.each{|u| Workers::NotificationWorker.perform_async(u.id, notification_title)}
+  end
+
+  def users
+    teams.flat_map {|t| t.users }.uniq
   end
 
   def notification_title
     "Tournament #{name} was updated."
+  end
+
+  def export_tournament
+    if calendar.event
+      calendar.update_event
+    else
+      calendar.create_event
+    end
+  end
+
+  def delete_tournament
+    calendar.delete_event
+  end
+
+  def calendar
+    @calendar ||= Calendar.new(self)
   end
 end

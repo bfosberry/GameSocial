@@ -38,6 +38,10 @@
         <% if @tournament.event %>
           <li class="list-group-item">Lan Party: <%= @tournament.event_name %></li>
         <% end %>
+        <% if @tournament.tournament_start_time %>
+          <li class="list-group-item">Start time: <%= @tournament.formatted_start_time %></li>
+          <li class="list-group-item">End time: <%= @tournament.formatted_end_time %></li>
+        <% end %>
         <li class="list-group-item">Owner: <%= @tournament.user_name %></li>
         <li class="list-group-item">Visibility: <%= @tournament.object_permission.permission_type %></li>
         <li class="list-group-item">Max number of Teams: <%= @tournament.num_teams %></li>

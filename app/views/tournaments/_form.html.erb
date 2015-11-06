@@ -1,4 +1,5 @@
 <%= form_for(@tournament, :html => {:role => "form-horizontal"}) do |f| %>
+  <% @tournament.set_defaults %>
   <% if @tournament.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@tournament.errors.count, "error") %> prohibited this tournament from being saved:</h2>
@@ -34,15 +35,19 @@
   </div>
   <% end %>
   <div class="form-group">
-    <%= f.label "Max number of Teams", :class => "help-inline"  %><br>
+    <%= f.label :start_time, :class => "help-inline" %><br>
+    <%= f.text_field(:start_time, :value=> @tournament.start_time.strftime('%Y-%m-%d %H:%M'), :class => "datetimepicker form-control") %>
+  </div>
+  <div class="form-group">
+    <%= f.label :num_teams, "Max number of Teams", :class => "help-inline"  %><br>
     <%= f.number_field :num_teams, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label "Max team size", :class => "help-inline"  %><br>
+    <%= f.label :team_max_size, "Max team size", :class => "help-inline"  %><br>
     <%= f.number_field :team_max_size, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label "Min team size", :class => "help-inline"  %><br>
+    <%= f.label :team_min_size, "Min team size", :class => "help-inline"  %><br>
     <%= f.number_field :team_min_size, :class => "form-control" %>
   </div>
   <div class="form-group">
@@ -54,23 +59,23 @@
     <%= f.number_field :teams_per_round, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label "Public team signup?", :class => "help-inline"  %><br>
+    <%= f.label :public_teams, "Public team signup?", :class => "help-inline"  %><br>
     <%= f.check_box :public_teams, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label "Lead time (minutes)", :class => "help-inline"  %><br>
+    <%= f.label :lead_time, "Lead time (minutes)", :class => "help-inline"  %><br>
     <%= f.number_field :lead_time, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label "Number of parallel games", :class => "help-inline"  %><br>
+    <%= f.label :num_parallel_events, "Number of parallel games", :class => "help-inline"  %><br>
     <%= f.number_field :num_parallel_events, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label "Round duration (minutes)", :class => "help-inline"  %><br>
+    <%= f.label :round_length, "Round duration (minutes)", :class => "help-inline"  %><br>
     <%= f.number_field :round_length, :class => "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.label "Time between rounds (minutes)", :class => "help-inline"  %><br>
+    <%= f.label :time_between_rounds, "Time between rounds (minutes)", :class => "help-inline"  %><br>
     <%= f.number_field :time_between_rounds, :class => "form-control" %>
   </div>
   <div class="form-group">

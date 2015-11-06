@@ -148,7 +148,7 @@ GEM
       momentjs-rails (~> 2.8, >= 2.8.4)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    hashie (3.3.2)
+    hashie (3.4.3)
     hiredis (0.6.0)
     hitimes (1.2.3)
     httparty (0.13.3)
@@ -295,7 +295,7 @@ GEM
       rspec-mocks (~> 3.1.0)
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
-    ruby-openid (2.6.0)
+    ruby-openid (2.7.0)
     runtimeerror_notifier (0.0.24)
       actionmailer
       actionpack

@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105041041) do
+ActiveRecord::Schema.define(version: 20151106172619) do
 
   create_table "alert_conditions", force: :cascade do |t|
-    t.string   "condition_type",    limit: 255
+    t.string   "condition_type"
     t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20151105041041) do
 
   create_table "alert_schedules", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -42,11 +42,11 @@ ActiveRecord::Schema.define(version: 20151105041041) do
   create_table "alerts", force: :cascade do |t|
     t.integer  "alert_schedule_id"
     t.text     "payload"
-    t.string   "title",             limit: 255
-    t.string   "description",       limit: 255
+    t.string   "title"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",            limit: 255
+    t.string   "status"
     t.datetime "delivered_at"
     t.boolean  "active"
   end
@@ -54,31 +54,31 @@ ActiveRecord::Schema.define(version: 20151105041041) do
   add_index "alerts", ["alert_schedule_id"], name: "index_alerts_on_alert_schedule_id"
 
   create_table "chat_servers", force: :cascade do |t|
-    t.string   "server_type",   limit: 255
+    t.string   "server_type"
     t.integer  "user_id"
-    t.string   "ip",            limit: 255
+    t.string   "ip"
     t.integer  "port"
     t.boolean  "public"
-    t.string   "name",          limit: 255
-    t.string   "password",      limit: 255
-    t.string   "room",          limit: 255
-    t.string   "room_password", limit: 255
+    t.string   "name"
+    t.string   "password"
+    t.string   "room"
+    t.string   "room_password"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "url",           limit: 255
+    t.string   "url"
   end
 
   add_index "chat_servers", ["user_id"], name: "index_chat_servers_on_user_id"
 
   create_table "credentials", force: :cascade do |t|
-    t.string   "uid",           limit: 255
-    t.string   "provider",      limit: 255
-    t.string   "name",          limit: 255
-    t.string   "nickname",      limit: 255
-    t.string   "email",         limit: 255
-    t.string   "profile_url",   limit: 255
-    t.string   "image_url",     limit: 255
-    t.string   "refresh_token", limit: 255
+    t.string   "uid"
+    t.string   "provider"
+    t.string   "name"
+    t.string   "nickname"
+    t.string   "email"
+    t.string   "profile_url"
+    t.string   "image_url"
+    t.string   "refresh_token"
     t.datetime "token_expiry"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -88,15 +88,15 @@ ActiveRecord::Schema.define(version: 20151105041041) do
   add_index "credentials", ["user_id"], name: "index_credentials_on_user_id"
 
   create_table "events", force: :cascade do |t|
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.text     "description"
-    t.datetime "start_time",              null: false
-    t.datetime "end_time",                null: false
+    t.datetime "start_time",  null: false
+    t.datetime "end_time",    null: false
     t.integer  "user_id"
-    t.string   "location",    limit: 255
+    t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "uid",         limit: 255
+    t.string   "uid"
     t.string   "image_url"
   end
 
@@ -125,17 +125,17 @@ ActiveRecord::Schema.define(version: 20151105041041) do
 
   create_table "game_events", force: :cascade do |t|
     t.integer  "event_id"
-    t.string   "title",                 limit: 255
+    t.string   "title"
     t.text     "description"
     t.integer  "game_id"
     t.integer  "game_social_server_id"
     t.integer  "chat_server_id"
     t.integer  "user_id"
-    t.datetime "game_start_time",                   null: false
-    t.datetime "game_end_time",                     null: false
+    t.datetime "game_start_time",       null: false
+    t.datetime "game_end_time",         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "uid",                   limit: 255
+    t.string   "uid"
     t.integer  "tournament_id"
     t.string   "location"
   end
@@ -164,16 +164,16 @@ ActiveRecord::Schema.define(version: 20151105041041) do
   add_index "game_locations", ["user_id"], name: "index_game_locations_on_user_id"
 
   create_table "game_social_servers", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.string   "ip",              limit: 255
+    t.string   "name"
+    t.string   "ip"
     t.integer  "port"
     t.integer  "game_id"
     t.integer  "max_players"
     t.integer  "current_players"
     t.integer  "latency"
-    t.string   "current_map",     limit: 255
-    t.string   "match_type",      limit: 255
-    t.string   "region",          limit: 255
+    t.string   "current_map"
+    t.string   "match_type"
+    t.string   "region"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
@@ -183,14 +183,14 @@ ActiveRecord::Schema.define(version: 20151105041041) do
   add_index "game_social_servers", ["user_id"], name: "index_game_social_servers_on_user_id"
 
   create_table "games", force: :cascade do |t|
-    t.string   "name",        limit: 255
+    t.string   "name"
     t.text     "store_url"
     t.text     "description"
     t.text     "logo_url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "provider_id"
-    t.string   "provider",    limit: 255
+    t.string   "provider"
   end
 
   add_index "games", ["name"], name: "index_games_on_name"
@@ -207,8 +207,20 @@ ActiveRecord::Schema.define(version: 20151105041041) do
     t.integer "user_id"
   end
 
-# Could not dump table "groups" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "provider_id"
+    t.string   "avatar_url"
+    t.string   "url"
+  end
+
+  add_index "groups", ["name"], name: "index_groups_on_name"
+  add_index "groups", ["user_id"], name: "index_groups_on_user_id"
 
   create_table "groups_users", force: :cascade do |t|
     t.integer "group_id"
@@ -216,9 +228,9 @@ ActiveRecord::Schema.define(version: 20151105041041) do
   end
 
   create_table "object_permissions", force: :cascade do |t|
-    t.string   "permission_type",         limit: 255
+    t.string   "permission_type"
     t.integer  "permissible_object_id"
-    t.string   "permissible_object_type", limit: 255
+    t.string   "permissible_object_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -236,11 +248,11 @@ ActiveRecord::Schema.define(version: 20151105041041) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string   "title",         limit: 255
+    t.string   "title"
     t.text     "body"
     t.integer  "user_id"
     t.integer  "postable_id"
-    t.string   "postable_type", limit: 255
+    t.string   "postable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -256,7 +268,7 @@ ActiveRecord::Schema.define(version: 20151105041041) do
   create_table "teams", force: :cascade do |t|
     t.integer  "tournament_id"
     t.integer  "user_id"
-    t.string   "name",          limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -271,14 +283,14 @@ ActiveRecord::Schema.define(version: 20151105041041) do
   create_table "tournament_rounds", force: :cascade do |t|
     t.integer  "tournament_id"
     t.integer  "game_event_id"
-    t.string   "score",         limit: 255
-    t.string   "round_type",    limit: 255
+    t.string   "score"
+    t.string   "round_type"
     t.integer  "round_index"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "winner_id"
     t.integer  "bracket_id"
-    t.string   "conceded",      limit: 255
+    t.string   "conceded"
     t.integer  "num_teams"
   end
 
@@ -291,12 +303,12 @@ ActiveRecord::Schema.define(version: 20151105041041) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin"
-    t.string   "remember_token",  limit: 255
-    t.string   "password_digest", limit: 255
-    t.string   "status",          limit: 255, default: "Inactive"
-    t.string   "name",            limit: 255
-    t.string   "email",           limit: 255
-    t.string   "avatar_url",      limit: 255
+    t.string   "remember_token"
+    t.string   "password_digest"
+    t.string   "status",          default: "Inactive"
+    t.string   "name"
+    t.string   "email"
+    t.string   "avatar_url"
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"

@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   delegate :email, :to => :user, :prefix => true, :allow_nil => true
   has_many :posts, as: :postable
   has_many :playlists
-  has_many :game_events, :dependent => :destroy
+  has_many :game_events, ->{ order(:game_start_time) }, :dependent => :destroy
   has_many :tournaments, :dependent => :destroy
   has_and_belongs_to_many :game_social_servers
   has_one :object_permission, as: :permissible_object
