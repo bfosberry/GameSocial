@@ -45,7 +45,11 @@ class Event < ActiveRecord::Base
   end
 
   def next_event
-    game_events.where("game_start_time > ?", DateTime.now).first
+    next_ge = game_events.where("game_start_time > ?", DateTime.now).first
+    next_t = tournaments.where("tournament_start_time > ?", DateTime.now).first
+    return next_ge unless next_t
+    return next_t unless next_ge
+    return (next_t.start_time < next_ge.start_time) ? next_t : next_ge
   end
 
   def set_defaults
