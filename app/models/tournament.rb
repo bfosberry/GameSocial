@@ -120,7 +120,7 @@ class Tournament < ActiveRecord::Base
   end
 
   def schedule_rounds
-    time = DateTime.now + lead_time.minutes
+    time = (start_time || DateTime.now) + lead_time.minutes
     in_slot = 0
     bracket = 1
 
